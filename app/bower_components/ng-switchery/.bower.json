@@ -1,0 +1,27 @@
+{
+  "name": "ng-switchery",
+  "main": "src/ng-switchery.js",
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "tests",
+    "examples"
+  ],
+  "dependencies": {
+    "switchery": "~0.6.2"
+  },
+  "devDependencies": {
+    "angular": "~1.2.19"
+  },
+  "homepage": "https://github.com/ndevrstudios/NgSwitchery",
+  "_release": "ca296e7e09",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "ca296e7e094a9c8df599b69dbff882bc12ae173c"
+  },
+  "_source": "git://github.com/ndevrstudios/NgSwitchery.git",
+  "_target": "master",
+  "_originalSource": "ndevrstudios/NgSwitchery"
+}
