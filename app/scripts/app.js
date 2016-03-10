@@ -11,6 +11,8 @@ angular.module('wbaApp', [
     function($stateProvider, $urlRouterProvider, $routeProvider, $httpProvider) {
       'use strict';
       
+      $httpProvider.defaults.useXDomain = true;
+      delete $httpProvider.defaults.headers.common['X-Requested-With'];
       $urlRouterProvider.otherwise('/dashboard');
       
       $stateProvider
@@ -47,7 +49,8 @@ angular.module('wbaApp', [
         })
         .state('wba.organizacoes.novo', {
           url: '/novo',
-          templateUrl: 'views/wba/organizacoes/novo.html'
+          templateUrl: 'views/wba/organizacoes/novo.html',
+          controller: 'OrganizacoesNovoController'
         })
         .state('wba.usuarios', {
           url: '/usuarios',

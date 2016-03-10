@@ -3,9 +3,19 @@ angular
   .controller('OrganizacoesListarController', [
     '$scope',
     '$timeout',
-    'apiOrganizacoes',
-    function ($scope, $timeout, apiOrganizacoes) {
+    '$http',
+    'baseUrl',
+    function ($scope, $timeout, $http, baseUrl) {
       
+      $scope.getOrgs = function () {
+        $http.get(baseUrl.apiUrl + '/organizacoes').then(
+          function (res) {
+            console.log(res);
+          }
+        )
+      }
+
+      $scope.getOrgs();
     }
   ]);
 

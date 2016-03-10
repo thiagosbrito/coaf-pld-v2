@@ -18,6 +18,7 @@ angular
     'theme.core.messages_controller',
     'theme.core.notifications_controller',
     'theme.core.organization_controller',
+    'theme.core.neworganization_controller',
     'ui.router',
     'ui.utils.masks',
     'angular-loading-bar'
