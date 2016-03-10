@@ -17,6 +17,10 @@ angular
     'theme.core.navigation_controller',
     'theme.core.messages_controller',
     'theme.core.notifications_controller',
+    'theme.core.organization_controller',
+    'ui.router',
+    'ui.utils.masks',
+    'angular-loading-bar'
   ])
   .constant('nanoScrollerDefaults', {
     nanoClass: 'scroll-pane',

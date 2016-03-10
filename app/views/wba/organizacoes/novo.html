@@ -1,0 +1,55 @@
+<ol class="breadcrumb" style="margin: 0 0 15px 0">
+  <li><a href="#/">Dashboard</a></li>
+  <li>Organizações</li>
+  <li class="active">Novo</li>
+
+</ol>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading">
+          <h2>Organizações</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" href="#/organizacoes/listar">
+              <i class="fa fa-chevron-left"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <form class="form-horizontal">
+            <fieldset>  
+              <legend>Cadastrar organização</legend>
+              <div class="form-group">
+                <label for="organizationName" class="col-md-2 control-label">Nome</label>
+                <div class="col-md-6">
+                  <input type="text" name="nome" class="form-control" id="organizationName" ng-model="organizacao.nome" placeholder="Nome da Organização">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="organizationCNPJ" class="col-md-2 control-label">CNPJ</label>
+                <div class="col-md-6">
+                  <input type="text" name="field" class="form-control" ng-model="organizacao.cnpj" ui-br-cnpj-mask>
+                  <span id="helpBlock2" class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-8">
+                  <div class="btn-group pull-right">
+                    <button class="btn btn-success" ng-click="save()">Ok</button>
+                    <button class="btn btn-danger" ui-sref="wba.organizacoes.listar">Cancel</button>
+                  </div>
+                </div>
+              </div>
+
+                
+
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

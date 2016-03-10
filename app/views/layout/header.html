@@ -1,10 +1,9 @@
 <header
 	id="topnav"
-	class="navbar ng-hide {{getLayoutOption('topNavThemeClass')}}"
+	class="navbar {{getLayoutOption('topNavThemeClass')}}"
 	ng-class="{'navbar-fixed-top': getLayoutOption('fixedHeader'), 'navbar-static-top': !getLayoutOption('fixedHeader')}"
 	ng-controller="MainController"
 	role="banner"
-	ng-show="!layoutLoading"
 	ng-cloak>
 	<a id="leftmenu-trigger" ng-click="toggleLeftBar()"></a>
 	<a id="rightmenu-trigger" ng-click="toggleRightBar()"></a>

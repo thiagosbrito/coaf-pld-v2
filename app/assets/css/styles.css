@@ -4383,7 +4383,7 @@ button.close {
 }
 .breadcrumb {
   padding: 3px 6px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   list-style: none;
   background-color: #eeeeee;
   border-radius: 2px;
@@ -13089,7 +13089,7 @@ fieldset[disabled] .btn.btn-social.btn-windows-alt.active {
 .breadcrumb {
   padding: 5px 10px;
   border: 1px solid #eeeeee !important;
-  margin-bottom: 0;
+  margin-bottom: 20px !important;
 }
 .breadcrumb > li {
   color: #bdbdbd;

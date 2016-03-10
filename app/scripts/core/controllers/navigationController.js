@@ -6,127 +6,154 @@ angular
     '$timeout',
     function($scope, $location, $timeout) {
       'use strict';
-      $scope.menu = [{
-        label: 'Explore',
-        iconClasses: '',
-        separator: true
-      }, {
-        label: 'Dashboard',
-        iconClasses: 'ti ti-home',
-        html: '<span class="badge badge-info">2</span>',
-        url: '#/',
-      }, {
-        label: 'HTML Version',
-        iconClasses: 'ti ti-cup',
-        url: '../../',
-      }, {
-        label: 'Layouts',
-        iconClasses: 'ti ti-layout',
-        children: [{
-          label: 'Grid Scaffolding',
-          url: '#/layout-grid',
-        }, {
-          label: 'Horizontal Nav',
-          url: '#/layout-horizontal'
-        }, {
-          label: 'Boxed',
-          url: '#/layout-boxed'
-        }]
-      }, {
-        label: 'UI Kit',
-        iconClasses: 'ti ti-view-list-alt',
-        children: [{
-          label: 'Typography',
-          url: '#/ui-typography'
-        }, {
-          label: 'Buttons',
-          url: '#/ui-buttons'
-        }, {
-          label: 'Modals',
-          url: '#/ui-modals'
+      $scope.menu = [
+        {
+          label: 'Organização',
+          iconClasses: 'ti ti-layout',
+          children: [
+            {
+              label: 'Listar Organizações',
+              url: '#/organizacoes/listar'
+            }
+          ]
+        },
+        {
+          label: 'Organização',
+          iconClasses: '',
+          separator: true
+        },
+        {
+          label: 'Explore',
+          iconClasses: '',
+          separator: true
+        }, 
+        {
+          label: 'Dashboard',
+          iconClasses: 'ti ti-home',
+          html: '<span class="badge badge-info">2</span>',
+          url: '#/template/',
+        },
+        {
+          label: 'HTML Version',
+          iconClasses: 'ti ti-cup',
+          url: '../../',
+        },
+        {
+          label: 'Layouts',
+          iconClasses: 'ti ti-layout',
+          children: [
+            {
+              label: 'Grid Scaffolding',
+              url: '#/template/layout-grid'
+            },
+            {
+              label: 'Horizontal Nav',
+              url: '#/template/layout-horizontal'
+            },
+            {
+              label: 'Boxed',
+              url: '#/template/layout-boxed'
+            }
+          ]
+        },
+        {
+          label: 'UI Kit',
+          iconClasses: 'ti ti-view-list-alt',
+          children: [
+            {
+              label: 'Typography',
+              url: '#/template/ui-typography'
+            },
+            {
+              label: 'Buttons',
+              url: '#/template/ui-buttons'
+            },
+            {
+              label: 'Modals',
+              url: '#/template/ui-modals'
         }, {
           label: 'Progress',
-          url: '#/ui-progressbars'
+          url: '#/template/ui-progressbars'
         }, {
           label: 'Pagination',
-          url: '#/ui-paginations'
+          url: '#/template/ui-paginations'
         }, {
           label: 'Breadcrumbs',
-          url: '#/ui-breadcrumbs'
+          url: '#/template/ui-breadcrumbs'
         }, {
           label: 'Labels & Badges',
-          url: '#/ui-labelsbadges',
+          url: '#/template/ui-labelsbadges',
         }, {
           label: 'Alerts',
-          url: '#/ui-alerts',
+          url: '#/template/ui-alerts',
         }, {
           label: 'Tabs',
-          url: '#/ui-tabs',
+          url: '#/template/ui-tabs',
         }, {
           label: 'FontAwesome Icons',
-          url: '#/ui-icons-fontawesome',
+          url: '#/template/ui-icons-fontawesome',
         }, {
           label: 'Themify Icons',
-          url: '#/ui-icons-themify',
+          url: '#/template/ui-icons-themify',
         }, {
           label: 'Wells',
-          url: '#/ui-wells'
+          url: '#/template/ui-wells'
         }, {
           label: 'Images & Carousel',
-          url: '#/ui-imagecarousel'
+          url: '#/template/ui-imagecarousel'
         }]
       }, {
         label: 'Components',
         iconClasses: 'ti ti-control-shuffle',
         children: [{
           label: 'Tiles',
-          url: '#/ui-tiles'
+          url: '#/template/ui-tiles'
         }, {
           label: 'Bootbox',
-          url: '#/components-bootbox'
+          url: '#/template/components-bootbox'
         }, {
           label: 'Pines Notifications',
-          url: '#/components-notifications'
+          url: '#/template/components-notifications'
         }, {
           label: 'Sliders & Ranges',
-          url: '#/ui-sliders',
+          url: '#/template/ui-sliders',
         }, {
           label: 'Pulsating Elements',
-          url: '#/components-pulsate'
+          url: '#/template/components-pulsate'
         }, {
           label: 'jQuery Knob',
-          url: '#/components-knob'
+          url: '#/template/components-knob'
         }]
       }, {
         label: 'Forms',
         iconClasses: 'ti ti-pencil',
         children: [{
           label: 'Form Layout',
-          url: '#/form-layout',
+          url: '#/template/form-layout',
         }, {
           label: 'Components',
-          url: '#/form-components',
+          url: '#/template/form-components',
         }, {
           label: 'Pickers',
-          url: '#/form-pickers'
+          url: '#/template/form-pickers'
         }, {
           label: 'Form Wizard',
-          url: '#/form-wizard'
+          url: '#/template/form-wizard'
         }, {
           label: 'Validation',
-          url: '#/form-validation',
+          url: '#/template/form-validation',
         }, {
           label: 'Form Masks',
-          url: '#/form-masks'
+          url: '#/template/form-masks'
         }, {
           label: 'Advanced Uploaders',
-          url: '#/form-fileupload',
+          url: '#/template/form-fileupload',
         }, {
           label: 'WYSIWYG Editor',
-          url: '#/form-wysiwyg',
+          url: '#/template/form-wysiwyg',
         }, {
           label: 'Inline Editor',
-          url: '#/form-xeditable',
+          url: '#/template/form-xeditable',
         }]
       }, {
         label: 'Panels',
@@ -134,26 +161,26 @@ angular
         hideOnHorizontal: true,
         children: [{
           label: 'Panels',
-          url: '#/ui-panels',
+          url: '#/template/ui-panels',
         }, {
           label: 'Draggable Panels',
-          url: '#/ui-advancedpanels'
+          url: '#/template/ui-advancedpanels'
         }]
       }, {
         label: 'Tables',
         iconClasses: 'ti ti-layout-grid3',
         children: [{
           label: 'Tables',
-          url: '#/tables-basic'
+          url: '#/template/tables-basic'
         }, {
           label: 'ngGrid',
-          url: '#/tables-data',
+          url: '#/template/tables-data',
         }, {
           label: 'Responsive Tables',
-          url: '#/tables-responsive'
+          url: '#/template/tables-responsive'
         }, {
           label: 'Editable Tables',
-          url: '#/tables-editable',
+          url: '#/template/tables-editable',
         }]
       }, {
         label: 'Analytics',
@@ -161,16 +188,16 @@ angular
         hideOnHorizontal: true,
         children: [{
           label: 'Flot',
-          url: '#/charts-flot',
+          url: '#/template/charts-flot',
         }, {
           label: 'Morris.js',
-          url: '#/charts-morrisjs'
+          url: '#/template/charts-morrisjs'
         }, {
           label: 'Easy Pie Chart',
-          url: '#/charts-easypiechart'
+          url: '#/template/charts-easypiechart'
         }, {
           label: 'Sparklines',
-          url: '#/charts-sparklines',
+          url: '#/template/charts-sparklines',
         }]
       }, {
         label: 'Maps',
@@ -178,10 +205,10 @@ angular
         hideOnHorizontal: true,
         children: [{
           label: 'Google Maps',
-          url: '#/maps-google'
+          url: '#/template/maps-google'
         }, {
           label: 'Vector Maps',
-          url: '#/maps-vector',
+          url: '#/template/maps-vector',
         }]
       }, {
         label: 'Pages',
@@ -189,28 +216,28 @@ angular
         hideOnHorizontal: true,
         children: [{
           label: 'Profile',
-          url: '#/extras-profile'
+          url: '#/template/extras-profile'
         }, {
           label: 'FAQ',
-          url: '#/extras-faq',
+          url: '#/template/extras-faq',
         }, {
           label: 'Invoice',
-          url: '#/extras-invoice'
+          url: '#/template/extras-invoice'
         }, {
           label: 'Registration',
-          url: '#/extras-registration'
+          url: '#/template/extras-registration'
         }, {
           label: 'Password Reset',
-          url: '#/extras-forgotpassword'
+          url: '#/template/extras-forgotpassword'
         }, {
           label: 'Login',
-          url: '#/extras-login'
+          url: '#/template/extras-login'
         }, {
           label: '404 Page',
-          url: '#/extras-404'
+          url: '#/template/extras-404'
         }, {
           label: '500 Page',
-          url: '#/extras-500'
+          url: '#/template/extras-500'
         }]
       }, {
         label: 'Functional Apps',
@@ -219,12 +246,12 @@ angular
       }, {
         label: 'Inbox',
         iconClasses: 'ti ti-email',
-        url: '#/inbox',
+        url: '#/template/inbox',
         html: '<span class="badge badge-danger">3</span>'
       }, {
         label: 'Calendar',
         iconClasses: 'ti ti-calendar',
-        url: '#/calendar',
+        url: '#/template/calendar',
         html: '<span class="badge badge-warning">1</span>'
       }];
 
@@ -256,6 +283,7 @@ angular
       $scope.openItems = []; $scope.selectedItems = []; $scope.selectedFromNavMenu = false;
 
       $scope.select = function(item) {
+        console.log(item);
         // close open nodes
         if (item.open) {
           item.open = false;
