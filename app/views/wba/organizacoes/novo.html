@@ -38,7 +38,7 @@
               <div class="form-group">
                 <div class="col-md-8">
                   <div class="btn-group pull-right">
-                    <button class="btn btn-success" ng-click="save()">Ok</button>
+                    <button class="btn btn-primary" ng-disabled="orgForm.field.$error.cnpj" ng-click="save()">Ok</button>
                     <button class="btn btn-danger" ui-sref="wba.organizacoes.listar">Cancel</button>
                   </div>
                 </div>

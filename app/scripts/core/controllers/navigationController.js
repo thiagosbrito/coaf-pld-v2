@@ -1,5 +1,5 @@
 angular
-  .module('theme.core.navigation_controller', ['theme.core.services'])
+  .module('wbaApp')
   .controller('NavigationController', [
     '$scope',
     '$location',
@@ -14,13 +14,12 @@ angular
             {
               label: 'Listar Organizações',
               url: '#/organizacoes/listar'
+            },
+            {
+              label: 'Módulos',
+              url: '#/organizacoes/modulos'
             }
           ]
-        },
-        {
-          label: 'Organização',
-          iconClasses: '',
-          separator: true
         },
         {
           label: 'Explore',

@@ -1,5 +1,5 @@
 angular
-  .module('theme.core.notifications_controller', [])
+  .module('wbaApp')
   .controller('NotificationsController', ['$scope', '$filter', function($scope, $filter) {
     'use strict';
     $scope.notifications = [{

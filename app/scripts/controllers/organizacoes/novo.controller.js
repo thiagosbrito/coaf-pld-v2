@@ -1,31 +1,29 @@
 angular
-  .module('theme.core.neworganization_controller',['theme.core.services'])
+  .module('wbaApp')
   .controller('OrganizacoesNovoController', [
     '$scope',
     '$timeout',
     '$http',
     'baseUrl',
-    function ($scope, $timeout, $http, baseUrl) {
+    '$state',
+    'apiOrganizacoes',
+    function ($scope, $timeout, $http, baseUrl, $state, apiOrganizacoes) {
 
       $scope.organizacao = {};
       
       $http.defaults.useXDomain = true;
 
       $scope.save = function () {
-        console.log($scope.organizacao);
-        $http({
-          url: baseUrl.apiUrl + '/organizacoes',
-          data: $scope.organizacao,
-          method: 'POST',
-          headers: [
-            {'Content-Type': 'application/json'}
-          ]
-        }).then(
+        apiOrganizacoes.saveOrganization($scope.organizacao).then(
           function (res) {
-            console.log(res);
+            $scope.organizacao = res.data;
+            $state.go('wba.organizacoes.listar');
+          },
+          function (err) {
+            console.log(err)
           }
         )
-      }
+      };
 
     }
   ]);

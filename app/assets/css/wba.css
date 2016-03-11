@@ -1,0 +1,15 @@
+.header-section h2 {
+  font-weight: 300;
+}
+.header-section h2 small{
+  font-size: 14px;
+  position: relative;
+  padding-left: 10px;
+}
+
+.header-section h2 small:before {
+  content: '|';
+  left: 3px;
+  top: 1px;
+  position: absolute;
+}

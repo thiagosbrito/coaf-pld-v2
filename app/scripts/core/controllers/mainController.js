@@ -1,4 +1,4 @@
-angular.module('theme.core.main_controller', ['theme.core.services'])
+angular.module('wbaApp')
   .controller('MainController', [
     '$scope',
     '$theme',
@@ -11,39 +11,11 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
       $scope.layoutFixedHeader = $theme.get('fixedHeader');
       $scope.layoutPageTransitionStyle = $theme.get('pageTransitionStyle');
       $scope.layoutDropdownTransitionStyle = $theme.get('dropdownTransitionStyle');
-      $scope.layoutPageTransitionStyleList = [
-        'bounce',
-        'flash',
-        'pulse',
-        'bounceIn',
-        'bounceInDown',
-        'bounceInLeft',
-        'bounceInRight',
-        'bounceInUp',
-        'fadeIn',
-        'fadeInDown',
-        'fadeInDownBig',
-        'fadeInLeft',
-        'fadeInLeftBig',
-        'fadeInRight',
-        'fadeInRightBig',
-        'fadeInUp',
-        'fadeInUpBig',
-        'flipInX',
-        'flipInY',
-        'lightSpeedIn',
-        'rotateIn',
-        'rotateInDownLeft',
-        'rotateInDownRight',
-        'rotateInUpLeft',
-        'rotateInUpRight',
-        'rollIn',
-        'zoomIn',
-        'zoomInDown',
-        'zoomInLeft',
-        'zoomInRight',
-        'zoomInUp'
-      ];
+      $scope.layoutPageTransitionStyleList = ['bounce','flash','pulse','bounceIn','bounceInDown','bounceInLeft',
+      'bounceInRight','bounceInUp','fadeIn','fadeInDown','fadeInDownBig','fadeInLeft','fadeInLeftBig','fadeInRight',
+      'fadeInRightBig','fadeInUp','fadeInUpBig','flipInX','flipInY','lightSpeedIn','rotateIn','rotateInDownLeft',
+      'rotateInDownRight','rotateInUpLeft','rotateInUpRight','rollIn','zoomIn','zoomInDown','zoomInLeft','zoomInRight',
+      'zoomInUp'];
 
       $scope.layoutLoading = true;
 
@@ -62,6 +34,18 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
         $event.stopPropagation();
         $theme.set('sidebarThemeClass', classname);
       };
+      $scope.toggleLeftBar = function() {
+        $theme.set('leftbarCollapsed', !$theme.get('leftbarCollapsed'));
+      };
+      $scope.toggleSearchBar = function($event) {
+        $event.stopPropagation();
+        $event.preventDefault();
+        $theme.set('showSmallSearchBar', !$theme.get('showSmallSearchBar'));
+      };
+
+      // there are better ways to do this, e.g. using a dedicated service
+      // but for the purposes of this demo this will do
+      $scope.isLoggedIn = true;
 
       $scope.$watch('layoutFixedHeader', function(newVal, oldval) {
         if (newVal === undefined || newVal === oldval) {
@@ -94,9 +78,6 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
         $theme.set('leftbarCollapsed', newVal);
       });
 
-      $scope.toggleLeftBar = function() {
-        $theme.set('leftbarCollapsed', !$theme.get('leftbarCollapsed'));
-      };
 
       $scope.$on('themeEvent:maxWidth767', function(event, newVal) {
         $timeout(function() {
@@ -116,35 +97,6 @@ angular.module('theme.core.main_controller', ['theme.core.services'])
         $scope.layoutLeftbarCollapsed = newVal;
       });
 
-      $scope.toggleSearchBar = function($event) {
-        $event.stopPropagation();
-        $event.preventDefault();
-        $theme.set('showSmallSearchBar', !$theme.get('showSmallSearchBar'));
-      };
 
-      // there are better ways to do this, e.g. using a dedicated service
-      // but for the purposes of this demo this will do
-      $scope.isLoggedIn = true;
-      $scope.logOut = function() {
-        $scope.isLoggedIn = false;
-      };
-      $scope.logIn = function() {
-        $scope.isLoggedIn = true;
-      };
-
-      $scope.$on('$routeChangeStart', function() {
-        if ($location.path() === '') {
-          return $location.path('/');
-        }
-        progressLoader.start();
-        progressLoader.set(50);
-      });
-      $scope.$on('$routeChangeSuccess', function() {
-        progressLoader.end();
-        if ($scope.layoutLoading) {
-          $scope.layoutLoading = false;
-        }
-        wijetsService.make();
-      });
     }
   ]);

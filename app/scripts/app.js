@@ -1,8 +1,62 @@
 angular.module('wbaApp', [
-  'theme',
+  'ngCookies',
+  'ngResource',
+  'ngSanitize',
+  'ngRoute',
+  'ngAnimate',
+  'easypiechart',
+  'NgSwitchery',
+  'sun.scrollable',
+  'ui.bootstrap',
+  'ui.select',
+  'theme.core.templates',
+  'theme.core.template_overrides',
+  'ui.router',
+  'ui.utils.masks',
+  'angular-loading-bar',
   'theme.demos'
   ])
-  
+  .constant('nanoScrollerDefaults', {
+    nanoClass: 'scroll-pane',
+    paneClass: 'scroll-track',
+    sliderClass: 'scroll-thumb',
+    contentClass: 'scroll-content'
+  })
+  .run(['$window', function ($window) {
+    $window.ngGrid.config = {
+        footerRowHeight: 40,
+        headerRowHeight: 40,
+        rowHeight: 40
+    };
+  }])
+  .run([
+    '$state',
+    '$rootScope',
+    function ($state, $rootScope) {
+      $rootScope.$state = $state;
+      $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
+        console.log('$stateChangeStart to '+toState.to+'- fired when the transition begins. toState,toParams : \n',toState, toParams);
+      });
+
+      $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams){
+        console.log('$stateChangeError - fired when an error occurs during transition.');
+        console.log(arguments);
+      });
+
+      $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
+        console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
+      });
+
+      $rootScope.$on('$viewContentLoaded',function(event){
+        console.log('$viewContentLoaded - fired after dom rendered',event);
+      });
+
+      $rootScope.$on('$stateNotFound',function(event, unfoundState, fromState, fromParams){
+        console.log('$stateNotFound '+unfoundState.to+'  - fired when a state cannot be found by its name.');
+        console.log(unfoundState, fromState, fromParams);
+      });    
+    }
+  ])
   .config([
     '$stateProvider',
     '$urlRouterProvider',
@@ -52,6 +106,31 @@ angular.module('wbaApp', [
           templateUrl: 'views/wba/organizacoes/novo.html',
           controller: 'OrganizacoesNovoController'
         })
+        .state('wba.organizacoes.usuarios',{
+          url: '/:organizacaoId/usuarios',
+          template: '<div ui-view=""></div>'
+        })
+        .state('wba.organizacoes.usuarios.listar', {
+          url: '/listar',
+          templateUrl: 'views/wba/organizacoes/usuarios.html',
+          controller: 'OrganizacoesUsuariosController'
+        })
+        .state('wba.organizacoes.usuarios.novo', {
+          url: '/novo',
+          templateUrl: 'views/wba/organizacoes/novo-usuario.html',
+          controller: 'OrganizacoesUsuariosNovoController'
+        })
+        .state('wba.organizacoes.usuarios.grupos', {
+          url: '/:usuarioId/grupos',
+          templateUrl: 'views/wba/organizacoes/grupos-usuario.html',
+          controller: 'OrganizacoesUsuariosGruposController'
+        })
+        .state('wba.organizacoes.usuarios.roles', {
+          url: '/:usuarioId/roles',
+          templateUrl: 'views/wba/organizacoes/roles-usuario.html',
+          controller: 'OrganizacoesUsuariosRolesController'
+        })
+
         .state('wba.usuarios', {
           url: '/usuarios',
           template: '<div ui-view=""></div>'

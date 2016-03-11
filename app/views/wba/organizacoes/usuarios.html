@@ -1,0 +1,57 @@
+<ol class="breadcrumb" style="margin: 0 0 15px 0">
+    <li><a href="#/">Dashboard</a></li>
+    <li class="active">Organizações</li>
+    
+</ol>
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-12">
+        <div class="panel panel-indigo">
+          <div class="panel-heading header-section">
+            <h2>Organizações <small>Usuários</small></h2>
+            <div class="panel-ctrls">
+              <a class="button-icon" ui-sref="wba.organizacoes.usuarios.novo({organizacaoId: '{{organizacaoId}}'})">
+                <i class="fa fa-plus"></i>
+              </a>
+            </div>
+          </div>
+          <div class="panel-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <td>Nome de Usuário</td>
+                  <td>Nome Completo</td>
+                  <td>Email</td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="user in users track by $index">
+                  <td ng-bind="user.usuario"></td>
+                  <td ng-bind="user.nome"></td>
+                  <td ng-bind="user.email"></td>
+                  <td>
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-primary" ui-sref="wba.organizacoes.usuarios.roles({organizacaoId: '{{organizacaoId}}', usuarioId: user.id})">
+                        <i class="fa fa-lock"></i>
+                      </button>
+                      <button class="btn btn-sm btn-info" ui-sref="wba.organizacoes.usuarios.grupos({organizacaoId: '{{organizacaoId}}', usuarioId: user.id})">
+                        <i class="fa fa-group"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+            <!-- <panel panel-class="panel-info" heading="Listagem de Organizações">
+                
+            </panel> -->
+        </div>
+    </div>
+
+</div> <!-- container-fluid -->

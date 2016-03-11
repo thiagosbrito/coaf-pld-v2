@@ -13,7 +13,7 @@
             <h2>Organizações</h2>
             <div class="panel-ctrls">
               <a class="button-icon" href="#/organizacoes/novo">
-                <i class="fa fa-file-o"></i>
+                <i class="fa fa-plus"></i>
               </a>
             </div>
           </div>
@@ -21,26 +21,21 @@
             <table class="table">
               <thead>
                 <tr>
-                  <td>Id</td>
+                  <!-- <td>Id</td> -->
                   <td>Cnpj</td>
                   <td>Nome</td>
                   <td></td>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>00.000.000/0000-11</td>
-                  <td>CODEHOUSE</td>
+                <tr ng-repeat="item in orgs track by $index">
+                  <!-- <td>1</td> -->
+                  <td ng-bind="item.cnpj"></td>
+                  <td ng-bind="item.nome"></td>
                   <td>
-                    <div class="btn-group pull-right">
-                      <button class="btn btn-sm btn-danger">
-                        <i class="fa fa-trash-o"></i>
-                      </button>
-                      <button class="btn btn-sm btn-primary">
-                        <i class="fa fa-pencil"></i>
-                      </button>
-                    </div>
+                    <button class="btn btn-sm btn-success" ui-sref="wba.organizacoes.usuarios.listar({organizacaoId: item.id})">
+                      <i class="fa fa-group"></i>
+                    </button>
                   </td>
                 </tr>
               </tbody>

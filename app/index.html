@@ -11,6 +11,7 @@
 	<!-- prochtml:remove:dist -->
 	<!-- <link href="../../assets/less/styles.less" rel="stylesheet/less" media="all">  -->
 	<link href="assets/css/styles.css" rel="stylesheet" media="all"> 
+	<link href="assets/css/wba.css" rel="stylesheet" media="all"> 
 	<!-- /prochtml -->
 
    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600' rel='stylesheet' type='text/css'>
@@ -108,7 +109,7 @@
 					        <div class="widget-body">
 					            <div class="userinfo">
 					                <div class="avatar">
-					                    <img masked-image src="assets/demo/avatar/avatar_11.png" class="img-responsive img-circle">
+					                    <img masked-image src="http://placehold.it/64x64" class="img-responsive img-circle">
 					                </div>
 					                <div class="info">
 					                    <span class="username">Jonathan Smith</span>
@@ -292,22 +293,26 @@
 	<!-- endbuild -->
 	<script src="scripts/app.js"></script>
 
+	<script src="scripts/services/organizacoes.js"></script>
 	<script src="scripts/controllers/organizacoes/listar.controller.js"></script>
 	<script src="scripts/controllers/organizacoes/novo.controller.js"></script>
-	<script src="scripts/services/organizacoes.service.js"></script>
+	<script src="scripts/controllers/organizacoes/usuarios.controller.js"></script>
+	<script src="scripts/controllers/organizacoes/novo-usuario.controller.js"></script>
+	<script src="scripts/controllers/organizacoes/grupos-usuario.controller.js"></script>
+	<script src="scripts/controllers/organizacoes/roles-usuario.controller.js"></script>
 	 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 	<script src="scripts/core/controllers/mainController.js"></script>
 	<script src="scripts/core/controllers/navigationController.js"></script>
 	<script src="scripts/core/controllers/notificationsController.js"></script>
 	<script src="scripts/core/controllers/messagesController.js"></script>
-	<script src="scripts/core/directives/directives.js"></script>
+	<!-- <script src="scripts/core/directives/directives.js"></script> -->
 	<script src="scripts/core/directives/form.js"></script>
 	<script src="scripts/core/directives/ui.js"></script>
 	<script src="scripts/core/modules/templateOverrides.js"></script>
 	<script src="scripts/core/modules/templates.js"></script>
 	<script src="scripts/core/services/services.js"></script>
 	<script src="scripts/core/services/theme.js"></script>
-	<script src="scripts/core/theme.js"></script>
+	<!-- <script src="scripts/core/theme.js"></script> -->
 	<script src="scripts/calendar/calendar.js"></script>
 	<script src="scripts/chart/canvas.js"></script>
 	<script src="scripts/chart/flot.js"></script>
