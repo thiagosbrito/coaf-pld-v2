@@ -19967,29 +19967,43 @@ body.error .error-wrapper h1 {
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
 }
 #topnav .navbar-brand {
-  font: 0/0 a !important;
-  color: transparent !important;
+  font-family: 'Source Sans Pro', 'Segoe UI', 'Droid Sans', Tahoma, Arial, sans-serif;
+  color: #FFF !important;
   text-shadow: none !important;
   background-color: transparent !important;
   border: 0 !important;
-  background: url("") no-repeat top left;
   height: 56px;
   width: 184px;
   padding: 16px 0 !important;
+}
+#topnav .navbar-brand small {
+  color: #eee;
+  font-size: 13px;
+  font-style: italic;
+  position: relative;
+  padding-left: 10px;
+}
+#topnav .navbar-brand small:before {
+  content: '|';
+  font-size: 15px;
+  left: 1px;
+  top: -2px;
+  color: #eee;
+  position: absolute;
 }
 @media (max-width: 767px) {
   #topnav .navbar-brand {
     width: 68px;
   }
 }
-#topnav.navbar-default .navbar-brand,
+/*#topnav.navbar-default .navbar-brand,
 #topnav.navbar-bluegraylight .navbar-brand,
 #topnav.navbar-graylight .navbar-brand {
   background: url("../img/logo-dark.png") no-repeat left 0 center;
 }
-#topnav .navbar-brand {
+/*#topnav .navbar-brand {
   background: url("../img/logo.png") no-repeat left 0 center;
-}
+}*/*/
 #topnav .dropdown-menu,
 #topnav .tt-dropdown-menu {
   background-color: #ffffff;
@@ -23934,7 +23948,7 @@ textarea.autosize {
   margin-bottom: 16px;
   font-weight: 400;
   font-family: 'Source Sans Pro', 'Segoe UI', 'Droid Sans', Tahoma, Arial, sans-serif;
-  font-family: 300;
+  font-weight: 300;
 }
 .stepy-header li div small,
 .stepy-header li div .small {
@@ -29130,4 +29144,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
   cursor: pointer;
   width: 14px;
   height: 14px;
+}
+.fix-table-vertical-alignment tbody td{
+  vertical-align: middle !important;
 }

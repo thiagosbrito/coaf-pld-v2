@@ -1,6 +1,7 @@
 <ol class="breadcrumb" style="margin: 0 0 15px 0">
-    <li><a href="#/">Dashboard</a></li>
-    <li class="active">Organizações</li>
+    <li><a ui-sref="wba.dashboard">Dashboard</a></li>
+    <li><a ui-sref="wba.usuarios-permissoes.organizacoes.listar">Organizações</a></li>
+    <li class="active">Usuários</li>
     
 </ol>
 
@@ -10,15 +11,18 @@
         <div class="col-md-12">
         <div class="panel panel-indigo">
           <div class="panel-heading header-section">
+            <button class="btn btn-voltar btn-primary-alt pull-left" ui-sref="wba.usuarios-permissoes.organizacoes.listar">
+              <i class="fa fa-chevron-left"></i>
+            </button>
             <h2>Organizações <small>Usuários</small></h2>
             <div class="panel-ctrls">
-              <a class="button-icon" ui-sref="wba.organizacoes.usuarios.novo({organizacaoId: '{{organizacaoId}}'})">
+              <a class="button-icon" ng-click="openModal()">
                 <i class="fa fa-plus"></i>
               </a>
             </div>
           </div>
           <div class="panel-body">
-            <table class="table">
+            <table class="table table-striped fix-table-vertical-alignment">
               <thead>
                 <tr>
                   <td>Nome de Usuário</td>
@@ -34,10 +38,10 @@
                   <td ng-bind="user.email"></td>
                   <td>
                     <div class="btn-group">
-                      <button class="btn btn-sm btn-primary" ui-sref="wba.organizacoes.usuarios.roles({organizacaoId: '{{organizacaoId}}', usuarioId: user.id})">
+                      <button class="btn btn-primary-alt" tooltip="Roles" ui-sref="wba.usuarios-permissoes.organizacoes.usuarios.roles.listar({organizacaoId: '{{organizacaoId}}', usuarioId: user.id})">
                         <i class="fa fa-lock"></i>
                       </button>
-                      <button class="btn btn-sm btn-info" ui-sref="wba.organizacoes.usuarios.grupos({organizacaoId: '{{organizacaoId}}', usuarioId: user.id})">
+                      <button class="btn btn-info-alt" tooltip="Grupos" ui-sref="wba.usuarios-permissoes.organizacoes.usuarios.grupos.listar({organizacaoId: '{{organizacaoId}}', usuarioId: user.id})">
                         <i class="fa fa-group"></i>
                       </button>
                     </div>

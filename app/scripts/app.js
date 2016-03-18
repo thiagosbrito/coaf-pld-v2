@@ -62,9 +62,11 @@ angular.module('wbaApp', [
     '$urlRouterProvider',
     '$routeProvider',
     '$httpProvider',
-    function($stateProvider, $urlRouterProvider, $routeProvider, $httpProvider) {
+    '$locationProvider',
+    function($stateProvider, $urlRouterProvider, $routeProvider, $httpProvider,$locationProvider) {
       'use strict';
       
+      // $locationProvider.html5mode = true;
       $httpProvider.defaults.useXDomain = true;
       delete $httpProvider.defaults.headers.common['X-Requested-With'];
       $urlRouterProvider.otherwise('/dashboard');
@@ -72,6 +74,7 @@ angular.module('wbaApp', [
       $stateProvider
         .state('wba',{
           url: '',
+          abstract: true,
           templateUrl: 'views/main/main.html',
           resolve: {
             loadCalendar : ['$ocLazyLoad', function ($ocLazyLoad) {
@@ -84,6 +87,9 @@ angular.module('wbaApp', [
         .state('wba.templates', {
           url: '/template/:templateFile',
           templateUrl: function (param) {
+            if (param.templateFile == 'inbox') {
+              param.templateFile = 'extras-inbox'
+            }
             return 'views/' + param.templateFile + '.html';
           }
         })
@@ -92,62 +98,130 @@ angular.module('wbaApp', [
           controller: 'MainController',
           templateUrl: 'views/index.html'
         })
-        .state('wba.organizacoes', {
+        .state('wba.usuarios-permissoes', {
+          url: '/usuarios-permissoes',
+          template: '<div ui-view=""></div>'
+        })
+        .state('wba.usuarios-permissoes.profile', {
+          url: '/perfil',
+          templateUrl: 'views/wba/usuario/perfil.html'
+        })
+        .state('wba.usuarios-permissoes.organizacoes', {
           url: '/organizacoes',
           template: '<div ui-view=""></div>'
         })
-        .state('wba.organizacoes.listar', {
+        .state('wba.usuarios-permissoes.organizacoes.listar', {
           url: '/listar',
           templateUrl: 'views/wba/organizacoes/listar.html',
           controller: 'OrganizacoesListarController'
         })
-        .state('wba.organizacoes.novo', {
-          url: '/novo',
-          templateUrl: 'views/wba/organizacoes/novo.html',
-          controller: 'OrganizacoesNovoController'
-        })
-        .state('wba.organizacoes.usuarios',{
+        
+        .state('wba.usuarios-permissoes.organizacoes.usuarios',{
           url: '/:organizacaoId/usuarios',
           template: '<div ui-view=""></div>'
         })
-        .state('wba.organizacoes.usuarios.listar', {
+        .state('wba.usuarios-permissoes.organizacoes.usuarios.listar', {
           url: '/listar',
           templateUrl: 'views/wba/organizacoes/usuarios.html',
           controller: 'OrganizacoesUsuariosController'
         })
-        .state('wba.organizacoes.usuarios.novo', {
-          url: '/novo',
-          templateUrl: 'views/wba/organizacoes/novo-usuario.html',
-          controller: 'OrganizacoesUsuariosNovoController'
-        })
-        .state('wba.organizacoes.usuarios.grupos', {
+        
+        .state('wba.usuarios-permissoes.organizacoes.usuarios.grupos', {
           url: '/:usuarioId/grupos',
+          template: '<div ui-view=""></div>'
+        })
+        .state('wba.usuarios-permissoes.organizacoes.usuarios.grupos.listar', {
+          url: '/listar',
           templateUrl: 'views/wba/organizacoes/grupos-usuario.html',
           controller: 'OrganizacoesUsuariosGruposController'
         })
-        .state('wba.organizacoes.usuarios.roles', {
+        .state('wba.usuarios-permissoes.organizacoes.usuarios.grupos.novo', {
+          url: '/novo',
+          templateUrl: 'views/wba/organizacoes/novo-grupo-usuario.html',
+          controller: 'OrganizacoesUsuariosGruposNovoController'
+        })
+        .state('wba.usuarios-permissoes.organizacoes.usuarios.roles', {
           url: '/:usuarioId/roles',
+          template: '<div ui-view=""></div>'
+        })
+        .state('wba.usuarios-permissoes.organizacoes.usuarios.roles.listar', {
+          url: '/listar',
           templateUrl: 'views/wba/organizacoes/roles-usuario.html',
           controller: 'OrganizacoesUsuariosRolesController'
         })
+        .state('wba.usuarios-permissoes.organizacoes.usuarios.roles.novo', {
+          url: '/novo',
+          templateUrl: 'views/wba/organizacoes/novo-roles-usuario.html',
+          controller: 'OrganizacoesUsuariosRolesNovoController'
+        })
 
-        .state('wba.usuarios', {
-          url: '/usuarios',
+        .state('wba.usuarios-permissoes.grupos', {
+          url: '/grupos',
           template: '<div ui-view=""></div>'
         })
-        .state('wba.usuarios.listar',{
+        .state('wba.usuarios-permissoes.grupos.listar',{
           url: '/listar',
-          templateUrl: 'views/wba/usuarios/listar.html'
+          templateUrl: 'views/wba/grupos/listar.html',
+          controller: 'GruposListarController'
         })
-        .state('wba.usuarios.novo',{
-          url: '/novo',
-          templateUrl: 'views/wba/usuarios/novo.html'
-        })
-        .state('wba.usuarios.editar',{
+        .state('wba.usuarios-permissoes.grupos.editar',{
           url: '/editar',
-          templateUrl: 'views/wba/usuarios/editar.html'
+          templateUrl: 'views/wba/grupos/editar.html'
         })
 
+        .state('wba.usuarios-permissoes.roles', {
+          url: '/roles',
+          template: '<div ui-view=""></div>'
+        })
+        .state('wba.usuarios-permissoes.roles.listar',{
+          url: '/listar',
+          templateUrl: 'views/wba/roles/listar.html',
+          controller: 'RolesListarController'
+        })
+        .state('wba.usuarios-permissoes.roles.novo',{
+          url: '/novo',
+          templateUrl: 'views/wba/roles/novo.html'
+        })
+        .state('wba.usuarios-permissoes.roles.editar',{
+          url: '/editar',
+          templateUrl: 'views/wba/roles/editar.html'
+        })
+
+        .state('wba.usuarios-permissoes.modulos', {
+          url: '/modulos',
+          template: '<div ui-view=""></div>'
+        })
+
+        .state('wba.usuarios-permissoes.modulos.listar', {
+          url: '/listar',
+          templateUrl: 'views/wba/modulos-permissoes/listar.html',
+          controller: 'ModulosPermissoesListarController'
+        })
+
+        // Routews for Empresas Module
+        .state('wba.empresas',{
+          url: '/empresas'
+        })
+
+        // Routews for Comercial Module
+        .state('wba.comercial',{
+          url: '/comercial'
+        })
+
+        // Routews for Cobranca Module
+        .state('wba.cobranca',{
+          url: '/cobranca'
+        })
+
+        // Routews for Checagem Module
+        .state('wba.checagem',{
+          url: '/checagem'
+        })
+
+        // Routews for Notificacao Module
+        .state('wba.notificacao',{
+          url: '/notificacao'
+        })
 
       
     }
@@ -165,6 +239,7 @@ angular.module('wbaApp', [
       }
     };
   })
+  .config
 
   // var auth = {};
   // var logout = function(){

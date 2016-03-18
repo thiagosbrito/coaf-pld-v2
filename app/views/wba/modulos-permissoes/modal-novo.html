@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h3 class="modal-title">Cadastrar novo Módulo</h3>
+</div>
+<div class="modal-body">
+  <form role="form" class="form-horizontal">
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Nome</label>
+      <div class="col-sm-8">
+        <input type="text" ng-model="modulo.nome" class="form-control">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Permissões</label>
+      <div class="col-sm-8">
+        <ui-select multiple ng-model="modulo.permissoes" close-on-select="false" title="Permissões">
+          <ui-select-match placeholder="Selecione as permissões..">{{$select.selected[$index].nome}}</ui-select-match>
+          <ui-select-choices repeat="permissao in permissoes | filter: $select.search">
+            <span ng-bind-html="permissao.nome | highlight: $select.search"></span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left" ng-click="close()">
+    <i class="fa fa-times"></i> Cancelar
+  </button>
+  <button class="btn btn-primary" ng-click="salvar(modulo)">
+    <i class="fa fa-save"></i> Salvar
+  </button>
+</div>
