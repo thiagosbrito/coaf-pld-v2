@@ -123,7 +123,7 @@
 						<div class="widget stay-on-collapse">
 							<nav class="widget-body">
 								<ul ng-controller="NavigationController" class="acc-menu" sticky-scroll="40">
-								  <li ng-repeat="item in menu"
+								  <li ng-repeat="item in menu track by $index"
 									  ng-class="{ hasChild: (item.children!==undefined),
 													active: item.selected,
 													  open: (item.children!==undefined) && item.open,
@@ -302,6 +302,7 @@
 	<!-- Wba Scripts -->
 	<!-- Usuarios e Permissoes -->
 	<script src="scripts/services/organizacoes.js"></script>
+	<script src="scripts/services/cep.js"></script>
 	<script src="scripts/controllers/organizacoes/organizacoes.controller.js"></script>
 	<script src="scripts/controllers/organizacoes/usuarios.controller.js"></script>
 	<script src="scripts/controllers/organizacoes/grupos-usuario.controller.js"></script>
@@ -309,6 +310,11 @@
 	<script src="scripts/controllers/modulos-permissoes/modulos-permissoes.controller.js"></script>
 	<script src="scripts/controllers/grupos/grupos.controller.js"></script>
 	<script src="scripts/controllers/roles/roles.controller.js"></script>
+	<script src="scripts/controllers/empresas/empresas.controller.js"></script>
+	<script src="scripts/controllers/empresas/novo-empresa.controller.js"></script>
+	<script src="scripts/controllers/empresas/novo-endereco.controller.js"></script>
+	<script src="scripts/controllers/empresas/novo-representante.controller.js"></script>
+	<script src="scripts/controllers/empresas/novo-contato.controller.js"></script>
 	<!-- end of Usuarios e Permissoes -->
 	
 	<!-- end of Wba Scripts  -->

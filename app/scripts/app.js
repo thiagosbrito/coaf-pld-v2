@@ -200,7 +200,37 @@ angular.module('wbaApp', [
 
         // Routews for Empresas Module
         .state('wba.empresas',{
-          url: '/empresas'
+          url: '/empresas',
+          template: '<div ui-view=""></div>'
+        })
+        .state('wba.empresas.listar',{
+          url: '/listar',
+          templateUrl: 'views/wba/empresas/listar.html',
+          controller: 'EmpresasListarController'
+        })
+        .state('wba.empresas.novo',{
+          url: '/novo',
+          templateUrl: 'views/wba/empresas/novo.html'
+        })
+        .state('wba.empresas.novo.empresa',{
+          url: '/empresa',
+          templateUrl: 'views/wba/empresas/novo-empresa.html',
+          controller: 'NovaEmpresaController'
+        })
+        .state('wba.empresas.novo.endereco',{
+          url: '/:empresaId/endereco',
+          templateUrl: 'views/wba/empresas/novo-endereco.html',
+          controller: 'NovaEmpresaEnderecoController'
+        })
+        .state('wba.empresas.novo.representante',{
+          url: '/:empresaId/representante',
+          templateUrl: 'views/wba/empresas/novo-representante.html',
+          controller: 'NovaEmpresaRepresentanteController'
+        })
+        .state('wba.empresas.novo.contato',{
+          url: '/:empresaId/contato',
+          templateUrl: 'views/wba/empresas/novo-contato.html',
+          controller: 'NovaEmpresaContatoController'
         })
 
         // Routews for Comercial Module

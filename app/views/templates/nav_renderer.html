@@ -5,7 +5,7 @@
 </a>
 <ul ng-if="item.children.length" data-slide-out-nav="item.open || (searchQuery.length>0 && item.selected)">
     <li
-      ng-repeat="item in item.children"
+      ng-repeat="item in item.children track by $index"
       ng-class="{
         hasChild: (item.children!==undefined),
         active: item.selected,
