@@ -11,7 +11,8 @@
 	<!-- prochtml:remove:dist -->
 	<!-- <link href="../../assets/less/styles.less" rel="stylesheet/less" media="all">  -->
 	<link href="assets/css/styles.css" rel="stylesheet" media="all"> 
-	<link href="assets/css/wba.css" rel="stylesheet" media="all"> 
+	<link href="assets/css/wba.css" rel="stylesheet" media="all">
+	<link href="bower_components/AngularJs-Toaster/toaster.min.css" rel="stylesheet" /> 
 	<!-- /prochtml -->
 
    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600' rel='stylesheet' type='text/css'>
@@ -79,8 +80,9 @@
   to-top-on-load
   faux-offcanvas
 >
+	<toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
 	<ng-include src="'views/layout/header.html'" ng-class="{'navbar-fixed-top': getLayoutOption('fixedHeader')}"></ng-include>
-
+	
 	<div id="wrapper">
 
 		<nav id="headernav" class="navbar ng-hide {{getLayoutOption('sidebarThemeClass').replace('sidebar', 'navbar')}}" role="navigation" ng-show="getLayoutOption('layoutHorizontal') && !layoutLoading">
@@ -281,6 +283,7 @@
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <script src="bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
   <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+  <script src="bower_components/AngularJs-Toaster/toaster.min.js"></script>
 
 
 	<!-- endbower -->
@@ -301,6 +304,7 @@
 
 	<!-- Wba Scripts -->
 	<!-- Usuarios e Permissoes -->
+	<script src="scripts/services/empresas.js"></script>
 	<script src="scripts/services/organizacoes.js"></script>
 	<script src="scripts/services/cep.js"></script>
 	<script src="scripts/controllers/organizacoes/organizacoes.controller.js"></script>

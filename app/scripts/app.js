@@ -14,7 +14,8 @@ angular.module('wbaApp', [
   'ui.router',
   'ui.utils.masks',
   'angular-loading-bar',
-  'theme.demos'
+  'theme.demos',
+  'toaster'
   ])
   .constant('nanoScrollerDefaults', {
     nanoClass: 'scroll-pane',
@@ -257,7 +258,8 @@ angular.module('wbaApp', [
     }
   ])
   .constant('baseUrl',{
-    "apiUrl":"http://localhost:8000/sso-wba/v1"
+    "apiUrl"          :     "http://localhost:8000/sso-wba/v1",
+    "apiEmpresas"     :     "http://192.168.99.100:8081/empresas/v1"
   })
   .directive('demoOptions', function () {
     return {

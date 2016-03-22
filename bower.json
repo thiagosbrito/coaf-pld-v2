@@ -61,7 +61,8 @@
     "angular-ui-router": "~0.2.18",
     "angular-input-masks": "~2.1.1",
     "angular-loading-bar": "~0.8.0",
-    "ng-filters-br": "~1.0.2"
+    "ng-filters-br": "~1.0.2",
+    "AngularJS-Toaster": "angularjs-toaster#~1.2.0"
   },
   "resolutions": {
     "jquery": "~1.11.0",

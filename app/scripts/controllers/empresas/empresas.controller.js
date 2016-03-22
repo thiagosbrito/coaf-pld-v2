@@ -3,10 +3,17 @@ angular.module('wbaApp')
     '$scope',
     '$state',
     '$stateParams',
-    'apiCep',
-    function ($scope, $state, $stateParams, apiCep) {
+    'apiEmpresas',
+    function ($scope, $state, $stateParams, apiEmpresas) {
       
-
+      apiEmpresas.getAll().then(
+        function (res) {
+          console.log(res);
+        },
+        function (err) {
+          console.log(err);
+        }
+      )
       
     }
   ])
