@@ -12,15 +12,17 @@
           <h2>Cadastrar nova Empresa</h2>
           <div class="options">
             <ul class="nav nav-tabs form-wzrd">
-              <li ui-sref-active="active"><a ui-sref="wba.empresas.novo.empresa">Empresa</a></li>
-              <li ui-sref-active="active"><a ui-sref="wba.empresas.novo.endereco">Endereços</a></li>
-              <li ui-sref-active="active"><a ui-sref="wba.empresas.novo.representante">Representantes</a></li>
-              <li ui-sref-active="active" class="last"><a ui-sref="wba.empresas.novo.contato">Contatos</a></li>
+              <li ui-sref-active="active"><a ui-sref="wba.empresas.novo.empresa" class="disabled">Empresa</a></li>
+              <li ui-sref-active="active"><a ui-sref="wba.empresas.novo.endereco" class="disabled">Endereços</a></li>
+              <li ui-sref-active="active"><a ui-sref="wba.empresas.novo.representante" class="disabled">Representantes</a></li>
+              <li ui-sref-active="active" class="last"><a ui-sref="wba.empresas.novo.contato" class="disabled">Contatos</a></li>
             </ul>
           </div>
         </div>
         <div class="panel-body">
-          <div ui-view=""></div>
+          <div class="tab-content">
+            <div ui-view=""></div>
+          </div>
         </div>
       </div>
     </div>

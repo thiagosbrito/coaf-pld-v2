@@ -16,6 +16,8 @@ angular.module('wbaApp', [
   'angular-loading-bar',
   'theme.demos',
   'toaster'
+  // ,
+  // 'csrf-cross-domain'
   ])
   .constant('nanoScrollerDefaults', {
     nanoClass: 'scroll-pane',
@@ -70,6 +72,18 @@ angular.module('wbaApp', [
       // $locationProvider.html5mode = true;
       $httpProvider.defaults.useXDomain = true;
       delete $httpProvider.defaults.headers.common['X-Requested-With'];
+      $httpProvider.defaults.headers.common = {};
+      $httpProvider.defaults.headers.post = {};
+      $httpProvider.defaults.headers.put = {};
+      $httpProvider.defaults.headers.patch = {};
+
+      // $httpProvider.defaults.transformRequest = function(data){
+      //     if (data === undefined) {
+      //         return data;
+      //     }
+      //     return $.param(data);
+      // }
+
       $urlRouterProvider.otherwise('/dashboard');
       
       $stateProvider
@@ -233,6 +247,43 @@ angular.module('wbaApp', [
           templateUrl: 'views/wba/empresas/novo-contato.html',
           controller: 'NovaEmpresaContatoController'
         })
+        .state('wba.empresas.editar', {
+          url: '/editar/:empresaId',
+          templateUrl: 'views/wba/empresas/editar.html',
+          abstract: true,
+          controller: function ($scope, $stateParams) {
+            $scope.empresaId = $stateParams.empresaId;
+          },
+          resolve: {
+            empresa: function (apiEmpresas, $stateParams) {
+              return apiEmpresas.getById($stateParams.empresaId).then(
+                function (res) {
+                  return res.data
+                }
+              )
+            }
+          }
+        })
+        .state('wba.empresas.editar.empresa',{
+          url: '/empresa',
+          templateUrl: 'views/wba/empresas/editar-empresa.html',
+          controller: 'EditarEmpresaController'
+        })
+        .state('wba.empresas.editar.endereco',{
+          url: '/endereco',
+          templateUrl: 'views/wba/empresas/editar-empresa-endereco.html',
+          controller: 'EditarEmpresaEnderecoController'
+        })
+        .state('wba.empresas.editar.representante',{
+          url: '/representante',
+          templateUrl: 'views/wba/empresas/editar-empresa-representante.html',
+          controller: 'EditarEmpresaRepresentanteController'
+        })
+        .state('wba.empresas.editar.contato',{
+          url: '/contato',
+          templateUrl: 'views/wba/empresas/editar-empresa-contato.html',
+          controller: 'EditarEmpresaContatoController'
+        })
 
         // Routews for Comercial Module
         .state('wba.comercial',{
@@ -271,7 +322,7 @@ angular.module('wbaApp', [
       }
     };
   })
-  .config
+  
 
   // var auth = {};
   // var logout = function(){

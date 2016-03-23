@@ -26,6 +26,10 @@
 table.table.table-striped.fix-table-vertical-alignment thead {
   font-weight: 600 !important;
 }
+.form-wzrd li a {
+  /*pointer-events: none;
+  cursor: default;*/
+}
 .form-wzrd li.active {
   margin-right: 10px;
 }

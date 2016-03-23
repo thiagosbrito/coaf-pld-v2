@@ -1,19 +1,18 @@
 angular.module('wbaApp')
-  .controller('EmpresasListarController',[
+  .controller('EditarEmpresaEnderecoController',[
     '$scope',
     '$state',
     '$stateParams',
     'apiEmpresas',
     function ($scope, $state, $stateParams, apiEmpresas) {
       
-      apiEmpresas.getAll().then(
+      apiEmpresas.getAddress($stateParams.empresaId).then(
         function (res) {
-          $scope.empresas = res.data;
+          $scope.enderecos = res.data
         },
         function (err) {
           console.log(err);
         }
-      )
-      
+      ) 
     }
   ])

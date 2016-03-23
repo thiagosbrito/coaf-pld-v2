@@ -4,24 +4,29 @@ angular.module('wbaApp')
     '$state',
     '$stateParams',
     'apiCep',
-    function ($scope, $state, $stateParams, apiCep) {
+    'apiEmpresas',
+    'toaster',
+    function ($scope, $state, $stateParams, apiCep, apiEmpresas, toaster) {
       $scope.tipoDoc = 'cnpj';
 
       $scope.showTipo = function (item) {
         console.log(item);
       }
 
-      $scope.enderecos = [
-        {
-          logradouro: '',
-          numero: '',
-          complemento: '',
-          bairro: '',
-          cep: '',
-          cidade: '',
-          uf: ''
-        }
-      ]
+      $scope.endereco = {logradouro: '',numero: '',complemento: '',bairro: '',cep: '',cidade: '',uf: ''};
+
+
+      $scope.save = function () {
+        apiEmpresas.saveAddress($stateParams.empresaId, $scope.endereco).then(
+          function (res) {
+            toaster.pop('success','Endereço','Item cadastrado');
+            $scope.endereco = {};
+          },
+          function (err) {
+            toaster.pop('error','Endereço','Ops')
+          }
+        )
+      }
 
       $scope.addAddress = function () {
         $scope.enderecos.push({logradouro: '',numero: '',complemento: '',bairro: '',cep: '',cidade: '',uf: ''});
@@ -30,10 +35,10 @@ angular.module('wbaApp')
         apiCep.consultaCep(cep).then(
           function (res) {
             $scope.address = true;
-            $scope.enderecos[index].logradouro  = res.data.logradouro;
-            $scope.enderecos[index].bairro      = res.data.bairro;
-            $scope.enderecos[index].cidade      = res.data.localidade;
-            $scope.enderecos[index].uf          = res.data.uf;
+            $scope.endereco.logradouro  = res.data.logradouro;
+            $scope.endereco.bairro      = res.data.bairro;
+            $scope.endereco.cidade      = res.data.localidade;
+            $scope.endereco.uf          = res.data.uf;
           },
           function (err) {
             console.log(err)

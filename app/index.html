@@ -85,7 +85,7 @@
 	
 	<div id="wrapper">
 
-		<nav id="headernav" class="navbar ng-hide {{getLayoutOption('sidebarThemeClass').replace('sidebar', 'navbar')}}" role="navigation" ng-show="getLayoutOption('layoutHorizontal') && !layoutLoading">
+		<nav id="headernav" class="navbar ng-hide sidebar-bluegraylight" role="navigation" ng-show="getLayoutOption('layoutHorizontal') && !layoutLoading">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 					<i class="fa fa-reorder"></i>
@@ -106,7 +106,7 @@
 		</nav>
 
 		<div id="layout-static">
-			<div class="static-sidebar-wrapper {{getLayoutOption('sidebarThemeClass')}}">
+			<div class="static-sidebar-wrapper sidebar-bluegraylight">
 				<div class="static-sidebar" role="navigation">
 					<div class="sidebar">
 						<div class="widget" ng-cloak>
@@ -284,6 +284,7 @@
   <script src="bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
   <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
   <script src="bower_components/AngularJs-Toaster/toaster.min.js"></script>
+  <script src="bower_components/angular-csrf-cross-domain/dist/angular-csrf-cross-domain.min.js"></script>
 
 
 	<!-- endbower -->
@@ -319,6 +320,11 @@
 	<script src="scripts/controllers/empresas/novo-endereco.controller.js"></script>
 	<script src="scripts/controllers/empresas/novo-representante.controller.js"></script>
 	<script src="scripts/controllers/empresas/novo-contato.controller.js"></script>
+
+	<script src="scripts/controllers/empresas/editar-empresa.controller.js"></script>
+	<script src="scripts/controllers/empresas/editar-endereco.controller.js"></script>
+	<script src="scripts/controllers/empresas/editar-representante.controller.js"></script>
+	<script src="scripts/controllers/empresas/editar-contato.controller.js"></script>
 	<!-- end of Usuarios e Permissoes -->
 	
 	<!-- end of Wba Scripts  -->

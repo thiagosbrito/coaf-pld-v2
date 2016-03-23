@@ -1,0 +1,33 @@
+<div class="panel panel-indigo" ng-repeat="end in enderecos track by $index">
+  <div class="panel-heading">
+    Endereços
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Logradouro</th>
+          <th>No</th>
+          <th>CEP</th>
+          <th>Bairro</th>
+          <th>Cidade</th>
+          <th>UF</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="end in enderecos track by $index">
+          <td ng-bind="end.tipo"></td>
+          <td ng-bind="end.logradouro"></td>
+          <td ng-bind="end.numero"></td>
+          <td ng-bind="end.cep"></td>
+          <td ng-bind="end.bairro"></td>
+          <td ng-bind="end.cidade"></td>
+          <td ng-bind="end.uf"></td>
+          <td><button class="btn btn-warning-alt"><i class="fa fa-pencil"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
