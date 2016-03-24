@@ -1,0 +1,60 @@
+<form class="form-horizontal" name="orgForm">
+  <fieldset>  
+    <div class="form-group">
+      <div class="col-md-12">
+        <button class="btn btn-primary pull-right" ng-click="addRepresentate()">
+          <i class="fa fa-plus"></i> Adicionar representante
+        </button>
+      </div>
+    </div>
+    <div class="panel panel-indigo" ng-repeat="rep in representantes track by $index">
+      <div class="panel-heading">
+        Representante {{$index + 1}}
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label for="organizationName" class="col-md-2 control-label">Tipo</label>
+          <div class="col-md-4">
+            <select class="form-control" ng-model="rep.papel" ng-options="tRep.nome for tRep in tiposReps">
+              <option value="">Selecione..</option>
+            </select>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-link" ng-click="openModal()"><i class="fa fa-plus"></i> Tipo de Representante</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">Nome</label>
+          <div class="col-md-10">
+            <input type="text" ng-model="rep.nome" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">CPF</label>
+          <div class="col-md-8">
+            <input type="text" ng-model="rep.cpf" class="form-control" ui-br-cpf-mask>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">Email</label>
+          <div class="col-md-8">
+            <input type="email" ng-model="rep.email" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="col-md-12">
+        <button class="btn btn-danger-alt">
+          <i class="fa fa-times"></i> 
+          Cancelar
+        </button>
+        <div class="btn-group pull-right">
+          <button class="btn btn-primary"><i class="fa fa-save"></i> Salvar</button>
+          <button class="btn btn-info">Salvar e continuar <i class="fa fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</form>

@@ -1,0 +1,35 @@
+<div class="panel panel-indigo">
+  <div class="panel-heading">
+    Reprensentantes
+    <div class="panel-ctrls">
+      <a class="button-icon" ng-click="openModal('new')">
+        <i class="fa fa-plus"></i>
+      </a>
+    </div>
+  </div>
+  <div class="panel-body">
+    <p class="text-center" ng-show="representantes.length == 0">
+      Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
+    </p>
+    <table class="table table-striped" ng-show="representantes.length > 0">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>CPF</th>
+          <th>Papel</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="rep in representantes track by $index">
+          <td ng-bind="rep.nome"></td>
+          <td ng-bind="rep.email"></td>
+          <td ng-bind="rep.cpf"></td>
+          <td ng-bind="rep.papel"></td>
+          <td><button class="btn btn-warning-alt" ng-click="openModal('edit')"><i class="fa fa-pencil"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

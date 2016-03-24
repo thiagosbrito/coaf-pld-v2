@@ -1,0 +1,58 @@
+<ol class="breadcrumb" style="margin: 0 0 15px 0">
+    <li><a href="#/">Dashboard</a></li>
+    <li class="active">Organizações</li>
+    
+</ol>
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-12">
+        <div class="panel panel-indigo">
+          <div class="panel-heading header-section">
+            <!-- <button class="btn btn-voltar btn-primary-alt pull-left"><i class="fa fa-chevron-left"></i></button> -->
+            <h2>Organizações</h2>
+            <div class="panel-ctrls">
+              <a class="button-icon" ng-click="openModal()">
+              <!-- <a class="button-icon" ui-sref="wba.usuarios-permissoes.organizacoes.novo"> -->
+                <i class="fa fa-plus"></i>
+              </a>
+            </div>
+          </div>
+          <div class="panel-body">
+            <table class="table table-striped fix-table-vertical-alignment">
+              <thead>
+                <tr>
+                  <!-- <td>Id</td> -->
+                  <td><strong>CNPJ</strong></td>
+                  <td><strong>Nome</strong></td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in orgs track by $index">
+                  <!-- <td>1</td> -->
+                  <td>{{ item.cnpj | cnpj}}</td>
+                  <td ng-bind="item.nome"></td>
+                  <td>
+                    <button
+                      class="btn pull-right btn-warning-alt"
+                      tooltip="Usuários"
+                      ui-sref="wba.usuarios-permissoes.organizacoes.usuarios.listar({organizacaoId: item.id})">
+                      <i class="fa fa-user"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager>
+          </div>
+        </div>
+
+            <!-- <panel panel-class="panel-info" heading="Listagem de Organizações">
+                
+            </panel> -->
+        </div>
+    </div>
+
+</div> <!-- container-fluid -->

@@ -1,5 +1,5 @@
 angular
-  .module('theme.core.directives', [])
+  .module('wbaApp')
   .directive('autosize', function() {
     'use strict';
     return {

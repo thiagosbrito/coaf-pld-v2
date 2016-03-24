@@ -1,0 +1,49 @@
+<ol class="breadcrumb" style="margin: 0 0 15px 0">
+  <li><a href="#/">Dashboard</a></li>
+  <li><a ui-sref="wba.usuarios-permissoes.organizacoes.listar">Organizações</a></li>
+  <li><a ui-sref="wba.usuarios-permissoes.organizacoes.usuarios.listar({organizacaoId: organizacaoId})">Usuários</a></li>
+  <li class="active">Roles</li>
+
+</ol>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading header-section">
+          <button class="btn btn-voltar btn-primary-alt pull-left" ui-sref="wba.usuarios-permissoes.organizacoes.usuarios.listar({organizacaoId: organizacaoId})">
+            <i class="fa fa-chevron-left"></i>
+          </button>
+          <h2>Organizações <small>Usuários</small> <small>Roles</small></h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" ng-click="openModal()">
+              <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped fix-table-vertical-alignment">
+              <thead>
+                <tr>
+                  <td><strong>Nome</strong></td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in roles track by item.id">
+                  <td ng-bind="item.nome"></td>
+                  <td>
+                    <button class="btn pull-right btn-primary-alt" ui-sref="wba.organizacoes.usuarios.listar({organizacaoId: item.id})">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

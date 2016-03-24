@@ -1,0 +1,29 @@
+<ol class="breadcrumb" style="margin: 0 0 15px 0">
+    <li><a href="#/dashboard">Dashboard</a></li>
+    <li><a href="#/empresas/listar">Empresas</a></li>
+    <li class="active">Editar</li>
+</ol>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading">
+          <h2>
+            <ul class="nav nav-tabs">
+              <li ui-sref-active="active"><a ui-sref="wba.empresas.editar.empresa({empresaId: empresaId})">Empresa</a></li>
+              <li ui-sref-active="active"><a ui-sref="wba.empresas.editar.endereco({empresaId: empresaId})">Endereços</a></li>
+              <li ui-sref-active="active"><a ui-sref="wba.empresas.editar.representante({empresaId: empresaId})">Representantes</a></li>
+              <li ui-sref-active="active"><a ui-sref="wba.empresas.editar.contato({empresaId: empresaId})">Contatos</a></li>
+            </ul>
+          </h2>
+        </div>
+        <div class="panel-body">
+          <div class="tab-content">
+            <div ui-view=""></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

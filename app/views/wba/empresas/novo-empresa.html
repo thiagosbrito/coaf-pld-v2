@@ -1,0 +1,112 @@
+<form class="form-horizontal" name="orgForm">
+  <fieldset>  
+    <div class="form-group">
+      <label for="organizationName" class="col-md-2 control-label">Tipo</label>
+      <div class="col-md-3">
+        <select ng-model="empresa.tipo" class="form-control">
+          <option value="">Selectione...</option>
+          <option value="CEDENTE">Cendente</option>
+          <option value="SACADO">Sacado</option>
+          <option value="FACTORING">Factoring</option>
+          <option value="FIDC">FIDC</option>
+          <option value="SECURITIZADORA">Securitizadora</option>
+          <option value="TRUSTEE">Trustee</option>
+          <option value="CUSTODIANTE">Custodiante</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="organizationName" class="col-md-2 control-label">Razão Social</label>
+      <div class="col-md-10">
+        <input type="text" name="razaoSocial" class="form-control" ng-model="empresa.razaoSocial" placeholder="Razão social da Empresa">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="organizationName" class="col-md-2 control-label">Nome Fantasia</label>
+      <div class="col-md-10">
+        <input type="text" name="razaoSocial" class="form-control" ng-model="empresa.nomeFantasia" placeholder="Nome fantasia da Empresa">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="organizationName" class="col-md-2 control-label">Número de Inscrição</label>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+            <label class="radio-inline">
+              <input type="radio" name="tipoDOC" ng-model="tipoDoc" id="inlineRadio1" ng-value="'cpf'"> CPF
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="tipoDOC" ng-model="tipoDoc" id="inlineRadio2" ng-value="'cnpj'"> CNPJ
+            </label>
+          </div>
+          <div class="col-md-12" ng-show="tipoDoc == 'cpf'">
+            <input type="text" name="razaoSocial" class="form-control" ng-model="empresa.numeroInscricao" placeholder="CPF" ui-br-cpf-mask>
+          </div>
+          <div class="col-md-12" ng-show="tipoDoc == 'cnpj'">
+            <input type="text" name="razaoSocial" class="form-control" ng-model="empresa.numeroInscricao" placeholder="CNPJ" ui-br-cnpj-mask>
+          </div>
+        </div>
+
+        <!-- <input type="text" name="razaoSocial" class="form-control" ng-model="empresa.numeroInscricao" placeholder="Número de Inscrição da Empresa"> -->
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="organizationName" class="col-md-2 control-label">NIRE</label>
+      <div class="col-md-6">
+        <input type="text" name="razaoSocial" class="form-control" ng-model="empresa.nire" placeholder="NIRE da Empresa">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="organizationName" class="col-md-2 control-label">Inscrição Estadual</label>
+      <div class="col-md-10">
+        <div class="row">
+          <div class="col-md-2">
+            <select
+              ng-init="ufs=['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO']"
+              ng-model="selectedUF"
+              class="form-control"
+              ng-options="uf for uf in ufs">
+                <option value="">Selecione...</option>
+              </select>
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" ng-model="empresa.inscricaoEstadual" ui-br-ie-mask='selectedUF' placeholder="Inscrição Estadual da Empresa">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="organizationName" class="col-md-2 control-label">Inscrição Municipal</label>
+      <div class="col-md-6">
+        <input type="text" name="razaoSocial" class="form-control" ng-model="empresa.inscricaoMunicipal" placeholder="Inscrição Municipal da Empresa">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="organizationName" class="col-md-2 control-label">Ativo</label>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+            <label class="radio-inline">
+              <input type="radio" name="ativo" ng-model="empresa.ativo" id="inlineRadio1" ng-value="true"> Sim
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="ativo" ng-model="empresa.ativo" id="inlineRadio2" ng-value="false"> Não
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-10 col-md-offset-2">
+        <button class="btn btn-danger-alt">
+          <i class="fa fa-times"></i> 
+          Cancelar
+        </button>
+        <div class="btn-group pull-right">
+          <button class="btn btn-primary" ng-click="salvar(empresa, false)"><i class="fa fa-save"></i> Salvar</button>
+          <button class="btn btn-info" ng-click="salvar(empresa, true)">Salvar e continuar <i class="fa fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</form>

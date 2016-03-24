@@ -1,0 +1,49 @@
+<ol class="breadcrumb" style="margin: 0 0 15px 0">
+    <li><a href="#/">Dashboard</a></li>
+    <li class="active">Roles</li>
+    
+</ol>
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-12">
+        <div class="panel panel-indigo">
+          <div class="panel-heading">
+            <h2>Roles</h2>
+            <div class="panel-ctrls">
+              <a class="button-icon" ng-click="openModal()">
+                <i class="fa fa-plus"></i>
+              </a>
+            </div>
+          </div>
+          <div class="panel-body">
+            <table class="table table-striped fix-table-vertical-alignment">
+              <thead>
+                <tr>
+                  <td>Nome</td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in roles track by $index">
+                  <td ng-bind="item.nome"></td>
+                  <td>
+                    <button class="btn pull-right btn-success-alt" ui-sref="wba.roles.editar({roleId: item.id})">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager>
+          </div>
+        </div>
+
+            <!-- <panel panel-class="panel-info" heading="Listagem de Organizações">
+                
+            </panel> -->
+        </div>
+    </div>
+
+</div> <!-- container-fluid -->

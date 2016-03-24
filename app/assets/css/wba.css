@@ -1,0 +1,49 @@
+.header-section button.btn-voltar {
+  clear: both;
+  margin: 8px 8px 0px -13px !important;
+  border: none !important;
+}
+.header-section button.btn-voltar:hover,
+.header-section .button-icon:hover {
+  background-color: rgba(3, 21, 119, 0.25) !important;
+}
+.header-section h2 {
+  font-weight: 300;
+}
+.header-section h2 small{
+  font-size: 14px;
+  position: relative;
+  padding-left: 10px;
+}
+
+.header-section h2 small:before {
+  content: '|';
+  left: 3px;
+  top: 1px;
+  position: absolute;
+}
+
+table.table.table-striped.fix-table-vertical-alignment thead {
+  font-weight: 600 !important;
+}
+.form-wzrd li a {
+  /*pointer-events: none;
+  cursor: default;*/
+}
+.form-wzrd li.active {
+  margin-right: 10px;
+}
+.form-wzrd li.active a:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -20px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 24px 0 25px 20px;
+  border-color: transparent transparent transparent #FFF;
+}
+.form-wzrd li.active.last a:after {
+  border: none;
+}

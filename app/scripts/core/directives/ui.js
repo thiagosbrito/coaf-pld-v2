@@ -1,5 +1,5 @@
 angular
-  .module('theme.core.directives')
+  .module('wbaApp')
   .directive('disableAnimation', ['$animate', function($animate) {
     'use strict';
     return {

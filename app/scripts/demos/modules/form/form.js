@@ -2,7 +2,6 @@ angular
   .module('theme.demos.forms', [
     'flow',
     'xeditable',
-    'theme.core.directives',
     'theme.core.services'
   ])
   .config(['flowFactoryProvider', '$routeProvider', function(flowFactoryProvider, $routeProvider) {

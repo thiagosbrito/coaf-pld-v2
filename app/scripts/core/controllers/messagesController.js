@@ -1,54 +1,54 @@
 angular
-  .module('theme.core.messages_controller', [])
+  .module('wbaApp')
   .controller('MessagesController', ['$scope', '$filter', function($scope, $filter) {
     'use strict';
     $scope.messages = [{
       name: 'Polly Paton',
       message: 'Uploaded all the...',
       time: '2 mins ago',
-      thumb: 'assets/demo/avatar/avatar_01.png',
+      thumb: 'http://placehold.it/32x32',
       read: false
     }, {
       name: 'Simon Corbett',
       message: 'I am signing...',
       time: '16 mins ago',
-      thumb: 'assets/demo/avatar/avatar_02.png',
+      thumb: 'http://placehold.it/32x32',
       read: false
     }, {
       name: 'Matt Tennant',
       message: 'Everything is work...',
       time: '2 hours ago',
-      thumb: 'assets/demo/avatar/avatar_03.png',
+      thumb: 'http://placehold.it/32x32',
       read: true
     }, {
       name: 'Alan Doyle',
       message: 'Please mail me the...',
       time: '6 hours ago',
-      thumb: 'assets/demo/avatar/avatar_04.png',
+      thumb: 'http://placehold.it/32x32',
       read: false
     }, {
       name: 'Polly Paton',
       message: 'Uploaded all the...',
       time: '12 hours ago',
-      thumb: 'assets/demo/avatar/avatar_05.png',
+      thumb: 'http://placehold.it/32x32',
       read: false
     }, {
       name: 'Simon Corbett',
       message: 'I am signing...',
       time: '2 days ago',
-      thumb: 'assets/demo/avatar/avatar_06.png',
+      thumb: 'http://placehold.it/32x32',
       read: false
     }, {
       name: 'Matt Tennant',
       message: 'Everything is no...',
       time: '4 days ago',
-      thumb: 'assets/demo/avatar/avatar_07.png',
+      thumb: 'http://placehold.it/32x32',
       read: true
     }, {
       name: 'Alan Doyle',
       message: 'Please mail me the...',
       time: '6 days ago',
-      thumb: 'assets/demo/avatar/avatar_08.png',
+      thumb: 'http://placehold.it/32x32',
       read: false
     }, ];
 
