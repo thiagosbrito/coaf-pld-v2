@@ -1,9 +1,17 @@
-<div class="panel panel-indigo" ng-repeat="end in enderecos track by $index">
+<div class="panel panel-indigo">
   <div class="panel-heading">
     Endereços
+    <div class="panel-ctrls">
+      <a class="button-icon" ng-click="openModal('new')">
+        <i class="fa fa-plus"></i>
+      </a>
+    </div>
   </div>
   <div class="panel-body">
-    <table class="table table-striped">
+    <p class="text-center" ng-show="enderecos.length == 0">
+      Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
+    </p>
+    <table class="table table-striped" ng-show="enderecos.length > 0">
       <thead>
         <tr>
           <th>Tipo</th>
@@ -25,7 +33,12 @@
           <td ng-bind="end.bairro"></td>
           <td ng-bind="end.cidade"></td>
           <td ng-bind="end.uf"></td>
-          <td><button class="btn btn-warning-alt"><i class="fa fa-pencil"></i></button></td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-danger-alt" ng-click="delete()"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-warning" ng-click="openModal('edit',end.id)"><i class="fa fa-pencil"></i></button>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

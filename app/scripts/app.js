@@ -15,7 +15,8 @@ angular.module('wbaApp', [
   'ui.utils.masks',
   'angular-loading-bar',
   'theme.demos',
-  'toaster'
+  'toaster',
+  'oitozero.ngSweetAlert'
   // ,
   // 'csrf-cross-domain'
   ])

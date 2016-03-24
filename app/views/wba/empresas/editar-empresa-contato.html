@@ -1,54 +1,38 @@
-<form class="form-horizontal" name="orgForm">
-  <fieldset>  
-    <div class="form-group">
-      <div class="col-md-12">
-        <button class="btn btn-primary pull-right" ng-click="addContato()">
-          <i class="fa fa-plus"></i> Adicionar contato
-        </button>
-      </div>
+<div class="panel panel-indigo">
+  <div class="panel-heading">
+    Contatos
+    <div class="panel-ctrls">
+      <a class="button-icon">
+        <i class="fa fa-plus"></i>
+      </a>
     </div>
-    <div class="panel panel-indigo" ng-repeat="con in contatos track by $index">
-      <div class="panel-heading">
-        Contato {{$index + 1}}
-      </div>
-      <div class="panel-body">
-        <div class="form-group">
-          <label class="col-md-2 control-label">Departamento</label>
-          <div class="col-md-10">
-            <input type="text" ng-model="con.departamento" class="form-control">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-2 control-label">Email</label>
-          <div class="col-md-8">
-            <input type="email" ng-model="con.email" class="form-control">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-2 control-label">Telefone</label>
-          <div class="col-md-8">
-            <input type="text" ng-model="con.telefone" class="form-control">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-2 control-label">Fax</label>
-          <div class="col-md-8">
-            <input type="text" ng-model="con.fax" class="form-control">
-          </div>
-        </div>
-
-      </div>
-    </div>
-    
-    <div class="form-group">
-      <div class="col-md-12">
-        <button class="btn btn-danger-alt pull-left">
-          <i class="fa fa-times"></i> 
-          Cancelar
-        </button>
-        <button class="btn btn-primary pull-right"><i class="fa fa-save"></i> Salvar</button>
-        </div>
-      </div>
-    </div>
-  </fieldset>
-</form>
+  </div>
+  <div class="panel-body">
+    <p class="text-center" ng-show="contatos.length == 0">
+      Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
+    </p>
+    <table class="table table-striped" ng-show="contatos.length > 0">
+      <thead>
+        <tr>
+          <th>Departamento</th>
+          <th>Telefone</th>
+          <th>Email</th>
+          <th>Fax</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="cnt in contatos track by $index">
+          <td ng-bind="cnt.tipo"></td>
+          <td ng-bind="cnt.logradouro"></td>
+          <td ng-bind="cnt.numero"></td>
+          <td ng-bind="cnt.cep"></td>
+          <td ng-bind="cnt.bairro"></td>
+          <td ng-bind="cnt.cidade"></td>
+          <td ng-bind="cnt.uf"></td>
+          <td><button class="btn btn-warning-alt"><i class="fa fa-pencil"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

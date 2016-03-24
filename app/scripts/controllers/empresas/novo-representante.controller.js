@@ -35,7 +35,7 @@ angular.module('wbaApp')
       $scope.openModal = function () {
       
         var modalInstance = $modal.open({
-          templateUrl: 'views/wba/empresas/modal-representantes.html',
+          templateUrl: 'views/wba/empresas/modal-tipo-representantes.html',
           controller: function ($scope, $modalInstance) {
             
             $scope.close = function () {

@@ -19,35 +19,41 @@
             </div>
           </div>
           <div class="panel-body">
-            <table class="table table-striped fix-table-vertical-alignment">
+            <p class="text-center" ng-show="empresas.length == 0">
+              Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
+            </p>
+            <table class="table table-striped fix-table-vertical-alignment" ng-show="empresas.length > 0">
               <thead>
                 <tr>
                   <!-- <td>Id</td> -->
-                  <td>Razão Social</td>
-                  <td>Nome Fantasia</td>
-                  <td>Número de Inscrição</td>
-                  <td>NIRE</td>
-                  <td>Inscrição Estadual</td>
-                  <td>Inscrição Municipal</td>
-                  <td>Tipo</td>
-                  <td>Status</td>
-                  <td></td>
+                  <th>Razão Social</th>
+                  <th class="text-center">Nome Fantasia</th>
+                  <th class="text-center">Número de Inscrição</th>
+                  <th class="text-center">NIRE</th>
+                  <th class="text-center">Inscrição Estadual</th>
+                  <th class="text-center">Inscrição Municipal</th>
+                  <th class="text-center">Tipo</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr ng-repeat="item in empresas track by $index">
                   <td ng-bind="item.razaoSocial"></td>
-                  <td ng-bind="item.nomeFantasia"></td>
-                  <td ng-bind="item.numeroInscricao"></td>
-                  <td ng-bind="item.nire"></td>
-                  <td ng-bind="item.inscricaoEstadual"></td>
-                  <td ng-bind="item.inscricaoMunicipal"></td>
-                  <td ng-bind="item.tipo"></td>
-                  <td ng-bind="item.status"></td>
+                  <td class="text-center" ng-bind="item.nomeFantasia"></td>
+                  <td class="text-center" ng-bind="item.numeroInscricao"></td>
+                  <td class="text-center" ng-bind="item.nire"></td>
+                  <td class="text-center" ng-bind="item.inscricaoEstadual"></td>
+                  <td class="text-center" ng-bind="item.inscricaoMunicipal"></td>
+                  <td class="text-center" ng-bind="item.tipo"></td>
                   <td>
-                    <button class="btn pull-right btn-success-alt" ui-sref="wba.empresas.editar.empresa({empresaId: item.id})">
-                      <i class="fa fa-pencil"></i>
-                    </button>
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-danger-alt" ng-click="delete()">
+                        <i class="fa fa-trash-o"></i>
+                      </button>
+                      <button class="btn btn-sm btn-primary" ui-sref="wba.empresas.editar.empresa({empresaId: item.id})">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                    </div>
                   </td>
                 </tr>
               </tbody>

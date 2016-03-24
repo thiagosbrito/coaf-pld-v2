@@ -16,11 +16,14 @@ angular.module('wbaApp')
       $scope.endereco = {logradouro: '',numero: '',complemento: '',bairro: '',cep: '',cidade: '',uf: ''};
 
 
-      $scope.save = function () {
+      $scope.save = function (proceed) {
         apiEmpresas.saveAddress($stateParams.empresaId, $scope.endereco).then(
           function (res) {
-            toaster.pop('success','Endereço','Item cadastrado');
+            toaster.pop('success','Endereço','Endereço cadastrado com sucesso!');
             $scope.endereco = {};
+            if(proceed) {
+              $state.go('wba.empresas.novo.representante',{empresaId: $state.empresaId})
+            }
           },
           function (err) {
             toaster.pop('error','Endereço','Ops')

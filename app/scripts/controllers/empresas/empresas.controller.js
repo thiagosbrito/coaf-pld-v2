@@ -4,7 +4,8 @@ angular.module('wbaApp')
     '$state',
     '$stateParams',
     'apiEmpresas',
-    function ($scope, $state, $stateParams, apiEmpresas) {
+    'SweetAlert',
+    function ($scope, $state, $stateParams, apiEmpresas, SweetAlert) {
       
       apiEmpresas.getAll().then(
         function (res) {

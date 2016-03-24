@@ -23,13 +23,24 @@ angular.module('wbaApp')
       });
     };
 
+    // var _save = function (data) {
+    //   var url = baseUrl.apiEmpresas + '/empresas';
+    //   return $http.post(url, data, {headers: {'Content-Type':'application/json'}}).then(
+    //     function (res) {
+    //       return res
+    //     }
+    //   )
+    // };
+
     var _save = function (data) {
       var url = baseUrl.apiEmpresas + '/empresas';
-      return $http.post(url, data, {headers: {'Content-Type':'application/json'}}).then(
-        function (res) {
-          return res
-        }
-      )
+      return $http.post(url, data, {headers: {'Content-Type':'application/json'}}).
+        success(function (data, status, headers, config) {
+          return {data: data, headers: headers}
+        }).
+        error( function (data, status, headers, config) {
+          return {data: data, headers: headers}
+        })
     };
 
     var _update = function (data) {
@@ -59,7 +70,7 @@ angular.module('wbaApp')
         }
       )
     };
-    var _getAddressById = function (idEmpresa) {
+    var _getAddressById = function (idEmpresa, id) {
       var url = baseUrl.apiEmpresas + '/empresas/' + idEmpresa + '/enderecos/' + id;
       return $http.get(url).then(
         function (res) {
