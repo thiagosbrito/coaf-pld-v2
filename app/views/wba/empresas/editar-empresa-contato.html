@@ -2,7 +2,7 @@
   <div class="panel-heading">
     Contatos
     <div class="panel-ctrls">
-      <a class="button-icon">
+      <a class="button-icon" ng-click="openModal('new')">
         <i class="fa fa-plus"></i>
       </a>
     </div>
@@ -23,14 +23,11 @@
       </thead>
       <tbody>
         <tr ng-repeat="cnt in contatos track by $index">
-          <td ng-bind="cnt.tipo"></td>
-          <td ng-bind="cnt.logradouro"></td>
-          <td ng-bind="cnt.numero"></td>
-          <td ng-bind="cnt.cep"></td>
-          <td ng-bind="cnt.bairro"></td>
-          <td ng-bind="cnt.cidade"></td>
-          <td ng-bind="cnt.uf"></td>
-          <td><button class="btn btn-warning-alt"><i class="fa fa-pencil"></i></button></td>
+          <td ng-bind="cnt.departamento"></td>
+          <td ng-bind="cnt.email"></td>
+          <td ng-bind="cnt.telefone"></td>
+          <td ng-bind="cnt.fax"></td>
+          <td><button class="btn btn-warning-alt" ng-click="openModal('edit', cnt.id)"><i class="fa fa-pencil"></i></button></td>
         </tr>
       </tbody>
     </table>

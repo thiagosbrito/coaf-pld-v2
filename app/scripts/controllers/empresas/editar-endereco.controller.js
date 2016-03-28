@@ -7,7 +7,8 @@ angular.module('wbaApp')
     '$modal',
     '$log',
     'toaster',
-    function ($scope, $state, $stateParams, apiEmpresas, $modal, $log, toaster) {
+    'SweetAlert',
+    function ($scope, $state, $stateParams, apiEmpresas, $modal, $log, toaster, SweetAlert) {
       
       $scope.getAddresses = function () {
         apiEmpresas.getAddress($stateParams.empresaId).then(

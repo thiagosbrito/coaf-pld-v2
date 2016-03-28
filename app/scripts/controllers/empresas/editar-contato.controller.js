@@ -5,7 +5,10 @@ angular.module('wbaApp')
     '$stateParams',
     'apiEmpresas',
     'toaster',
-    function ($scope, $state, $stateParams, apiEmpresas, toaster) {
+    '$modal',
+    '$log',
+    function ($scope, $state, $stateParams, apiEmpresas, toaster, $modal, $log) {
+      
       $scope.getContatos = function () {
         apiEmpresas.getContacts($stateParams.empresaId).then(
           function (res) {
@@ -16,7 +19,8 @@ angular.module('wbaApp')
           }
         )
       }
-      $scope.getContatos(); 
+      $scope.getContatos();
+
 
       $scope.delete = function () {
         SweetAlert.swal({
@@ -31,6 +35,62 @@ angular.module('wbaApp')
         function(){ 
            SweetAlert.swal("Booyah!");
         });
+      }
+
+      $scope.openModal = function (action, id) {
+      
+        var modalInstance = $modal.open({
+          templateUrl: 'views/wba/empresas/modal-' + action + '-contatos.html',
+          controller: function ($scope, $modalInstance) {
+
+            if(id) {
+              apiEmpresas.getContactsById($stateParams.empresaId, id).then(
+                function (res) {
+                  $scope.contato = res.data
+                }
+              )
+            }
+
+            $scope.close = function () {
+              $modalInstance.dismiss('cancel');
+            }
+
+            $scope.salvar = function (item) {
+              $modalInstance.close(item);
+            }
+          },
+        });
+
+        // modal para cadastro de representante
+        modalInstance.result.then(
+          function (item) {
+            if (action === 'new') {
+              apiEmpresas.saveContacts($scope.empresaId, item).then(
+                function (res) {
+                  toaster.pop('success','Contato','Contato cadastrado com sucesso!')
+                  $scope.getContatos();
+                },
+                function (err) {
+
+                }
+              )
+            }
+            if (action === 'edit') {
+              apiEmpresas.updateContacts($scope.empresaId, item).then(
+                function (res) {
+                  toaster.pop('success','Contato','Contato atualizado com sucesso!')
+                  $scope.getContatos();
+                },
+                function (err) {
+                  
+                }
+              )
+            }
+          },
+          function () {
+            $log.info('Modal dismissed at: ' + new Date());
+          }
+        );
       }
     }
   ])

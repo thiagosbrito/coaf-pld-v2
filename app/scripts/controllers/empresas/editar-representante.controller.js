@@ -20,6 +20,15 @@ angular.module('wbaApp')
         }
       );
 
+      $scope.getTiposRepresentantes = function () {
+        apiEmpresas.getTipoRepresentante().then(
+          function (res) {
+            $scope.tiposReps = res.data;
+          }
+        )
+      }
+      $scope.getTiposRepresentantes();
+
       $scope.delete = function () {
         SweetAlert.swal({
            title: "Você tem certeza?",
@@ -39,8 +48,19 @@ angular.module('wbaApp')
       
         var modalInstance = $modal.open({
           templateUrl: 'views/wba/empresas/modal-' + action + '-representantes.html',
-          controller: function ($scope, $modalInstance) {
+          controller: function ($scope, $modalInstance) { 
             
+
+            $scope.getTiposRepresentantes = function () {
+              apiEmpresas.getTipoRepresentante().then(
+                function (res) {
+                  $scope.tiposReps = res.data;
+                }
+              )
+            }
+            $scope.getTiposRepresentantes()
+
+
             $scope.close = function () {
               $modalInstance.dismiss('cancel');
             }
@@ -48,9 +68,38 @@ angular.module('wbaApp')
             $scope.salvar = function (item) {
               $modalInstance.close(item);
             }
+
+            // Modal para cadastro de tipo de representante
+            $scope.openModal = function () {
+              var childModal = $modal.open({
+                templateUrl: 'views/wba/empresas/modal-tipo-representantes.html',
+                controller: function ($scope, $modalInstance) {
+                  $scope.cancel = $modalInstance.dismiss('cancel');
+                  $scope.salvar =  function (item) {
+                    $modalInstance.close(item);
+                    $scope.getTiposRepresentantes();
+                  }
+                }
+                
+                
+              })
+              childModal.result.then(
+                function (item) {
+                  apiEmpresas.saveTipoRepresentante(item).then(
+                    function (res) {
+                      toaster.pop('success','Tipo de Representante','Tipo de Representante cadastrado com sucesso!')
+                    },
+                    function (err) {
+                      toaster.pop('error','Tipo de Representante','Desculpe, algum erro ocorreu, favor, verifique as informações e tente novamente!')
+                    }
+                  )
+                }
+              )
+            }
           },
         });
 
+        // modal para cadastro de representante
         modalInstance.result.then(
           function (item) {
             if (action === 'new') {
@@ -73,15 +122,6 @@ angular.module('wbaApp')
                 }
               )
             }
-            // $scope.grupos.push(item);
-            // apiEmpresas.saveTipoRepresentante(item).then(
-            //   function (res) {
-            //     toaster.pop('success','Tipo de Representante','Item cadastrado com sucesso')
-            //   },
-            //   function (err) {
-            //     toaster.pop('error','Tipo de Representante',err.statusText)
-            //   }
-            // );
           },
           function () {
             $log.info('Modal dismissed at: ' + new Date());

@@ -13,6 +13,17 @@ angular.module('wbaApp')
         $scope.representantes.push({id: null,nome: '',cpf: '',email: '',papel: ''})
       };
 
+      $scope.save = function (proceed) {
+        apiEmpresas.saveRepresentante($stateParams.empresaId, $scope.representante).then(
+          function (res) {
+            toaster.pop('success','Representante','Representante cadastrado com sucesso!')
+          },
+          function (err) {
+            toaster.pop('error','Representante','Desculpe-nos, houve um erro ao processar suas informações, por favor, tente novamente.');
+          }
+        )
+      }
+
       $scope.representantes = [
         {
           id: null,
