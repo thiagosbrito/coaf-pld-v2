@@ -27,7 +27,14 @@
           <td ng-bind="cnt.email"></td>
           <td ng-bind="cnt.telefone"></td>
           <td ng-bind="cnt.fax"></td>
-          <td><button class="btn btn-warning-alt" ng-click="openModal('edit', cnt.id)"><i class="fa fa-pencil"></i></button></td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-danger-alt" ng-click="delete(cnt.id)">
+                <i class="fa fa-trash"></i>
+              </button>
+              <button class="btn btn-warning" ng-click="openModal('edit', cnt.id)"><i class="fa fa-pencil"></i></button>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>

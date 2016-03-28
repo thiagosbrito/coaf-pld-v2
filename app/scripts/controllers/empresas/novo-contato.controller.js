@@ -4,8 +4,8 @@ angular.module('wbaApp')
     '$state',
     '$stateParams',
     'toaster',
-    'apiEmpresa',
-    function ($scope, $state, $stateParams, toaster, apiEmpresa) {
+    'apiEmpresas',
+    function ($scope, $state, $stateParams, toaster, apiEmpresas) {
 
       $scope.addContato = function () {
         $scope.contatos.push({id: null,departamento: '',email: '',telefone: '',fax: ''})
@@ -22,9 +22,9 @@ angular.module('wbaApp')
       ]
 
       $scope.save = function (item) {
-        apiEmpresa.saveContacts($stateParams.empresaId, item).then(
+        apiEmpresas.saveContacts($stateParams.empresaId, item).then(
           function (res) {
-            toaster.pop('success','Contato','Contato cadastrado com sucesso!')
+            toaster.pop('success','Contato','Contato cadastrado com sucesso!');
           },
           function (err) {
             toaster.pop('error','Contato','Desculpe-nos, houve um erro ao processar suas informações, por favor, tente novamente.')

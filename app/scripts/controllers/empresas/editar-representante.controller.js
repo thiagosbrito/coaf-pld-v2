@@ -7,18 +7,22 @@ angular.module('wbaApp')
     'toaster',
     '$modal',
     '$log',
-    function ($scope, $state, $stateParams, apiEmpresas, toaster, $modal, $log) {
+    'SweetAlert',
+    function ($scope, $state, $stateParams, apiEmpresas, toaster, $modal, $log, SweetAlert) {
       
       $scope.empresaId = $stateParams.empresaId;
       //  Get all reps for one company
-      apiEmpresas.getRepresentantes($stateParams.empresaId).then(
-        function (res) {
-          $scope.representantes = res.data;
-        },
-        function (err) {
-          toaster.pop('error','Representantes',err.statustext);
-        }
-      );
+      $scope.getRepresentantes = function () {
+        apiEmpresas.getRepresentantes($stateParams.empresaId).then(
+          function (res) {
+            $scope.representantes = res.data;
+          },
+          function (err) {
+            toaster.pop('error','Representantes',err.statustext);
+          }
+        );
+      };
+      $scope.getRepresentantes();
 
       $scope.getTiposRepresentantes = function () {
         apiEmpresas.getTipoRepresentante().then(
@@ -29,7 +33,7 @@ angular.module('wbaApp')
       }
       $scope.getTiposRepresentantes();
 
-      $scope.delete = function () {
+      $scope.delete = function (id) {
         SweetAlert.swal({
            title: "Você tem certeza?",
            text: "Se prosseguir essa operação não poderá ser desfeita",
@@ -39,8 +43,18 @@ angular.module('wbaApp')
            confirmButtonText: "Prosseguir",
            closeOnConfirm: true
         }, 
-        function(){ 
-           SweetAlert.swal("Booyah!");
+        function(isConfirm){ 
+          if (isConfirm) {
+            apiEmpresas.deleteRepresentante($stateParams.empresaId, id).then(
+              function (res) {
+                toaster.pop('success','Representantes','Representante excluído com sucesso!');
+                $scope.getRepresentantes();
+              },
+              function (err) {
+                toaster.pop('error','Representantes','Desculpe, algum erro ocorreu, favor, verifique as informações e tente novamente!')
+              }
+            )
+          }
         });
       }
 
@@ -58,7 +72,7 @@ angular.module('wbaApp')
                 }
               )
             }
-            $scope.getTiposRepresentantes()
+            $scope.getTiposRepresentantes();
 
 
             $scope.close = function () {
@@ -77,7 +91,6 @@ angular.module('wbaApp')
                   $scope.cancel = $modalInstance.dismiss('cancel');
                   $scope.salvar =  function (item) {
                     $modalInstance.close(item);
-                    $scope.getTiposRepresentantes();
                   }
                 }
                 
@@ -87,7 +100,8 @@ angular.module('wbaApp')
                 function (item) {
                   apiEmpresas.saveTipoRepresentante(item).then(
                     function (res) {
-                      toaster.pop('success','Tipo de Representante','Tipo de Representante cadastrado com sucesso!')
+                      toaster.pop('success','Tipo de Representante','Tipo de Representante cadastrado com sucesso!');
+                      $scope.getTiposRepresentantes();
                     },
                     function (err) {
                       toaster.pop('error','Tipo de Representante','Desculpe, algum erro ocorreu, favor, verifique as informações e tente novamente!')
@@ -103,9 +117,12 @@ angular.module('wbaApp')
         modalInstance.result.then(
           function (item) {
             if (action === 'new') {
+              var papel = _.findWhere($scope.tiposReps, {id: item.uuidTipoRepresentante});
+              item.papel = papel.nome;
               apiEmpresas.saveRepresentante($scope.empresaId, item).then(
                 function (res) {
-                  toaster.pop('success','Representante','Representante cadastrado com sucesso!')
+                  toaster.pop('success','Representante','Representante cadastrado com sucesso!');
+                  $scope.getRepresentantes();
                 },
                 function (err) {
 
@@ -113,9 +130,12 @@ angular.module('wbaApp')
               )
             }
             if (action === 'edit') {
+              var papel = _.findWhere($scope.tiposReps, {id: item.uuidTipoRepresentante});
+              item.papel = papel.nome;
               apiEmpresas.updateRepresentante($scope.empresaId, item).then(
                 function (res) {
-                  toaster.pop('success','Representante','Representante atualizado com sucesso!')
+                  toaster.pop('success','Representante','Representante atualizado com sucesso!');
+                  $scope.getRepresentantes();
                 },
                 function (err) {
                   

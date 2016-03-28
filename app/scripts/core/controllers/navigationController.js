@@ -8,16 +8,6 @@ angular
       'use strict';
       $scope.menu = [
         {
-          label: 'Empresa',
-          iconClasses: 'ti ti-home',
-          children: [
-            {
-              label: 'Empresas',
-              url: '#/empresas/listar'
-            }
-          ]
-        },
-        {
           label: 'Usuários e Permissões',
           iconClasses: 'ti ti-lock',
           children: [
@@ -40,6 +30,16 @@ angular
             {
               label: 'Módulos',
               url: '#/usuarios-permissoes/modulos/listar'
+            }
+          ]
+        },
+        {
+          label: 'Empresas',
+          iconClasses: 'ti ti-home',
+          children: [
+            {
+              label: 'Listar Empresas',
+              url: '#/empresas/listar'
             }
           ]
         },

@@ -14,9 +14,14 @@ angular.module('wbaApp')
       };
 
       $scope.save = function (proceed) {
+        var papel = _.findWhere($scope.tiposReps, {id: $scope.representante.uuidTipoRepresentante});
+        $scope.representante.papel = papel.nome;
         apiEmpresas.saveRepresentante($stateParams.empresaId, $scope.representante).then(
           function (res) {
             toaster.pop('success','Representante','Representante cadastrado com sucesso!')
+            if(proceed) {
+              $state.go('wba.empresas.novo.contato',{empresaId: $stateParams.empresaId}) 
+            }
           },
           function (err) {
             toaster.pop('error','Representante','Desculpe-nos, houve um erro ao processar suas informações, por favor, tente novamente.');

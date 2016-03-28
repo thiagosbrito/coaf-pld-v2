@@ -29,9 +29,9 @@
           <label for="organizationName" class="col-md-2 control-label">CEP</label>
           <div class="col-md-4">
             <div class="input-group">
-              <input type="text" name="cep" class="form-control" ng-model="cep" placeholder="Digite o CEP...">
+              <input type="text" name="cep" class="form-control" ng-model="endereco.cep" placeholder="Digite o CEP...">
               <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" ng-click="consultaCep(cep, $index)">
+                <button class="btn btn-primary" type="button" ng-click="consultaCep(endereco.cep, $index)">
                   <i class="fa fa-search"></i>
                 </button>
               </span>
