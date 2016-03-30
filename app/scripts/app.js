@@ -288,9 +288,36 @@ angular.module('wbaApp', [
 
         // Routews for Comercial Module
         .state('wba.comercial',{
-          url: '/comercial'
+          url: '/comercial',
+          template: '<div ui-view=""></div>'
         })
+        .state('wba.comercial.hierarquias',{
+          url: '/hierarquias',
+          template: '<div ui-view=""></div>'
+        })
+        .state('wba.comercial.hierarquias.listar',{})
+        .state('wba.comercial.hierarquias.novo',{})
+        .state('wba.comercial.hierarquias.editar',{})
 
+        .state('wba.comercial.plataformas',{
+          url: '/plataformas',
+          template: '<div ui-view=""></div>'
+        })
+        .state('wba.comercial.plataformas.listar',{
+          url:'/listar',
+          templateUrl: 'views/wba/comercial/plataformas/listar.html',
+          controller: 'PlataformasListarController'
+        })
+        .state('wba.comercial.plataformas.novo',{
+          url:'/novo',
+          templateUrl: 'views/wba/comercial/plataformas/novo.html',
+          controller: 'PlataformasNovoController'
+        })
+        .state('wba.comercial.plataformas.editar',{
+          url:'/editar/:plataformaId',
+          templateUrl: 'views/wba/comercial/plataformas/editar.html',
+          controller: 'PlataformasEditarController'
+        })
         // Routews for Cobranca Module
         .state('wba.cobranca',{
           url: '/cobranca'
@@ -311,7 +338,8 @@ angular.module('wbaApp', [
   ])
   .constant('baseUrl',{
     "apiUrl"          :     "http://localhost:8000/sso-wba/v1",
-    "apiEmpresas"     :     "http://192.168.99.100:8081/empresas/v1"
+    "apiEmpresas"     :     "http://192.168.99.100:8081/empresas/v1",
+    "apiComercial"    :     "http://192.168.99.100:9090/comercial/v1"
   })
   .directive('demoOptions', function () {
     return {

@@ -48,7 +48,12 @@ angular
           iconClasses: 'ti ti-briefcase',
           children: [
             {
-              label: 'Hierarquias'
+              label: 'Hierarquias',
+              url: '#/comercial/hierarquias/listar'
+            },
+            {
+              label: 'Plataformas',
+              url: '#/comercial/plataformas/listar'
             }
           ]
         },
