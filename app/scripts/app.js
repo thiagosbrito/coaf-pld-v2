@@ -78,13 +78,6 @@ angular.module('wbaApp', [
       $httpProvider.defaults.headers.put = {};
       $httpProvider.defaults.headers.patch = {};
 
-      // $httpProvider.defaults.transformRequest = function(data){
-      //     if (data === undefined) {
-      //         return data;
-      //     }
-      //     return $.param(data);
-      // }
-
       $urlRouterProvider.otherwise('/dashboard');
       
       $stateProvider
@@ -295,9 +288,21 @@ angular.module('wbaApp', [
           url: '/hierarquias',
           template: '<div ui-view=""></div>'
         })
-        .state('wba.comercial.hierarquias.listar',{})
-        .state('wba.comercial.hierarquias.novo',{})
-        .state('wba.comercial.hierarquias.editar',{})
+        .state('wba.comercial.hierarquias.listar',{
+          url:'/listar',
+          templateUrl: 'views/wba/comercial/plataformas/listar.html',
+          controller: 'HierarquiasListarController'
+        })
+        .state('wba.comercial.hierarquias.novo',{
+          url:'/novo',
+          templateUrl: 'views/wba/comercial/hierarquias/novo.html',
+          controller: 'HierarquiasNovoController'
+        })
+        .state('wba.comercial.hierarquias.editar',{
+          url:'/editar',
+          templateUrl: 'views/wba/comercial/hierarquias/editar.html',
+          controller: 'HierarquiasEditarController'
+        })
 
         .state('wba.comercial.plataformas',{
           url: '/plataformas',

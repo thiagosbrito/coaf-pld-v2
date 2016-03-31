@@ -30,6 +30,7 @@ angular.module('wbaApp')
         }
       )
     };
+    
     // UPDATE
     var _updatePlataforma = function (data) {
       var url = baseUrl.apiComercial + '/plataformas';

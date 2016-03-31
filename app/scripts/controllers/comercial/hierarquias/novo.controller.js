@@ -7,13 +7,11 @@ angular.module('wbaApp')
     'toaster',
     'SweetAlert',
     'apiComercial',
-    '$http',
-    function ($scope, $state, $stateParams, toaster, SweetAlert, apiComercial, $http) {
+    function ($scope, $state, $stateParams, toaster, SweetAlert, apiComercial) {
       
       $scope.plataforma = {};
 
       $scope.save = function () {
-        
         apiComercial.savePlataforma($scope.plataforma).then(
           function (res) {
             toaster.pop('success','Plataforma','Plataforma cadastrada com sucesso!');
