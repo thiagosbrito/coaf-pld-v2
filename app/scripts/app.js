@@ -290,7 +290,7 @@ angular.module('wbaApp', [
         })
         .state('wba.comercial.hierarquias.listar',{
           url:'/listar',
-          templateUrl: 'views/wba/comercial/plataformas/listar.html',
+          templateUrl: 'views/wba/comercial/hierarquias/listar.html',
           controller: 'HierarquiasListarController'
         })
         .state('wba.comercial.hierarquias.novo',{
@@ -299,7 +299,7 @@ angular.module('wbaApp', [
           controller: 'HierarquiasNovoController'
         })
         .state('wba.comercial.hierarquias.editar',{
-          url:'/editar',
+          url:'/editar/:hierarquiaId',
           templateUrl: 'views/wba/comercial/hierarquias/editar.html',
           controller: 'HierarquiasEditarController'
         })

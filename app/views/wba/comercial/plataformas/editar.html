@@ -1,1 +1,62 @@
-editar.html
+<ol class="breadcrumb" style="margin: 0 0 15px 0">
+    <li><a href="#/dashboard">Dashboard</a></li>
+    <li><a href="#/comercial/plataformas/listar">Plataformas</a></li>
+    <li class="active">Editar</li>
+</ol>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading">
+          <h2>Editar Plataforma</h2>
+        </div>
+        <div class="panel-body">
+          <div class="tab-content">
+            <form role="form" class="form-horizontal">
+              <fieldset>
+                <div class="form-group">
+                  <label class="col-md-2 control-label">
+                    Nome
+                  </label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" ng-model="plataforma.nome">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-2 control-label">
+                    Descrição
+                  </label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" ng-model="plataforma.descricao">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="organizationName" class="col-md-2 control-label">Ativo</label>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <label class="radio-inline">
+                          <input type="radio" name="ativo" ng-model="plataforma.ativo" id="inlineRadio1" ng-value="true"> Sim
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" name="ativo" ng-model="plataform.ativo" id="inlineRadio2" ng-value="false"> Não
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-10 col-md-offset-2">
+                    <button class="btn btn-danger-alt pull-left" ui-sref="wba.comercial.plataformas.listar"><i class="fa fa-times"></i> Cancelar</button>
+                    <button class="btn btn-primary pull-right" ng-click="save(plataforma)"><i class="fa fa-save"></i> Salvar</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,19 +4,21 @@ angular.module('theme.core.templates', []).run(['$templateCache', function ($tem
 
   $templateCache.put('templates/nav_renderer.html',
     "<span ng-if=\"item.separator==true\">{{item.label}}</span>\n" +
-    "<a ng-if=\"!item.separator\" ng-click=\"select(item)\" ng-href=\"{{item.url}}\">\n" +
+    "<a ng-if=\"!item.separator\" class=\"brito-teste\" ng-click=\"select(item)\" ng-href=\"{{item.url}}\">\n" +
     "  <i ng-if=\"item.iconClasses\" class=\"{{item.iconClasses}}\"></i><span>{{item.label}}</span>\n" +
     "  <span ng-bind-html=\"item.html\"></span>\n" +
     "</a>\n" +
     "<ul ng-if=\"item.children.length\" data-slide-out-nav=\"item.open || (searchQuery.length>0 && item.selected)\">\n" +
-    "    <li ng-repeat=\"item in item.children\"\n" +
-    "      ng-class=\"{ hasChild: (item.children!==undefined),\n" +
-    "                      active: item.selected,\n" +
-    "                        open: (item.children!==undefined) && item.open,\n" +
-    "              'search-focus': (searchQuery.length>0 && item.selected) }\"\n" +
-    "    ng-show=\"!(searchQuery.length>0 && !item.selected)\"\n" +
-    "      ng-include=\"'templates/nav_renderer.html'\"\n" +
-    "    ></li>\n" +
+    "    <li\n" +
+    "      ng-repeat=\"item in item.children track by $index\"\n" +
+    "      ng-class=\"{\n" +
+    "        hasChild: (item.children!==undefined),\n" +
+    "        active: item.selected,\n" +
+    "        open: (item.children!==undefined) && item.open,\n" +
+    "        'search-focus': (searchQuery.length>0 && item.selected) }\"\n" +
+    "      ng-show=\"!(searchQuery.length>0 && !item.selected)\"\n" +
+    "      ng-include=\"'templates/nav_renderer.html'\">\n" +
+    "    </li>\n" +
     "</ul>"
   );
 

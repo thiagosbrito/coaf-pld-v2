@@ -1,1 +1,80 @@
-listar.html
+<ol class="breadcrumb" style="margin: 0 0 15px 0">
+    <li><a href="#/">Dashboard</a></li>
+    <li>Comercial</li>
+    <li class="active">Hierarquias</li>
+</ol>
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-12">
+        <div class="panel panel-indigo">
+          <div class="panel-heading header-section">
+            
+            <h2>Hierarquias</h2>
+            <div class="panel-ctrls">
+              <a class="button-icon" ui-sref="wba.comercial.hierarquias.novo">
+                <i class="fa fa-plus"></i>
+              </a>
+            </div>
+          </div>
+          <div class="panel-body">
+            <p class="text-center" ng-show="hierarquias.length == 0">
+              Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
+            </p>
+            <table class="table table-striped fix-table-vertical-alignment" ng-show="hierarquias.length > 0">
+              <thead>
+              <!-- {
+                "ativo": true,
+                "hierarquia": [
+                  {}
+                ],
+                "hierarquiaPai": {},
+                "nome": "string",
+                "tipoHierarquia": "string",
+                "uuid": 0,
+                "uuidCedente": 0,
+                "uuidPlataforma": 0,
+                "uuidUsuario": 0
+              } -->
+                <tr>
+                  <!-- <td>Id</td> -->
+                  <th>Nome</th>
+                  <th class="text-center">Tipo</th>
+                  <th class="text-center">Pai</th>
+                  <th class="text-center">Ativo</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in hierarquias track by $index">
+                  <td ng-bind="item.nome"></td>
+                  <td class="text-center" ng-bind="item.tipoHierarquia"></td>
+                  <td class="text-center" ng-bind="item.hierarquiaPai.nome"></td>
+                  <td class="text-center">
+                    <i class="fa" ng-class="{'fa-check green': item.ativo, 'fa-times red': !item.ativo}"></i>
+                  </td>
+                  <td>
+                    <div class="btn-group pull-right">
+                      <button class="btn btn-danger-alt" ng-click="inactive(item)">
+                        <i class="fa fa-trash-o"></i>
+                      </button>
+                      <button class="btn btn-primary" ui-sref="wba.comercial.hierarquias.editar({hierarquiaId: item.uuid})">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager> -->
+          </div>
+        </div>
+
+            <!-- <panel panel-class="panel-info" heading="Listagem de Organizações">
+                
+            </panel> -->
+        </div>
+    </div>
+
+</div> <!-- container-fluid -->
