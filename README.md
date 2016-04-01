@@ -4,9 +4,13 @@ Portal WBA Gestão
 ## Setup
 Para rodar o projeto em ambiente de desenvolvimento são necessárias algumas ferramentas.
 
-NodeJs, Npm, Grunt
+NodeJs, Npm, Grunt e Bower
 
 Para instalar o NodeJs vá para [NodeJs Download](https://nodejs.org/en/download/), após o download só seguir os passos do site.
+
+Para instalar o Bower:
+
+```npm install -g bower````
 
 Após a conclusão da Instalação, você terá em sua maquina NodeJs e NPM (Node Package Manager)
 
