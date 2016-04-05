@@ -38,10 +38,14 @@
                 </div>
                 <div class="form-group">
                   <label class="col-md-2 control-label">
-                    Tipo
+                    Tipo de Hierarquia
                   </label>
                   <div class="col-md-8">
-                    <input type="text" class="form-control" ng-model="hierarquia.descricao" required>
+                    <select class="form-control" ng-model="hierarquia.tipoHierarquia">
+                      <option value="">Selecione...</option>
+                      <option value="COMERCIAL">Comercial</option>  
+                      <option value="INDICANTE">Indicante</option>  
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
@@ -51,7 +55,8 @@
                   <div class="col-md-8">
                     <select class="form-control"
                       ng-model="hierarquia.hierarquiaPai"
-                      ng-options="hierarquia as hierarquia.nome for hierarquia in hierarquias">
+                      ng-options="item as item.nome for item in hierarquias"
+                      ng-change="addHierarquia(hierarquia.hierarquiaPai)">
                       <option value="">Selecione uma hierarquia...</option>
                     </select>
                   </div>

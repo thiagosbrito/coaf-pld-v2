@@ -9,52 +9,44 @@ angular.module('wbaApp')
     'apiComercial',
     function ($scope, $state, $stateParams, toaster, SweetAlert, apiComercial) {
       
-      $scope.hierarquia = {};
+      $scope.hierarquia = {
+        "ativo": null,
+        "hierarquia": null,
+        "hierarquiaPai": null,
+        "nome": null,
+        "tipoHierarquia": null,
+        "uuidPlataforma": null
+      }
 
-      $scope.hierarquias = [
-        {
-          "ativo": true,
-          "hierarquia": [
-            {}
-          ],
-          "hierarquiaPai": {},
-          "nome": "Walter Padelski",
-          "tipoHierarquia": "CEO",
-          "uuid": 0,
-          "uuidCedente": 0,
-          "uuidPlataforma": 0,
-          "uuidUsuario": 0
+      apiComercial.getHierarquias().then(
+        function (res) {
+          $scope.hierarquias = res.data;
         },
-        {
-          "ativo": true,
-          "hierarquia": [
-            {}
-          ],
-          "hierarquiaPai": {},
-          "nome": "Diogo Martins",
-          "tipoHierarquia": "Diretor de TI",
-          "uuid": 1,
-          "uuidCedente": 0,
-          "uuidPlataforma": 0,
-          "uuidUsuario": 0
-        },
-        {
-          "ativo": true,
-          "hierarquia": [
-            {}
-          ],
-          "hierarquiaPai": {},
-          "nome": "Thiago Brito",
-          "tipoHierarquia": "Desenvolvedor Front-End",
-          "uuid": 2,
-          "uuidCedente": 0,
-          "uuidPlataforma": 0,
-          "uuidUsuario": 0
+        function (err) {
+          toaster.pop('error','Hierarquia',err.statusText)
         }
-      ];
+      );
+
+      apiComercial.getPlataformas().then(
+        function (res) {
+          $scope.plataformas = res.data;
+        },
+        function (err) {
+          toaster.pop('error','Plataformas',err.statusText)
+        }
+      );
+
+      $scope.addHierarquia = function (item) {
+        if(angular.isArray($scope.hierarquia.hierarquiaPai)) {
+          $scope.hierarquia.hierarquiaPai.push(item)
+        }
+        else {
+          $scope.hierarquia.hierarquiaPai = [];
+          $scope.hierarquia.hierarquiaPai.push(item)
+        }
+      }
 
       $scope.save = function () {
-        // console.log($scope.hierarquia);
         apiComercial.saveHierarquia($scope.hierarquia).then(
           function (res) {
             toaster.pop('success','Hierarquia','Hierarquia cadastrada com sucesso!');
@@ -66,5 +58,6 @@ angular.module('wbaApp')
         )
       }
 
+      // 
     }
   ])

@@ -11,17 +11,34 @@ angular.module('wbaApp')
 
       $scope.hierarquia = {};
 
-      apiComercial.getHierarquias().then(
+      apiComercial.getHierarquiasById($stateParams.hierarquiaId).then(
         function (res) {
-          $scope.hierarquia = res.data
+          $scope.hierarquia = res.data;
         },
         function (err) {
-          toaster.pop('error','Hierarquia',err.statusText);
+          toaster.pop('error','Hierarquia',err.statusText)
+        }
+      );
+
+      apiComercial.getHierarquias().then(
+        function (res) {
+          $scope.hierarquias = res.data;
+        },
+        function (err) {
+          toaster.pop('error','Hierarquia',err.statusText)
+        }
+      );
+
+      apiComercial.getPlataformas().then(
+        function (res) {
+          $scope.plataformas = res.data;
+        },
+        function (err) {
+          toaster.pop('error','Plataformas',err.statusText)
         }
       );
       
       $scope.update = function () {
-        // console.log($scope.hierarquia);
         apiComercial.updateHierarquia($scope.hierarquia).then(
           function (res) {
             toaster.pop('success','Hierarquia','Hierarquia atualizada com sucesso!');
@@ -32,5 +49,6 @@ angular.module('wbaApp')
           }
         )
       };
+
     }
   ])

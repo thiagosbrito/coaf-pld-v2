@@ -8,7 +8,7 @@ angular.module('wbaApp')
     'SweetAlert',
     'apiComercial',
     function ($scope, $state, $stateParams, toaster, SweetAlert, apiComercial) {
-
+        
         apiComercial.getPlataformasById($stateParams.plataformaId).then(
             function (res) {
                 $scope.plataforma = res.data
