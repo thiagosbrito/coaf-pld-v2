@@ -13,7 +13,6 @@ angular.module('wbaApp')
         return results;
       });
     };
-
     var _getCarteiraById = function (id) {
       return $http({
         url: baseUrl.apiOperacoes + '/carteiras/' + id,
@@ -22,7 +21,6 @@ angular.module('wbaApp')
         return results;
       });
     };
-
     var _saveCarteira = function (data) {
       return $http({
         url: baseUrl.apiOperacoes + '/carteiras',
@@ -47,7 +45,6 @@ angular.module('wbaApp')
         return results;
       });
     };
-
     var _deleteCarteira = function (data) {
       return $http({
         url: baseUrl.apiOperacoes + '/carteiras',
@@ -60,6 +57,24 @@ angular.module('wbaApp')
         return results;
       });
     };
+
+    var _getOperacoes = function () {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes',
+        method: 'GET'
+      }).then(function (results) {
+        return results;
+      });
+    }
+    var _getOperacaoById = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes/' + id,
+        method: 'GET'
+      }).then(function (results) {
+        return results;
+      });
+    }
+
     
     // Comercial
     api.getCarteiras        = _getCarteiras;
@@ -67,6 +82,9 @@ angular.module('wbaApp')
     api.saveCarteira        = _saveCarteira;
     api.updateCarteira      = _updateCarteira;
     api.deleteCarteira      = _deleteCarteira;
+
+    api.getOperacoes        = _getOperacoes;
+    api.getOperacaoById     = _getOperacaoById;
     
     return api;
 

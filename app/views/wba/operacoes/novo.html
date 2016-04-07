@@ -1,6 +1,6 @@
 <ol class="breadcrumb" style="margin: 0 0 15px 0">
     <li><a href="#/dashboard">Dashboard</a></li>
-    <li><a href="#/comercial/hierarquias/listar">Hierarquias</a></li>
+    <li><a href="#/operacoes/listar">Operações</a></li>
     <li class="active">Novo</li>
 </ol>
 
@@ -9,18 +9,18 @@
     <div class="col-md-12">
       <div class="panel panel-indigo">
         <div class="panel-heading">
-          <h2>Cadastrar nova Hierarquia</h2>
+          <h2>Cadastrar nova Operação</h2>
         </div>
         <div class="panel-body">
           <div class="tab-content">
-            <form role="form" class="form-horizontal" novalidate name="formHierarquia">
+            <form role="form" class="form-horizontal" novalidate name="formOperacao">
               <fieldset>
                 <div class="form-group">
                   <label class="col-md-2 control-label">
                     Nome
                   </label>
                   <div class="col-md-8">
-                    <input type="text" class="form-control" ng-model="hierarquia.nome" required>
+                    <input type="text" class="form-control" ng-model="operacao.nome" required>
                   </div>
                 </div>
                 <div class="form-group">
@@ -28,7 +28,7 @@
                     Tipo de Hierarquia
                   </label>
                   <div class="col-md-8">
-                    <select class="form-control" ng-model="hierarquia.tipoHierarquia">
+                    <select class="form-control" ng-model="operacao.tipoHierarquia">
                       <option value="">Selecione...</option>
                       <option value="COMERCIAL">Comercial</option>  
                       <option value="INDICANTE">Indicante</option>  
@@ -41,10 +41,10 @@
                   </label>
                   <div class="col-md-8">
                     <select class="form-control"
-                      ng-model="hierarquia.hierarquiaPai"
+                      ng-model="operacao.hierarquiaPai"
                       ng-options="item as item.nome for item in hierarquias"
-                      ng-change="addHierarquia(hierarquia.hierarquiaPai)">
-                      <option value="">Selecione uma hierarquia...</option>
+                      ng-change="addHierarquia(operacao.hierarquiaPai)">
+                      <option value="">Selecione uma operacao...</option>
                     </select>
                   </div>
                 </div>
@@ -54,39 +54,22 @@
                   </label>
                   <div class="col-md-8">
                     <select class="form-control"
-                      ng-model="hierarquia.uuidPlataforma"
+                      ng-model="operacao.uuidPlataforma"
                       ng-options="plataforma.uuid as plataforma.nome for plataforma in plataformas">
-                      <option value="">Selecione uma hierarquia...</option>
+                      <option value="">Selecione uma operacao...</option>
                     </select>
                   </div>
                 </div>
-                <!-- <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Cedente
-                  </label>
-                  <div class="col-md-8">
-                    <em>select2</em>
-                  </div>
-                </div> -->
-                <!-- <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Usuário
-                  </label>
-                  <div class="col-md-8">
-                    <em>select2</em>
-                  </div>
-                </div> -->
-
                 <div class="form-group">
                   <label for="organizationName" class="col-md-2 control-label">Ativo</label>
                   <div class="col-md-6">
                     <div class="row">
                       <div class="col-md-12">
                         <label class="radio-inline">
-                          <input type="radio" name="ativo" ng-model="hierarquia.ativo" id="inlineRadio1" ng-value="true"> Sim
+                          <input type="radio" name="ativo" ng-model="operacao.ativo" id="inlineRadio1" ng-value="true"> Sim
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="ativo" ng-model="hierarquia.ativo" id="inlineRadio2" ng-value="false"> Não
+                          <input type="radio" name="ativo" ng-model="plataform.ativo" id="inlineRadio2" ng-value="false"> Não
                         </label>
                       </div>
                     </div>
@@ -95,7 +78,7 @@
                 <div class="form-group">
                   <div class="col-md-10 col-md-offset-2">
                     <button class="btn btn-danger-alt pull-left" ui-sref="wba.comercial.hierarquias.listar"><i class="fa fa-times"></i> Cancelar</button>
-                    <button class="btn btn-primary pull-right" ng-disabled="formHierarquia.$invalid" ng-click="save(hierarquia)"><i class="fa fa-save"></i> Salvar</button>
+                    <button class="btn btn-primary pull-right" ng-disabled="formOperacao.$invalid" ng-click="save(hierarquia)"><i class="fa fa-save"></i> Salvar</button>
                   </div>
                 </div>
               </fieldset>
