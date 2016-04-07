@@ -58,6 +58,32 @@ angular
           ]
         },
         {
+          label: 'Operações',
+          iconClasses: 'ti ti-bolt',
+          children: [
+            {
+              label: 'Carteiras',
+              url: '#/operacoes/carteiras/listar'
+            },
+            {
+              label: 'Operações',
+              url: '#/operacoes/listar'
+            },
+            {
+              label: 'Recebíveis',
+              url: '#/operacoes/recebiveis/listar'
+            },
+            {
+              label: 'Tarifas',
+              url: '#/operacoes/tarifas/listar'
+            },
+            {
+              label: 'Workflow',
+              url: '#/operacoes/workflow/listar'
+            }
+          ]
+        },
+        {
           label: 'Checagem',
           iconClasses: 'ti ti-check-box',
           children: [
