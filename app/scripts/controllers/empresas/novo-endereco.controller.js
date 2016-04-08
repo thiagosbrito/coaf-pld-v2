@@ -22,7 +22,7 @@ angular.module('wbaApp')
             toaster.pop('success','Endereço','Endereço cadastrado com sucesso!');
             $scope.endereco = {};
             if(proceed) {
-              $state.go('wba.empresas.novo.representante',{empresaId: $state.empresaId})
+              $state.go('wba.empresas.novo.representante',{empresaId: $stateParams.empresaId})
             }
           },
           function (err) {

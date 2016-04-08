@@ -7,7 +7,8 @@ angular.module('wbaApp')
     '$modal',
     '$log',
     'toaster',
-    function ($scope, $state, $stateParams, apiEmpresas, $modal, $log, toaster) {
+    'SweetAlert',
+    function ($scope, $state, $stateParams, apiEmpresas, $modal, $log, toaster, SweetAlert) {
       
       $scope.getAddresses = function () {
         apiEmpresas.getAddress($stateParams.empresaId).then(
@@ -21,7 +22,7 @@ angular.module('wbaApp')
       }
       $scope.getAddresses();
 
-      $scope.delete = function () {
+      $scope.delete = function (id) {
         SweetAlert.swal({
            title: "Você tem certeza?",
            text: "Se prosseguir essa operação não poderá ser desfeita",
@@ -31,8 +32,18 @@ angular.module('wbaApp')
            confirmButtonText: "Prosseguir",
            closeOnConfirm: true
         }, 
-        function(){ 
-           SweetAlert.swal("Booyah!");
+        function(isConfirm){ 
+          if (isConfirm) {
+            apiEmpresas.deleteAddress($stateParams.empresaId, id).then(
+              function (res) {
+                toaster.pop('success','Endereços','Endereço excluído com sucesso!');
+                $scope.getAddresses();
+              },
+              function (err) {
+                toaster.pop('error','Endereços','Desculpe, algum erro ocorreu, favor, verifique as informações e tente novamente!')
+              }
+            )
+          }
         });
       }
 

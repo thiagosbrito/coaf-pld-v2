@@ -196,7 +196,7 @@
 	<script src="bower_components/es5-shim/es5-shim.js"></script>
 	<script src="bower_components/json3/lib/json3.min.js"></script>
 	<![endif]-->
-	<script src="http://192.168.99.100:8080/auth/js/keycloak.js"></script>
+	<!-- <script src="http://192.168.99.100:8080/auth/js/keycloak.js"></script> -->
 	<script type='text/javascript' src='http://maps.google.com/maps/api/js?sensor=true'></script> 
 
 	<!-- build:js scripts/vendor.js -->
@@ -302,6 +302,9 @@
 	
 	<!-- endbuild -->
 	<script src="scripts/app.js"></script>
+	<script src="scripts/config/constants.js"></script>
+	<script src="scripts/config/routes.js"></script>
+	<script src="scripts/config/runners.js"></script>
 	
 	<!-- Filters -->
 	<script src="scripts/filters/cnpj.filter.js"></script>
@@ -309,7 +312,9 @@
 	<!-- Wba Scripts -->
 	<!-- Usuarios e Permissoes -->
 	<script src="scripts/services/empresas.js"></script>
+	<script src="scripts/services/comercial.js"></script>
 	<script src="scripts/services/organizacoes.js"></script>
+	<script src="scripts/services/operacoes.js"></script>
 	<script src="scripts/services/cep.js"></script>
 	<script src="scripts/controllers/organizacoes/organizacoes.controller.js"></script>
 	<script src="scripts/controllers/organizacoes/usuarios.controller.js"></script>
@@ -323,6 +328,17 @@
 	<script src="scripts/controllers/empresas/novo-endereco.controller.js"></script>
 	<script src="scripts/controllers/empresas/novo-representante.controller.js"></script>
 	<script src="scripts/controllers/empresas/novo-contato.controller.js"></script>
+
+	<script src="scripts/controllers/comercial/plataformas/listar.controller.js"></script>
+	<script src="scripts/controllers/comercial/plataformas/novo.controller.js"></script>
+	<script src="scripts/controllers/comercial/plataformas/editar.controller.js"></script>
+
+	<script src="scripts/controllers/comercial/hierarquias/listar.controller.js"></script>
+	<script src="scripts/controllers/comercial/hierarquias/novo.controller.js"></script>
+	<script src="scripts/controllers/comercial/hierarquias/editar.controller.js"></script>
+
+	<script src="scripts/controllers/operacoes/listar.controller.js"></script>
+	<script src="scripts/controllers/operacoes/carteiras/listar.controller.js"></script>
 
 	<script src="scripts/controllers/empresas/editar-empresa.controller.js"></script>
 	<script src="scripts/controllers/empresas/editar-endereco.controller.js"></script>

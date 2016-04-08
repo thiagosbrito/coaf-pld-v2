@@ -8,16 +8,6 @@ angular
       'use strict';
       $scope.menu = [
         {
-          label: 'Empresa',
-          iconClasses: 'ti ti-home',
-          children: [
-            {
-              label: 'Empresas',
-              url: '#/empresas/listar'
-            }
-          ]
-        },
-        {
           label: 'Usuários e Permissões',
           iconClasses: 'ti ti-lock',
           children: [
@@ -44,11 +34,52 @@ angular
           ]
         },
         {
+          label: 'Empresas',
+          iconClasses: 'ti ti-home',
+          children: [
+            {
+              label: 'Listar Empresas',
+              url: '#/empresas/listar'
+            }
+          ]
+        },
+        {
           label: 'Comercial',
           iconClasses: 'ti ti-briefcase',
           children: [
             {
-              label: 'Hierarquias'
+              label: 'Hierarquias',
+              url: '#/comercial/hierarquias/listar'
+            },
+            {
+              label: 'Plataformas',
+              url: '#/comercial/plataformas/listar'
+            }
+          ]
+        },
+        {
+          label: 'Operações',
+          iconClasses: 'ti ti-bolt',
+          children: [
+            {
+              label: 'Carteiras',
+              url: '#/operacoes/carteiras/listar'
+            },
+            {
+              label: 'Operações',
+              url: '#/operacoes/listar'
+            },
+            {
+              label: 'Recebíveis',
+              url: '#/operacoes/recebiveis/listar'
+            },
+            {
+              label: 'Tarifas',
+              url: '#/operacoes/tarifas/listar'
+            },
+            {
+              label: 'Workflow',
+              url: '#/operacoes/workflow/listar'
             }
           ]
         },

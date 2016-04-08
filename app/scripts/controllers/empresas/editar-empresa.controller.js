@@ -4,7 +4,9 @@ angular.module('wbaApp')
     '$state',
     '$stateParams',
     'empresa',
-    function ($scope, $state, $stateParams, empresa) {
+    'apiEmpresas',
+    'toaster',
+    function ($scope, $state, $stateParams, empresa, apiEmpresas, toaster) {
       
       $scope.empresa = empresa;
 

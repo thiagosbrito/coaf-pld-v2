@@ -1,3 +1,12 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+.red {
+  color: #e51c23;
+}
+.green {
+  color: #8bc34a;
+}
 .header-section button.btn-voltar {
   clear: both;
   margin: 8px 8px 0px -13px !important;
@@ -27,8 +36,8 @@ table.table.table-striped.fix-table-vertical-alignment thead {
   font-weight: 600 !important;
 }
 .form-wzrd li a {
-  /*pointer-events: none;
-  cursor: default;*/
+  pointer-events: none;
+  cursor: default;
 }
 .form-wzrd li.active {
   margin-right: 10px;

@@ -137,7 +137,7 @@ angular.module('wbaApp')
       )
     };
     var _deleteContacts = function (idEmpresa, id) {
-      var url = baseUrl.apiEmpresas + '/empresas/' + id + '/contatos/' + id;
+      var url = baseUrl.apiEmpresas + '/empresas/' + idEmpresa + '/contatos/' + id;
       return $http.delete(url).then(
         function (res) {
           return res
