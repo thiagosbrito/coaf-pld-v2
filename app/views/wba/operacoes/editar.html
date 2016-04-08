@@ -1,7 +1,7 @@
 <ol class="breadcrumb" style="margin: 0 0 15px 0">
     <li><a href="#/dashboard">Dashboard</a></li>
     <li><a href="#/operacoes/listar">Operações</a></li>
-    <li class="active">Novo</li>
+    <li class="active">Editar</li>
 </ol>
 
 <div class="container-fluid">
@@ -9,7 +9,7 @@
     <div class="col-md-12">
       <div class="panel panel-indigo">
         <div class="panel-heading">
-          <h2>Cadastrar nova Operação</h2>
+          <h2>Editar Operação</h2>
         </div>
         <div class="panel-body">
           <div class="tab-content">
@@ -42,7 +42,7 @@
                     Número
                   </label>
                   <div class="col-md-8">
-                    <input type="text" class="form-control" ng-model="operacao.numero" required>
+                    <input type="text" class="form-control" ng-model="operacao.numero">
                   </div>
                 </div>
                 <div class="form-group">
@@ -72,7 +72,6 @@
                         min-date="minDate"
                         datepicker-options="dateOptions"
                         date-disabled="disabled(date, mode)"
-                        ng-required="true"
                         close-text="Fechar"
                         current-text="Hoje"
                         clear-text="Limpar" />
@@ -98,7 +97,11 @@
                 <div class="form-group">
                   <div class="col-md-10 col-md-offset-2">
                     <button class="btn btn-danger-alt pull-left" ui-sref="wba.operacoes.listar"><i class="fa fa-times"></i> Cancelar</button>
-                    <button class="btn btn-primary pull-right" ng-disabled="formOperacao.$invalid" ng-click="save(operacao)"><i class="fa fa-save"></i> Salvar</button>
+                    <button class="btn btn-primary pull-right"
+
+
+
+                     ng-click="update(operacao)"><i class="fa fa-save"></i> Salvar</button>
                   </div>
                 </div>
               </fieldset>
