@@ -4,7 +4,7 @@ angular.module('wbaApp')
 
     var api = {};
 
-    // LIST
+    // CARTEIRAS
     var _getCarteiras = function () {
       return $http({
         url: baseUrl.apiOperacoes + '/carteiras',
@@ -58,6 +58,7 @@ angular.module('wbaApp')
       });
     };
 
+    // OPERACOES
     var _getOperacoes = function () {
       return $http({
         url: baseUrl.apiOperacoes + '/operacoes',
@@ -74,6 +75,30 @@ angular.module('wbaApp')
         return results;
       });
     }
+    var _saveOperacao = function (data) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes',
+        method: 'POST',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(function (results) {
+        return results;
+      });
+    }
+    var _updateOperacao = function (data) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes',
+        method: 'PUT',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(function (results) {
+        return results;
+      });
+    }
 
     
     // Comercial
@@ -85,7 +110,8 @@ angular.module('wbaApp')
 
     api.getOperacoes        = _getOperacoes;
     api.getOperacaoById     = _getOperacaoById;
-    
+    api.saveOperacao        = _saveOperacao;
+    api.updateOperacao      = _updateOperacao;
     return api;
 
 }]);

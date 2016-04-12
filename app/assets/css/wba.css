@@ -56,3 +56,8 @@ table.table.table-striped.fix-table-vertical-alignment thead {
 .form-wzrd li.active.last a:after {
   border: none;
 }
+
+.datepicker-holder table{
+  width: 95%;
+  margin: 0 auto;
+}

@@ -5,71 +5,50 @@
 </ol>
 
 <div class="container-fluid">
-    
-    <div class="row">
-        <div class="col-md-12">
-        <div class="panel panel-indigo">
-          <div class="panel-heading header-section">
-            
-            <h2>Operações</h2>
-            <div class="panel-ctrls">
-              <a class="button-icon" ui-sref="wba.operacoes.novo">
-                <i class="fa fa-plus"></i>
-              </a>
-            </div>
-          </div>
-          <div class="panel-body">
-            <p class="text-center" ng-show="operacoes.length == 0">
-              Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
-            </p>
-            <table class="table table-striped fix-table-vertical-alignment" ng-show="operacoes.length > 0">
-              <thead>
-              <!-- {
-                "ativo": true,
-                "hierarquia": [
-                  {}
-                ],
-                "hierarquiaPai": {},
-                "nome": "string",
-                "tipoHierarquia": "string",
-                "uuid": 0,
-                "uuidCedente": 0,
-                "uuidPlataforma": 0,
-                "uuidUsuario": 0
-              } -->
-                <tr>
-                  <!-- <td>Id</td> -->
-                  <th>Número</th>
-                  <th class="text-center">Modelo</th>
-                  <th class="text-center">Data</th>
-                  <th class="text-center">Status</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="item in operacoes track by $index">
-                  <td ng-bind="item.numero"></td>
-                  <td ng-bind="item.modeloCobranca" class="text-center"></td>
-                  <td class="text-center">{{item.dataOperacao | date: 'dd/MM/yyyy'}}</td>
-                  <td class="text-center">
-                    <i class="fa" ng-class="{'fa-check green': item.ativo, 'fa-times red': !item.ativo}"></i>
-                  </td>
-                  <td>
-                    <button class="btn btn-primary pull-right" ui-sref="wba.operacoes.editar({operacaoId: item.uuid})">
-                      <i class="fa fa-pencil"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager> -->
+  <div class="row">
+      <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading header-section">
+          
+          <h2>Operações</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" ui-sref="wba.operacoes.novo">
+              <i class="fa fa-plus"></i>
+            </a>
           </div>
         </div>
-
-            <!-- <panel panel-class="panel-info" heading="Listagem de Organizações">
-                
-            </panel> -->
+        <div class="panel-body">
+          <p class="text-center" ng-show="operacoes.length == 0">
+            Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
+          </p>
+          <table class="table table-striped fix-table-vertical-alignment" ng-show="operacoes.length > 0">
+            <thead>
+              <tr>
+                <th>Número</th>
+                <th class="text-center">Modelo de Cobrança</th>
+                <th class="text-center">Data</th>
+                <th class="text-center">Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in operacoes track by $index">
+                <td ng-bind="item.numero"></td>
+                <td ng-bind="item.modeloCobranca" class="text-center"></td>
+                <td class="text-center">{{item.dataOperacao | date: 'dd/MM/yyyy'}}</td>
+                <td class="text-center" ng-bind="item.status">
+                </td>
+                <td>
+                  <button class="btn btn-primary pull-right" ui-sref="wba.operacoes.editar({operacaoId: item.uuid})">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager> -->
         </div>
+      </div>
     </div>
-
-</div> <!-- container-fluid -->
+  </div>
+</div>

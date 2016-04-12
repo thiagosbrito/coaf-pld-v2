@@ -273,6 +273,16 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/operacoes/listar.html',
         controller: 'OperacoesListarController'
       })
+      .state('wba.operacoes.novo',{
+        url: '/novo',
+        templateUrl: 'views/wba/operacoes/novo.html',
+        controller: 'OperacoesNovoController'
+      })
+      .state('wba.operacoes.editar',{
+        url: '/editar/:operacaoId',
+        templateUrl: 'views/wba/operacoes/editar.html',
+        controller: 'OperacoesEditarController'
+      })
       .state('wba.operacoes.carteiras',{
         url: '/carteiras',
         template: '<div ui-view=""></div>'
