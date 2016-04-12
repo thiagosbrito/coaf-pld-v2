@@ -1,4 +1,5 @@
-# wba-gestao-portal
+# wba-gestao-portal [![Build Status](https://travis-ci.com/idtrust/wba-gestao-portal.svg?token=zyz2y94HMAD7GW9Cr5k9&branch=develop)](https://travis-ci.com/idtrust/wba-gestao-portal)
+
 Portal WBA Gestão
 
 ## Setup
