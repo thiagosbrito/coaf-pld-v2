@@ -14,7 +14,6 @@ angular.module('wbaApp', [
   'ui.router',
   'ui.utils.masks',
   'angular-loading-bar',
-  'theme.demos',
   'toaster',
   'oitozero.ngSweetAlert'
   ])
