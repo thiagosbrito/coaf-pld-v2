@@ -1,0 +1,62 @@
+<ol class="breadcrumb" style="margin: 0 0 15px 0">
+    <li><a href="#/">Dashboard</a></li>
+    <li>Operações</li>
+    <li class="active">Tarifas</li>
+</ol>
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-12">
+        <div class="panel panel-indigo">
+          <div class="panel-heading header-section">
+            
+            <h2>Tarifas</h2>
+            <div class="panel-ctrls">
+              <a class="button-icon" ng-click="openModalTarifa('new')">
+                <i class="fa fa-plus"></i>
+              </a>
+            </div>
+          </div>
+          <div class="panel-body">
+            <p class="text-center" ng-show="tarifas.length == 0">
+              Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
+            </p>
+            <table class="table table-striped fix-table-vertical-alignment" ng-show="tarifas.length > 0">
+              <thead>
+                <tr>
+                  <th>Cód.</th>
+                  <th>Descrição</th>
+                  <th>Ordem</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in tarifas track by $index">
+                  <td ng-bind="item.codigoLancamento"></td>
+                  <td ng-bind="item.descricao"></td>
+                  <td ng-bind="item.ordem"></td>
+                  <td>
+                    <div class="btn-group pull-right">
+                      <button class="btn btn-danger-alt" ng-click="delete(item)">
+                        <i class="fa fa-trash-o"></i>
+                      </button>
+                      <button class="btn btn-primary" ng-click="openModalTarifa('edit', item.ordem)">
+                        <i class="fa fa-pencil"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager> -->
+          </div>
+        </div>
+
+            <!-- <panel panel-class="panel-info" heading="Listagem de Organizações">
+                
+            </panel> -->
+        </div>
+    </div>
+
+</div> <!-- container-fluid -->

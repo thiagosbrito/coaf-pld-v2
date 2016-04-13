@@ -100,6 +100,61 @@ angular.module('wbaApp')
       });
     }
 
+    // 
+
+    var _getTarifas = function () {
+      return $http({
+        url: baseUrl.apiOperacoes + '/tarifas',
+        method: 'GET'
+      }).then(function (results) {
+        return results;
+      });
+    };
+    var _getTarifaById = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/tarifas/' + id,
+        method: 'GET'
+      }).then(function (results) {
+        return results;
+      });
+    };
+    var _saveTarifa = function (data) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/tarifas',
+        method: 'POST',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(function (results) {
+        return results;
+      });
+    };
+    var _updateTarifa = function (data) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/tarifas',
+        method: 'PUT',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(function (results) {
+        return results;
+      });
+    };
+    var _deleteTarifa = function (data) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/tarifas',
+        method: 'DELETE',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(function (results) {
+        return results;
+      });
+    };
+
     
     // Comercial
     api.getCarteiras        = _getCarteiras;
@@ -107,6 +162,12 @@ angular.module('wbaApp')
     api.saveCarteira        = _saveCarteira;
     api.updateCarteira      = _updateCarteira;
     api.deleteCarteira      = _deleteCarteira;
+
+    api.getTarifas          = _getTarifas;
+    api.getTarifaById       = _getTarifaById;
+    api.saveTarifa          = _saveTarifa;
+    api.updateTarifa        = _updateTarifa;
+    api.deleteTarifa        = _deleteTarifa;
 
     api.getOperacoes        = _getOperacoes;
     api.getOperacaoById     = _getOperacaoById;
