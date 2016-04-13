@@ -1,59 +1,50 @@
 <ol class="breadcrumb" style="margin: 0 0 15px 0">
-    <li><a href="#/">Dashboard</a></li>
-    <li>Operações</li>
-    <li class="active">Carteiras</li>
+  <li><a href="#/">Dashboard</a></li>
+  <li>Operações</li>
+  <li class="active">Carteiras</li>
 </ol>
-
 <div class="container-fluid">
-    
-    <div class="row">
-        <div class="col-md-12">
-        <div class="panel panel-indigo">
-          <div class="panel-heading header-section">
-            
-            <h2>Carteiras</h2>
-            <div class="panel-ctrls">
-              <a class="button-icon" ng-click="openModalCarteira('new')">
-                <i class="fa fa-plus"></i>
-              </a>
-            </div>
-          </div>
-          <div class="panel-body">
-            <p class="text-center" ng-show="carteiras.length == 0">
-              Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
-            </p>
-            <table class="table table-striped fix-table-vertical-alignment" ng-show="carteiras.length > 0">
-              <thead>
-                <tr>
-                  <!-- <td>Id</td> -->
-                  <th>Nome</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="item in carteiras track by $index">
-                  <td ng-bind="item.nome"></td>
-                  <td>
-                    <div class="btn-group pull-right">
-                      <button class="btn btn-danger-alt" ng-click="delete(item)">
-                        <i class="fa fa-trash-o"></i>
-                      </button>
-                      <button class="btn btn-primary" ng-click="openModalCarteira('edit', item.uuid)">
-                        <i class="fa fa-pencil"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager> -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading header-section">
+          <h2>Carteiras</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" ng-click="openModalCarteira('new')">
+              <i class="fa fa-plus"></i>
+            </a>
           </div>
         </div>
-
-            <!-- <panel panel-class="panel-info" heading="Listagem de Organizações">
-                
-            </panel> -->
+        <div class="panel-body">
+          <p class="text-center" ng-show="carteiras.length == 0">
+            Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
+          </p>
+          <table class="table table-striped fix-table-vertical-alignment" ng-show="carteiras.length > 0">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in carteiras track by $index">
+                <td ng-bind="item.nome"></td>
+                <td>
+                  <div class="btn-group pull-right">
+                    <button class="btn btn-danger-alt" ng-click="delete(item)">
+                      <i class="fa fa-trash-o"></i>
+                    </button>
+                    <button class="btn btn-primary" ui-sref="wba.operacoes.carteiras.editar({carteiraId: item.uuid})">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager> -->
         </div>
+      </div>
     </div>
-
+  </div>
 </div> <!-- container-fluid -->

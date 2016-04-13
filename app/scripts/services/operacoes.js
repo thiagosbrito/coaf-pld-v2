@@ -33,6 +33,19 @@ angular.module('wbaApp')
         return results;
       });
     };
+
+    var _addTarifaToCarteira = function (idCarteira, idTarifa, valor) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/carteiras/' + idCarteira + '/tarifas/' + idTarifa,
+        method: 'POST',
+        data: valor,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(function (results) {
+        return results;
+      });
+    }
     var _updateCarteira = function (data) {
       return $http({
         url: baseUrl.apiOperacoes + '/carteiras',
@@ -162,6 +175,7 @@ angular.module('wbaApp')
     api.saveCarteira        = _saveCarteira;
     api.updateCarteira      = _updateCarteira;
     api.deleteCarteira      = _deleteCarteira;
+    api.addTarifaToCarteira = _addTarifaToCarteira;
 
     api.getTarifas          = _getTarifas;
     api.getTarifaById       = _getTarifaById;

@@ -21,7 +21,7 @@
                   </label>
                   <div class="col-md-8">
                     <select ng-model="operacao.uuidCedente" class="form-control"
-                    ng-options="ced.id as ced.nomeFantasia for ced in cedentes" required>
+                    ng-options="ced.id as ced.nomeFantasia for ced in cedentes track by operacao.uuidCedente" required>
                       <option value="">Selecione</option>
                     </select>
                   </div>

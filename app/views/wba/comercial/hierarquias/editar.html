@@ -55,7 +55,7 @@
                   <div class="col-md-8">
                     <select class="form-control"
                       ng-model="hierarquia.hierarquiaPai"
-                      ng-options="hierarquia as hierarquia.nome for hierarquia in hierarquias track by hierarquia.uuid">
+                      ng-options="hie as hie.nome for hie in hierarquias track by hie.uuid">
                       <option value="">Selecione uma hierarquia...</option>
                     </select>
                   </div>
@@ -67,7 +67,7 @@
                   <div class="col-md-8">
                     <select class="form-control"
                       ng-model="hierarquia.uuidPlataforma"
-                      ng-options="plataforma.uuid as plataforma.nome for plataforma in plataformas">
+                      ng-options="plataforma.uuid as plataforma.nome for plataforma in plataformas track by hierarquia.uuidPlataforma">
                       <option value="">Selecione uma plataforma...</option>
                     </select>
                   </div>
