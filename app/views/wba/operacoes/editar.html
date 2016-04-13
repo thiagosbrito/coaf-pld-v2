@@ -21,7 +21,7 @@
                   </label>
                   <div class="col-md-8">
                     <select ng-model="operacao.uuidCedente" class="form-control"
-                    ng-options="ced.id as ced.nomeFantasia for ced in cedentes">
+                    ng-options="ced.id as ced.nomeFantasia for ced in cedentes" required>
                       <option value="">Selecione</option>
                     </select>
                   </div>
@@ -32,7 +32,7 @@
                   </label>
                   <div class="col-md-8">
                     <select ng-model="operacao.uuidCarteira" class="form-control"
-                    ng-options="cart.uuid as cart.nome for cart in carteiras">
+                    ng-options="cart.uuid as cart.nome for cart in carteiras" required>
                       <option value="">Selecione</option>
                     </select>
                   </div>
@@ -85,7 +85,7 @@
                   <label class="col-md-2 control-label">
                     Status
                   </label>
-                  <div class="col-md-8">
+                  <div class="col-md-4">
                     <select class="form-control" ng-model="operacao.status">
                       <option value="">Selecione...</option>
                       <option value="SIMULADA">Simulada</option>
@@ -97,11 +97,12 @@
                 <div class="form-group">
                   <div class="col-md-10 col-md-offset-2">
                     <button class="btn btn-danger-alt pull-left" ui-sref="wba.operacoes.listar"><i class="fa fa-times"></i> Cancelar</button>
-                    <button class="btn btn-primary pull-right"
-
-
-
-                     ng-click="update(operacao)"><i class="fa fa-save"></i> Salvar</button>
+                    <button
+                      class="btn btn-primary pull-right"
+                      ng-disabled="formOperacao.$invalid"
+                      ng-click="update(operacao)">
+                      <i class="fa fa-save"></i> Salvar
+                    </button>
                   </div>
                 </div>
               </fieldset>
