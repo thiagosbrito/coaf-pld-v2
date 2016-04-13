@@ -1,0 +1,78 @@
+<ol class="breadcrumb">
+    <li><a href="#/">Dashboard</a></li>
+    <li>Pages</li>
+    <li class="active">Blank Page</li>
+</ol>
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <panel panel-class="panel-indigo" heading="Cadastrar usuário">
+                <form class="form form-horizontal" role="form">
+                  <fieldset>
+                    <div class="form-group">
+                      <label class="col-md-2 control-label">Nome de usuário</label>
+                      <div class="col-md-5">
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-md-2 control-label">Nome</label>
+                      <div class="col-md-8">
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-md-2 control-label">Email</label>
+                      <div class="col-md-8">
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-md-2 control-label">Hierarquia</label>
+                      <div class="col-md-5">
+                        <select ng-model="usuario.hierarquia" class="form-control" ng-options="hierarquia as hierarquia.nome for hierarquia in hierarquias">
+                          <option value="">Selecione a hierarquia</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-md-2 control-label">Roles</label>
+                      <div class="col-md-5">
+                        <ui-select multiple ng-model="usuario.roles" close-on-select="false" title="Roles">
+                          <ui-select-match placeholder="Selecione as roles..">{{$select.selected[$index].nome}}</ui-select-match>
+                          <ui-select-choices repeat="role in roles | filter: $select.search">
+                            <span ng-bind-html="role.nome | highlight: $select.search"></span>
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-md-2 control-label">Grupos</label>
+                      <div class="col-md-5">
+                        <ui-select multiple ng-model="usuario.grupos" close-on-select="false" title="Grupos">
+                          <ui-select-match placeholder="Selecione os grupos..">{{$select.selected[$index].nome}}</ui-select-match>
+                          <ui-select-choices repeat="grupo in grupos | filter: $select.search">
+                            <span ng-bind-html="grupo.nome | highlight: $select.search"></span>
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-8 col-md-offset-2">
+                        <button class="btn btn-danger-alt pull-left">
+                          <i class="fa fa-times"></i> Cancelar
+                        </button>
+                        <button class="btn btn-primary pull-right">
+                          <i class="fa fa-save"></i> Salvar
+                        </button>
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+            </panel>
+        </div>
+    </div>
+
+</div> <!-- container-fluid -->

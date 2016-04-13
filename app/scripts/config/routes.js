@@ -74,7 +74,16 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/organizacoes/usuarios.html',
         controller: 'OrganizacoesUsuariosController'
       })
-      
+      .state('wba.usuarios', {
+        url: '/usuarios',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.usuarios.novo', {
+        url: '/novo',
+        templateUrl: 'views/wba/usuario/novo.html',
+        controller: 'OrganizacoesUsuariosNovoController'
+      })
+
       .state('wba.usuarios-permissoes.organizacoes.usuarios.grupos', {
         url: '/:usuarioId/grupos',
         template: '<div ui-view=""></div>'
@@ -332,5 +341,6 @@ angular.module('wbaApp')
       .state('wba.notificacao',{
         url: '/notificacao'
       })
+
   }
 ])
