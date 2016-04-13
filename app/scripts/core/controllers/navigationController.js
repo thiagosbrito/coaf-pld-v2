@@ -7,39 +7,56 @@ angular
     function($scope, $location, $timeout) {
       'use strict';
       $scope.menu = [
+        // {
+        //   label: 'Usuários e Permissões',
+        //   iconClasses: 'ti ti-lock',
+        //   children: [
+        //     {
+        //       label: 'Organizações',
+        //       url: '#/usuarios-permissoes/organizacoes/listar'
+        //     },
+        //     {
+        //       label: 'Grupos',
+        //       url: '#/usuarios-permissoes/grupos/listar'
+        //     },
+        //     {
+        //       label: 'Roles',
+        //       url: '#/usuarios-permissoes/roles/listar'
+        //     },
+        //     {
+        //       label: 'Permissões',
+        //       url: '#/usuarios-permissoes/roles/listar'
+        //     },
+        //     {
+        //       label: 'Módulos',
+        //       url: '#/usuarios-permissoes/modulos/listar'
+        //     }
+        //   ]
+        // },
         {
-          label: 'Usuários e Permissões',
-          iconClasses: 'ti ti-lock',
-          children: [
-            {
-              label: 'Organizações',
-              url: '#/usuarios-permissoes/organizacoes/listar'
-            },
-            {
-              label: 'Grupos',
-              url: '#/usuarios-permissoes/grupos/listar'
-            },
-            {
-              label: 'Roles',
-              url: '#/usuarios-permissoes/roles/listar'
-            },
-            {
-              label: 'Permissões',
-              url: '#/usuarios-permissoes/roles/listar'
-            },
-            {
-              label: 'Módulos',
-              url: '#/usuarios-permissoes/modulos/listar'
-            }
-          ]
+          label: 'Visão Geral',
+          iconClasses: 'ti ti-dashboard',
+          url: '#/dashboard'
         },
         {
-          label: 'Empresas',
-          iconClasses: 'ti ti-home',
+          label: 'Cadastro',
+          iconClasses: 'ti ti-panel',
           children: [
+            // {
+            //   label: 'Empresas',
+            //   url: '#/empresas/listar'
+            // },
             {
-              label: 'Listar Empresas',
-              url: '#/empresas/listar'
+              label: 'Carteiras',
+              url: '#/operacoes/carteiras/listar'
+            },
+            {
+              label: 'Plataformas',
+              url: '#/comercial/plataformas/listar'
+            },
+            {
+              label: 'Hierarquia Comercial',
+              url: '#/comercial/hierarquias/listar'
             }
           ]
         },
@@ -48,12 +65,30 @@ angular
           iconClasses: 'ti ti-briefcase',
           children: [
             {
-              label: 'Hierarquias',
-              url: '#/comercial/hierarquias/listar'
+              label: 'Oportunidades'
             },
             {
-              label: 'Plataformas',
-              url: '#/comercial/plataformas/listar'
+              label: 'Atividades',
+              children: [
+                {
+                  label: 'Visitas'
+                },
+                {
+                  label: 'Tarefas'
+                },
+                {
+                  label: 'Anotações'
+                },
+                {
+                  label: 'Ligações'
+                }
+              ]
+            },
+            {
+              label: 'Cliente potencial'
+            },
+            {
+              label: 'Contatos'
             }
           ]
         },
@@ -61,10 +96,6 @@ angular
           label: 'Operações',
           iconClasses: 'ti ti-bolt',
           children: [
-            {
-              label: 'Carteiras',
-              url: '#/operacoes/carteiras/listar'
-            },
             {
               label: 'Operações',
               url: '#/operacoes/listar'
@@ -115,6 +146,36 @@ angular
                   label: 'Retorno'
                 }
               ]
+            }
+          ]
+        },
+        {
+          label: 'Relatórios',
+          iconClasses: 'ti ti-stats-up'
+        },
+        {
+          label: 'Configurações',
+          iconClasses: 'ti ti-settings',
+          children: [
+            {
+              label: 'Empresas',
+              url: '#/empresas/listar'
+            },
+            {
+              label: 'Usuários e Permissões',
+              url: '#/usuarios-permissoes/organizacoes/listar'
+            },
+            {
+              label: 'Parâmetros do sistema',
+              url: '#/usuarios-permissoes/grupos/listar'
+            },
+            {
+              label: 'Auditoria',
+              url: '#/usuarios-permissoes/grupos/listar'
+            },
+            {
+              label: 'Manutenção',
+              url: '#/usuarios-permissoes/grupos/listar'
             }
           ]
         },

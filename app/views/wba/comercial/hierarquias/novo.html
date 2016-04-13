@@ -42,8 +42,7 @@
                   <div class="col-md-8">
                     <select class="form-control"
                       ng-model="hierarquia.hierarquiaPai"
-                      ng-options="item as item.nome for item in hierarquias"
-                      ng-change="addHierarquia(hierarquia.hierarquiaPai)">
+                      ng-options="item as item.nome for item in hierarquias track by item.uuid">
                       <option value="">Selecione uma hierarquia...</option>
                     </select>
                   </div>

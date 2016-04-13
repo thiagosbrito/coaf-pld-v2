@@ -292,6 +292,11 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/operacoes/carteiras/listar.html',
         controller: 'CarteirasListarController'
       })
+      .state('wba.operacoes.carteiras.editar',{
+        url: '/editar/:carteiraId',
+        templateUrl: 'views/wba/operacoes/carteiras/editar.html' ,
+        controller: 'CarteirasEditarController'
+      })
 
       .state('wba.operacoes.tarifas',{
         url: '/tarifas',

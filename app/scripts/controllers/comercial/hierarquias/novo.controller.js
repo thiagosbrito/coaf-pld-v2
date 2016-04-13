@@ -12,7 +12,7 @@ angular.module('wbaApp')
       $scope.hierarquia = {
         "ativo": null,
         "hierarquia": null,
-        "hierarquiaPai": null,
+        "hierarquiaPai": {},
         "nome": null,
         "tipoHierarquia": null,
         "uuidPlataforma": null
@@ -36,15 +36,15 @@ angular.module('wbaApp')
         }
       );
 
-      $scope.addHierarquia = function (item) {
-        if(angular.isArray($scope.hierarquia.hierarquiaPai)) {
-          $scope.hierarquia.hierarquiaPai.push(item)
-        }
-        else {
-          $scope.hierarquia.hierarquiaPai = [];
-          $scope.hierarquia.hierarquiaPai.push(item)
-        }
-      }
+      // $scope.addHierarquia = function (item) {
+      //   if(angular.isArray($scope.hierarquia.hierarquiaPai)) {
+      //     $scope.hierarquia.hierarquiaPai.push(item)
+      //   }
+      //   else {
+      //     $scope.hierarquia.hierarquiaPai = [];
+      //     $scope.hierarquia.hierarquiaPai.push(item)
+      //   }
+      // }
 
       $scope.save = function () {
         apiComercial.saveHierarquia($scope.hierarquia).then(
