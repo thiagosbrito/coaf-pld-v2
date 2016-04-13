@@ -10,7 +10,8 @@ angular.module('wbaApp')
   'toaster',
   'SweetAlert',
   '$modal',
-  function ($scope, $state, $stateParams, apiOperacoes, apiEmpresas, toaster, SweetAlert, $modal) {
+  '$log',
+  function ($scope, $state, $stateParams, apiOperacoes, apiEmpresas, toaster, SweetAlert, $modal, $log) {
 
     apiEmpresas.getAll().then(
       function (res) {
@@ -22,14 +23,17 @@ angular.module('wbaApp')
       }
     );
 
-    apiOperacoes.getCarteiras().then(
-      function (res) {
-        $scope.carteiras = res.data;
-      },
-      function (err) {
-        toaster.pop('error','Carteiras',err.statusText)
-      }
-    ); 
+    $scope.getCarteiras = function () {
+      apiOperacoes.getCarteiras().then(
+        function (res) {
+          $scope.carteiras = res.data;
+        },
+        function (err) {
+          toaster.pop('error','Carteiras',err.statusText)
+        }
+      ); 
+    }
+    $scope.getCarteiras();
 
     $scope.save = function (data) {
       apiOperacoes.saveOperacao(data).then(
@@ -41,6 +45,38 @@ angular.module('wbaApp')
           toaster.pop('error','Operações',err.statusText)
         }
       )
+    }
+
+    $scope.openModalCarteiras = function () {
+      var modalInstance = $modal.open({
+          templateUrl: 'views/wba/operacoes/carteiras/modal-new.html',
+          controller: function ($scope, $modalInstance) {
+            $scope.close = function () {
+              $modalInstance.dismiss('cancel');
+            }
+            $scope.salvar = function (item) {
+              $modalInstance.close(item);
+            }
+          },
+        });
+
+        // modal para cadastro de representante
+        modalInstance.result.then(
+          function (item) {
+            apiOperacoes.saveCarteira(item).then(
+              function (res) {
+                toaster.pop('success','Carteira','Carteira cadastrada com sucesso!');
+                $scope.getCarteiras();
+              },
+              function (err) {
+                toaster.pop('error','Carteiras',err.statusText);
+              }
+            )
+          },
+          function () {
+            $log.info('Modal dismissed at: ' + new Date());
+          }
+        );
     }
 
     $scope.today = function() {

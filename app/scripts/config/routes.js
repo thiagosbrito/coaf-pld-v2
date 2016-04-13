@@ -293,6 +293,25 @@ angular.module('wbaApp')
         controller: 'CarteirasListarController'
       })
 
+      .state('wba.operacoes.tarifas',{
+        url: '/tarifas',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.operacoes.tarifas.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/operacoes/tarifas/listar.html',
+        controller: 'TarifasListarController'
+      })
+
+      // .state('wba.operacoes.tarifas.novo',{
+      //   url: '/novo',
+      //   templateUrl: 'views/wba/operacoes/tarifas/novo.html'
+      // })
+      // .state('wba.operacoes.tarifas.editar',{
+      //   url: '/editar/:tarifaId',
+      //   templateUrl: 'views/wba/operacoes/tarifas/editar.html'
+      // })
+
 
       // Routews for Cobranca Module
       .state('wba.cobranca',{
