@@ -16,5 +16,6 @@ angular.module('wbaApp', [
   'angular-loading-bar',
   'theme.demos',
   'toaster',
-  'oitozero.ngSweetAlert'
+  'oitozero.ngSweetAlert',
+  'frapontillo.bootstrap-switch'
   ])

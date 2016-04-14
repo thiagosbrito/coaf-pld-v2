@@ -21,27 +21,128 @@
           <p class="text-center" ng-show="operacoes.length == 0">
             Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
           </p>
-          <table class="table table-striped fix-table-vertical-alignment" ng-show="operacoes.length > 0">
-            <thead>
-              <tr>
-                <th>Número</th>
-                <th class="text-center">Modelo de Cobrança</th>
-                <th class="text-center">Data</th>
-                <th class="text-center">Status</th>
-                <th></th>
-              </tr>
-            </thead>
+          <table class="table" ng-show="operacoes.length > 0">
             <tbody>
               <tr ng-repeat="item in operacoes track by $index">
-                <td ng-bind="item.numero"></td>
-                <td ng-bind="item.modeloCobranca" class="text-center"></td>
-                <td class="text-center">{{item.dataOperacao | date: 'dd/MM/yyyy'}}</td>
-                <td class="text-center" ng-bind="item.status">
-                </td>
-                <td>
-                  <button class="btn btn-primary pull-right" ui-sref="wba.operacoes.editar({operacaoId: item.uuid})">
-                    <i class="fa fa-pencil"></i>
-                  </button>
+                <td colspan="5">
+                  <table class="table table-striped fix-table-vertical-alignment">
+                    <thead>
+                      <tr>
+                        <th>
+                          <button class="btn btn-sm btn-primary-alt" ng-click="collapse = !collapse">
+                            <i class="fa fa-search"></i>
+                          </button>
+                        </th>
+                        <th>Número</th>
+                        <th class="text-center">Modelo de Cobrança</th>
+                        <th class="text-center">Data</th>
+                        <th class="text-center">Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <td colspan="2">
+                         <span ng-hide="edit" ng-cloak style="margin-left: 115px">
+                           {{item.numero}}
+                         </span>
+                         <input type="text" class="form-control" ng-model="item.numero" ng-show="edit" ng-cloak>
+                      </td>
+                      <td class="text-center">
+                        <span ng-bind="item.modeloCobranca" ng-hide="edit" ng-cloak></span>
+                        <select class="form-control" ng-model="item.modeloCobranca" required ng-show="edit">
+                          <option value="">Selecione...</option>
+                          <option value="BANCO">Banco</option>  
+                          <option value="CARTEIRA">Carteira</option>  
+                        </select>
+                      </td>
+                      <td class="text-center" style="width: 240px;">
+                        <span ng-hide="edit" ng-cloak>
+                          {{item.dataOperacao | date: 'dd/MM/yyyy'}}
+                        </span>
+                        <div class="input-group datepicker-holder" ng-show="edit" ng-cloak>
+                          <input
+                            type="text"
+                            class="form-control"
+                            datepicker-popup="dd/MM/yyyy"
+                            ng-model="item.dataOperacao"
+                            is-open="opened"
+                            min-date="minDate"
+                            datepicker-options="dateOptions"
+                            date-disabled="disabled(date, mode)"
+                            close-text="Fechar"
+                            current-text="Hoje"
+                            clear-text="Limpar">
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="ti ti-calendar"></i></button>
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        <span ng-hide="edit" ng-cloak>{{item.status}}</span>
+                        <select class="form-control" ng-model="item.status" required ng-show="edit" ng-cloak>
+                          <option value="">Selecione...</option>
+                          <option value="SIMULADA">Simulada</option>
+                          <option value="EM_ANALISE">Em Análise</option>
+                          <option value="APROVADA">Aprovada</option>
+                        </select>
+                      </td>
+                      <td>
+                        <div class="pull-right" ng-class="{'btn-group': edit}">
+                          <button class="btn" ng-class="{'btn-danger': edit, 'btn-primary': !edit}" ng-click="edit = !edit" ng-cloak>
+                            <i class="fa" ng-class="{'fa-pencil': !edit, 'fa-times': edit}"></i>
+                          </button>
+                          <button class="btn btn-warning" ng-show="edit" ng-cloak >
+                            <i class="fa fa-upload"></i>
+                          </button>
+                          <button class="btn btn-primary" ng-show="edit" ng-cloak ng-click="updateItem(item)">
+                            <i class="fa fa-save"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tbody>
+                  </table>
+                  <div class="well" collapse="!collapse">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th colspan="9" class="text-center">
+                                Recebíveis
+                              </th>
+                            </tr>
+                            <tr>
+                              <th>Valor</th>
+                              <th>Vencimento</th>
+                              <th>Número</th>
+                              <th>% Desconto</th>
+                              <th>Data limite Desconto</th>
+                              <th>Emissão</th>
+                              <th>Nosso Número</th>
+                              <th>Valor Líquido</th>
+                              <th>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="rec in item.recebiveis">
+                              <td>{{rec.valor}}</td>
+                              <td>{{rec.vencimento | date: 'dd/MM/yyyy'}}</td>
+                              <td>{{rec.numero}}</td>
+                              <td>{{rec.percentualDesconto}}</td>
+                              <td>{{rec.dateLimiteDesconto}}</td>
+                              <td>{{rec.emissao | date: 'dd/MM/yyyy'}}</td>
+                              <td>{{rec.nossoNumero}}</td>
+                              <td>{{rec.valorLiquido}}</td>
+                              <td>
+                                <i class="fa fa-circle" ng-class="{'green': rec.ativo, 'red': !rec.ativo}"></i>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
                 </td>
               </tr>
             </tbody>

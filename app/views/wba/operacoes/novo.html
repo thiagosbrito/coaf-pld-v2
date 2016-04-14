@@ -20,10 +20,18 @@
                     Cedente
                   </label>
                   <div ng-class="{'col-md-7': cedentes.length == 0, 'col-md-8': cedentes.length > 0}">
-                    <select ng-model="operacao.uuidCedente" class="form-control"
+                    <input
+                      type="text"
+                      ng-model="operacao.uuidCedente"
+                      placeholder="Selecione o cedente.."
+                      typeahead="ced.nomeFantasia for ced in cedentes"
+                      typeahead-loading="loadingLocations"
+                      class="form-control">
+                    <!-- <select ng-model="operacao.uuidCedente" class="form-control"
                     ng-options="ced.id as ced.nomeFantasia for ced in cedentes" required>
                       <option value="">Selecione</option>
-                    </select>
+                    </select> -->
+                    <i ng-show="loadingLocations" class="pull-right glyphicon glyphicon-refresh"></i>
                   </div>
                   <div class="col-md-1" ng-if="cedentes.length == 0">
                     <button class="btn btn-primary-alt btn-block" ui-sref="wba.empresas.novo.empresa">
