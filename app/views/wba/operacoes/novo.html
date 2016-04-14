@@ -9,7 +9,7 @@
     <div class="col-md-12">
       <div class="panel panel-indigo">
         <div class="panel-heading">
-          <h2>Cadastrar nova Operação</h2>
+          <h2>Cadastrar nova Operaçãooo</h2>
         </div>
         <div class="panel-body">
           <div class="tab-content">
@@ -24,13 +24,9 @@
                       type="text"
                       ng-model="operacao.uuidCedente"
                       placeholder="Selecione o cedente.."
-                      typeahead="ced.nomeFantasia for ced in cedentes"
+                      typeahead="ced as ced.nomeFantasia for ced in cedentes"
                       typeahead-loading="loadingLocations"
                       class="form-control">
-                    <!-- <select ng-model="operacao.uuidCedente" class="form-control"
-                    ng-options="ced.id as ced.nomeFantasia for ced in cedentes" required>
-                      <option value="">Selecione</option>
-                    </select> -->
                     <i ng-show="loadingLocations" class="pull-right glyphicon glyphicon-refresh"></i>
                   </div>
                   <div class="col-md-1" ng-if="cedentes.length == 0">

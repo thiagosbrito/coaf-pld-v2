@@ -29,7 +29,7 @@
                     <thead>
                       <tr>
                         <th>
-                          <button class="btn btn-sm btn-primary-alt" ng-click="collapse = !collapse">
+                          <button class="btn btn-sm btn-primary-alt" ng-click="collapse = !collapse" ng-if="item.recebiveis">
                             <i class="fa fa-search"></i>
                           </button>
                         </th>
@@ -42,7 +42,9 @@
                     </thead>
                     <tbody>
                       <td colspan="2">
-                         <span ng-hide="edit" ng-cloak style="margin-left: 115px">
+                         <span ng-hide="edit"
+                          ng-cloak
+                          ng-style="item.recebiveis ? {'margin-left':'115px'} : {'margin-left': '50px'}">
                            {{item.numero}}
                          </span>
                          <input type="text" class="form-control" ng-model="item.numero" ng-show="edit" ng-cloak>
@@ -91,7 +93,7 @@
                           <button class="btn" ng-class="{'btn-danger': edit, 'btn-primary': !edit}" ng-click="edit = !edit" ng-cloak>
                             <i class="fa" ng-class="{'fa-pencil': !edit, 'fa-times': edit}"></i>
                           </button>
-                          <button class="btn btn-warning" ng-show="edit" ng-cloak >
+                          <button class="btn btn-warning" ng-show="edit" ng-cloak ng-click="openModalImportar(item)">
                             <i class="fa fa-upload"></i>
                           </button>
                           <button class="btn btn-primary" ng-show="edit" ng-cloak ng-click="updateItem(item)">
@@ -101,7 +103,7 @@
                       </td>
                     </tbody>
                   </table>
-                  <div class="well" collapse="!collapse">
+                  <div class="well" collapse="!collapse" ng-show="item.recebiveis">
                     <div class="row">
                       <div class="col-md-12">
                         <table class="table table-striped">
@@ -133,7 +135,7 @@
                               <td>{{rec.emissao | date: 'dd/MM/yyyy'}}</td>
                               <td>{{rec.nossoNumero}}</td>
                               <td>{{rec.valorLiquido}}</td>
-                              <td>
+                              <tdc class="">
                                 <i class="fa fa-circle" ng-class="{'green': rec.ativo, 'red': !rec.ativo}"></i>
                               </td>
                             </tr>

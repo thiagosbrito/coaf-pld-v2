@@ -36,6 +36,7 @@ angular.module('wbaApp')
     $scope.getCarteiras();
 
     $scope.save = function (data) {
+      data.uuidCedente = data.uuidCedente.id;
       apiOperacoes.saveOperacao(data).then(
         function(res) {
           toaster.pop('success','Operações','Operação salva com sucesso');
