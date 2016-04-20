@@ -10,12 +10,14 @@ angular.module('wbaApp')
   'toaster',
   'SweetAlert',
   '$modal',
-  function ($scope, $state, $stateParams, apiOperacoes, apiEmpresas, toaster, SweetAlert, $modal) {
+  'operacao',
+  function ($scope, $state, $stateParams, apiOperacoes, apiEmpresas, toaster, SweetAlert, $modal, operacao) {
 
     apiEmpresas.getAll().then(
       function (res) {
         $scope.cedentes = res.data;
-        $scope.cedentes = _.where($scope.cedentes, {tipo: 'CEDENTE'});
+        $scope.cedente = _.where($scope.cedentes, {id: parseInt(operacao.uuidCedente)});
+        console.log($scope.cedente, operacao.uuidCedente);
       },
       function (err) {
         toaster.pop('error','Cedentes',err.statusText);
@@ -25,20 +27,27 @@ angular.module('wbaApp')
     apiOperacoes.getCarteiras().then(
       function (res) {
         $scope.carteiras = res.data;
+        $scope.carteiraOpe = _.where($scope.carteiras, {uuid: operacao.uuidCarteira});
       },
       function (err) {
         toaster.pop('error','Carteiras',err.statusText)
       }
     );
 
-    apiOperacoes.getOperacaoById($stateParams.operacaoId).then(
-      function (res) {
-        $scope.operacao = res.data;
-      },
-      function (err) {
-        toaster.pop('error','Operação',err.statusText);
-      }
-    );
+    // apiOperacoes.getOperacaoById($stateParams.operacaoId).then(
+    //   function (res) {
+    //     $scope.operacao = res.data;
+    //   },
+    //   function (err) {
+    //     toaster.pop('error','Operação',err.statusText);
+    //   }
+    // );
+
+    $scope.operacao = operacao;
+
+    console.log($scope.operacao);
+
+
 
     $scope.update = function (data) {
       apiOperacoes.updateOperacao(data).then(

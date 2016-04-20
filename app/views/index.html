@@ -4,7 +4,7 @@
 </ol>
 
 <div class="container-fluid" ng-controller="DashboardController">
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-3">
             <div class="info-tile tile-orange">
                 <div class="tile-icon"><i class="ti ti-shopping-cart-full"></i></div>
@@ -37,14 +37,14 @@
                 <div class="tile-footer"><span class="text-danger">10.5% <i class="fa fa-level-down"></i></span></div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div data-widget-group="group1">
         <div class="row">
             <div class="col-md-6">
-                <div class="panel panel-info" data-widget='{"id" : "wiget9", "draggable": "false"}'>
+                <div class="panel panel-indigo" data-widget='{"id" : "wiget9", "draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Social Stats</h2>
+                        <h2>Vencidos x À Vencer</h2>
                         <div class="panel-ctrls button-icon-bg" 
                             data-actions-container="" 
                             data-action-collapse='{"target": ".panel-body"}'
@@ -64,9 +64,9 @@
             </div>
 
             <div class="col-md-6">
-                <div class="panel panel-bluegray" data-widget='{"draggable": "false"}'>
+                <div class="panel panel-indigo" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Earnings Stats</h2>
+                        <h2>Total Carteira</h2>
                         <div class="panel-ctrls button-icon-bg" 
                             data-actions-container="" 
                             data-action-collapse='{"target": ".panel-body"}'
@@ -87,7 +87,7 @@
         </div>
 
 
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-gray" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
@@ -279,14 +279,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
         <div class="row">
             <div class="col-md-8">
-                <div class="panel panel-default" data-widget='{"draggable": "false"}'>
+                <div class="panel panel-indigo" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
-                        <h2>Sparklines</h2>
+                        <h2>Confirmações</h2>
                         <div class="panel-ctrls button-icon-bg" 
                             data-actions-container="" 
                             data-action-collapse='{"target": ".panel-body"}'
@@ -300,11 +300,11 @@
                             <div class="col-md-6">
                                 <div class="spark-container mb-xl">
                                     <div class="pull-left">
-                                        <h2 class="title" style="color: #cddc39">Pageviews</h2>
+                                        <h2 class="title" style="color: #cddc39">Confirmados</h2>
                                         <h3 class="number">19,600</h3>
                                     </div>
                                     <div class="pull-right">
-                                        <h2 class="title" style="color: #ff5722; text-align: right;">Sessions</h2>
+                                        <h2 class="title" style="color: #ff5722; text-align: right;">Não Confirmados</h2>
                                         <h3 class="number">1,200</h3>
                                     </div>
 
@@ -325,14 +325,14 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="spark-container">
-                                    <h2 class="title">Users</h2>
+                                    <h2 class="title">Tiítulos</h2>
                                     <h3 class="number">700</h3>
                                     <span sparklines="{ fillColor: '#f5f5f5', lineColor: '#e0e0e0', lineWidth: 2, height: '24px', width: '100%', spotRadius: 0}" data-data="[15,14,17,11,8,12,15,24,17,16,17,14,10,8,11,17,15,13,17,18,16,10,9,1,4,9,13,11,12,15]"></span>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="spark-container">
-                                    <h2 class="title">Avg. Duration</h2>
+                                    <h2 class="title">Tempo méd. Aprovação</h2>
                                     <h3 class="number">00:04:36</h3>
                                     <div class="spark-avgduration"></div>
                                     <span sparklines="{ fillColor: '#f5f5f5', lineColor: '#e0e0e0', lineWidth: 2, height: '24px', width: '100%', spotRadius: 0}" data-data="[15,14,17,11,8,12,15,24,17,16,17,14,10,8,11,17,15,13,17,18,16,10,9,1,4,9,13,11,12,15]"></span>
@@ -340,14 +340,14 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="spark-container">
-                                    <h2 class="title">Page/Session</h2>
+                                    <h2 class="title">Tarifa Média</h2>
                                     <h3 class="number">4.20</h3>
                                     <span sparklines="{ fillColor: '#f5f5f5', lineColor: '#e0e0e0', lineWidth: 2, height: '24px', width: '100%', spotRadius: 0}" data-data="[15,14,17,11,8,12,15,24,17,16,17,14,10,8,11,17,15,13,17,18,16,10,9,1,4,9,13,11,12,15]"></span>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="spark-container">
-                                    <h2 class="title">Bounce Rate</h2>
+                                    <h2 class="title">% Aprovação</h2>
                                     <h3 class="number">52.10%</h3>
                                     <span sparklines="{ fillColor: '#f5f5f5', lineColor: '#e0e0e0', lineWidth: 2, height: '24px', width: '100%', spotRadius: 0}" data-data="[15,14,17,11,8,12,15,24,17,16,17,14,10,8,11,17,15,13,17,18,16,10,9,1,4,9,13,11,12,15]"></span>
                                 </div>
@@ -357,9 +357,9 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="panel panel-teal" data-widget='{"draggable": "false"}'>
+                <div class="panel panel-indigo" data-widget='{"draggable": true}'>
                     <div class="panel-heading">
-                        <h2>Browsers</h2>
+                        <h2>Cedentes / % Liquidados</h2>
                         <div class="panel-ctrls button-icon-bg" 
                             data-actions-container="" 
                             data-action-collapse='{"target": ".panel-body"}'
@@ -372,7 +372,7 @@
                         <table class="table browsers m-n">
                             <tbody>
                                 <tr>
-                                    <td>Google Chrome</td>
+                                    <td>Cedente 1</td>
                                     <td class="text-right">43.7%</td>
                                     <td class="vam" style="width: 56px;">
                                         <div class="progress m-n">
@@ -381,7 +381,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Firefox</td>
+                                    <td>Cedente 2</td>
                                     <td class="text-right">20.5%</td>
                                     <td class="vam">
                                         <div class="progress m-n">
@@ -390,7 +390,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Opera</td>
+                                    <td>Cedente 3</td>
                                     <td class="text-right">14.6%</td>
                                     <td class="vam">
                                         <div class="progress m-n">
@@ -399,7 +399,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Safari</td>
+                                    <td>Cedente 4</td>
                                     <td class="text-right">9.1%</td>
                                     <td class="vam">
                                         <div class="progress m-n">
@@ -408,7 +408,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Internet Explorer</td>
+                                    <td>Cedente 5</td>
                                     <td class="text-right">5.3%</td>
                                     <td class="vam">
                                         <div class="progress m-n">
@@ -417,7 +417,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Torch</td>
+                                    <td>Cedente 6</td>
                                     <td class="text-right">2.9%</td>
                                     <td class="vam">
                                         <div class="progress m-n">
@@ -426,7 +426,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Maxthon</td>
+                                    <td>Cedente 7</td>
                                     <td class="text-right">2.3%</td>
                                     <td class="vam">
                                         <div class="progress m-n">
@@ -435,7 +435,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Others</td>
+                                    <td>Cedente 8</td>
                                     <td class="text-right">1.6%</td>
                                     <td class="vam">
                                         <div class="progress m-n">
@@ -450,7 +450,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
 
             <div class="col-md-4">
                 <div class="panel panel-realtime" data-widget='{"draggable": "false"}'>
@@ -458,7 +458,6 @@
                         <h2>Real-Time</h2>
                         <div class="panel-ctrls mr-n">
                             <div class="mt-md mb-md">
-                                <!-- <input type="checkbox" class="js-switch-success switchery-xs" checked /> -->
                                 <input type="checkbox" class="switchery-xs" checked ui-switch="{}" ng-init="someModel3=true" ng-model="someModel3" />
                             </div>
                         </div>
@@ -492,7 +491,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </div>
 

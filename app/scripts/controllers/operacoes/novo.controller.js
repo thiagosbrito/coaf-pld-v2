@@ -16,7 +16,7 @@ angular.module('wbaApp')
     apiEmpresas.getAll().then(
       function (res) {
         $scope.cedentes = res.data;
-        $scope.cedentes = _.where($scope.cedentes, {tipo: 'CEDENTE'});
+        // $scope.cedentes = _.where($scope.cedentes, {tipo: 'CEDENTE'});
       },
       function (err) {
         toaster.pop('error','Cedentes',err.statusText);
@@ -36,6 +36,7 @@ angular.module('wbaApp')
     $scope.getCarteiras();
 
     $scope.save = function (data) {
+      data.uuidCedente = data.uuidCedente.id;
       apiOperacoes.saveOperacao(data).then(
         function(res) {
           toaster.pop('success','Operações','Operação salva com sucesso');

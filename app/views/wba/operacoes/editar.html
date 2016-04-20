@@ -9,107 +9,77 @@
     <div class="col-md-12">
       <div class="panel panel-indigo">
         <div class="panel-heading">
-          <h2>Editar Operação</h2>
+          <h2>Cadastrar nova Operação</h2>
+          <div class="options">
+            <ul class="nav nav-tabs form-wzrd">
+              <li ui-sref-active="active"><a ui-sref="wba.operacoes.editar.digitacao" class="disabled">Digitação</a></li>
+              <li ui-sref-active="active"><a ui-sref="wba.operacoes.editar.analise" class="disabled">Análise</a></li>
+              <li ui-sref-active="active"><a ui-sref="wba.operacoes.editar.estatisticas" class="disabled">Estastísticas</a></li>
+              <li ui-sref-active="active" class="last"><a ui-sref="wba.operacoes.editar.liberacao" class="disabled">Liberação</a></li>
+            </ul>
+          </div>
         </div>
         <div class="panel-body">
           <div class="tab-content">
-            <form role="form" class="form-horizontal" novalidate name="formOperacao">
-              <fieldset>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Cedente
-                  </label>
-                  <div class="col-md-8">
-                    <select ng-model="operacao.uuidCedente" class="form-control"
-                    ng-options="ced.id as ced.nomeFantasia for ced in cedentes track by operacao.uuidCedente" required>
-                      <option value="">Selecione</option>
-                    </select>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="well">
+                  <div class="row">
+                    <div class="col-md-12">                      
+                      <pre>{{operacao | json}}</pre>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Carteira
-                  </label>
-                  <div class="col-md-8">
-                    <select ng-model="operacao.uuidCarteira" class="form-control"
-                    ng-options="cart.uuid as cart.nome for cart in carteiras" required>
-                      <option value="">Selecione</option>
-                    </select>
+                  <div class="row display-info">
+                    <div class="col-md-3">
+                      <span class="ope-titles">Cedente</span><br>
+                      <span>{{cedente[0].razaoSocial}}</span>
+                    </div>
+                    <div class="col-md-2">
+                      <span class="ope-titles">Carteira</span><br>
+                      <span>{{carteiraOpe[0].nome}}</span>
+                    </div>
+                    <div class="col-md-2">
+                      <span class="ope-titles">Data da Operação</span><br>
+                      <span>{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</span>
+                    </div>
+                    <div class="col-md-2">
+                      <span class="ope-titles">Modelo de Cobrança</span><br>
+                      <span>{{operacao.modeloCobranca}}</span>
+                    </div>
                   </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Número
-                  </label>
-                  <div class="col-md-8">
-                    <input type="text" class="form-control" ng-model="operacao.numero">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Modelo de Cobrança
-                  </label>
-                  <div class="col-md-8">
-                    <select class="form-control" ng-model="operacao.modeloCobranca">
-                      <option value="">Selecione...</option>
-                      <option value="BANCO">Banco</option>  
-                      <option value="CARTEIRA">Carteira</option>  
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Data da Operação
-                  </label>
-                  <div class="col-md-4">
-                    <p class="input-group datepicker-holder">
-                      <input
-                        type="text"
-                        class="form-control"
-                        datepicker-popup="dd/MM/yyyy"
-                        ng-model="operacao.dataOperacao"
-                        is-open="opened"
-                        min-date="minDate"
-                        datepicker-options="dateOptions"
-                        date-disabled="disabled(date, mode)"
-                        close-text="Fechar"
-                        current-text="Hoje"
-                        clear-text="Limpar" />
-                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="ti ti-calendar"></i></button>
+                  <div class="row display-info">
+                    <div class="col-md-4">
+                      <span class="ope-titles">
+                        Número
+                      </span><br>
+                      <span>
+                        {{operacao.numero}}
                       </span>
-                    </p>
+                    </div>
+                    <div class="col-md-4">
+                      <span class="ope-titles">
+                        Número de Recebíves
+                      </span><br>
+                      <span>
+                        {{operacao.recebiveis.length}}
+                      </span>
+                    </div>
+                    <div class="col-md-4">
+                      <span class="ope-titles">
+                        Status
+                      </span><br>
+                      <span>
+                        {{operacao.status}}
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Status
-                  </label>
-                  <div class="col-md-4">
-                    <select class="form-control" ng-model="operacao.status">
-                      <option value="">Selecione...</option>
-                      <option value="SIMULADA">Simulada</option>
-                      <option value="EM_ANALISE">Em Análise</option>
-                      <option value="APROVADA">Aprovada</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-10 col-md-offset-2">
-                    <button class="btn btn-danger-alt pull-left" ui-sref="wba.operacoes.listar"><i class="fa fa-times"></i> Cancelar</button>
-                    <button
-                      class="btn btn-primary pull-right"
-                      ng-disabled="formOperacao.$invalid"
-                      ng-click="update(operacao)">
-                      <i class="fa fa-save"></i> Salvar
-                    </button>
-                  </div>
-                </div>
-              </fieldset>
-            </form>
+              </div>
+            </div>
+            <div ui-view=""></div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</div> <!-- container-fluid -->

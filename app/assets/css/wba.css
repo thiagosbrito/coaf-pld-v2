@@ -61,3 +61,14 @@ table.table.table-striped.fix-table-vertical-alignment thead {
   width: 95%;
   margin: 0 auto;
 }
+
+.ope-titles {
+  font-weight: bolder;
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+.display-info {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #999;
+}

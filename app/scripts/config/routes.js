@@ -287,11 +287,33 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/operacoes/novo.html',
         controller: 'OperacoesNovoController'
       })
+      
+      // Editar operações wizard
       .state('wba.operacoes.editar',{
         url: '/editar/:operacaoId',
+        abstract: true,
         templateUrl: 'views/wba/operacoes/editar.html',
-        controller: 'OperacoesEditarController'
+        controller: 'OperacoesEditarController',
+        resolve: {
+          operacao: function (apiOperacoes, $stateParams) {
+            return apiOperacoes.getOperacaoById($stateParams.operacaoId).then(
+              function (res) {
+                return res.data
+              }
+            )
+          } 
+        }
       })
+      .state('wba.operacoes.editar.digitacao',{
+        url: '/digitacao',
+        templateUrl: 'views/wba/operacoes/editar-digitacao.html',
+        controller: 'DigitacaoOperacaoController'
+      })
+      .state('wba.operacoes.editar.analise',{})
+      .state('wba.operacoes.editar.estatisticas',{})
+      .state('wba.operacoes.editar.liberacao',{})
+
+
       .state('wba.operacoes.carteiras',{
         url: '/carteiras',
         template: '<div ui-view=""></div>'

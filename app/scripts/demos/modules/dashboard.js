@@ -6,7 +6,7 @@ angular.module('theme.demos.dashboard', [
 
     var fans = [[1, 17], [2, 34], [3, 73], [4, 47], [5, 90], [6, 70], [7, 40]];
     var followers = [[1, 54], [2, 40], [3, 10], [4, 25], [5, 42], [6, 14], [7, 36]];
-    $scope.plotSocialData = [{ data: fans, label: "Facebook" }, { data: followers, label: "Twitter" }];
+    $scope.plotSocialData = [{ data: fans, label: "Vencidos" }, { data: followers, label: "À Vencer" }];
     $scope.plotSocialOptions = {
         series: {
             shadowSize: 0,
@@ -83,7 +83,7 @@ angular.module('theme.demos.dashboard', [
 
     ds.push({
         data: d1,
-        label: "Revenues",
+        label: "Cedente 1",
         bars: {
             show: true,
             barWidth: 0.12,
@@ -92,7 +92,7 @@ angular.module('theme.demos.dashboard', [
     });
     ds.push({
         data: d2,
-        label: "Earnings",
+        label: "Cedente 2",
         bars: {
             show: true,
             barWidth: 0.12,
@@ -101,7 +101,7 @@ angular.module('theme.demos.dashboard', [
     });
     ds.push({
         data: d3,
-        label: "Referrals",
+        label: "Cedente 3",
         bars: {
             show: true,
             barWidth: 0.12,
@@ -157,8 +157,8 @@ angular.module('theme.demos.dashboard', [
     };
 
     $scope.plotDonutData = [
-        { label: "Returning",  data: 68, color: '#7e57c2'},
-        { label: "New",  data: 32, color: '#26c6da'}
+        { label: "Confirmados",  data: 68, color: '#7e57c2'},
+        { label: "Ñ Confirmados",  data: 32, color: '#26c6da'}
     ];
 
     $scope.plotDonutOptions = {
