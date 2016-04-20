@@ -3,13 +3,165 @@
     Importar recebível
   </div>
   <div class="modal-body">
-    Content
+    <tabset tab-theme="orange" tab-position="top">
+      <tab heading="Importação">
+        <form role="form" class="form-horizontal">
+          <fieldset>
+            <div class="form-group">
+              <label class="col-md-3 control-label">
+                Tipo de Importação
+              </label>
+              <div class="col-md-3">
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" ng-value="'cnab'" ng-model="typeImport">
+                    CNAB
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" ng-value="'xml'" ng-model="typeImport">
+                    XML
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-12">
+                {{typeImport}}
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3 control-label">
+                Arquivo
+              </label>
+              <div class="col-md-9">
+                <div class="input-group">
+                  <input type="text" class="form-control">
+                  <span class="input-group-btn">
+                    <button
+                      class="btn btn-primary"
+                      type="button"
+                      ngf-select="uploadFiles($file, $invalidFiles, typeImport)"
+                      ngf-max-size="1MB">
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </span>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                     <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+                          <span class="progress" ng-show="f.progress >= 0">
+                              <div style="width:{{f.progress}}%"  
+                                   ng-bind="f.progress + '%'"></div>
+                          </span>
+                      </div>     
+                      {{errorMsg}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </tab>
+      <tab heading="Digitação">
+        <div class="row" ng-if="recebiveis.length == 0">
+          <div class="col-md-12">
+            <p class="text-center alert alert-info">
+              <i class="fa fa-info-circle"></i> Não existe títulos cadastrados para essa operação, clique no botão adicionar, para adicionar um título.
+              <button class="btn btn-primary pull-right" style="margin-top: -8px" ng-click="addTitulo()">
+                <i class="fa fa-plus"></i> Adicionar título
+              </button>
+            </p>
+          </div>
+        </div>
+        <table class="table table-striped" ng-if="recebiveis.length > 0">
+          <thead>
+            <tr>
+              <th>Valor</th>
+              <th>Vencimento</th>
+              <th>Número</th>
+              <th>% Desconto</th>
+              <th>Data limite Desconto</th>
+              <th>Emissão</th>
+              <th>Nosso Número</th>
+              <th>Valor Líquido</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="rec in recebiveis">
+              <td>
+                <input type="text" ng-model="rec.valor" class="form-control">
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  datepicker-popup="dd/MM/yyyy"
+                  ng-model="rec.vencimento"
+                  is-open="opened"
+                  min-date="minDate"
+                  datepicker-options="dateOptions"
+                  date-disabled="disabled(date, mode)"
+                  close-text="Fechar"
+                  current-text="Hoje"
+                  clear-text="Limpar"
+                  ng-click="open($event)">
+              </td>
+              <td><input type="text" ng-model="rec.numero" class="form-control"></td>
+              <td><input type="text" ng-model="rec.percentualDesconto" class="form-control"></td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  datepicker-popup="dd/MM/yyyy"
+                  ng-model="rec.dateLimiteDesconto"
+                  is-open="opened"
+                  min-date="minDate"
+                  datepicker-options="dateOptions"
+                  date-disabled="disabled(date, mode)"
+                  close-text="Fechar"
+                  current-text="Hoje"
+                  clear-text="Limpar"
+                  ng-click="open($event)">
+              </td>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  datepicker-popup="dd/MM/yyyy"
+                  ng-model="rec.emissao"
+                  is-open="opened"
+                  min-date="minDate"
+                  datepicker-options="dateOptions"
+                  date-disabled="disabled(date, mode)"
+                  close-text="Fechar"
+                  current-text="Hoje"
+                  clear-text="Limpar"
+                  ng-click="open($event)">
+              </td>
+              <td><input type="text" ng-model="rec.nossoNumero" class="form-control"></td>
+              <td><input type="text" ng-model="rec.valor" class="form-control"></td>
+              <td class="">
+                <i class="fa fa-circle" ng-class="{'green': rec.ativo, 'red': !rec.ativo}"></i>
+              </td>
+              <td>
+                <button class="btn btn-primary" ng-click="addRecebivel(rec)">
+                  <i class="fa fa-save"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </tab>
+    </tabset>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-danger-alt">
-      <i class="fa fa-times"></i> Cancelar
-    </button>
-    <button class="btn btn-primary">
-      <i class="fa fa-save"></i> Salvar
+    <button class="btn btn-danger-alt" ng-click="close()">
+      <i class="fa fa-times"></i> Sair
     </button>
   </div>

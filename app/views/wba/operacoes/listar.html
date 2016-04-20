@@ -33,29 +33,22 @@
                             <i class="fa fa-search"></i>
                           </button>
                         </th>
-                        <th>Número</th>
-                        <th class="text-center">Modelo de Cobrança</th>
-                        <th class="text-center">Data</th>
+                        <th>Número Op.</th>
+                        <th class="text-center">Cedente</th>
+                        <th class="text-center">Carteira</th>
+                        <th class="text-center">Qtd Titulos</th>
+                        <th class="text-center">Vl. Bruto</th>
+                        <th class="text-center">Vl. Líquido</th>
                         <th class="text-center">Status</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <td colspan="2">
-                         <span ng-hide="edit"
-                          ng-cloak
-                          ng-style="item.recebiveis ? {'margin-left':'115px'} : {'margin-left': '50px'}">
-                           {{item.numero}}
-                         </span>
-                         <input type="text" class="form-control" ng-model="item.numero" ng-show="edit" ng-cloak>
+                         {{item.numero}}
                       </td>
                       <td class="text-center">
-                        <span ng-bind="item.modeloCobranca" ng-hide="edit" ng-cloak></span>
-                        <select class="form-control" ng-model="item.modeloCobranca" required ng-show="edit">
-                          <option value="">Selecione...</option>
-                          <option value="BANCO">Banco</option>  
-                          <option value="CARTEIRA">Carteira</option>  
-                        </select>
+                        {{item.cedentes.nomeFantasia}}
                       </td>
                       <td class="text-center" style="width: 240px;">
                         <span ng-hide="edit" ng-cloak>
@@ -79,6 +72,9 @@
                           </span>
                         </div>
                       </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
                       <td class="text-center">
                         <span ng-hide="edit" ng-cloak>{{item.status}}</span>
                         <select class="form-control" ng-model="item.status" required ng-show="edit" ng-cloak>
