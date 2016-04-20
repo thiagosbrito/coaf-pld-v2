@@ -85,7 +85,7 @@
                         </select>
                       </td>
                       <td>
-                        <div class="pull-right" ng-class="{'btn-group': edit}">
+                        <!-- <div class="pull-right" ng-class="{'btn-group': edit}">
                           <button class="btn" ng-class="{'btn-danger': edit, 'btn-primary': !edit}" ng-click="edit = !edit" ng-cloak>
                             <i class="fa" ng-class="{'fa-pencil': !edit, 'fa-times': edit}"></i>
                           </button>
@@ -95,6 +95,12 @@
                           <button class="btn btn-primary" ng-show="edit" ng-cloak ng-click="updateItem(item)">
                             <i class="fa fa-save"></i>
                           </button>
+                        </div> -->
+                        <div class="pull-right">
+                          <button class="btn btn-primary" ui-sref="wba.operacoes.editar.digitacao({operacaoId: item.uuid})">
+                            <i class="fa fa-pencil"></i>
+                          </button>
+                          
                         </div>
                       </td>
                     </tbody>
