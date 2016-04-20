@@ -43,18 +43,14 @@
                         <th class="text-center">Qtd Titulos</th>
                         <th class="text-center">Vl. Bruto</th>
                         <th class="text-center">Vl. Líquido</th>
-                        <th class="text-center">Status</th>
+                        <th class="text-right">Status</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <td ng-if="item.recebiveis"></td>
-                      <td colspan="2">
-                         {{item.numero}}
-                      </td>
-                      <td class="text-center">
-                        {{item.cedentes.nomeFantasia}}
-                      </td>
+                      <td class="text-left">{{item.numero}}</td>
+                      <td class="text-center">{{item.cedentes.nomeFantasia}}</td>
                       <td class="text-center" style="width: 240px;">
                         <span ng-hide="edit" ng-cloak>
                           {{item.dataOperacao | date: 'dd/MM/yyyy'}}
@@ -80,7 +76,7 @@
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td class="text-center">
+                      <td class="text-right">
                         <span ng-hide="edit" ng-cloak>{{item.status}}</span>
                         <select class="form-control" ng-model="item.status" required ng-show="edit" ng-cloak>
                           <option value="">Selecione...</option>
