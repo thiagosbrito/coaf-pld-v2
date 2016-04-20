@@ -18,6 +18,7 @@
           </div>
         </div>
         <div class="panel-body">
+
           <p class="text-center" ng-show="operacoes.length == 0">
             Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
           </p>
@@ -28,8 +29,11 @@
                   <table class="table table-striped fix-table-vertical-alignment">
                     <thead>
                       <tr>
-                        <th>
-                          <button class="btn btn-sm btn-primary-alt" ng-click="collapse = !collapse" ng-if="item.recebiveis">
+                        <th ng-if="item.recebiveis">
+                          <button
+                            class="btn btn-sm btn-primary-alt"
+                            ng-click="item.open = !item.open"
+                            ng-if="item.recebiveis">
                             <i class="fa fa-search"></i>
                           </button>
                         </th>
@@ -44,6 +48,7 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <td ng-if="item.recebiveis"></td>
                       <td colspan="2">
                          {{item.numero}}
                       </td>
@@ -85,27 +90,34 @@
                         </select>
                       </td>
                       <td>
-                        <!-- <div class="pull-right" ng-class="{'btn-group': edit}">
-                          <button class="btn" ng-class="{'btn-danger': edit, 'btn-primary': !edit}" ng-click="edit = !edit" ng-cloak>
-                            <i class="fa" ng-class="{'fa-pencil': !edit, 'fa-times': edit}"></i>
+                        <div class="btn-group pull-right">
+                          <button
+                            class="btn btn-primary"
+                            tooltip="Editar operação"
+                            ui-sref="wba.operacoes.editar.digitacao({operacaoId: item.uuid})">
+                              <i class="fa fa-pencil"></i>
                           </button>
-                          <button class="btn btn-warning" ng-show="edit" ng-cloak ng-click="openModalImportar(item)">
-                            <i class="fa fa-upload"></i>
+                          <button
+                            class="btn btn-success"
+                            tooltip="Adicionar Tarifa"
+                            ng-click="addTarifa()">
+                              <i class="fa fa-usd"></i>
                           </button>
-                          <button class="btn btn-primary" ng-show="edit" ng-cloak ng-click="updateItem(item)">
-                            <i class="fa fa-save"></i>
+                          <button
+                            class="btn btn-warning"
+                            tooltip="Liberar operação"
+                            ng-click="liberarOperacao()">
+                              <i class="fa fa-share"></i>
                           </button>
-                        </div> -->
-                        <div class="pull-right">
-                          <button class="btn btn-primary" ui-sref="wba.operacoes.editar.digitacao({operacaoId: item.uuid})">
-                            <i class="fa fa-pencil"></i>
-                          </button>
-                          
                         </div>
                       </td>
                     </tbody>
                   </table>
-                  <div class="well" collapse="!collapse" ng-show="item.recebiveis">
+                  <div
+                    class="well"
+                    collapse="!item.open"
+                    ng-if="item.recebiveis"
+                    style="margin-top: -20px">
                     <div class="row">
                       <div class="col-md-12">
                         <table class="table table-striped">
@@ -133,11 +145,11 @@
                               <td>{{rec.vencimento | date: 'dd/MM/yyyy'}}</td>
                               <td>{{rec.numero}}</td>
                               <td>{{rec.percentualDesconto}}</td>
-                              <td>{{rec.dateLimiteDesconto}}</td>
+                              <td>{{rec.dateLimiteDesconto | date: 'dd/MM/yyyy'}}</td>
                               <td>{{rec.emissao | date: 'dd/MM/yyyy'}}</td>
                               <td>{{rec.nossoNumero}}</td>
                               <td>{{rec.valorLiquido}}</td>
-                              <tdc class="">
+                              <td class="">
                                 <i class="fa fa-circle" ng-class="{'green': rec.ativo, 'red': !rec.ativo}"></i>
                               </td>
                             </tr>

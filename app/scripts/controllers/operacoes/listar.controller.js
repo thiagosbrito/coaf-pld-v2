@@ -15,11 +15,16 @@ angular.module('wbaApp')
   'apiEmpresas',
   function ($scope, $state, $stateParams, apiOperacoes, toaster, $modal, SweetAlert, $log, Upload, apiEmpresas) {
 
+    $scope.openRecebivel = false;
+
     $scope.addRecebiveisToArray = function (operacoes) {
       angular.forEach(operacoes, function (value, key) {
         apiEmpresas.getById(value.uuidCedente).then(
           function (rs) {
+            value.open = false;
             value.cedentes = rs.data
+            value.recebiveis = [];
+            value.recebiveis.push({"ativo": true,"dateLimiteDesconto": "2016-04-20T19:02:16.983Z","emissao": "2016-04-20T19:02:16.983Z","nossoNumero": "string","numero": "string","percentualDesconto": 0,"uuid": "string","valor": 0,"valorLiquido": 0,"vencimento": "2016-04-20T19:02:16.983Z"});
           }
         )
       })
