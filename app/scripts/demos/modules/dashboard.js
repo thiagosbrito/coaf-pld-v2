@@ -157,8 +157,8 @@ angular.module('theme.demos.dashboard', [
     };
 
     $scope.plotDonutData = [
-        { label: "Aprovação",  data: 68, color: '#7e57c2'},
-        { label: "Reprovação",  data: 32, color: '#26c6da'}
+        { label: "Confirmados",  data: 68, color: '#7e57c2'},
+        { label: "Ñ Confirmados",  data: 32, color: '#26c6da'}
     ];
 
     $scope.plotDonutOptions = {
