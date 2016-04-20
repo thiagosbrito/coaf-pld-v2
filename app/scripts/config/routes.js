@@ -362,7 +362,20 @@ angular.module('wbaApp')
 
       // Routews for Checagem Module
       .state('wba.checagem',{
-        url: '/checagem'
+        url: '/checagem',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.checagem.agendamentos',{
+        url: '/agendamentos',
+        templateUrl: 'views/wba/checagem/agendamentos.html'
+      })
+      .state('wba.checagem.confirmacao',{
+        url: '/confirmacao-titulos',
+        templateUrl: 'views/wba/checagem/confirmacao.html'
+      })
+      .state('wba.checagem.conferencia',{
+        url: '/conferencia',
+        templateUrl: 'views/wba/checagem/conferencia.html'
       })
 
       // Routews for Notificacao Module

@@ -1,0 +1,33 @@
+<div class="modal-header">
+  Adicionar Tarifas
+</div>
+<div class="modal-body">
+  <form role="form" class="form-horizontal">
+    <fieldset>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Tarifa
+        </label>
+        <div class="col-md-6">
+          <select class="form-control" ng-options="tar.uuid as tar.descricao for tar in tarifas" ng-model="tarifa.uuid">
+            <option value="">Selecione uma tarifa...</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Valor</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" ng-model="tarifa.valor" placeholder="Defina um valor para a Tarifa">
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left">
+    <i class="fa fa-times"></i> Cancelar
+  </button>
+  <button class="btn btn-primary" ng-click="salvar(tarifa)">
+    <i class="fa fa-save"></i> Salvar
+  </button>
+</div>

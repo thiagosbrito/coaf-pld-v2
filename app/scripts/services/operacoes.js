@@ -126,6 +126,19 @@ angular.module('wbaApp')
       }); 
     }
 
+    var _addTarifaToOperacao = function (idOperacao, idTarifa, tarifa) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes/' + idOperacao + '/tarifas/' + idTarifa,
+        method: 'POST',
+        data: tarifa,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(function (results) {
+        return results;
+      });
+    }
+
     // 
 
     var _getTarifas = function () {
@@ -201,6 +214,7 @@ angular.module('wbaApp')
     api.saveOperacao        = _saveOperacao;
     api.updateOperacao      = _updateOperacao;
     api.addRecebivel        = _addRecebivel;
+    api.addTarifaToOperacao = _addTarifaToOperacao;
     return api;
 
 }]);

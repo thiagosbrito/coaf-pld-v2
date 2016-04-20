@@ -119,13 +119,16 @@ angular
           iconClasses: 'ti ti-check-box',
           children: [
             {
-              label: 'Agendamentos'
+              label: 'Agendamentos',
+              url: '#/checagem/agendamentos'
             },
             {
-              label: 'Confirmação de Títulos'
+              label: 'Confirmação de Títulos',
+              url: '#/checagem/confirmacao-titulos'
             },
             {
-              label: 'Conferência'
+              label: 'Conferência',
+              url: '#/checagem/conferencia'
             }
           ]
         },
