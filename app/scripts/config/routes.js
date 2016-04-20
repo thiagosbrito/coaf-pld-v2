@@ -309,9 +309,15 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/operacoes/editar-digitacao.html',
         controller: 'DigitacaoOperacaoController'
       })
-      .state('wba.operacoes.editar.analise',{})
-      .state('wba.operacoes.editar.estatisticas',{})
-      .state('wba.operacoes.editar.liberacao',{})
+      .state('wba.operacoes.editar.analise',{
+        url: '/analise',
+        templateUrl: 'views/wba/operacoes/editar-analise.html'
+      })
+      
+      .state('wba.operacoes.editar.liberacao',{
+        url: '/liberacao',
+        templateUrl: 'views/wba/operacoes/editar-liberacao.html'
+      })
 
 
       .state('wba.operacoes.carteiras',{
