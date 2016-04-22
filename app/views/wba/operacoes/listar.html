@@ -34,7 +34,7 @@
                             class="btn btn-sm btn-primary-alt"
                             ng-click="item.open = !item.open"
                             ng-if="item.recebiveis">
-                            <i class="fa fa-search"></i>
+                            <i class="fa fa-bars"></i>
                           </button>
                         </th>
                         <th>Número Op.</th>
@@ -102,7 +102,7 @@
                           <button
                             class="btn btn-warning"
                             tooltip="Liberar operação"
-                            ng-click="liberarOperacao()">
+                            ng-click="liberarOperacao(item.uuid)">
                               <i class="fa fa-share"></i>
                           </button>
                         </div>

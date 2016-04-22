@@ -100,3 +100,38 @@ table.table.table-striped.fix-table-vertical-alignment thead {
   font-weight: normal;
 }
 .progress {height: 20px !important;}
+
+
+.resumo-operacao {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  position: relative;
+}
+
+.resumo-operacao:hover .btn-editar-operacao {
+  visibility: visible;
+}
+
+.btn-editar-operacao {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -16px;
+  visibility: hidden;
+  transition: all ease .5s
+}
+
+.custom-hr {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+  border-top: 1px solid #ccc;
+}

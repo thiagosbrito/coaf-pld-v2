@@ -35,6 +35,18 @@ angular.module('wbaApp')
       }
     );
 
+    $scope.getRecebiveisByOperacao = function () {
+      apiOperacoes.getRecebiveisByOperacao($stateParams.operacaoId).then(
+        function (res) {
+          $scope.recebiveis = res.data;
+        },
+        function (err) {
+          toaster.pop('error','Recebiveis',err.statusText);
+        }
+      )
+    }
+    $scope.getRecebiveisByOperacao();
+
     // apiOperacoes.getOperacaoById($stateParams.operacaoId).then(
     //   function (res) {
     //     $scope.operacao = res.data;
@@ -124,7 +136,13 @@ angular.module('wbaApp')
     }
 
     $scope.addTitulo = function () {
-      $scope.recebiveis = [{}];
+
+      if (!$scope.recebiveis) {
+        $scope.recebiveis = [{}];
+      }
+      else {
+        $scope.recebiveis.push({});
+      }
     }
 
     $scope.saveTitulo = function (titulo) {
