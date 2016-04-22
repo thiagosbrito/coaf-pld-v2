@@ -38,9 +38,13 @@
 table.table.table-striped.fix-table-vertical-alignment thead {
   font-weight: 600 !important;
 }
-.form-wzrd li a {
+.form-wzrd li a.disabled {
   pointer-events: none;
   cursor: default;
+}
+.form-wzrd.actions {
+  pointer-events: all;
+  cursor: pointer; 
 }
 .form-wzrd li.active {
   margin-right: 10px;
@@ -95,3 +99,4 @@ table.table.table-striped.fix-table-vertical-alignment thead {
   color: #000;
   font-weight: normal;
 }
+.progress {height: 20px !important;}
