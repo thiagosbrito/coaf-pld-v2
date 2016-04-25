@@ -11,18 +11,19 @@ angular.module('wbaApp')
   'SweetAlert',
   '$modal',
   'operacao',
-  function ($scope, $state, $stateParams, apiOperacoes, apiEmpresas, toaster, SweetAlert, $modal, operacao) {
+  'Upload',
+  '$timeout',
+  function ($scope, $state, $stateParams, apiOperacoes, apiEmpresas, toaster, SweetAlert, $modal, operacao, Upload, $timeout) {
 
     apiEmpresas.getAll().then(
       function (res) {
         $scope.cedentes = res.data;
         $scope.cedente = _.where($scope.cedentes, {id: parseInt(operacao.uuidCedente)});
-        console.log($scope.cedente, operacao.uuidCedente);
       },
       function (err) {
         toaster.pop('error','Cedentes',err.statusText);
       }
-    );
+      );
 
     apiOperacoes.getCarteiras().then(
       function (res) {
@@ -34,6 +35,18 @@ angular.module('wbaApp')
       }
     );
 
+    $scope.getRecebiveisByOperacao = function () {
+      apiOperacoes.getRecebiveisByOperacao($stateParams.operacaoId).then(
+        function (res) {
+          $scope.recebiveis = res.data;
+        },
+        function (err) {
+          toaster.pop('error','Recebiveis',err.statusText);
+        }
+      )
+    }
+    $scope.getRecebiveisByOperacao();
+
     // apiOperacoes.getOperacaoById($stateParams.operacaoId).then(
     //   function (res) {
     //     $scope.operacao = res.data;
@@ -44,10 +57,6 @@ angular.module('wbaApp')
     // );
 
     $scope.operacao = operacao;
-
-    console.log($scope.operacao);
-
-
 
     $scope.update = function (data) {
       apiOperacoes.updateOperacao(data).then(
@@ -80,11 +89,20 @@ angular.module('wbaApp')
     };
     $scope.toggleMin();
 
-    $scope.open = function($event) {
+
+    $scope.open = function($event, instance) {
       $event.preventDefault();
       $event.stopPropagation();
 
-      $scope.opened = true;
+      if (instance == 'vencimento') {
+        $scope.openedVencimento = true
+      }
+      if (instance == 'dataLimite') {
+        $scope.openedDataLimite = true
+      }
+      if (instance == 'emissao') {
+        $scope.openedEmissao = true
+      }
     };
 
     $scope.dateOptions = {
@@ -92,6 +110,51 @@ angular.module('wbaApp')
       startingDay: 1,
       language: 'pt-BR'
     };
+
+    $scope.uploadFiles = function(file, errFiles, type) {
+      $scope.f = file;
+      $scope.errFile = errFiles && errFiles[0];
+      var url = 'http://api.erp.idtrust.com.br:9000/operacoes/v1/operacoes/' + $stateParams.operacaoId + '/' + type; 
+      if (file) {
+        file.upload = Upload.upload({
+          url: url,
+          data: {file: file}
+        });
+
+        file.upload.then(function (response) {
+          $timeout(function () {
+            // file.result = response.data;
+            toaster.pop('success','Importação de CNAB','Upload de arquivo efetuado')
+          });
+        }, function (response) {
+          if (response.status > 0)
+            toaster.pop('error','Importação de CNAB','Upload de arquivo não efetuado')
+        }, function (evt) {
+          file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+        });
+      }
+    }
+
+    $scope.addTitulo = function () {
+
+      if (!$scope.recebiveis) {
+        $scope.recebiveis = [{}];
+      }
+      else {
+        $scope.recebiveis.push({});
+      }
+    }
+
+    $scope.saveTitulo = function (titulo) {
+      apiOperacoes.addRecebivel($stateParams.operacaoId, titulo).then(
+        function (res) {
+          toaster.pop('success','Recebível','Item adicionado a operação');
+        },
+        function (err) {
+          toaster.pop('error','Recebível',err.statusText);
+        }
+      )
+    }
 
   }
 ])

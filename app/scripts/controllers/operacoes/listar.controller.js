@@ -15,20 +15,22 @@ angular.module('wbaApp')
   'apiEmpresas',
   function ($scope, $state, $stateParams, apiOperacoes, toaster, $modal, SweetAlert, $log, Upload, apiEmpresas) {
 
-    $scope.openRecebivel = false;
-
     $scope.addRecebiveisToArray = function (operacoes) {
       angular.forEach(operacoes, function (value, key) {
         apiEmpresas.getById(value.uuidCedente).then(
           function (rs) {
             value.open = false;
             value.cedentes = rs.data
-            value.recebiveis = [];
-            value.recebiveis.push({"ativo": true,"dateLimiteDesconto": "2016-04-20T19:02:16.983Z","emissao": "2016-04-20T19:02:16.983Z","nossoNumero": "string","numero": "string","percentualDesconto": 0,"uuid": "string","valor": 0,"valorLiquido": 0,"vencimento": "2016-04-20T19:02:16.983Z"});
+            // value.recebiveis = [];
+            // value.recebiveis.push({"ativo": true,"dateLimiteDesconto": "2016-04-20T19:02:16.983Z","emissao": "2016-04-20T19:02:16.983Z","nossoNumero": "string","numero": "string","percentualDesconto": 0,"uuid": "string","valor": 0,"valorLiquido": 0,"vencimento": "2016-04-20T19:02:16.983Z"});
+          }
+        )
+        apiOperacoes.getRecebiveisByOperacao(value.uuid).then(
+          function (rs) {
+            value.recebiveis = rs.data;
           }
         )
       })
-      console.log($scope.operacoes);
     }
 
     $scope.getOperacoes = function () {
@@ -39,150 +41,68 @@ angular.module('wbaApp')
         }
       )
     }
+    
     $scope.getOperacoes();
 
-    $scope.today = function() {
-      $scope.dt = new Date();
-    };
-    $scope.today();
-
-    $scope.clear = function () {
-      $scope.dt = null;
-    };
-
-    // Disable weekend selection
-    $scope.disabled = function(date, mode) {
-      return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-    };
-
-    $scope.toggleMin = function() {
-      $scope.minDate = $scope.minDate ? null : new Date();
-    };
-    $scope.toggleMin();
-
-    $scope.open = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope.opened = true;
-    };
-
-    $scope.dateOptions = {
-      formatYear: 'yy',
-      startingDay: 1,
-      language: 'pt-BR'
-    };
-
-    $scope.openModalImportar = function (item) {
-        
+    $scope.openModalTarifas = function (idOperacao) {
       var modalInstance = $modal.open({
-        templateUrl: 'views/wba/operacoes/modal-importacao.html',
-        size: 'lg',
-        controller: function ($scope, $modalInstance) {
+        templateUrl: 'views/wba/operacoes/modal-tarifas.html',
+        controller: function ($scope, $modalInstance, apiOperacoes) {
 
-          $scope.today = function() {
-            $scope.dt = new Date();
-          };
-          $scope.today();
-
-          $scope.clear = function () {
-            $scope.dt = null;
-          };
-
-          // Disable weekend selection
-          $scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-          };
-
-          $scope.toggleMin = function() {
-            $scope.minDate = $scope.minDate ? null : new Date();
-          };
-          $scope.toggleMin();
-
-          $scope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope.opened = true;
-          };
-
-          $scope.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1,
-            language: 'pt-BR'
-          };
-
-          $scope.recebiveis = [];
-
-          $scope.addTitulo = function () {
-            $scope.recebiveis.push({}); 
-          }
-
-          $scope.addRecebivel = function (data) {
-            apiOperacoes.addRecebivel(item.uuid, data).then(
-              function (res) {
-                toaster.pop('success','Recebível','Recebível cadastrado com sucesso');
-                $modalInstance.dismiss('cancel');
-              },
-              function (err) {
-
-              }
-            )
-          }
-          $scope.close = function () {
-            $modalInstance.dismiss('cancel');
-          }
-          $scope.salvar = function (item) {
-            $modalInstance.close(item);
-          }
-          $scope.uploadFiles = function(file, errFiles, type) {
-            $scope.f = file;
-            $scope.errFile = errFiles && errFiles[0];
-            if (file) {
-              var url;
-              if(type == 'cnab') {
-                url = 'http://api.erp.idtrust.com.br:9000/operacoes/v1/operacoes/' + item.uuid + '/cnab';
-              }
-              if(type == 'xml') {
-                url = 'http://api.erp.idtrust.com.br:9000/operacoes/v1/operacoes/' + item.uuid + '/cte';
-              }
-              file.upload = Upload.upload({
-                url: url,
-                data: {file: file}
-              });
-
-              file.upload.then(function (response) {
-                $timeout(function () {
-                  file.result = response.data;
-                });
-              }, function (response) {
-                if (response.status > 0)
-                  $scope.errorMsg = response.status + ': ' + response.data;
-              }, function (evt) {
-                  file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-              });
-            }   
-          }
-        }
-      });
-
-      modalInstance.result.then(
-        function (item) {
-          console.log(item);
-          apiOrganizacoes.saveOrganization(item).then(
+          apiOperacoes.getTarifas().then(
             function (res) {
-              $scope.getOrganizations();
+              $scope.tarifas = res.data;
             },
             function (err) {
               console.log(err)
             }
-          )
-        },
-        function () {
-          $log.info('Modal dismissed at: ' + new Date());
-        }
-      );
-    }
+            )
+          
+          $scope.salvar = function (item) {
+            $modalInstance.close(item);
+          }
 
+        },
+      });
+
+
+      modalInstance.result.then(
+        function (item) {
+          apiOperacoes.addTarifaToOperacao(idOperacao, item.uuid, {valor: item.valor}).then(
+            function (res) {
+              toaster.pop('success','Adicionar tarifa à operação','Tarifa adionada com sucesso')
+            },
+            function(err) {
+              toaster.pop('error','Adicionar tarifa à operação',err.statusText)
+            }
+            )
+        }
+        );
+    };
+
+    $scope.liberarOperacao = function (id) {
+
+      SweetAlert.swal({
+        title: "Você tem certeza?",
+        text: "Se prosseguir essa operação não poderá ser desfeita",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Prosseguir",
+        closeOnConfirm: true
+      }, 
+      function(isConfirm){ 
+        if (isConfirm) {
+          apiOperacoes.liberarOperacao().then(
+            function (res) {
+              toaster.pop('success','Operação','Operação liberada com sucesso');
+            },
+            function (err) {
+              toaster.pop('error','Operação',err.statusText);
+            }
+          )
+        }
+      })
+    }
   }
 ])

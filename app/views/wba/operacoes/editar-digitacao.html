@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 		<tabset tab-theme="orange" tab-position="top">
       <tab heading="Importação">
-        <form role="form" class="form-horizontal">
+        <form role="form" class="form-horizontal" novalidate>
           <fieldset>
             <div class="form-group">
               <label class="col-md-3 control-label">
@@ -11,7 +11,7 @@
               <div class="col-md-3">
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" ng-value="'cnab'" ng-model="typeImport">
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" ng-value="'cnab'" ng-model="typeImport" required>
                     CNAB
                   </label>
                 </div>
@@ -19,15 +19,10 @@
               <div class="col-md-6">
                 <div class="radio">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" ng-value="'xml'" ng-model="typeImport">
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" ng-value="'nfe'" ng-model="typeImport" required>
                     XML
                   </label>
                 </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-md-12">
-                {{typeImport}}
               </div>
             </div>
             <div class="form-group">
@@ -41,6 +36,7 @@
                     <button
                       class="btn btn-primary"
                       type="button"
+                      ng-disabled="!typeImport"
                       ngf-select="uploadFiles($file, $invalidFiles, typeImport)"
                       ngf-max-size="1MB">
                       <i class="fa fa-search"></i>
@@ -49,13 +45,9 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                     <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
-                          <span class="progress" ng-show="f.progress >= 0">
-                              <div style="width:{{f.progress}}%"  
-                                   ng-bind="f.progress + '%'"></div>
-                          </span>
-                      </div>     
-                      {{errorMsg}}
+                    <progressbar value="f.progress" ng-if="f.progress">
+                      {{f.progress + '% '}}
+                    </progressbar>
                   </div>
                 </div>
               </div>
@@ -64,7 +56,7 @@
         </form>
       </tab>
       <tab heading="Digitação">
-        <div class="row" ng-if="recebiveis.length == 0">
+        <div class="row">
           <div class="col-md-12">
             <p class="text-center alert alert-info">
               <i class="fa fa-info-circle"></i> Não existe títulos cadastrados para essa operação, clique no botão adicionar, para adicionar um título.
@@ -77,77 +69,70 @@
         <table class="table table-striped" ng-if="recebiveis.length > 0">
           <thead>
             <tr>
-              <th>Valor</th>
-              <th>Vencimento</th>
-              <th>Número</th>
-              <th>% Desconto</th>
-              <th>Data limite Desconto</th>
-              <th>Emissão</th>
-              <th>Nosso Número</th>
-              <th>Valor Líquido</th>
-              <th>Status</th>
+              <th class="text-center">Valor</th>
+              <th class="text-center">Vencimento</th>
+              <th class="text-center">Número</th>
+              <th class="text-center">% Desconto</th>
+              <th class="text-center">Data limite Desconto</th>
+              <th class="text-center">Emissão</th>
+              <th class="text-center">Nosso Número</th>
+              <th class="text-center">Valor Líquido</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="rec in recebiveis">
-              <td>
+              <td class="text-center">
                 <input type="text" ng-model="rec.valor" class="form-control">
               </td>
-              <td>
+              <td class="text-center">
                 <input
                   type="text"
                   class="form-control"
                   datepicker-popup="dd/MM/yyyy"
                   ng-model="rec.vencimento"
-                  is-open="opened"
+                  is-open="openedVencimento"
                   min-date="minDate"
                   datepicker-options="dateOptions"
-                  date-disabled="disabled(date, mode)"
                   close-text="Fechar"
                   current-text="Hoje"
                   clear-text="Limpar"
-                  ng-click="open($event)">
+                  ng-click="open($event, 'vencimento')">
               </td>
-              <td><input type="text" ng-model="rec.numero" class="form-control"></td>
-              <td><input type="text" ng-model="rec.percentualDesconto" class="form-control"></td>
-              <td>
+              <td class="text-center"><input type="text" ng-model="rec.numero" class="form-control"></td>
+              <td class="text-center"><input type="text" ng-model="rec.percentualDesconto" class="form-control"></td>
+              <td class="text-center">
                 <input
                   type="text"
                   class="form-control"
                   datepicker-popup="dd/MM/yyyy"
                   ng-model="rec.dateLimiteDesconto"
-                  is-open="opened"
+                  is-open="openedDataLimite"
                   min-date="minDate"
                   datepicker-options="dateOptions"
-                  date-disabled="disabled(date, mode)"
                   close-text="Fechar"
                   current-text="Hoje"
                   clear-text="Limpar"
-                  ng-click="open($event)">
+                  ng-click="open($event, 'dataLimite')">
               </td>
-              <td>
+              <td class="text-center">
                 <input
                   type="text"
                   class="form-control"
                   datepicker-popup="dd/MM/yyyy"
                   ng-model="rec.emissao"
-                  is-open="opened"
+                  is-open="openedEmissao"
                   min-date="minDate"
                   datepicker-options="dateOptions"
-                  date-disabled="disabled(date, mode)"
                   close-text="Fechar"
                   current-text="Hoje"
                   clear-text="Limpar"
-                  ng-click="open($event)">
+                  ng-click="open($event, 'emissao')">
               </td>
-              <td><input type="text" ng-model="rec.nossoNumero" class="form-control"></td>
-              <td><input type="text" ng-model="rec.valor" class="form-control"></td>
-              <td class="">
-                <i class="fa fa-circle" ng-class="{'green': rec.ativo, 'red': !rec.ativo}"></i>
-              </td>
+              <td class="text-center"><input type="text" ng-model="rec.nossoNumero" class="form-control"></td>
+              <td class="text-center"><input type="text" ng-model="rec.valorLiquido" class="form-control"></td>
               <td>
-                <button class="btn btn-primary" ng-click="addRecebivel(rec)">
+                <button class="btn btn-primary" ng-click="saveTitulo(rec)">
                   <i class="fa fa-save"></i>
                 </button>
               </td>

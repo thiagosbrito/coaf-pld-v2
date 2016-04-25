@@ -126,6 +126,19 @@ angular.module('wbaApp')
       }); 
     }
 
+    var _addTarifaToOperacao = function (idOperacao, idTarifa, tarifa) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes/' + idOperacao + '/tarifas/' + idTarifa,
+        method: 'POST',
+        data: tarifa,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(function (results) {
+        return results;
+      });
+    }
+
     // 
 
     var _getTarifas = function () {
@@ -181,6 +194,28 @@ angular.module('wbaApp')
       });
     };
 
+    var _liberarOperacao = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes/' + id + '/iniciar',
+        method: 'PUT'
+      }).then(
+        function (results) {
+          return results;
+        }
+      )
+    };
+
+    var _getRecebiveisByOperacao = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes/' + id + '/recebivel',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results;
+        }
+      )
+    }
+
     
     // Comercial
     api.getCarteiras        = _getCarteiras;
@@ -201,6 +236,11 @@ angular.module('wbaApp')
     api.saveOperacao        = _saveOperacao;
     api.updateOperacao      = _updateOperacao;
     api.addRecebivel        = _addRecebivel;
+    api.addTarifaToOperacao = _addTarifaToOperacao;
+    api.liberarOperacao     = _liberarOperacao;
+
+    api.getRecebiveisByOperacao = _getRecebiveisByOperacao;
+
     return api;
 
 }]);
