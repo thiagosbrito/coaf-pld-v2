@@ -152,3 +152,6 @@ table.table.table-striped.fix-table-vertical-alignment thead {
 .form-group:last-child {
   margin-bottom: 25px !important
 }
+.recebiveis-lista-holder {
+  max-height: 400px !important;
+}

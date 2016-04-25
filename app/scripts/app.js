@@ -19,5 +19,6 @@ angular.module('wbaApp', [
   'oitozero.ngSweetAlert',
   'frapontillo.bootstrap-switch',
   'ngFileUpload',
-  'ng-currency'
+  'ng-currency',
+  'ngScrollbars'
   ])

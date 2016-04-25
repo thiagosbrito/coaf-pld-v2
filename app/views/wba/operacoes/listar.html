@@ -85,10 +85,12 @@
                     </tbody>
                   </table>
                   <div
-                    class="well"
+                    class="well recebiveis-lista-holder"
                     collapse="!item.open"
                     ng-if="item.recebiveis"
-                    style="margin-top: -20px">
+                    style="margin-top: -20px"
+                    ng-scrollbars
+                    ng-scrollbars-config="config">
                     <div class="row">
                       <div class="col-md-12">
                         <table class="table table-striped">

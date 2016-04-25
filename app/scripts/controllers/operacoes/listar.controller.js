@@ -15,6 +15,20 @@ angular.module('wbaApp')
   'apiEmpresas',
   function ($scope, $state, $stateParams, apiOperacoes, toaster, $modal, SweetAlert, $log, Upload, apiEmpresas) {
 
+    $scope.config = {
+      autoHideScrollbar: true,
+      theme: 'minimal',
+      scrollButtons: {
+        enable: false
+      },
+      advanced:{
+        updateOnContentResize: true
+      },
+      setHeight: 200,
+      scrollInertia: 0,
+      axis: 'y'
+    };
+    
     $scope.addRecebiveisToArray = function (operacoes) {
       angular.forEach(operacoes, function (value, key) {
         apiEmpresas.getById(value.uuidCedente).then(
