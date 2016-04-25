@@ -10,6 +10,12 @@
 .green {
   color: #8bc34a;
 }
+.blue {
+  color: #03a9f4;
+}
+.orange {
+  color: #ffc107;
+}
 .header-section button.btn-voltar {
   clear: both;
   margin: 8px 8px 0px -13px !important;
@@ -44,7 +50,7 @@ table.table.table-striped.fix-table-vertical-alignment thead {
 }
 .form-wzrd.actions {
   pointer-events: all;
-  cursor: pointer; 
+  cursor: pointer;
 }
 .form-wzrd li.active {
   margin-right: 10px;
@@ -63,10 +69,15 @@ table.table.table-striped.fix-table-vertical-alignment thead {
 .form-wzrd li.active.last a:after {
   border: none;
 }
-
+.datepicker-holder {
+  margin: 0 !important;
+}
 .datepicker-holder table{
   width: 95%;
   margin: 0 auto;
+}
+.datepicker-holder ul {
+  width: 240px !important;
 }
 
 .ope-titles {
@@ -76,7 +87,7 @@ table.table.table-striped.fix-table-vertical-alignment thead {
 }
 .display-info {
   margin-bottom: 10px;
-  padding-bottom: 10px;  
+  padding-bottom: 10px;
 }
 
 .analise-infos-holder {
@@ -134,4 +145,10 @@ table.table.table-striped.fix-table-vertical-alignment thead {
   margin-top: 8px !important;
   margin-bottom: 8px !important;
   border-top: 1px solid #ccc;
+}
+.form-group {
+  margin-bottom: 10px !important;
+}
+.form-group:last-child {
+  margin-bottom: 25px !important
 }

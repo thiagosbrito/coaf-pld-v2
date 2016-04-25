@@ -17,14 +17,14 @@
       <div class="form-group">
         <label class="col-md-2 control-label">Valor</label>
         <div class="col-md-6">
-          <input type="text" class="form-control" ng-model="tarifa.valor" placeholder="Defina um valor para a Tarifa">
+          <input type="text" class="form-control" ng-model="tarifa.valor" ng-currency placeholder="Defina um valor para a Tarifa">
         </div>
       </div>
     </fieldset>
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-danger-alt pull-left">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()">
     <i class="fa fa-times"></i> Cancelar
   </button>
   <button class="btn btn-primary" ng-click="salvar(tarifa)">

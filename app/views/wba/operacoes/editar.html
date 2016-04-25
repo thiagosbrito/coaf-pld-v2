@@ -21,7 +21,7 @@
         <div class="panel-body">
           <div class="tab-content">
             <!-- <div class="row">
-              <div class="col-md-12">                      
+              <div class="col-md-12">
                 <pre>{{operacao | json}}</pre>
               </div>
             </div> -->
@@ -29,13 +29,100 @@
                 <div class="col-md-12">
                   <h4>Resumo da Operacão</h4>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-12">
+                  <div class="resumo-operacao">
+                    <form role="form" class="form">
+                      <fieldset>
+                        <div class="form-group col-md-4">
+                          <label>
+                            Cedente:
+                          </label>
+                          <select 
+                            class="form-control"
+                            ng-model="selectedCedente"
+                            ng-disabled="recebiveis.length > 0"
+                            ng-options="ced as ced.razaoSocial for ced in cedentes">
+                            <option value="">Selecione...</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label>Carteira:</label>
+                          <select
+                            ng-model="selectedCarteira"
+                            class="form-control"
+                            ng-options="cart as cart.nome for cart in carteiras">
+                            <option value="">Selecione...</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label>
+                            Num. Operação: 
+                          </label>
+                          <input type="text" class="form-control" disabled="" ng-model="operacao.numero">
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label for="">Dt. Operação</label>
+                          <p class="input-group datepicker-holder">
+                            <input
+                              type="text"
+                              class="form-control"
+                              datepicker-popup="dd/MM/yyyy"
+                              ng-model="operacao.dataOperacao"
+                              is-open="isOpened"
+                              close-text="Fechar"
+                              current-text="Hoje"
+                              clear-text="Limpar" />
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-default" ng-click="openMain($event)"><i class="ti ti-calendar"></i></button>
+                            </span>
+                          </p>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label>
+                            Modelo de Cobrança
+                          </label>
+                          <select class="form-control" ng-model="operacao.modeloCobranca" required>
+                            <option value="">Selecione...</option>
+                            <option value="BANCO">Banco</option>  
+                            <option value="CARTEIRA">Carteira</option>  
+                          </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label>Status: </label>
+                          <select class="form-control" ng-model="operacao.status" required>
+                            <option value="">Selecione...</option>
+                            <option value="SIMULADA">Simulada</option>
+                            <option value="EM_ANALISE">Em Análise</option>
+                            <option value="APROVADA">Aprovada</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label>
+                            Método de Cálculo
+                          </label>
+                          <input type="text" class="form-control" disabled="">
+                        </div>
+                        <div class="form-group col-md-4">
+                          <label>
+                            Float
+                          </label>
+                          <input type="text" class="form-control" disabled="">
+                        </div>
+                        <div class="form-group col-md-4">
+                          <button class="btn btn-primary pull-right" style="margin-top: 27px" ng-click="update(operacao)">
+                            <i class="fa fa-save"></i> Salvar
+                          </button>
+                        </div>
+                      </fieldset>
+                    </form>
+                  </div>
+                </div>
+                <!-- <div class="col-md-3">
                   <div class="resumo-operacao">
                     <strong>Número operação</strong>: <span>{{operacao.numero}}</span> <hr class="custom-hr">
-                    <!-- <hr> -->
                     <strong>
                       Data da operação
-                    </strong>:  
+                    </strong>:
                     <span ng-show="!editFirst">{{operacao.dataOperacao | date: 'dd/MM/yyyy'}}</span>
                     <input type="text" class="form-control" ng-show="editFirst">
                     <div class="button btn btn-primary btn-editar-operacao" ng-click="editFisrt = !editFirst"><i class="fa fa-pencil"></i></div>
@@ -43,30 +130,28 @@
                 </div>
                 <div class="col-md-3">
                   <div class="resumo-operacao">
-                    <strong>Cedente</strong>: 
+                    <strong>Cedente</strong>:
                     <span>{{cedente[0].razaoSocial}}</span><hr class="custom-hr">
-                    <!-- <hr> -->
-                    <strong>Carteira</strong>: 
+                    <strong>Carteira</strong>:
                     <span>{{carteiraOpe[0].nome}}</span>
                     <div class="button btn btn-primary btn-editar-operacao"><i class="fa fa-pencil"></i></div>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="resumo-operacao">
-                    <strong>Modelo de cobrança</strong>: 
+                    <strong>Modelo de cobrança</strong>:
                     <span>{{operacao.modeloCobranca}}</span><hr class="custom-hr">
-                    <!-- <hr> -->
-                    <strong>Status</strong>: 
+                    <strong>Status</strong>:
                     <span>{{operacao.status}}</span>
                     <div class="button btn btn-primary btn-editar-operacao"><i class="fa fa-pencil"></i></div>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="resumo-operacao">
-                    <strong>Número de recebíveis</strong>: 
+                    <strong>Número de recebíveis</strong>:
                     <span>{{recebiveis.length}}</span>
                   </div>
-                </div>
+                </div> -->
             </div>
             <hr>
             <div ui-view=""></div>

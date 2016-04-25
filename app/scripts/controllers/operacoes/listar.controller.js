@@ -20,18 +20,21 @@ angular.module('wbaApp')
         apiEmpresas.getById(value.uuidCedente).then(
           function (rs) {
             value.open = false;
-            value.cedentes = rs.data
-            // value.recebiveis = [];
-            // value.recebiveis.push({"ativo": true,"dateLimiteDesconto": "2016-04-20T19:02:16.983Z","emissao": "2016-04-20T19:02:16.983Z","nossoNumero": "string","numero": "string","percentualDesconto": 0,"uuid": "string","valor": 0,"valorLiquido": 0,"vencimento": "2016-04-20T19:02:16.983Z"});
+            value.cedentes = rs.data;
           }
-        )
+        );
+        apiOperacoes.getCarteiraById(value.uuidCarteira).then(
+          function (rs) {
+            value.carteira = rs.data;
+          }
+        );
         apiOperacoes.getRecebiveisByOperacao(value.uuid).then(
           function (rs) {
             value.recebiveis = rs.data;
           }
-        )
-      })
-    }
+        );
+      });
+    };
 
     $scope.getOperacoes = function () {
       apiOperacoes.getOperacoes().then(
@@ -41,7 +44,7 @@ angular.module('wbaApp')
         }
       )
     }
-    
+
     $scope.getOperacoes();
 
     $scope.openModalTarifas = function (idOperacao) {
@@ -57,9 +60,13 @@ angular.module('wbaApp')
               console.log(err)
             }
             )
-          
+
           $scope.salvar = function (item) {
             $modalInstance.close(item);
+          }
+
+          $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
           }
 
         },
@@ -90,10 +97,10 @@ angular.module('wbaApp')
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Prosseguir",
         closeOnConfirm: true
-      }, 
-      function(isConfirm){ 
+      },
+      function(isConfirm){
         if (isConfirm) {
-          apiOperacoes.liberarOperacao().then(
+          apiOperacoes.liberarOperacao(id).then(
             function (res) {
               toaster.pop('success','Operação','Operação liberada com sucesso');
             },
