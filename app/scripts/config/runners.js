@@ -21,6 +21,7 @@ angular.module('wbaApp')
       });
 
       $rootScope.$on('$stateChangeSuccess',function(event, toState, toParams, fromState, fromParams){
+        $rootScope.prevState = fromState;
         console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
       });
 
@@ -31,6 +32,6 @@ angular.module('wbaApp')
       $rootScope.$on('$stateNotFound',function(event, unfoundState, fromState, fromParams){
         console.log('$stateNotFound '+unfoundState.to+'  - fired when a state cannot be found by its name.');
         console.log(unfoundState, fromState, fromParams);
-      });    
+      });
     }
   ])

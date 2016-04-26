@@ -137,7 +137,8 @@ angular
           iconClasses: 'ti ti-money',
           children: [
             {
-              label: 'Boletos'
+              label: 'Boletos',
+              url: '#/cobranca/boletos/inicio'
             },
             {
               label: 'Arquivos Eletrônicos',
@@ -195,12 +196,12 @@ angular
           ]
         }
         // ,
-        
+
         // {
         //   label: 'Explore',
         //   iconClasses: '',
         //   separator: true
-        // }, 
+        // },
         // {
         //   label: 'Dashboard',
         //   iconClasses: 'ti ti-home',

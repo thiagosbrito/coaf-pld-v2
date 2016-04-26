@@ -44,6 +44,17 @@ angular.module('wbaApp')
           }
         )
       }
+
+      $scope.updateCarteira = function (carteira) {
+        apiOperacoes.updateCarteira(carteira).then(
+          function (res) {
+            toaster.pop('success','Carteira','Carteira atualizada com sucesso');
+          },
+          function (err) {
+            toaster.pop('error','Carteira',err.statusText);
+          }
+        )
+      }
     }
 
   ])
