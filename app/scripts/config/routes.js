@@ -9,7 +9,7 @@ angular.module('wbaApp')
   '$locationProvider',
   function($stateProvider, $urlRouterProvider, $routeProvider, $httpProvider,$locationProvider) {
     'use strict';
-    
+
     // $locationProvider.html5mode = true;
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
@@ -19,7 +19,7 @@ angular.module('wbaApp')
     $httpProvider.defaults.headers.patch = {};
 
     $urlRouterProvider.otherwise('/dashboard');
-    
+
     $stateProvider
       .state('wba',{
         url: '',
@@ -31,7 +31,7 @@ angular.module('wbaApp')
               'bower_components/fullcalendar/dist/fullcalendar.js'
             ])
           }]
-        }          
+        }
       })
       .state('wba.templates', {
         url: '/template/:templateFile',
@@ -64,7 +64,7 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/organizacoes/listar.html',
         controller: 'OrganizacoesListarController'
       })
-      
+
       .state('wba.usuarios-permissoes.organizacoes.usuarios',{
         url: '/:organizacaoId/usuarios',
         template: '<div ui-view=""></div>'
@@ -272,7 +272,7 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/comercial/plataformas/editar.html',
         controller: 'PlataformasEditarController'
       })
-      
+
       .state('wba.operacoes',{
         url: '/operacoes',
         template: '<div ui-view=""></div>'
@@ -287,7 +287,7 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/operacoes/novo.html',
         controller: 'OperacoesNovoController'
       })
-      
+
       // Editar operações wizard
       .state('wba.operacoes.editar',{
         url: '/editar/:operacaoId',
@@ -301,7 +301,7 @@ angular.module('wbaApp')
                 return res.data
               }
             )
-          } 
+          }
         }
       })
       .state('wba.operacoes.editar.digitacao',{
@@ -313,7 +313,7 @@ angular.module('wbaApp')
         url: '/analise',
         templateUrl: 'views/wba/operacoes/editar-analise.html'
       })
-      
+
       .state('wba.operacoes.editar.liberacao',{
         url: '/liberacao',
         templateUrl: 'views/wba/operacoes/editar-liberacao.html'
@@ -357,7 +357,47 @@ angular.module('wbaApp')
 
       // Routews for Cobranca Module
       .state('wba.cobranca',{
-        url: '/cobranca'
+        url: '/cobranca',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.cobranca.boletos',{
+        url: '/boletos',
+        template: '<div ui-view=""></div>'
+      })
+
+      .state('wba.cobranca.boletos.inicial',{
+        url: '/inicio',
+        templateUrl: 'views/wba/cobranca/boletos/inicial.html'
+      })
+
+      .state('wba.cobranca.boletos.passos',{
+        url: '/passos',
+        template: 'views/wba/cobranca/boletos/passos.html'
+      })
+      .state('wba.cobranca.boletos.passos.passo-1',{
+        url: '/passo-1',
+        template: 'views/wba/cobranca/boletos/passo-1.html',
+        title: 'Passo 1'
+      })
+      .state('wba.cobranca.boletos.passos.passo-2',{
+        url: '/passo-2',
+        template: 'views/wba/cobranca/boletos/passo-2.html',
+        title: 'Passo 2'
+      })
+      .state('wba.cobranca.boletos.passos.passo-3',{
+        url: '/passo-3',
+        template: 'views/wba/cobranca/boletos/passo-3.html',
+        title: 'Passo 3'
+      })
+      .state('wba.cobranca.boletos.passos.passo-4',{
+        url: '/passo-4',
+        template: 'views/wba/cobranca/boletos/passo-4.html',
+        title: 'Passo 4'
+      })
+      .state('wba.cobranca.boletos.passos.passo-5',{
+        url: '/passo-5',
+        template: 'views/wba/cobranca/boletos/passo-5.html',
+        title: 'Passo 5'
       })
 
       // Routews for Checagem Module
