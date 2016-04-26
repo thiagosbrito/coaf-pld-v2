@@ -155,3 +155,24 @@ table.table.table-striped.fix-table-vertical-alignment thead {
 .recebiveis-lista-holder {
   max-height: 400px !important;
 }
+.icon-destaque {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 0 auto;
+  background-color: #03a9f4;
+  box-sizing: border-box;
+  padding: 16px;
+  margin-bottom: 40px;
+}
+.tit-boletos {
+  margin-bottom: 40px;
+}
+.icon-destaque i {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%)
+}
+.mb-40 {
+  margin-bottom: 40px;
+}
