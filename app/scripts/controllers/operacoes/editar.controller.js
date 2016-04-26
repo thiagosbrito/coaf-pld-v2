@@ -18,7 +18,8 @@ angular.module('wbaApp')
     apiEmpresas.getAll().then(
       function (res) {
         $scope.cedentes = res.data;
-        $scope.cedente = _.where($scope.cedentes, {id: parseInt(operacao.uuidCedente)});
+        $scope.selectedCedente = _.where($scope.cedentes, {id: parseInt(operacao.uuidCedente)});
+        $scope.selectedCedente = $scope.selectedCedente[0];
       },
       function (err) {
         toaster.pop('error','Cedentes',err.statusText);
@@ -28,7 +29,8 @@ angular.module('wbaApp')
     apiOperacoes.getCarteiras().then(
       function (res) {
         $scope.carteiras = res.data;
-        $scope.carteiraOpe = _.where($scope.carteiras, {uuid: operacao.uuidCarteira});
+        $scope.selectedCarteira = _.where($scope.carteiras, {uuid: operacao.uuidCarteira});
+        $scope.selectedCarteira = $scope.selectedCarteira[0];
       },
       function (err) {
         toaster.pop('error','Carteiras',err.statusText)
@@ -39,6 +41,11 @@ angular.module('wbaApp')
       apiOperacoes.getRecebiveisByOperacao($stateParams.operacaoId).then(
         function (res) {
           $scope.recebiveis = res.data;
+          angular.forEach($scope.recebiveis, function (value, key) {
+            value.dpVencimento  = false;
+            value.dpEmissao     = false;
+            value.dpDataLimite  = false;
+          })
         },
         function (err) {
           toaster.pop('error','Recebiveis',err.statusText);
@@ -59,6 +66,8 @@ angular.module('wbaApp')
     $scope.operacao = operacao;
 
     $scope.update = function (data) {
+      data.uuidCedente = $scope.selectedCedente.id;
+      data.uuidCarteira = $scope.selectedCarteira.uuid;
       apiOperacoes.updateOperacao(data).then(
         function(res) {
           toaster.pop('success','Operações','Operação atualizada com sucesso');
@@ -90,19 +99,23 @@ angular.module('wbaApp')
     $scope.toggleMin();
 
 
-    $scope.open = function($event, instance) {
+    $scope.open = function($event, instance, mode) {
       $event.preventDefault();
       $event.stopPropagation();
 
-      if (instance == 'vencimento') {
-        $scope.openedVencimento = true
-      }
-      if (instance == 'dataLimite') {
-        $scope.openedDataLimite = true
-      }
-      if (instance == 'emissao') {
-        $scope.openedEmissao = true
-      }
+      instance.dpVencimento = false;
+      instance.dpDataLimite = false;
+      instance.dpEmissao = false;
+
+      if(mode == 'vencimento') {
+        instance.dpVencimento = true;
+      };
+      if(mode == 'dataLimite') {
+        instance.dpDataLimite = true;
+      };
+      if(mode == 'emissao') {
+        instance.dpEmissao = true;
+      };
     };
 
     $scope.dateOptions = {
@@ -114,7 +127,7 @@ angular.module('wbaApp')
     $scope.uploadFiles = function(file, errFiles, type) {
       $scope.f = file;
       $scope.errFile = errFiles && errFiles[0];
-      var url = 'http://api.erp.idtrust.com.br:9000/operacoes/v1/operacoes/' + $stateParams.operacaoId + '/' + type; 
+      var url = 'http://api.erp.idtrust.com.br:9000/operacoes/v1/operacoes/' + $stateParams.operacaoId + '/' + type;
       if (file) {
         file.upload = Upload.upload({
           url: url,

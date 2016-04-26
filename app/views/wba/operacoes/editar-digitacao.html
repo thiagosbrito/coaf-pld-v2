@@ -56,7 +56,7 @@
         </form>
       </tab>
       <tab heading="Digitação">
-        <div class="row">
+        <div class="row" ng-if="recebiveis.length == 0">
           <div class="col-md-12">
             <p class="text-center alert alert-info">
               <i class="fa fa-info-circle"></i> Não existe títulos cadastrados para essa operação, clique no botão adicionar, para adicionar um título.
@@ -70,75 +70,106 @@
           <thead>
             <tr>
               <th class="text-center">Valor</th>
-              <th class="text-center">Vencimento</th>
+              <th class="text-center">Venc.</th>
               <th class="text-center">Número</th>
-              <th class="text-center">% Desconto</th>
-              <th class="text-center">Data limite Desconto</th>
+              <th class="text-center">% Desc.</th>
+              <th class="text-center">Dt. Lim. Desc.</th>
               <th class="text-center">Emissão</th>
-              <th class="text-center">Nosso Número</th>
-              <th class="text-center">Valor Líquido</th>
+              <th class="text-center">Nosso #</th>
+              <th class="text-center">Valor Líq.</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="rec in recebiveis">
-              <td class="text-center">
-                <input type="text" ng-model="rec.valor" class="form-control">
+              <td class="text-center" width="120">
+                <input type="text" ng-model="rec.valor" class="form-control" ng-currency>
               </td>
-              <td class="text-center">
-                <input
-                  type="text"
-                  class="form-control"
-                  datepicker-popup="dd/MM/yyyy"
-                  ng-model="rec.vencimento"
-                  is-open="openedVencimento"
-                  min-date="minDate"
-                  datepicker-options="dateOptions"
-                  close-text="Fechar"
-                  current-text="Hoje"
-                  clear-text="Limpar"
-                  ng-click="open($event, 'vencimento')">
+              <td class="text-center" width="140">
+								<p class="input-group datepicker-holder">
+									<input
+										type="text"
+										class="form-control"
+										datepicker-popup="dd/MM/yyyy"
+										ng-model="rec.vencimento"
+										is-open="rec.dpVencimento"
+										close-text="Fechar"
+										current-text="Hoje"
+										clear-text="Limpar" />
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default" ng-click="open($event, rec, 'vencimento')"><i class="ti ti-calendar"></i></button>
+									</span>
+								</p>
               </td>
               <td class="text-center"><input type="text" ng-model="rec.numero" class="form-control"></td>
               <td class="text-center"><input type="text" ng-model="rec.percentualDesconto" class="form-control"></td>
-              <td class="text-center">
-                <input
-                  type="text"
-                  class="form-control"
-                  datepicker-popup="dd/MM/yyyy"
-                  ng-model="rec.dateLimiteDesconto"
-                  is-open="openedDataLimite"
-                  min-date="minDate"
-                  datepicker-options="dateOptions"
-                  close-text="Fechar"
-                  current-text="Hoje"
-                  clear-text="Limpar"
-                  ng-click="open($event, 'dataLimite')">
+              <td class="text-center" width="140">
+								<p class="input-group datepicker-holder">
+									<input
+										type="text"
+										class="form-control"
+										datepicker-popup="dd/MM/yyyy"
+										ng-model="rec.dateLimiteDesconto"
+										is-open="rec.dpDataLimite"
+										close-text="Fechar"
+										current-text="Hoje"
+										clear-text="Limpar" />
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default" ng-click="open($event, rec, 'dataLimite')"><i class="ti ti-calendar"></i></button>
+									</span>
+								</p>
               </td>
-              <td class="text-center">
-                <input
-                  type="text"
-                  class="form-control"
-                  datepicker-popup="dd/MM/yyyy"
-                  ng-model="rec.emissao"
-                  is-open="openedEmissao"
-                  min-date="minDate"
-                  datepicker-options="dateOptions"
-                  close-text="Fechar"
-                  current-text="Hoje"
-                  clear-text="Limpar"
-                  ng-click="open($event, 'emissao')">
+              <td class="text-center" width="140">
+								<!-- {{rec.dpEmissao}} -->
+								<p class="input-group datepicker-holder">
+									<input
+										type="text"
+										class="form-control"
+										datepicker-popup="dd/MM/yyyy"
+										ng-model="rec.emissao"
+										is-open="rec.dpEmissao"
+										close-text="Fechar"
+										current-text="Hoje"
+										clear-text="Limpar" />
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default" ng-click="open($event, rec, 'emissao')"><i class="ti ti-calendar"></i></button>
+									</span>
+								</p>
               </td>
               <td class="text-center"><input type="text" ng-model="rec.nossoNumero" class="form-control"></td>
-              <td class="text-center"><input type="text" ng-model="rec.valorLiquido" class="form-control"></td>
+              <td class="text-center" width="120"><input type="text" ng-model="rec.valorLiquido" ng-currency class="form-control"></td>
               <td>
-                <button class="btn btn-primary" ng-click="saveTitulo(rec)">
-                  <i class="fa fa-save"></i>
+                <button
+                  popover-template="'views/wba/operacoes/titulos-action.html'"
+                  popover-title="Ações"
+                  class="btn btn-sm btn-default">
+                  <i class="fa fa-bars"></i>
                 </button>
+                <!-- <div class="btn-group">
+                  <button class="btn btn-sm btn-primary" ng-click="saveTitulo(rec)">
+                    <i class="fa fa-save"></i>
+                  </button>
+                  <button class="btn btn-sm btn-danger">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                  <button class="btn btn-sm btn-success">
+                    <i class="fa fa-check"></i>
+                  </button>
+                  <button class="btn btn-sm btn-warning">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div> -->
               </td>
             </tr>
           </tbody>
         </table>
+				<div class="row" ng-if="recebiveis.length > 0">
+          <div class="col-md-12">
+						<button class="btn btn-primary pull-right" style="margin-top: -8px" ng-click="addTitulo()">
+							<i class="fa fa-plus"></i> Adicionar título
+						</button>
+          </div>
+        </div>
       </tab>
     </tabset>
 	</div>

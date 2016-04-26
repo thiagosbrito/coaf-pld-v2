@@ -321,7 +321,7 @@ module.exports = function (grunt) {
             'assets/plugins/jvectormap/jquery-jvectormap-nl-mill-en.js',
             'assets/plugins/jvectormap/jquery-jvectormap-se-mill-en.js',
             'assets/plugins/jvectormap/jquery-jvectormap-us-aea-en.js',
-            'assets/plugins/jvectormap/jquery-jvectormap-us-ny-newyork-mill-en.js',
+            'assets/plugins/jvectormap/jquery-jvectormap-us-ny-newyork-mill-en.js'
           ]
         }, {
           expand: true,
@@ -368,7 +368,7 @@ module.exports = function (grunt) {
       ],
       dist: [
         'copy:styles',
-        'copy:dist',
+        'copy:dist'
         // 'imagemin',
         // 'svgmin'
       ]
@@ -382,7 +382,7 @@ module.exports = function (grunt) {
           bootstrap: function(module, script) {
             return '/* jshint ignore:start */\nangular.module(\'theme.core.templates\', []).run([\'$templateCache\', function ($templateCache) {\n'+script+'}])\n/* jshint ignore:end */';
           }
-        },
+        }
       }
     },
 
@@ -519,7 +519,7 @@ module.exports = function (grunt) {
     // 'uglify',
     // 'rev',
     // 'usemin',
-    'processhtml:dist',
+    'processhtml:dist'
     // 'htmlmin'
   ]);
 

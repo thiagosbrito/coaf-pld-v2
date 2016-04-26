@@ -54,10 +54,10 @@
                   <div class="col-md-12">
                      <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
                           <span class="progress" ng-show="f.progress >= 0">
-                              <div style="width:{{f.progress}}%"  
+                              <div style="width:{{f.progress}}%"
                                    ng-bind="f.progress + '%'"></div>
                           </span>
-                      </div>     
+                      </div>
                       {{errorMsg}}
                   </div>
                 </div>
@@ -95,7 +95,7 @@
           <tbody>
             <tr ng-repeat="rec in recebiveis">
               <td>
-                <input type="text" ng-model="rec.valor" class="form-control">
+                <input type="text" ng-model="rec.valor" class="form-control" ng-currency>
               </td>
               <td>
                 <input
@@ -145,7 +145,7 @@
                   ng-click="open($event)">
               </td>
               <td><input type="text" ng-model="rec.nossoNumero" class="form-control"></td>
-              <td><input type="text" ng-model="rec.valor" class="form-control"></td>
+              <td><input type="text" ng-model="rec.valorLiquido" ng-currency class="form-control"></td>
               <td class="">
                 <i class="fa fa-circle" ng-class="{'green': rec.ativo, 'red': !rec.ativo}"></i>
               </td>

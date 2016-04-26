@@ -9,10 +9,10 @@
       <div class="col-md-12">
       <div class="panel panel-indigo">
         <div class="panel-heading header-section">
-          
+
           <h2>Operações</h2>
           <div class="panel-ctrls">
-            <a class="button-icon" ui-sref="wba.operacoes.novo">
+            <a class="button-icon" ui-sref="wba.operacoes.novo" tooltip="Adicionar Operação">
               <i class="fa fa-plus"></i>
             </a>
           </div>
@@ -37,70 +37,45 @@
                             <i class="fa fa-bars"></i>
                           </button>
                         </th>
-                        <th>Número Op.</th>
+                        <th>Núm.</th>
                         <th class="text-center">Cedente</th>
                         <th class="text-center">Carteira</th>
-                        <th class="text-center">Qtd Titulos</th>
+                        <th class="text-center">Qtd Tits</th>
                         <th class="text-center">Vl. Bruto</th>
-                        <th class="text-center">Vl. Líquido</th>
-                        <th class="text-right">Status</th>
+                        <th class="text-center">Vl. Líq.</th>
+                        <th class="text-center">Status</th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody>
                       <td ng-if="item.recebiveis"></td>
-                      <td class="text-left">{{item.numero}}</td>
-                      <td class="text-center">{{item.cedentes.nomeFantasia}}</td>
-                      <td class="text-center" style="width: 240px;">
-                        <span ng-hide="edit" ng-cloak>
-                          {{item.dataOperacao | date: 'dd/MM/yyyy'}}
-                        </span>
-                        <div class="input-group datepicker-holder" ng-show="edit" ng-cloak>
-                          <input
-                            type="text"
-                            class="form-control"
-                            datepicker-popup="dd/MM/yyyy"
-                            ng-model="item.dataOperacao"
-                            is-open="opened"
-                            min-date="minDate"
-                            datepicker-options="dateOptions"
-                            date-disabled="disabled(date, mode)"
-                            close-text="Fechar"
-                            current-text="Hoje"
-                            clear-text="Limpar">
-                          <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="ti ti-calendar"></i></button>
-                          </span>
-                        </div>
+                      <td class="text-center" width="50">{{item.numero}}</td>
+                      <td class="text-center" width="150">{{item.cedentes.nomeFantasia}}</td>
+                      <td class="text-center" width="150">{{item.carteira.nome}}</td>
+                      <td class="text-center">
+                        {{item.recebiveis.length}}
                       </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td class="text-right">
-                        <span ng-hide="edit" ng-cloak>{{item.status}}</span>
-                        <select class="form-control" ng-model="item.status" required ng-show="edit" ng-cloak>
-                          <option value="">Selecione...</option>
-                          <option value="SIMULADA">Simulada</option>
-                          <option value="EM_ANALISE">Em Análise</option>
-                          <option value="APROVADA">Aprovada</option>
-                        </select>
+                      <td>{{item.valor | currency}}</td>
+                      <td>{{item.valorLiquido | currency}}</td>
+                      <td class="text-center">
+                        <i class="fa" ng-class="{'fa-check green': item.status == 'APROVADA', 'fa-pause blue': item.status == 'EM_ANALISE', 'fa-play orange': item.status == 'SIMULADA'}" tooltip="{{item.status}}"></i>
                       </td>
-                      <td>
+                      <td width="120">
                         <div class="btn-group pull-right">
                           <button
-                            class="btn btn-primary"
+                            class="btn btn-sm btn-primary"
                             tooltip="Editar operação"
                             ui-sref="wba.operacoes.editar.digitacao({operacaoId: item.uuid})">
                               <i class="fa fa-pencil"></i>
                           </button>
                           <button
-                            class="btn btn-success"
+                            class="btn btn-sm btn-success"
                             tooltip="Adicionar Tarifa"
                             ng-click="openModalTarifas(item.uuid)">
                               <i class="fa fa-usd"></i>
                           </button>
                           <button
-                            class="btn btn-warning"
+                            class="btn btn-sm btn-warning"
                             tooltip="Liberar operação"
                             ng-click="liberarOperacao(item.uuid)">
                               <i class="fa fa-share"></i>
@@ -110,10 +85,12 @@
                     </tbody>
                   </table>
                   <div
-                    class="well"
+                    class="well recebiveis-lista-holder"
                     collapse="!item.open"
                     ng-if="item.recebiveis"
-                    style="margin-top: -20px">
+                    style="margin-top: -20px"
+                    ng-scrollbars
+                    ng-scrollbars-config="config">
                     <div class="row">
                       <div class="col-md-12">
                         <table class="table table-striped">
@@ -137,14 +114,14 @@
                           </thead>
                           <tbody>
                             <tr ng-repeat="rec in item.recebiveis">
-                              <td>{{rec.valor}}</td>
+                              <td>{{rec.valor | currency}}</td>
                               <td>{{rec.vencimento | date: 'dd/MM/yyyy'}}</td>
                               <td>{{rec.numero}}</td>
                               <td>{{rec.percentualDesconto}}</td>
                               <td>{{rec.dateLimiteDesconto | date: 'dd/MM/yyyy'}}</td>
                               <td>{{rec.emissao | date: 'dd/MM/yyyy'}}</td>
                               <td>{{rec.nossoNumero}}</td>
-                              <td>{{rec.valorLiquido}}</td>
+                              <td>{{rec.valorLiquido | currency}}</td>
                               <td class="">
                                 <i class="fa fa-circle" ng-class="{'green': rec.ativo, 'red': !rec.ativo}"></i>
                               </td>
