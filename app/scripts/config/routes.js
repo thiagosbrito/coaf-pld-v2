@@ -372,31 +372,34 @@ angular.module('wbaApp')
 
       .state('wba.cobranca.boletos.passos',{
         url: '/passos',
-        template: 'views/wba/cobranca/boletos/passos.html'
+        templateUrl: 'views/wba/cobranca/boletos/passos.html',
+        controller: function ($scope, $state) {
+          $scope.st = $state;
+        }
       })
       .state('wba.cobranca.boletos.passos.passo-1',{
         url: '/passo-1',
-        template: 'views/wba/cobranca/boletos/passo-1.html',
+        templateUrl: 'views/wba/cobranca/boletos/passo-1.html',
         title: 'Passo 1'
       })
       .state('wba.cobranca.boletos.passos.passo-2',{
         url: '/passo-2',
-        template: 'views/wba/cobranca/boletos/passo-2.html',
+        templateUrl: 'views/wba/cobranca/boletos/passo-2.html',
         title: 'Passo 2'
       })
       .state('wba.cobranca.boletos.passos.passo-3',{
         url: '/passo-3',
-        template: 'views/wba/cobranca/boletos/passo-3.html',
+        templateUrl: 'views/wba/cobranca/boletos/passo-3.html',
         title: 'Passo 3'
       })
       .state('wba.cobranca.boletos.passos.passo-4',{
         url: '/passo-4',
-        template: 'views/wba/cobranca/boletos/passo-4.html',
+        templateUrl: 'views/wba/cobranca/boletos/passo-4.html',
         title: 'Passo 4'
       })
       .state('wba.cobranca.boletos.passos.passo-5',{
         url: '/passo-5',
-        template: 'views/wba/cobranca/boletos/passo-5.html',
+        templateUrl: 'views/wba/cobranca/boletos/passo-5.html',
         title: 'Passo 5'
       })
 
