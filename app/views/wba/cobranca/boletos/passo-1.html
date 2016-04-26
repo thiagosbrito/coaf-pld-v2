@@ -1,4 +1,3 @@
-<hr>
 <div class="row">
   <div class="col-md-12">
     <h1 class="text-center">
@@ -7,13 +6,31 @@
     <p class="text-center">
       Selecione um banco abaixo:
     </p>
-    <ul class="lista-bancos">
-      <li>BB</li>
-      <li>Bra</li>
-      <li>Itau</li>
-      <li>Sant</li>
-      <li>Caixa</li>
+    <ul class="lista-bancos col-md-10 col-md-offset-1">
+      <li
+        ng-repeat="banco in bancos track by $index"
+        ng-click="selectBanco(banco)">
+          <img ng-src="{{banco.logoUrl}}" ng-class="{'active': banco.active}">
+      </li>
     </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="well">
+      <p>
+        Você possui conta no banco informado? &nbsp;&nbsp;
+        <input type="radio" name="contaBanco" ng-click="changeSelectedBanco(true)"> Sim &nbsp;&nbsp;
+        <input type="radio" name="contaBanco" ng-click="changeSelectedBanco(false)"> Não
+      </p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <button class="btn btn-primary-alt pull-right btn-lg" ng-disabled="!selectedBanco" ng-click="proceed()">
+      Prosseguir <i class="fa fa-chevron-right"></i>
+    </button>
   </div>
 </div>
 

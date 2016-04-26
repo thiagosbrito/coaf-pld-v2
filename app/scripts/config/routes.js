@@ -375,32 +375,39 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/cobranca/boletos/passos.html',
         controller: function ($scope, $state) {
           $scope.st = $state;
+          console.log($scope.st);
         }
       })
       .state('wba.cobranca.boletos.passos.passo-1',{
         url: '/passo-1',
         templateUrl: 'views/wba/cobranca/boletos/passo-1.html',
-        title: 'Passo 1'
+        title: 'Passo 1',
+        queue: 0,
+        controller: 'BoletosPasso1Controller'
       })
       .state('wba.cobranca.boletos.passos.passo-2',{
         url: '/passo-2',
         templateUrl: 'views/wba/cobranca/boletos/passo-2.html',
-        title: 'Passo 2'
+        title: 'Passo 2',
+        queue: 1
       })
       .state('wba.cobranca.boletos.passos.passo-3',{
         url: '/passo-3',
         templateUrl: 'views/wba/cobranca/boletos/passo-3.html',
-        title: 'Passo 3'
+        title: 'Passo 3',
+        queue: 2
       })
       .state('wba.cobranca.boletos.passos.passo-4',{
         url: '/passo-4',
         templateUrl: 'views/wba/cobranca/boletos/passo-4.html',
-        title: 'Passo 4'
+        title: 'Passo 4',
+        queue: 3
       })
       .state('wba.cobranca.boletos.passos.passo-5',{
         url: '/passo-5',
         templateUrl: 'views/wba/cobranca/boletos/passo-5.html',
-        title: 'Passo 5'
+        title: 'Passo 5',
+        queue: 4
       })
 
       // Routews for Checagem Module

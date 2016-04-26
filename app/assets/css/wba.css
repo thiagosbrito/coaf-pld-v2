@@ -212,7 +212,7 @@ table.table.table-striped.fix-table-vertical-alignment thead {
   width: 30px;
   height: 30px;
   display: block;
-  background: #fbe8aa;
+  background: #03a9f4;
   top: 52px;
   left: 50%;
   margin-top: -15px;
@@ -220,12 +220,8 @@ table.table.table-striped.fix-table-vertical-alignment thead {
   border-radius: 50%;
 }
 
-.bs-wizard > .bs-wizard-step > .bs-wizard-dot:after {
-  content: ' ';
-  width: 14px;
-  height: 14px;
-  background: #fbbd19;
-  border-radius: 50px;
+.bs-wizard > .bs-wizard-step > .bs-wizard-dot i {
+  color: white;
   position: absolute;
   top: 8px;
   left: 8px;
@@ -242,7 +238,7 @@ table.table.table-striped.fix-table-vertical-alignment thead {
 .bs-wizard > .bs-wizard-step > .progress > .progress-bar {
   width: 0px;
   box-shadow: none;
-  background: #fbe8aa;
+  background: #03a9f4;
 }
 
 .bs-wizard > .bs-wizard-step.complete > .progress > .progress-bar {
@@ -285,7 +281,23 @@ table.table.table-striped.fix-table-vertical-alignment thead {
 /*END Form Wizard*/
 .lista-bancos {
   list-style: none;
+  margin: 0 auto;
 }
 .lista-bancos li {
-  float: left
+  float: left;
+  width: 120px;
+  height: 120px;
+  margin: 22px;
+  cursor: pointer
+}
+
+.lista-bancos li img {
+  width: 100%;
+  opacity: .65
+}
+.lista-bancos li img.active {
+  opacity: 1;
+}
+.lista-bancos li:hover img {
+  opacity: 1
 }
