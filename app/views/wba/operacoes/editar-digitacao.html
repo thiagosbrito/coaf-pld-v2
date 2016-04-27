@@ -77,6 +77,7 @@
               <th class="text-center">Emissão</th>
               <th class="text-center">Nosso #</th>
               <th class="text-center">Valor Líq.</th>
+              <th class="text-center">Status</th>
               <th></th>
             </tr>
           </thead>
@@ -138,27 +139,33 @@
               </td>
               <td class="text-center"><input type="text" ng-model="rec.nossoNumero" class="form-control"></td>
               <td class="text-center" width="120"><input type="text" ng-model="rec.valorLiquido" ng-currency class="form-control"></td>
+              <td class="text-center">
+                <i class="fa" ng-class="{'fa-check green': rec.ativo, 'fa-times red': !rec.ativo}"></i>
+                <!--<switch id="enabled" name="enabled" ng-model="rec.ativo" class="green" ng-change="changeTitStatus(rec)"></switch>-->
+              </td>
               <td>
-                <button
-                  popover-template="'views/wba/operacoes/titulos-action.html'"
-                  popover-title="Ações"
-                  class="btn btn-sm btn-default">
-                  <i class="fa fa-bars"></i>
-                </button>
-                <!-- <div class="btn-group">
-                  <button class="btn btn-sm btn-primary" ng-click="saveTitulo(rec)">
+                <!--<button-->
+                  <!--popover-title="Ações"-->
+                  <!--popover-html-unsafe="{{popoverContent}}"-->
+                  <!--class="btn btn-sm btn-default"-->
+                  <!--ng-controller="digitacaoPopoverController"-->
+                <!--&gt;-->
+                  <!--<i class="fa fa-bars"></i>-->
+                <!--</button>-->
+                <!--<div class="btn-group">-->
+                  <!--<button class="btn btn-sm btn-primary pull-left" ng-click="saveTitulo(rec)">
                     <i class="fa fa-save"></i>
                   </button>
-                  <button class="btn btn-sm btn-danger">
+                  <button class="btn btn-sm btn-danger pull-left">
                     <i class="fa fa-trash-o"></i>
                   </button>
-                  <button class="btn btn-sm btn-success">
+                  <button class="btn btn-sm btn-success pull-left">
                     <i class="fa fa-check"></i>
                   </button>
-                  <button class="btn btn-sm btn-warning">
+                  <button class="btn btn-sm btn-warning pull-left">
                     <i class="fa fa-times"></i>
-                  </button>
-                </div> -->
+                  </button>-->
+                <!--</div>-->
               </td>
             </tr>
           </tbody>

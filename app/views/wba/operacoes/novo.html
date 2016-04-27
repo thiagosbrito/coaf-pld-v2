@@ -19,36 +19,39 @@
                   <label class="col-md-2 control-label">
                     Cedente
                   </label>
-                  <div ng-class="{'col-md-7': cedentes.length == 0, 'col-md-8': cedentes.length > 0}">
-                    <input
-                      type="text"
-                      ng-model="operacao.uuidCedente"
-                      placeholder="Selecione o cedente.."
-                      typeahead="ced as ced.nomeFantasia for ced in cedentes"
-                      typeahead-loading="loadingLocations"
-                      class="form-control">
-                    <i ng-show="loadingLocations" class="pull-right glyphicon glyphicon-refresh"></i>
-                  </div>
-                  <div class="col-md-1" ng-if="cedentes.length == 0">
-                    <button class="btn btn-primary-alt btn-block" ui-sref="wba.empresas.novo.empresa">
-                      <i class="fa fa-plus"></i>
-                    </button>
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        ng-model="operacao.uuidCedente"
+                        placeholder="Selecione o cedente.."
+                        typeahead="ced as ced.nomeFantasia for ced in cedentes"
+                        typeahead-loading="loadingLocations"
+                        class="form-control">
+                      <i ng-show="loadingLocations" class="pull-right glyphicon glyphicon-refresh"></i>
+                      <span class="input-group-btn">
+                        <button class="btn btn-primary-alt" ui-sref="wba.empresas.novo.empresa">
+                          <i class="fa fa-plus"></i> &nbsp; Cedente
+                        </button>
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-2 control-label">
                     Carteira
                   </label>
-                  <div ng-class="{'col-md-8': carteiras.length > 0, 'col-md-7': !carteiras}">
-                    <select ng-model="operacao.uuidCarteira" class="form-control"
-                    ng-options="cart.uuid as cart.nome for cart in carteiras" required>
-                      <option value="">Selecione</option>
-                    </select>
-                  </div>
-                  <div class="col-md-1" ng-if="!carteiras">
-                    <button class="btn btn-block btn-primary-alt" ng-click="openModalCarteiras()">
-                      <i class="fa fa-plus"></i>
-                    </button>
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <select ng-model="operacao.uuidCarteira" class="form-control" ng-options="cart.uuid as cart.nome for cart in carteiras" required>
+                        <option value="">Selecione</option>
+                      </select>
+                      <div class="input-group-btn">
+                        <button class="btn btn-primary-alt" ng-click="openModalCarteiras()">
+                          <i class="fa fa-plus"></i> &nbsp; Carteira
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -66,8 +69,8 @@
                   <div class="col-md-8">
                     <select class="form-control" ng-model="operacao.modeloCobranca" required>
                       <option value="">Selecione...</option>
-                      <option value="BANCO">Banco</option>  
-                      <option value="CARTEIRA">Carteira</option>  
+                      <option value="BANCO">Banco</option>
+                      <option value="CARTEIRA">Carteira</option>
                     </select>
                   </div>
                 </div>
