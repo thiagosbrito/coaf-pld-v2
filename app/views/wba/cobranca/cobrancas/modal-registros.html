@@ -1,0 +1,45 @@
+<div class="modal-header">
+  Registros
+</div>
+<div class="modal-body">
+  <h4>Registros</h4>
+
+  <hr>
+
+  <h4>Enviar arquivo de Retorno Bancário</h4>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="input-group">
+        <span class="input-group-addon">
+          Selecione o arquivo:
+        </span>
+        <input type="text" class="form-control" disabled>
+        <span class="input-group-btn">
+          <button
+            class="btn btn-primary"
+            ngf-select="uploadFiles($files, $invalidFiles)"
+            multiple
+            ngf-max-height="1000"
+            ngf-max-size="1MB">
+              <i class="fa fa-upload"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+    <div class="col-md-12">
+      Files:
+      <ul class="nav nav-stacked">
+        <li ng-repeat="f in files" style="font:smaller">
+          {{f.name}} {{f.$errorParam}}
+          <progressbar value="f.progress" type="success">
+        </li>
+        <li ng-repeat="f in errFiles" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary pull-right" ng-click="cancel()">
+    <i class="fa fa-save"></i> Sair
+  </button>
+</div>

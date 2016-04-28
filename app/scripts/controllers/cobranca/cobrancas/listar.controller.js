@@ -11,7 +11,8 @@ angular.module('wbaApp')
     'uuid4',
     '$modal',
     '$log',
-    function ($scope, $state, $stateParams, toaster, SweetAlert, apiCobrancas, apiOperacoes, uuid4, $modal, $log) {
+    'Upload',
+    function ($scope, $state, $stateParams, toaster, SweetAlert, apiCobrancas, apiOperacoes, uuid4, $modal, $log, Upload) {
 
       $scope.bancos = [
         {
@@ -41,6 +42,17 @@ angular.module('wbaApp')
         }
       ];
 
+      $scope.downloadCnab = function () {
+        apiCobrancas.getCnab().then(
+          function (res) {
+            toaster.pop('success','Gerar Cnab','Seu arquivo foi gerado com sucesso')
+          },
+          function (err) {
+            console.log(err)
+          }
+        )
+      };
+
       $scope.getCobrancas = function () {
         apiCobrancas.getCobrancas().then(
           function (res) {
@@ -48,6 +60,7 @@ angular.module('wbaApp')
             angular.forEach($scope.cobrancas, function (value, key) {
               // TODO: após implementada a API para bancos, substituir no grid o cob.uuidBanco por cob.banco.nomeBanco
               value.banco = _.findWhere($scope.bancos, {uuid: value.uuidBanco})
+              value.carteira = _.findWhere($scope.carteiras, {uuid: value.uuidBanco})
             });
 
           },
@@ -59,14 +72,35 @@ angular.module('wbaApp')
       $scope.getCobrancas();
 
       $scope.deleteCobranca = function (cobranca) {
-        apiCobrancas.deleteCobranca(cobranca).then(
-          function (res) {
-            toaster.pop('success','Cobrança','Sua cobrança foi excluída com sucesso');
-          },
-          function (err) {
-            toaster.pop('error','Cobrança',err.statusText);
+
+        SweetAlert.swal({
+          title: "Excluir Cobrança",
+          text: "Você tem certeza? Essa operação não pode ser desfeita",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          cancelButtonText: "Não",
+          confirmButtonText: "Sim, eu desejo continuar",
+          showLoaderOnConfirm: true,
+          timer: 3000,
+          closeOnConfirm: false
+        },function (isConfirm) {
+          if(isConfirm) {
+            apiCobrancas.deleteCobranca(cobranca).then(
+              function (res) {
+                swal("Excluir cobrança", "Sua cobrança foi excluída!", "success")
+                toaster.pop('success','Cobrança','Sua cobrança foi excluída com sucesso');
+              },
+              function (err) {
+                toaster.pop('error','Cobrança',err.statusText);
+              }
+            )
           }
-        )
+          else {
+            swal("Excluir Cobrança","Seu item permanece intacto","error")
+          }
+        });
+
       };
 
       $scope.novaCobranca = function () {
@@ -169,6 +203,7 @@ angular.module('wbaApp')
           confirmButtonColor: "#DD6B55",
           cancelButtonText: "Sim, desejo gerar mais de uma cobrança",
           confirmButtonText: "Não obrigado, vou gerar somente uma cobrança",
+          showLoaderOnConfirm: true,
           closeOnConfirm: false
         },function (isConfirm) {
           if(isConfirm) {
@@ -207,7 +242,7 @@ angular.module('wbaApp')
               function (res) {
                 $scope.cob = res.data;
               }
-            )
+            );
 
             $scope.bancos = bancos;
 
@@ -215,15 +250,21 @@ angular.module('wbaApp')
               function (res) {
                 $scope.carteiras = res.data;
               }
-            )
+            );
 
             $scope.cancel =  function () {
               $modalInstance.dismiss('cancel');
-            }
+            };
 
             $scope.update = function (item) {
-              // console.log(item)
-              $modalInstance.close($scope.cob);
+              apiCobrancas.updateCobranca(item).then(
+                function (res) {
+                  toaster.pop('success','Cobranças','Cobrança atualizada com sucesso');
+                },
+                function (err) {
+                  toaster.pop('error','Cobranças',err.statusText)
+                }
+              )
             }
           }
         });
@@ -243,5 +284,67 @@ angular.module('wbaApp')
         );
       };
 
+      $scope.sendRetorno = function (id) {
+
+        var modalInstance = $modal.open({
+          templateUrl: 'views/wba/cobranca/cobrancas/modal-registros.html',
+          resolve: {
+            idCobranca: function (){
+              return id
+            }
+          },
+          controller: function ($scope, $modalInstance, apiCobrancas, apiOperacoes, idCobranca, Upload) {
+
+            apiCobrancas.getRegistros(idCobranca).then(
+              function (res) {
+                $scope.registros = res.data;
+              }
+            );
+
+            $scope.cancel =  function () {
+              $modalInstance.dismiss('cancel');
+            };
+
+            $scope.uploadFiles = function(files, errFiles) {
+              $scope.files = files;
+              $scope.errFiles = errFiles;
+              angular.forEach(files, function(file) {
+                file.upload = Upload.upload({
+                  url: 'http://api.erp.idtrust.com.br:9000/cobrancas/v1/cobrancas/' + idCobranca + '/registros/retorno',
+                  data: {file: file}
+                });
+
+                file.upload.then(function (response) {
+                  $timeout(function () {
+                    file.result = response.data;
+                  });
+                }, function (response) {
+                  if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                  file.progress = Math.min(100, parseInt(100.0 *
+                    evt.loaded / evt.total));
+                });
+              });
+            }
+
+          }
+        });
+
+        modalInstance.result.then(
+          function (item) {
+            apiCobrancas.updateCobranca(item).then(
+              function (res) {
+                toaster.pop('success','Cobranças','Cobrança atualizada com sucesso.');
+                $scope.getCobrancas();
+              },
+              function (err) {
+                toaster.pop('error','Cobranças',err.statusText);
+              }
+            )
+          }
+        );
+
+      }
     }
   ]);

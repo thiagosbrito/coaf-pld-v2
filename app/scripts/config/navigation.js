@@ -143,10 +143,6 @@ angular
               {
                 label: 'Cobranças',
                 url: '#/cobranca/listar'
-              },
-              {
-                label: 'Registros',
-                url: '#/cobranca/registros/listar'
               }
               // {
               //   label: 'Arquivos Eletrônicos',

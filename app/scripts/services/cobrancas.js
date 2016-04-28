@@ -113,16 +113,46 @@ angular.module('wbaApp')
       )
     };
 
+
+    var _getRegistros = function (id) {
+      var url = baseUrl.apiCobrancas + '/cobrancas/' + id + '/registros';
+      return $http({
+        url: url,
+        method: 'GET'
+      }).then(
+        function (res) {
+          return res
+        }
+      )
+    };
+
+    var _sendRetorno = function (id) {
+      var url = baseUrl.apiCobrancas + '/cobrancas/' + id + '/registros/retorno';
+      return $http({
+        url: url,
+        method: 'POST',
+        headers: {
+          'Content-Type':'multipart/form-data'
+        }
+      }).then(
+        function (res) {
+          return res
+        }
+      )
+    };
+
     // Comercial
     api.getCobrancas        = _getCobrancas;
     api.getCobrancasById    = _getCobrancasById;
     api.saveCobranca        = _saveCobranca;
     api.updateCobranca      = _updateCobranca;
     api.deleteCobranca      = _deleteCobranca;
-    api.geraCobranca       = _geraCobranca;
+    api.geraCobranca        = _geraCobranca;
 
     api.getCnab             = _getCnab;
     // api.getBancos           = _getBancos;
+    api.getRegistros        = _getRegistros;
+    api.sendRetorno         = _sendRetorno;
 
     return api;
 

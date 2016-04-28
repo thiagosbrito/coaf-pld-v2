@@ -26,7 +26,7 @@
                   <input icheck type="checkbox" ng-model="allSelected" ng-change="selectAllCobs(allSelected)" ng-checked="selectedCobs.length == cobrancas.length">
                 </th>
                 <th>Descrição</th>
-                <th class="text-center">Tipo</th>
+                <th class="text-center">Tipo Cobr. Eletr.</th>
                 <th class="text-center">Banco</th>
                 <th class="text-center">Carteira</th>
                 <th class="text-center">Ativo</th>
@@ -39,17 +39,23 @@
                   <input icheck type="checkbox" ng-model="cob.selected" ng-change="changeSingle(cob.uuid, cob.selected)">
                 </td>
                 <td ng-bind="cob.descricao"></td>
-                <td ng-bind="cob.tipoCobrancaEletronica" class="text-center"></td>
+                <td class="text-center"><span class="label" ng-class="{'label-warning': cob.tipoCobrancaEletronica == 'SIMPLES', 'label-info': cob.tipoCobrancaEletronica == 'DIRETA'}">{{cob.tipoCobrancaEletronica | lowercase}}</span></td>
                 <td ng-bind="cob.uuidBanco" class="text-center"></td>
                 <td ng-bind="cob.uuidCarteira" class="text-center"></td>
-                <td ng-bind="cob.ativo" class="text-center"></td>
+                <td class="text-center">
+                  <i class="fa" ng-class="{'fa-times red': !cob.ativo, 'fa-check green': cob.ativo}"></i>
+                </td>
                 <td>
                   <div class="btn-group pull-right">
                     <button class="btn btn-danger-alt" tooltip="Excluir cobrança" ng-click="deleteCobranca(cob)">
                       <i class="fa fa-trash"></i>
                     </button>
-                    <button class="btn btn-success" tooltip="Gerar cobrança" ng-click="gerarCobranca()" ng-hide="multCobs" ng-show="!allSelected">
+                    <button class="btn btn-warning" tooltip="Download Cnab" ng-click="downloadCnab(cob.uuid)"><i class="fa fa-download"></i></button>
+                    <button class="btn btn-success" tooltip="Gerar cobrança" ng-click="gerarCobranca()" ng-hide="multCobs" ng-show="selectedCobs.length <= 1">
                       <i class="fa fa-cogs"></i>
+                    </button>
+                    <button class="btn btn-info" tooltip="Registros" ng-click="sendRetorno(cob.uuid)">
+                      <i class="fa fa-list"></i>
                     </button>
                     <button class="btn btn-primary" tooltip="Editar cobrança" ng-click="editarCobranca(cob.uuid)">
                       <i class="fa fa-pencil"></i>
@@ -60,16 +66,11 @@
             </tbody>
           </table>
 
-          <div class="row" ng-if="showGenerateButton">
+          <div class="row"  ng-show="selectedCobs.length >= 2">
             <div class="col-md-12">
-              <button class="btn btn-primary pull-right" ng-click="generateGroupedCobs()" ng-disabled="!allSelected" ng-hide="!allSelected">
+              <button class="btn btn-primary pull-right" ng-click="generateGroupedCobs()" ng-hide="selectedCobs.length <= 1">
                 Gerar cobranças <i class="fa fa-chevron-right"></i>
               </button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              {{selectedCobs}}
             </div>
           </div>
 
