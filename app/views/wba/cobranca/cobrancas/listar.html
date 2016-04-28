@@ -1,0 +1,89 @@
+<ol class="breadcrumb">
+  <li><a href="#/">Dashboard</a></li>
+  <li>Cobrancas</li>
+  <li class="active">Listar</li>
+</ol>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading header-section">
+          <h2>Cobranças</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" ng-click="novaCobranca()" tooltip="Criar Cobrança">
+              <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+
+          <table class="table table-strip">
+            <thead>
+              <tr>
+                <th ng-show="multCobs">
+                  <input icheck type="checkbox" ng-model="allSelected" ng-change="selectAllCobs(allSelected)" ng-checked="selectedCobs.length == cobrancas.length">
+                </th>
+                <th>Descrição</th>
+                <th class="text-center">Tipo</th>
+                <th class="text-center">Banco</th>
+                <th class="text-center">Carteira</th>
+                <th class="text-center">Ativo</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="cob in cobrancas">
+                <td ng-if="multCobs">
+                  <input icheck type="checkbox" ng-model="cob.selected" ng-change="changeSingle(cob.uuid, cob.selected)">
+                </td>
+                <td ng-bind="cob.descricao"></td>
+                <td ng-bind="cob.tipoCobrancaEletronica" class="text-center"></td>
+                <td ng-bind="cob.uuidBanco" class="text-center"></td>
+                <td ng-bind="cob.uuidCarteira" class="text-center"></td>
+                <td ng-bind="cob.ativo" class="text-center"></td>
+                <td>
+                  <div class="btn-group pull-right">
+                    <button class="btn btn-danger-alt" tooltip="Excluir cobrança" ng-click="deleteCobranca(cob)">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                    <button class="btn btn-success" tooltip="Gerar cobrança" ng-click="gerarCobranca()" ng-hide="multCobs" ng-show="!allSelected">
+                      <i class="fa fa-cogs"></i>
+                    </button>
+                    <button class="btn btn-primary" tooltip="Editar cobrança" ng-click="editarCobranca(cob.uuid)">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="row" ng-if="showGenerateButton">
+            <div class="col-md-12">
+              <button class="btn btn-primary pull-right" ng-click="generateGroupedCobs()" ng-disabled="!allSelected" ng-hide="!allSelected">
+                Gerar cobranças <i class="fa fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              {{selectedCobs}}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--<panel panel-class="panel-indigo" heading="Cobranças">-->
+        <!--<p>Listagem Cobranças</p>-->
+        <!--<div class="panel-ctrls">-->
+          <!--<a class="button-icon" ui-sref="wba.operacoes.novo" tooltip="Adicionar Operação">-->
+            <!--<i class="fa fa-plus"></i>-->
+          <!--</a>-->
+        <!--</div>-->
+      <!--</panel>-->
+    </div>
+  </div>
+
+</div> <!-- container-fluid -->

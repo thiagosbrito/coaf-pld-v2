@@ -21,5 +21,6 @@ angular.module('wbaApp', [
   'ngFileUpload',
   'ng-currency',
   'ngScrollbars',
-  'uiSwitch'
+  'uiSwitch',
+  'uuid4'
   ]);

@@ -360,6 +360,21 @@ angular.module('wbaApp')
         url: '/cobranca',
         template: '<div ui-view=""></div>'
       })
+
+      .state('wba.cobranca.cobrancas', {
+        url: '',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.cobranca.cobrancas.listar', {
+        url: '/listar',
+        templateUrl: 'views/wba/cobranca/cobrancas/listar.html',
+        controller: 'CobrancasListarController'
+      })
+      .state('wba.cobranca.cobrancas.editar', {
+        url: '/editar/:cobrancaId',
+        templateUrl: 'views/wba/cobranca/cobrancas/editar.html',
+        controller: 'CobrancasEditarController'
+      })
       .state('wba.cobranca.boletos',{
         url: '/boletos',
         template: '<div ui-view=""></div>'
