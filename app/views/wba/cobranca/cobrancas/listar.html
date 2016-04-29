@@ -42,25 +42,25 @@
                 <td class="text-center"><span class="label" ng-class="{'label-warning': cob.tipoCobrancaEletronica == 'SIMPLES', 'label-info': cob.tipoCobrancaEletronica == 'DIRETA'}">{{cob.tipoCobrancaEletronica | lowercase}}</span></td>
                 <td ng-bind="cob.uuidBanco" class="text-center"></td>
                 <td ng-bind="cob.uuidCarteira" class="text-center"></td>
-                <td class="text-center">
+                <td class="text-center" width="60">
                   <i class="fa" ng-class="{'fa-times red': !cob.ativo, 'fa-check green': cob.ativo}"></i>
                 </td>
-                <td>
+                <td width="150">
                   <div class="btn-group pull-right">
-                    <button class="btn btn-danger-alt" tooltip="Excluir cobrança" ng-click="deleteCobranca(cob)">
+                    <button class="btn btn-sm btn-danger-alt" tooltip="Excluir cobrança" ng-click="deleteCobranca(cob)">
                       <i class="fa fa-trash"></i>
                     </button>
-                    <button class="btn btn-warning" tooltip="Download Cnab" ng-click="downloadCnab(cob.uuid)"><i class="fa fa-download"></i></button>
-                    <button class="btn btn-success" tooltip="Gerar cobrança" ng-click="gerarCobranca()" ng-hide="multCobs" ng-show="selectedCobs.length <= 1">
+                    <button class="btn btn-sm btn-warning" tooltip="Download Cnab" ng-click="downloadCnab(cob.uuid)"><i class="fa fa-download"></i></button>
+                    <button class="btn btn-sm btn-success" tooltip="Gerar cobrança" ng-click="gerarCobranca()" ng-hide="multCobs" ng-show="selectedCobs.length <= 1">
                       <i class="fa fa-cogs"></i>
                     </button>
-                    <button class="btn btn-info" tooltip="Registros" ng-click="sendRetorno(cob.uuid)">
+                    <button class="btn btn-sm btn-info" tooltip="Registros" ng-click="sendRetorno(cob.uuid)">
                       <i class="fa fa-list"></i>
                     </button>
-                    <button class="btn btn-primary" tooltip="Editar cobrança" ng-click="editarCobranca(cob.uuid)">
+                    <button class="btn btn-sm btn-primary" tooltip="Editar cobrança" ng-click="editarCobranca(cob.uuid)">
                       <i class="fa fa-pencil"></i>
                     </button>
-                  </div>
+                  </div>0
                 </td>
               </tr>
             </tbody>

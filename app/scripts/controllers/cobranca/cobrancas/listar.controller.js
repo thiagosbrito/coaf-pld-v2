@@ -227,7 +227,7 @@ angular.module('wbaApp')
 
       $scope.editarCobranca = function (id) {
         var modalInstance = $modal.open({
-          templateUrl: 'views/wba/cobranca/cobrancas/modal-criar-cobranca.html',
+          templateUrl: 'views/wba/cobranca/cobrancas/modal-editar-cobranca.html',
           resolve: {
             idCobranca: function (){
               return id
@@ -256,15 +256,8 @@ angular.module('wbaApp')
               $modalInstance.dismiss('cancel');
             };
 
-            $scope.update = function (item) {
-              apiCobrancas.updateCobranca(item).then(
-                function (res) {
-                  toaster.pop('success','Cobranças','Cobrança atualizada com sucesso');
-                },
-                function (err) {
-                  toaster.pop('error','Cobranças',err.statusText)
-                }
-              )
+            $scope.close = function (item) {
+              $modalInstance.close(item);
             }
           }
         });
