@@ -42,8 +42,8 @@ angular.module('wbaApp')
         }
       ];
 
-      $scope.downloadCnab = function () {
-        apiCobrancas.getCnab().then(
+      $scope.downloadCnab = function (id) {
+        apiCobrancas.getCnab(id).then(
           function (res) {
             toaster.pop('success','Gerar Cnab','Seu arquivo foi gerado com sucesso')
           },

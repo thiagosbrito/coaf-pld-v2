@@ -60,38 +60,38 @@ angular
               }
             ]
           },
-          {
-            label: 'Comercial',
-            iconClasses: 'ti ti-briefcase',
-            children: [
-              {
-                label: 'Oportunidades'
-              },
-              {
-                label: 'Atividades',
-                children: [
-                  {
-                    label: 'Visitas'
-                  },
-                  {
-                    label: 'Tarefas'
-                  },
-                  {
-                    label: 'Anotações'
-                  },
-                  {
-                    label: 'Ligações'
-                  }
-                ]
-              },
-              {
-                label: 'Cliente potencial'
-              },
-              {
-                label: 'Contatos'
-              }
-            ]
-          },
+          // {
+          //   label: 'Comercial',
+          //   iconClasses: 'ti ti-briefcase',
+          //   children: [
+          //     {
+          //       label: 'Oportunidades'
+          //     },
+          //     {
+          //       label: 'Atividades',
+          //       children: [
+          //         {
+          //           label: 'Visitas'
+          //         },
+          //         {
+          //           label: 'Tarefas'
+          //         },
+          //         {
+          //           label: 'Anotações'
+          //         },
+          //         {
+          //           label: 'Ligações'
+          //         }
+          //       ]
+          //     },
+          //     {
+          //       label: 'Cliente potencial'
+          //     },
+          //     {
+          //       label: 'Contatos'
+          //     }
+          //   ]
+          // },
           {
             label: 'Operações',
             iconClasses: 'ti ti-bolt',
@@ -99,19 +99,20 @@ angular
               {
                 label: 'Simulação',
                 url: '#/operacoes/listar'
-              },
-              {
-                label: 'Consulta',
-                url: '#/operacoes/recebiveis/listar'
-              },
-              {
-                label: 'Tarifas',
-                url: '#/operacoes/tarifas/listar'
-              },
-              {
-                label: 'Workflow',
-                url: '#/operacoes/workflow/listar'
               }
+              // ,
+              // {
+              //   label: 'Consulta',
+              //   url: '#/operacoes/recebiveis/listar'
+              // },
+              // {
+              //   label: 'Tarifas',
+              //   url: '#/operacoes/tarifas/listar'
+              // },
+              // {
+              //   label: 'Workflow',
+              //   url: '#/operacoes/workflow/listar'
+              // }
             ]
           },
           {
@@ -172,33 +173,35 @@ angular
               {
                 label: 'Usuários e Permissões',
                 url: '#/usuarios-permissoes/organizacoes/listar'
-              },
-              {
-                label: 'Parâmetros do sistema',
-                url: '#/usuarios-permissoes/grupos/listar'
-              },
-              {
-                label: 'Auditoria',
-                url: '#/usuarios-permissoes/grupos/listar'
-              },
-              {
-                label: 'Manutenção',
-                url: '#/usuarios-permissoes/grupos/listar'
               }
-            ]
-          },
-          {
-            label: 'Notificações',
-            iconClasses: 'ti ti-announcement',
-            children: [
-              {
-                label: 'Emails'
-              },
-              {
-                label: 'SMTP'
-              }
+              // ,
+              // {
+              //   label: 'Parâmetros do sistema',
+              //   url: '#/usuarios-permissoes/grupos/listar'
+              // },
+              // {
+              //   label: 'Auditoria',
+              //   url: '#/usuarios-permissoes/grupos/listar'
+              // },
+              // {
+              //   label: 'Manutenção',
+              //   url: '#/usuarios-permissoes/grupos/listar'
+              // }
             ]
           }
+          // ,
+          // {
+          //   label: 'Notificações',
+          //   iconClasses: 'ti ti-announcement',
+          //   children: [
+          //     {
+          //       label: 'Emails'
+          //     },
+          //     {
+          //       label: 'SMTP'
+          //     }
+          //   ]
+          // }
           // ,
 
           // {

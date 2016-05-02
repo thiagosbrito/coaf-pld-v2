@@ -240,7 +240,18 @@ angular.module('wbaApp')
       .state('wba.comercial.hierarquias.listar',{
         url:'/listar',
         templateUrl: 'views/wba/comercial/hierarquias/listar.html',
-        controller: 'HierarquiasListarController'
+        controller: 'HierarquiasListarController',
+        resolve: {
+          hierarquias: function (apiComercial) {
+            return apiComercial.getHierarquias().then(
+              function (res) {
+                return res.data
+              }
+            )
+          }
+        }
+
+
       })
       .state('wba.comercial.hierarquias.novo',{
         url:'/novo',

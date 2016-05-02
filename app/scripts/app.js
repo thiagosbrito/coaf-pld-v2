@@ -22,5 +22,7 @@ angular.module('wbaApp', [
   'ng-currency',
   'ngScrollbars',
   'uiSwitch',
-  'uuid4'
+  'uuid4',
+  'treeGrid'
+
   ]);

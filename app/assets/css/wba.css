@@ -1,8 +1,12 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+.tree-grid, .tree-grid * {
+  -webkit-transition: none !important;
+  transition: none !important;
+}
 .collapse.in {
-      height: auto !important;
+  height: auto !important;
 }
 .red {
   color: #e51c23;
