@@ -72,7 +72,8 @@
     "ng-currency": "^0.9.6",
     "ng-scrollbars": "^0.0.10",
     "angular-ui-switch": "^0.1.1",
-    "angular-uuid4": "^0.3.1"
+    "angular-uuid4": "^0.3.1",
+    "angular-tree-dnd": "^3.0.4"
   },
   "resolutions": {
     "jquery": "~1.11.0",

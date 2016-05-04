@@ -39,24 +39,20 @@ angular
             url: '#/dashboard'
           },
           {
-            label: 'Cadastro',
+            label: 'Comercial',
             iconClasses: 'ti ti-panel',
             children: [
               // {
               //   label: 'Empresas',
               //   url: '#/empresas/listar'
               // },
-              {
-                label: 'Carteiras',
-                url: '#/operacoes/carteiras/listar'
-              },
+              // {
+              //   label: 'Carteiras',
+              //   url: '#/operacoes/carteiras/listar'
+              // },
               {
                 label: 'Plataformas',
                 url: '#/comercial/plataformas/listar'
-              },
-              {
-                label: 'Hierarquia Comercial',
-                url: '#/comercial/hierarquias/listar'
               }
             ]
           },

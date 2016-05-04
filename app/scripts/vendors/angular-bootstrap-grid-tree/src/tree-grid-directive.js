@@ -6,11 +6,11 @@
       function ($templateCache) {
         $templateCache.put('template/treeGrid/treeGrid.html',
           "<div class=\"table-responsive table-bordered\">\n" +
-          " <table class=\"table table-striped table-bordered tree-grid\">\n" +
+          " <table class=\"table table-striped table-bordered tree-grid\" style=\"margin-bottom: 0px\">\n" +
           "   <thead>\n" +
           "     <tr>\n" +
-          "       <th>{{expandingProperty.displayName || expandingProperty.field || expandingProperty}}</th>\n" +
-          "       <th ng-repeat=\"col in colDefinitions\">{{col.displayName || col.field}}</th><th width='20'></th>\n" +
+          "       <th>{{expandingProperty.displayName || expandingProperty.field || expandingProperty | capitalize}}</th>\n" +
+          "       <th ng-repeat=\"col in colDefinitions\" class=\"text-center\" >{{col.displayName || col.field | capitalize}}</th>\n" +
           "     </tr>\n" +
           "   </thead>\n" +
           "   <tbody>\n" +
@@ -20,18 +20,18 @@
           "       class=\"tree-grid-row\">\n" +
           // "       ng-click=\"selectRow(row.branch)\" \n"+
           "       <td>" +
-          "         <a ng-click=\"user_clicks_branch(row.branch)\">" +
+          "         <a>" +
           "           <i ng-class=\"row.tree_icon\"\n" +
           "             ng-click=\"row.branch.expanded = !row.branch.expanded\"\n" +
           "             class=\"indented tree-icon\"></i>\n" +
           "         </a><span class=\"indented tree-label\" ng-click=\"on_user_click(row.branch)\">\n" +
           "             {{row.branch[expandingProperty.field] || row.branch[expandingProperty]}}</span>\n" +
           "       </td>\n" +
-          "       <td ng-repeat=\"col in colDefinitions\">\n" +
+          "       <td ng-repeat=\"col in colDefinitions\" class=\"text-center\">\n" +
           "         <div ng-if=\"col.cellTemplate\" compile=\"col.cellTemplate\"></div>\n" +
           "         <div ng-if=\"!col.cellTemplate\">{{row.branch[col.field]}}</div>\n" +
           "       </td>\n" +
-          "       <td width='20'> <button class=\"btn btn-primary\" ng-click=\"user_clicks_branch(row.branch)\"><i class='fa fa-pencil'></i></button>\n" +
+          // "       <td width='20'> <button class=\"btn btn-primary\" ng-click=\"user_clicks_branch(row.branch)\"><i class='fa fa-pencil'></i></button>\n" +
 
           "       </td> \n" +
           "     </tr>\n" +

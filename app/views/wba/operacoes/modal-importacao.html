@@ -11,29 +11,27 @@
               <label class="col-md-3 control-label">
                 Tipo de Importação
               </label>
-              <div class="col-md-3">
-                <div class="radio">
+              <div class="col-md-9">
+                <div class="radio-inline icheck">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" ng-value="'cnab'" ng-model="typeImport">
+                    <input icheck type="radio" ng-value="'cnab'" ng-model="typeImport">
                     CNAB
                   </label>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="radio">
+                <div class="radio-inline icheck">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" ng-value="'xml'" ng-model="typeImport">
+                    <input icheck type="radio"  ng-value="'nfe'" ng-model="typeImport">
                     XML
                   </label>
                 </div>
+                <div class="radio-inline">
+                  <switch id="enabled" name="enabled" ng-model="ableTyping" ng-change="typeImport = null" class="green"></switch>
+                  <span style="float: right; padding-left: 7px;">Digitacao</span>
+                </div>
               </div>
             </div>
-            <div class="form-group">
-              <div class="col-md-12">
-                {{typeImport}}
-              </div>
-            </div>
-            <div class="form-group">
+
+            <div class="form-group" ng-if="!ableTyping">
               <label class="col-md-3 control-label">
                 Arquivo
               </label>
@@ -63,105 +61,97 @@
                 </div>
               </div>
             </div>
+            <div class="row" ng-if="ableTyping">
+              <div class="col-md-12">
+                <table class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Valor</th>
+                    <th>Vencimento</th>
+                    <th>Número</th>
+                    <th>% Desconto</th>
+                    <th>Data limite Desconto</th>
+                    <th>Emissão</th>
+                    <th>Nosso Número</th>
+                    <th>Valor Líquido</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      <input type="text" ng-model="rec.valor" class="form-control" ng-currency>
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        datepicker-popup="dd/MM/yyyy"
+                        ng-model="rec.vencimento"
+                        is-open="opened"
+                        min-date="minDate"
+                        datepicker-options="dateOptions"
+                        date-disabled="disabled(date, mode)"
+                        close-text="Fechar"
+                        current-text="Hoje"
+                        clear-text="Limpar"
+                        ng-click="open($event)">
+                    </td>
+                    <td><input type="text" ng-model="rec.numero" class="form-control"></td>
+                    <td><input type="text" ng-model="rec.percentualDesconto" class="form-control"></td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        datepicker-popup="dd/MM/yyyy"
+                        ng-model="rec.dateLimiteDesconto"
+                        is-open="opened"
+                        min-date="minDate"
+                        datepicker-options="dateOptions"
+                        date-disabled="disabled(date, mode)"
+                        close-text="Fechar"
+                        current-text="Hoje"
+                        clear-text="Limpar"
+                        ng-click="open($event)">
+                    </td>
+                    <td>
+                      <input
+                        type="text"
+                        class="form-control"
+                        datepicker-popup="dd/MM/yyyy"
+                        ng-model="rec.emissao"
+                        is-open="opened"
+                        min-date="minDate"
+                        datepicker-options="dateOptions"
+                        date-disabled="disabled(date, mode)"
+                        close-text="Fechar"
+                        current-text="Hoje"
+                        clear-text="Limpar"
+                        ng-click="open($event)">
+                    </td>
+                    <td><input type="text" ng-model="rec.nossoNumero" class="form-control"></td>
+                    <td><input type="text" ng-model="rec.valorLiquido" ng-currency class="form-control"></td>
+                    <td class="">
+                      <i class="fa fa-circle" ng-class="{'green': rec.ativo, 'red': !rec.ativo}"></i>
+                    </td>
+                    <td>
+                      <button class="btn btn-primary" ng-click="addRecebivel(rec)">
+                        <i class="fa fa-save"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </fieldset>
         </form>
-      </tab>
-      <tab heading="Digitação">
-        <div class="row" ng-if="recebiveis.length == 0">
-          <div class="col-md-12">
-            <p class="text-center alert alert-info">
-              <i class="fa fa-info-circle"></i> Não existe títulos cadastrados para essa operação, clique no botão adicionar, para adicionar um título.
-              <button class="btn btn-primary pull-right" style="margin-top: -8px" ng-click="addTitulo()">
-                <i class="fa fa-plus"></i> Adicionar título
-              </button>
-            </p>
-          </div>
-        </div>
-        <table class="table table-striped" ng-if="recebiveis.length > 0">
-          <thead>
-            <tr>
-              <th>Valor</th>
-              <th>Vencimento</th>
-              <th>Número</th>
-              <th>% Desconto</th>
-              <th>Data limite Desconto</th>
-              <th>Emissão</th>
-              <th>Nosso Número</th>
-              <th>Valor Líquido</th>
-              <th>Status</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="rec in recebiveis">
-              <td>
-                <input type="text" ng-model="rec.valor" class="form-control" ng-currency>
-              </td>
-              <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  datepicker-popup="dd/MM/yyyy"
-                  ng-model="rec.vencimento"
-                  is-open="opened"
-                  min-date="minDate"
-                  datepicker-options="dateOptions"
-                  date-disabled="disabled(date, mode)"
-                  close-text="Fechar"
-                  current-text="Hoje"
-                  clear-text="Limpar"
-                  ng-click="open($event)">
-              </td>
-              <td><input type="text" ng-model="rec.numero" class="form-control"></td>
-              <td><input type="text" ng-model="rec.percentualDesconto" class="form-control"></td>
-              <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  datepicker-popup="dd/MM/yyyy"
-                  ng-model="rec.dateLimiteDesconto"
-                  is-open="opened"
-                  min-date="minDate"
-                  datepicker-options="dateOptions"
-                  date-disabled="disabled(date, mode)"
-                  close-text="Fechar"
-                  current-text="Hoje"
-                  clear-text="Limpar"
-                  ng-click="open($event)">
-              </td>
-              <td>
-                <input
-                  type="text"
-                  class="form-control"
-                  datepicker-popup="dd/MM/yyyy"
-                  ng-model="rec.emissao"
-                  is-open="opened"
-                  min-date="minDate"
-                  datepicker-options="dateOptions"
-                  date-disabled="disabled(date, mode)"
-                  close-text="Fechar"
-                  current-text="Hoje"
-                  clear-text="Limpar"
-                  ng-click="open($event)">
-              </td>
-              <td><input type="text" ng-model="rec.nossoNumero" class="form-control"></td>
-              <td><input type="text" ng-model="rec.valorLiquido" ng-currency class="form-control"></td>
-              <td class="">
-                <i class="fa fa-circle" ng-class="{'green': rec.ativo, 'red': !rec.ativo}"></i>
-              </td>
-              <td>
-                <button class="btn btn-primary" ng-click="addRecebivel(rec)">
-                  <i class="fa fa-save"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
       </tab>
     </tabset>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-danger-alt" ng-click="close()">
+    <button class="btn btn-danger-alt" ng-click="cancel()">
       <i class="fa fa-times"></i> Sair
     </button>
   </div>

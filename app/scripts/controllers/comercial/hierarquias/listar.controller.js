@@ -8,26 +8,35 @@ angular.module('wbaApp')
     'SweetAlert',
     'apiComercial',
     'hierarquias',
-    function ($scope, $state, $stateParams, toaster, SweetAlert, apiComercial, hierarquias) {
+    '$modal',
+    '$log',
+    function ($scope, $state, $stateParams, toaster, SweetAlert, apiComercial, hierarquias, $modal, $log) {
+
+      $scope.hierarquias = hierarquias;
+
       var tree;
       $scope.data = [];
-      angular.forEach(hierarquias, function (item) {
-        if(item.hierarquiaPai) {
-          var idPai = item.hierarquiaPai.uuid;
-          item.parentId = idPai;
-          item.parentNome = item.hierarquiaPai.nome;
-        }
-        else {
-          item.parentId = null;
-          item.parentNome = null;
-        }
 
-        var i = _.omit(item, 'hierarquiaPai');
-        $scope.data.push(i);
+      if(hierarquias) {
+        hierarquias = _.sortBy(hierarquias, 'uuid');
+        angular.forEach(hierarquias, function (item) {
+          if(item.hierarquiaPai) {
+            var idPai = item.hierarquiaPai.uuid;
+            item.parentId = idPai;
+            item.parentNome = item.hierarquiaPai.nome;
+          }
+          else {
+            item.parentId = null;
+            item.parentNome = null;
+          }
 
-      });
+          var i = _.omit(item, 'hierarquiaPai');
+          $scope.data.push(i);
 
-      $scope.tree_data = getTree($scope.data, 'uuid', 'parentId');
+        });
+
+        $scope.tree_data = getTree($scope.data, 'uuid', 'parentId');
+      }
 
       $scope.my_tree = tree = {};
 
@@ -100,6 +109,55 @@ angular.module('wbaApp')
         };
 
         return tree;
+      }
+
+      $scope.newHierarchy = function () {
+        var modalInstance = $modal.open({
+          animation: true,
+          templateUrl: 'views/wba/comercial/hierarquias/nova-hierarquia.html',
+          size: 'lg',
+          resolve: {
+            plataformas: function (apiComercial) {
+              return apiComercial.getPlataformas().then(
+                function (res) {
+                  return res.data;
+                }
+              )
+            },
+            hierarquias: function () {
+              return $scope.hierarquias;
+            }
+          },
+          controller: function ($scope, $modalInstance, plataformas, $state, hierarquias) {
+            $scope.hierarquias = hierarquias;
+            $scope.plataformas = plataformas;
+            $scope.close = function () {
+              $modalInstance.dismiss('cancel');
+            }
+
+            $scope.save = function (item) {
+              $modalInstance.close(item);
+            }
+          }
+        });
+
+        // modal para cadastro de representante
+        modalInstance.result.then(
+          function (item) {
+            apiComercial.saveHierarquia(item).then(
+              function (res) {
+                toaster.pop('success','Hierarquia','Hierarquia salva com sucesso');
+                $state.go($state.current, {}, {reload: true});
+              },
+              function (err) {
+                toaster.pop('error','Hierarquia',err.statusText);
+              }
+            )
+          },
+          function () {
+            $log.info('Modal dismissed at: ' + new Date());
+          }
+        );
       }
 
     }

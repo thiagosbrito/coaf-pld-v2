@@ -38,14 +38,16 @@ angular.module('wbaApp')
     );
 
     $scope.getRecebiveisByOperacao = function () {
+      $scope.loading = true;
       apiOperacoes.getRecebiveisByOperacao($stateParams.operacaoId).then(
         function (res) {
+          $scope.loading = false;
           $scope.recebiveis = res.data;
           angular.forEach($scope.recebiveis, function (value, key) {
             value.dpVencimento  = false;
             value.dpEmissao     = false;
             value.dpDataLimite  = false;
-          })
+          });
         },
         function (err) {
           toaster.pop('error','Recebiveis',err.statusText);
@@ -170,4 +172,4 @@ angular.module('wbaApp')
     }
 
   }
-])
+]);

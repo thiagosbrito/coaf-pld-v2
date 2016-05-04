@@ -1,0 +1,89 @@
+<div class="modal-header">
+  Cadastrar uma nova Hierarquia
+</div>
+<div class="modal-body">
+  <form role="form" class="form-horizontal" novalidate name="formHierarquia">
+    <fieldset>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Nome
+        </label>
+        <div class="col-md-8">
+          <input type="text" class="form-control" ng-model="hierarquia.nome" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Tipo de Hierarquia
+        </label>
+        <div class="col-md-8">
+          <select class="form-control" ng-model="hierarquia.tipoHierarquia">
+            <option value="">Selecione...</option>
+            <option value="COMERCIAL">Comercial</option>
+            <option value="INDICANTE">Indicante</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Hierarquia Pai
+        </label>
+        <div class="col-md-8">
+          <select class="form-control"
+                  ng-model="hierarquia.hierarquiaPai"
+                  ng-options="item as item.nome for item in hierarquias track by item.uuid">
+            <option value="">Selecione uma hierarquia...</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Plataforma
+        </label>
+        <div class="col-md-8">
+          <select class="form-control"
+                  ng-model="hierarquia.uuidPlataforma"
+                  ng-options="plataforma.uuid as plataforma.nome for plataforma in plataformas">
+            <option value="">Selecione uma hierarquia...</option>
+          </select>
+        </div>
+      </div>
+      <!-- <div class="form-group">
+        <label class="col-md-2 control-label">
+          Cedente
+        </label>
+        <div class="col-md-8">
+          <em>select2</em>
+        </div>
+      </div> -->
+      <!-- <div class="form-group">
+        <label class="col-md-2 control-label">
+          Usuário
+        </label>
+        <div class="col-md-8">
+          <em>select2</em>
+        </div>
+      </div> -->
+
+      <div class="form-group">
+        <label for="organizationName" class="col-md-2 control-label">Ativo</label>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <label class="radio-inline">
+                <input type="radio" name="ativo" ng-model="hierarquia.ativo" id="inlineRadio1" ng-value="true"> Sim
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="ativo" ng-model="hierarquia.ativo" id="inlineRadio2" ng-value="false"> Não
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()"><i class="fa fa-times"></i> Cancelar</button>
+  <button class="btn btn-primary pull-right" ng-disabled="formHierarquia.$invalid" ng-click="save(hierarquia)"><i class="fa fa-save"></i> Salvar</button>
+</div>

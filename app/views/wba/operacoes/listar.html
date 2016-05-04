@@ -12,7 +12,7 @@
 
           <h2>Operações</h2>
           <div class="panel-ctrls">
-            <a class="button-icon" ui-sref="wba.operacoes.novo" tooltip="Adicionar Operação">
+            <a class="button-icon" ng-click="novaOperacao()" tooltip="Adicionar Operação">
               <i class="fa fa-plus"></i>
             </a>
           </div>
@@ -67,6 +67,13 @@
                             tooltip="Editar operação"
                             ui-sref="wba.operacoes.editar.digitacao({operacaoId: item.uuid})">
                               <i class="fa fa-pencil"></i>
+                          </button>
+                          <button
+                            class="btn btn-info btn-sm"
+                            ng-click="openImportacao(item)"
+                            tooltip="Importação"
+                          >
+                            <i class="fa fa-upload"></i>
                           </button>
                           <button
                             class="btn btn-sm btn-success"

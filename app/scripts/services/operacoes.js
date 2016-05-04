@@ -45,7 +45,7 @@ angular.module('wbaApp')
       }).then(function (results) {
         return results;
       });
-    }
+    };
     var _updateCarteira = function (data) {
       return $http({
         url: baseUrl.apiOperacoes + '/carteiras',
@@ -79,7 +79,7 @@ angular.module('wbaApp')
       }).then(function (results) {
         return results;
       });
-    }
+    };
     var _getOperacaoById = function (id) {
       return $http({
         url: baseUrl.apiOperacoes + '/operacoes/' + id,
@@ -87,7 +87,7 @@ angular.module('wbaApp')
       }).then(function (results) {
         return results;
       });
-    }
+    };
     var _saveOperacao = function (data) {
       return $http({
         url: baseUrl.apiOperacoes + '/operacoes',
@@ -99,7 +99,7 @@ angular.module('wbaApp')
       }).then(function (results) {
         return results;
       });
-    }
+    };
     var _updateOperacao = function (data) {
       return $http({
         url: baseUrl.apiOperacoes + '/operacoes',
@@ -111,7 +111,7 @@ angular.module('wbaApp')
       }).then(function (results) {
         return results;
       });
-    }
+    };
 
     var _addRecebivel = function (id , data) {
       return $http({
@@ -123,9 +123,20 @@ angular.module('wbaApp')
         }
       }).then(function (results) {
         return results;
-      }); 
-    }
-
+      });
+    };
+    var _updateRecebivel = function (id, data) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/recebiveis/' + id + '/recebivel',
+        method: 'PUT',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(function (results) {
+        return results;
+      });
+    };
     var _addTarifaToOperacao = function (idOperacao, idTarifa, tarifa) {
       return $http({
         url: baseUrl.apiOperacoes + '/operacoes/' + idOperacao + '/tarifas/' + idTarifa,
@@ -137,9 +148,9 @@ angular.module('wbaApp')
       }).then(function (results) {
         return results;
       });
-    }
+    };
 
-    // 
+    //
 
     var _getTarifas = function () {
       return $http({
@@ -214,9 +225,11 @@ angular.module('wbaApp')
           return results;
         }
       )
-    }
+    };
 
-    
+
+
+
     // Comercial
     api.getCarteiras        = _getCarteiras;
     api.getCarteiraById     = _getCarteiraById;
@@ -236,6 +249,7 @@ angular.module('wbaApp')
     api.saveOperacao        = _saveOperacao;
     api.updateOperacao      = _updateOperacao;
     api.addRecebivel        = _addRecebivel;
+    api.updateRecebivel     = _updateRecebivel;
     api.addTarifaToOperacao = _addTarifaToOperacao;
     api.liberarOperacao     = _liberarOperacao;
 

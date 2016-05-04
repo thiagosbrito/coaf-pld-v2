@@ -1,7 +1,7 @@
 <ol class="breadcrumb" style="margin: 0 0 15px 0">
-    <li><a href="#/">Dashboard</a></li>
-    <li>Comercial</li>
-    <li class="active">Hierarquias</li>
+  <li><a href="#/">Dashboard</a></li>
+  <li>Comercial</li>
+  <li class="active">Hierarquias</li>
 </ol>
 
 <div class="container-fluid">
@@ -13,7 +13,7 @@
 
             <h2>Hierarquias</h2>
             <div class="panel-ctrls">
-              <a class="button-icon" ui-sref="wba.comercial.hierarquias.novo">
+              <a class="button-icon" ng-click="newHierarchy()">
                 <i class="fa fa-plus"></i>
               </a>
             </div>
@@ -22,20 +22,21 @@
             <p class="text-center" ng-show="hierarquias.length == 0">
               Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
             </p>
-            <tree-grid
-              tree-data="tree_data"
-              tree-control="my_tree"
-              col-defs="definition_cols"
-              expand-on="expanding_property"
-              on-select="my_tree_handler(branch)"
-              icon-leaf="fa fa-square-o"
-              icon-expand="fa fa-plus-square-o"
-              icon-collapse= "fa fa-minus-square-o">
-            </tree-grid>
+            <!--<tree-grid-->
+              <!--ng-if="data.length > 0"-->
+              <!--tree-data="tree_data"-->
+              <!--tree-control="my_tree"-->
+              <!--col-defs="definition_cols"-->
+              <!--expand-on="expanding_property"-->
+              <!--on-select="my_tree_handler(branch)"-->
+              <!--icon-leaf="fa fa-square-o"-->
+              <!--icon-expand="fa fa-plus-square-o"-->
+              <!--icon-collapse= "fa fa-minus-square-o">-->
+            <!--</tree-grid>-->
 
-            <!--<table class="table table-striped fix-table-vertical-alignment" ng-show="hierarquias.length > 0">
+            <table class="table table-striped fix-table-vertical-alignment" ng-show="hierarquias.length > 0">
               <thead>
-              &lt;!&ndash; {
+              <!-- {
                 "ativo": true,
                 "hierarquia": [
                   {}
@@ -47,9 +48,8 @@
                 "uuidCedente": 0,
                 "uuidPlataforma": 0,
                 "uuidUsuario": 0
-              } &ndash;&gt;
+              } -->
                 <tr>
-                  &lt;!&ndash; <td>Id</td> &ndash;&gt;
                   <th>Nome</th>
                   <th class="text-center">Tipo</th>
                   <th class="text-center">Pai</th>
@@ -78,7 +78,7 @@
                 </tr>
               </tbody>
             </table>
-             <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager>-->
+             <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager>
           </div>
         </div>
 

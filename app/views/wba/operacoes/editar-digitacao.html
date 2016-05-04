@@ -1,61 +1,21 @@
 <div class="row">
 	<div class="col-md-12">
 		<tabset tab-theme="orange" tab-position="top">
-      <tab heading="Importação">
-        <form role="form" class="form-horizontal" novalidate>
-          <fieldset>
-            <div class="form-group">
-              <label class="col-md-3 control-label">
-                Tipo de Importação
-              </label>
-              <div class="col-md-3">
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" ng-value="'cnab'" ng-model="typeImport" required>
-                    CNAB
-                  </label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" ng-value="'nfe'" ng-model="typeImport" required>
-                    XML
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label">
-                Arquivo
-              </label>
-              <div class="col-md-9">
-                <div class="input-group">
-                  <input type="text" class="form-control">
-                  <span class="input-group-btn">
-                    <button
-                      class="btn btn-primary"
-                      type="button"
-                      ng-disabled="!typeImport"
-                      ngf-select="uploadFiles($file, $invalidFiles, typeImport)"
-                      ngf-max-size="1MB">
-                      <i class="fa fa-search"></i>
-                    </button>
-                  </span>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <progressbar value="f.progress" ng-if="f.progress">
-                      {{f.progress + '% '}}
-                    </progressbar>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </fieldset>
-        </form>
-      </tab>
-      <tab heading="Digitação">
+      <tab heading="Títulos">
+        <button
+          class="btn btn-danger btn-circle btn-lg pull-right"
+          style="padding-top: 5px !important;"
+          tooltip="Importar títulos"
+          ng-click="openModalImportacao()">
+          <i class="fa fa-upload"></i>
+        </button>
+        <div class="sk-wave" ng-show="loading">
+          <div class="sk-rect sk-rect1"></div>
+          <div class="sk-rect sk-rect2"></div>
+          <div class="sk-rect sk-rect3"></div>
+          <div class="sk-rect sk-rect4"></div>
+          <div class="sk-rect sk-rect5"></div>
+        </div>
         <div class="row" ng-if="recebiveis.length == 0">
           <div class="col-md-12">
             <p class="text-center alert alert-info">
@@ -144,28 +104,9 @@
                 <!--<switch id="enabled" name="enabled" ng-model="rec.ativo" class="green" ng-change="changeTitStatus(rec)"></switch>-->
               </td>
               <td>
-                <!--<button-->
-                  <!--popover-title="Ações"-->
-                  <!--popover-html-unsafe="{{popoverContent}}"-->
-                  <!--class="btn btn-sm btn-default"-->
-                  <!--ng-controller="digitacaoPopoverController"-->
-                <!--&gt;-->
-                  <!--<i class="fa fa-bars"></i>-->
-                <!--</button>-->
-                <!--<div class="btn-group">-->
-                  <!--<button class="btn btn-sm btn-primary pull-left" ng-click="saveTitulo(rec)">
-                    <i class="fa fa-save"></i>
-                  </button>
-                  <button class="btn btn-sm btn-danger pull-left">
-                    <i class="fa fa-trash-o"></i>
-                  </button>
-                  <button class="btn btn-sm btn-success pull-left">
-                    <i class="fa fa-check"></i>
-                  </button>
-                  <button class="btn btn-sm btn-warning pull-left">
-                    <i class="fa fa-times"></i>
-                  </button>-->
-                <!--</div>-->
+                <button class="btn btn-primary" ng-click="updateTitulo(rec)">
+                  <i class="fa fa-save"></i>
+                </button>
               </td>
             </tr>
           </tbody>
