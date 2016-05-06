@@ -20,5 +20,8 @@ angular.module('wbaApp', [
   'frapontillo.bootstrap-switch',
   'ngFileUpload',
   'ng-currency',
-  'ngScrollbars'
-  ])
+  'ngScrollbars',
+  'uiSwitch',
+  'uuid4',
+  'ntt.TreeDnD'
+  ]);

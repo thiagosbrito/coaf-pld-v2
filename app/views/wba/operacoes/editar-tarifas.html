@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="analise-panel-holder pull-left panel-width-animated col-md-12">
+    <div class="panel panel-indigo">
+      <div class="panel-heading">
+        Tarifas
+        <div class="panel-ctrls">
+          <a class="button-icon" ng-click="expandTars = !expandTars">
+            <i class="ti ti-fullscreen"></i>
+          </a>
+        </div>
+      </div>
+      <div class="panel-body">
+        <table class="table table-reponsive table-striped table-bordered">
+          <thead>
+          <th>Cód</th>
+          <th>Descrição</th>
+          <th>Escopo</th>
+          <th>Ordem</th>
+          <th>Tipo</th>
+          <th>Valor</th>
+          </thead>
+          <tbody>
+          <tr ng-repeat="tar in tarifas">
+            <td>{{tar.codigoLancamento}}</td>
+            <td>{{tar.descricao}}</td>
+            <td>{{tar.escopo}}</td>
+            <td>{{tar.ordem}}</td>
+            <td>{{tar.tipo}}</td>
+            <td>{{tar.valor | currency}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

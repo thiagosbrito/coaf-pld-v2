@@ -1,0 +1,65 @@
+<div class="modal-header">
+  Editar Cobrança - {{cob.descricao}}
+</div>
+<div class="modal-body">
+  <form role="form" class="form form-horizontal">
+    <fieldset>
+      <div class="form-group">
+        <label class="col-md-3">
+          Descrição
+        </label>
+        <div class="col-md-9">
+          <input type="text" ng-model="cob.descricao" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-md-3">
+          Tipo de Cobran. Eletr.
+        </label>
+        <div class="col-md-5">
+          <select class="form-control" ng-model="cob.tipoCobrancaEletronica">
+            <option value="">Selecione...</option>
+            <option value="SIMPLES">Simples</option>
+            <option value="DIRETA">Direta</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-md-3">
+          Banco
+        </label>
+        <div class="col-md-5">
+          <select class="form-control" ng-model="cob.uuidBanco" ng-options="ban.uuid as ban.nomeBanco for ban in bancos track by cob.uuidBanco">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-md-3">
+          Carteira
+        </label>
+        <div class="col-md-5">
+          <select class="form-control" ng-model="cob.uuidCarteira" ng-options="car.uuid as car.nome for car in carteiras track by cob.uuidCarteira">
+            <option value=""></option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-md-3">
+          Ativo
+        </label>
+        <div class="col-md-5">
+          <switch id="enabled" name="enabled" ng-model="cob.ativo" class="green"></switch>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()">
+    <i class="fa fa-times"></i> Cancelar
+  </button>
+  <button class="btn btn-primary pull-right" ng-click="close(cob)">
+    <i class="fa fa-save"></i> Atualizar
+  </button>
+</div>

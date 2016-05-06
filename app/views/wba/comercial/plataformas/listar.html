@@ -5,12 +5,12 @@
 </ol>
 
 <div class="container-fluid">
-    
+
     <div class="row">
         <div class="col-md-12">
         <div class="panel panel-indigo">
           <div class="panel-heading header-section">
-            
+
             <h2>Plataformas</h2>
             <div class="panel-ctrls">
               <a class="button-icon" ui-sref="wba.comercial.plataformas.novo">
@@ -22,42 +22,82 @@
             <p class="text-center" ng-show="plataformas.length == 0">
               Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
             </p>
-            <table class="table table-striped fix-table-vertical-alignment" ng-show="plataformas.length > 0">
-              <thead>
-                <tr>
-                  <!-- <td>Id</td> -->
-                  <th>Nome</th>
-                  <th class="text-center">Descrição</th>
-                  <th class="text-center">Ativo</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="item in plataformas track by $index">
-                  <td ng-bind="item.nome"></td>
-                  <td class="text-center" ng-bind="item.descricao"></td>
-                  <td class="text-center">
-                    <i class="fa" ng-class="{'fa-check green': item.ativo, 'fa-times red': !item.ativo}"></i>
-                  </td>
-                  <td>
-                    
-                      <!-- <button class="btn btn-danger-alt" ng-click="inactive(item)">
-                        <i class="fa fa-trash-o"></i>
-                      </button> -->
-                      <button class="btn btn-primary" ui-sref="wba.comercial.plataformas.editar({plataformaId: item.uuid})">
-                        <i class="fa fa-pencil"></i>
-                      </button>
-                    
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager>
+
+            <div class="panel panel-info" ng-repeat="plat in plataformas track by $index">
+              <div class="panel-heading" style="background-color: #00acc1; cursor: pointer">
+                <div class="panel-ctrls pull-left" style="margin-right: 10px">
+                  <a class="button-icon" ng-click="openPanel(plat)">
+                    <i class="fa" ng-class="{'fa-chevron-right': !plat.open, 'fa-chevron-down': plat.open}"></i>
+                  </a>
+                </div>
+                <h2>{{plat.nome}}</h2>
+                <div class="panel-ctrls">
+                  <a class="button-icon" ng-click="editPlatform(plat)">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="panel-body" ng-show="plat.open">
+                <tree-dnd
+                  ng-if="plat.hierarquias.length > 0"
+                  tree-class="table table-bordered table-striped"
+                  tree-data="plat.tree"
+                  tree-control="my_tree"
+                  drag-enabled="false"
+                  icon-leaf="fa fa-square-o"
+                  icon-expand="fa fa-minus-square-o"
+                  icon-collapse="fa fa-plus-square-o"
+                  column-defs="definition_cols"
+                  expand-on="expanding_property"
+                  on-select="my_tree_handler(node)"
+                  on-click="my_tree_handler(node)"
+                  data-indent="30"
+                  data-indent-unit="px"
+                  data-indent-plus="15"
+                >
+                </tree-dnd>
+                <div class="col-md-4 col-md-offset-4" ng-if="plat.hierarquias.length == 0">
+                  <button class="btn btn-primary btn-block" ng-click="addHierarquia(plat.uuid)">
+                    <i class="fa fa-plus"></i> Adicionar hierarquia
+                  </button>
+                </div>
+            </div>
+            <!--<table class="table table-striped fix-table-vertical-alignment" ng-show="plataformas.length > 0">-->
+              <!--<thead>-->
+                <!--<tr>-->
+                  <!--&lt;!&ndash; <td>Id</td> &ndash;&gt;-->
+                  <!--<th>Nome</th>-->
+                  <!--<th class="text-center">Descrição</th>-->
+                  <!--<th class="text-center">Ativo</th>-->
+                  <!--<th></th>-->
+                <!--</tr>-->
+              <!--</thead>-->
+              <!--<tbody>-->
+                <!--<tr ng-repeat="item in plataformas track by $index">-->
+                  <!--<td ng-bind="item.nome"></td>-->
+                  <!--<td class="text-center" ng-bind="item.descricao"></td>-->
+                  <!--<td class="text-center">-->
+                    <!--<i class="fa" ng-class="{'fa-check green': item.ativo, 'fa-times red': !item.ativo}"></i>-->
+                  <!--</td>-->
+                  <!--<td>-->
+                    <!---->
+                      <!--&lt;!&ndash; <button class="btn btn-danger-alt" ng-click="inactive(item)">-->
+                        <!--<i class="fa fa-trash-o"></i>-->
+                      <!--</button> &ndash;&gt;-->
+                      <!--<button class="btn btn-primary" ui-sref="wba.comercial.plataformas.editar({plataformaId: item.uuid})">-->
+                        <!--<i class="fa fa-pencil"></i>-->
+                      <!--</button>-->
+                    <!---->
+                  <!--</td>-->
+                <!--</tr>-->
+              <!--</tbody>-->
+            <!--</table>-->
+            <!--<pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager>-->
           </div>
         </div>
 
             <!-- <panel panel-class="panel-info" heading="Listagem de Organizações">
-                
+
             </panel> -->
         </div>
     </div>

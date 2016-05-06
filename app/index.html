@@ -43,16 +43,22 @@
 	<link rel="stylesheet" href="bower_components/skylo/vendor/styles/skylo.css" />
 	<link rel="stylesheet" href="bower_components/themify-icons/themify-icons.css" />
 	<link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" />
+  <link rel="stylesheet" href="bower_components/angular-tree-dnd/dist/ng-tree-dnd.css" />
 	<!-- endbower -->
 	<link rel='stylesheet' type='text/css' href='assets/plugins/form-fseditor/fseditor.css' />
 	<link rel='stylesheet' type='text/css' href='assets/plugins/jcrop/css/jquery.Jcrop.min.css' />
 	<link rel="stylesheet" type='text/css' href="assets/plugins/iCheck/skins/all.css" />
 	<link rel="stylesheet" type='text/css' href="assets/plugins/google-code-prettify/prettify.css" />
 	<link rel="stylesheet" type="text/css" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css"/>
+
+  <link rel="stylesheet" type="text/css" href="bower_components/angular-ui-switch/angular-ui-switch.css">
+  <link rel="stylesheet" type="text/css" href="scripts/vendors/angular-bootstrap-grid-tree/src/treeGrid.css">
+
 	<!-- endbuild -->
 
 	<!-- build:css({.tmp,app}) assets/css/main.css -->
 	  <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/tree-grid.css">
 	<!-- endbuild -->
 
 
@@ -215,7 +221,8 @@
 	<script src="bower_components/angular-animate/angular-animate.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 	<script src="bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
-	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<script src="bower_components/jquery.ui/ui/jquery.ui.core.js"></script>
 	<script src="bower_components/jquery.ui/ui/jquery.ui.widget.js"></script>
 	<script src="bower_components/jquery.ui/ui/jquery.ui.mouse.js"></script>
@@ -298,6 +305,10 @@
   <script src="bower_components/ng-currency/dist/ng-currency.min.js"></script>
   <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
   <script src="bower_components/ng-scrollbars/dist/scrollbars.min.js"></script>
+  <script src="bower_components/angular-ui-switch/angular-ui-switch.min.js"></script>
+  <script src="bower_components/angular-uuid4/angular-uuid4.min.js"></script>
+  <script src="bower_components/angular-tree-dnd/dist/ng-tree-dnd.js"></script>
+
 
 
 	<!-- endbower -->
@@ -319,6 +330,9 @@
 
 	<!-- Filters -->
 	<script src="scripts/filters/cnpj.filter.js"></script>
+  <script src="scripts/filters/capitalize.filter.js"></script>
+
+  <script src="scripts/directives/popover-html.js"></script>
 
 	<!-- Wba Scripts -->
 	<!-- Usuarios e Permissoes -->
@@ -326,6 +340,7 @@
 	<script src="scripts/services/comercial.js"></script>
 	<script src="scripts/services/organizacoes.js"></script>
 	<script src="scripts/services/operacoes.js"></script>
+  <script src="scripts/services/cobrancas.js"></script>
 	<script src="scripts/services/cep.js"></script>
 	<script src="scripts/controllers/organizacoes/organizacoes.controller.js"></script>
 	<script src="scripts/controllers/organizacoes/usuarios.controller.js"></script>
@@ -355,6 +370,8 @@
 	<script src="scripts/controllers/operacoes/carteiras/editar.controller.js"></script>
 	<script src="scripts/controllers/operacoes/digitacao.editar.controller.js"></script>
 	<script src="scripts/controllers/operacoes/tarifas/listar.controller.js"></script>
+  <script src="scripts/controllers/operacoes/analise.controller.js"></script>
+  <script src="scripts/controllers/operacoes/tarifas.controller.js"></script>
 
 	<script src="scripts/controllers/empresas/editar-empresa.controller.js"></script>
 	<script src="scripts/controllers/empresas/editar-endereco.controller.js"></script>
@@ -362,6 +379,8 @@
 	<script src="scripts/controllers/empresas/editar-contato.controller.js"></script>
 
   <script src="scripts/controllers/cobranca/boletos/passo1.controller.js"></script>
+  <script src="scripts/controllers/cobranca/cobrancas/listar.controller.js"></script>
+  <script src="scripts/controllers/cobranca/cobrancas/editar.controller.js"></script>
 
 	<script src="scripts/controllers/usuarios/novo.controller.js"></script>
 	<!-- end of Usuarios e Permissoes -->
@@ -370,7 +389,7 @@
 
  	<!-- build:js({.tmp,app}) scripts/scripts.js -->
 	<script src="scripts/core/controllers/mainController.js"></script>
-	<script src="scripts/core/controllers/navigationController.js"></script>
+	<script src="scripts/config/navigation.js"></script>
 	<script src="scripts/core/controllers/notificationsController.js"></script>
 	<script src="scripts/core/controllers/messagesController.js"></script>
 	<!-- <script src="scripts/core/directives/directives.js"></script> -->

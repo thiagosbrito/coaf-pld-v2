@@ -1,5 +1,4 @@
 'use strict';
-
 angular.module('wbaApp')
 .controller('OperacoesNovoController', [
   '$scope',
@@ -31,7 +30,7 @@ angular.module('wbaApp')
         function (err) {
           toaster.pop('error','Carteiras',err.statusText)
         }
-      ); 
+      );
     }
     $scope.getCarteiras();
 
@@ -51,6 +50,7 @@ angular.module('wbaApp')
     $scope.openModalCarteiras = function () {
       var modalInstance = $modal.open({
           templateUrl: 'views/wba/operacoes/carteiras/modal-new.html',
+          size: 'sm',
           controller: function ($scope, $modalInstance) {
             $scope.close = function () {
               $modalInstance.dismiss('cancel');

@@ -10,7 +10,8 @@ angular.module('wbaApp')
     'toaster',
     '$modal',
     'SweetAlert',
-    function ($scope, $state, $stateParams, apiOperacoes, toaster, $modal, SweetAlert) {
+    '$log',
+    function ($scope, $state, $stateParams, apiOperacoes, toaster, $modal, SweetAlert, $log) {
 
       $scope.getCarteiras = function () {
         apiOperacoes.getCarteiras().then(
@@ -25,9 +26,11 @@ angular.module('wbaApp')
       $scope.getCarteiras();
 
       $scope.openModalCarteira = function (action, id) {
-      
+
         var modalInstance = $modal.open({
+          animation: true,
           templateUrl: 'views/wba/operacoes/carteiras/modal-' + action + '.html',
+          size: 'lg',
           controller: function ($scope, $modalInstance) {
 
             if(action == 'edit') {
@@ -45,7 +48,7 @@ angular.module('wbaApp')
             $scope.salvar = function (item) {
               $modalInstance.close(item);
             }
-          },
+          }
         });
 
         // modal para cadastro de representante
@@ -90,8 +93,8 @@ angular.module('wbaApp')
            confirmButtonColor: "#DD6B55",
            confirmButtonText: "Prosseguir",
            closeOnConfirm: true
-        }, 
-        function(isConfirm){ 
+        },
+        function(isConfirm){
            if(isConfirm) {
             apiOperacoes.deleteCarteira(item).then(
               function(res) {

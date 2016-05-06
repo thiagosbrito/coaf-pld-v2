@@ -240,7 +240,18 @@ angular.module('wbaApp')
       .state('wba.comercial.hierarquias.listar',{
         url:'/listar',
         templateUrl: 'views/wba/comercial/hierarquias/listar.html',
-        controller: 'HierarquiasListarController'
+        controller: 'HierarquiasListarController',
+        resolve: {
+          hierarquias: function (apiComercial) {
+            return apiComercial.getHierarquias().then(
+              function (res) {
+                return res.data
+              }
+            )
+          }
+        }
+
+
       })
       .state('wba.comercial.hierarquias.novo',{
         url:'/novo',
@@ -311,12 +322,14 @@ angular.module('wbaApp')
       })
       .state('wba.operacoes.editar.analise',{
         url: '/analise',
-        templateUrl: 'views/wba/operacoes/editar-analise.html'
+        templateUrl: 'views/wba/operacoes/editar-analise.html',
+        controller: 'AnaliseOperacaoController'
       })
 
-      .state('wba.operacoes.editar.liberacao',{
-        url: '/liberacao',
-        templateUrl: 'views/wba/operacoes/editar-liberacao.html'
+      .state('wba.operacoes.editar.tarifas',{
+        url: '/tarifas',
+        templateUrl: 'views/wba/operacoes/editar-tarifas.html',
+        controller: 'TarifasOperacaoController'
       })
 
 
@@ -359,6 +372,21 @@ angular.module('wbaApp')
       .state('wba.cobranca',{
         url: '/cobranca',
         template: '<div ui-view=""></div>'
+      })
+
+      .state('wba.cobranca.cobrancas', {
+        url: '',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.cobranca.cobrancas.listar', {
+        url: '/listar',
+        templateUrl: 'views/wba/cobranca/cobrancas/listar.html',
+        controller: 'CobrancasListarController'
+      })
+      .state('wba.cobranca.cobrancas.editar', {
+        url: '/editar/:cobrancaId',
+        templateUrl: 'views/wba/cobranca/cobrancas/editar.html',
+        controller: 'CobrancasEditarController'
       })
       .state('wba.cobranca.boletos',{
         url: '/boletos',

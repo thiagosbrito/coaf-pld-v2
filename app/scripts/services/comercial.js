@@ -32,7 +32,7 @@ angular.module('wbaApp')
         }
       )
     };
-    
+
     // UPDATE
     var _updatePlataforma = function (data) {
       var url = baseUrl.apiComercial + '/plataformas';
@@ -80,7 +80,19 @@ angular.module('wbaApp')
         }
       )
     };
-    
+
+
+    var _getHierarquiaByPlatformId = function (plataformaId) {
+      return $http({
+        url: baseUrl.apiComercial + '/plataformas/' + plataformaId + '/hierarquias',
+        method: 'GET'
+      }).then(
+        function(res) {
+          return res
+        }
+      )
+    };
+
     // Comercial
     api.getPlataformas        = _getPlataformas;
     api.getPlataformasById    = _getPlataformasById;
@@ -91,7 +103,8 @@ angular.module('wbaApp')
     api.getHierarquiasById    = _getHierarquiasById;
     api.saveHierarquia        = _saveHierarquia;
     api.updateHierarquia      = _updateHierarquia;
-    
+
+    api.getHierarquiaByPlatformId = _getHierarquiaByPlatformId;
 
     return api;
 

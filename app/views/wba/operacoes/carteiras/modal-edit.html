@@ -10,6 +10,41 @@
           <input type="text" ng-model="carteira.nome" class="form-control">
         </div>
       </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Fator Cálculo</label>
+        <div class="col-md-10">
+          <input type="text" ng-model="carteira.fatorCalculo" class="form-control" ng-currency>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Taxa Juros Recompra Menor 30 dias</label>
+        <div class="col-md-10">
+          <input type="text" ng-model="carteira.taxaJurosRecompraMenor30Dias" class="form-control" ng-currency>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Taxa Juros Recompra Maior 30Dias</label>
+        <div class="col-md-10">
+          <input type="text" ng-model="carteira.taxaJurosRecompraMaior30Dias" class="form-control" ng-currency>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Confirmar títulos acima do limite</label>
+        <div class="col-md-10">
+          <label class="radio-inline icheck">
+            <input icheck type="radio" ng-model="deveConfirmarTitulosPorValorAcimaLimite" ng-value="true" name="optionsRadiosInline" > Sim
+          </label>
+          <label class="radio-inline icheck">
+            <input icheck type="radio" ng-model="deveConfirmarTitulosPorValorAcimaLimite" ng-value="false" name="optionsRadiosInline" > Não
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Valor limite para confirmar Auto.</label>
+        <div class="col-md-10">
+          <input type="text" ng-model="carteira.valorLimiteParaConfirmarAutomaticamente" class="form-control" ng-currency>
+        </div>
+      </div>
       <div class="panel panel-indigo">
         <div class="panel-heading">
           Tarifas
