@@ -18,7 +18,7 @@ angular.module('wbaApp')
     apiEmpresas.getAll().then(
       function (res) {
         $scope.cedentes = res.data;
-        $scope.selectedCedente = _.where($scope.cedentes, {id: parseInt(operacao.uuidCedente)});
+        $scope.selectedCedente = _.where($scope.cedentes, {id: parseInt(operacao.idCedente)});
         $scope.selectedCedente = $scope.selectedCedente[0];
       },
       function (err) {
@@ -29,7 +29,7 @@ angular.module('wbaApp')
     apiOperacoes.getCarteiras().then(
       function (res) {
         $scope.carteiras = res.data;
-        $scope.selectedCarteira = _.where($scope.carteiras, {uuid: operacao.uuidCarteira});
+        $scope.selectedCarteira = _.where($scope.carteiras, {uuid: operacao.idCarteira});
         $scope.selectedCarteira = $scope.selectedCarteira[0];
       },
       function (err) {

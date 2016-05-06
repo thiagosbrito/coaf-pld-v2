@@ -26,6 +26,30 @@
           <input type="number" min-value="0" class="form-control" ng-model="tarifa.ordem">
         </div>
       </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Escopo
+        </label>
+        <div class="col-md-6">
+          <select ng-model="tarifa.escopo" class="form-control">
+            <option value=""></option>
+            <option value="OPERACAO">Operação</option>
+            <option value="RECEBIVEL">Recebível</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Tipo
+        </label>
+        <div class="col-md-6">
+          <select ng-model="tarifa.tipo" class="form-control">
+            <option value=""></option>
+            <option value="VALOR">Valor</option>
+            <option value="PORCENTAGEM">Porcentagem</option>
+          </select>
+        </div>
+      </div>
     </fieldset>
   </form>
 </div>

@@ -5,12 +5,12 @@
 </ol>
 
 <div class="container-fluid">
-    
+
     <div class="row">
         <div class="col-md-12">
         <div class="panel panel-indigo">
           <div class="panel-heading header-section">
-            
+
             <h2>Tarifas</h2>
             <div class="panel-ctrls">
               <a class="button-icon" ng-click="openModalTarifa('new')">
@@ -28,6 +28,8 @@
                   <th>Cód.</th>
                   <th>Descrição</th>
                   <th>Ordem</th>
+                  <th>Escopo</th>
+                  <th>Tipo</th>
                   <th></th>
                 </tr>
               </thead>
@@ -36,6 +38,8 @@
                   <td ng-bind="item.codigoLancamento"></td>
                   <td ng-bind="item.descricao"></td>
                   <td ng-bind="item.ordem"></td>
+                  <td ng-bind="item.escopo"></td>
+                  <td ng-bind="item.tipo"></td>
                   <td>
                     <div class="btn-group pull-right">
                       <button class="btn btn-danger-alt" ng-click="delete(item)">
@@ -54,7 +58,7 @@
         </div>
 
             <!-- <panel panel-class="panel-info" heading="Listagem de Organizações">
-                
+
             </panel> -->
         </div>
     </div>

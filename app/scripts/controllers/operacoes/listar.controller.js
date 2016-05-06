@@ -31,13 +31,13 @@ angular.module('wbaApp')
 
     $scope.addRecebiveisToArray = function (operacoes) {
       angular.forEach(operacoes, function (value, key) {
-        apiEmpresas.getById(value.uuidCedente).then(
+        apiEmpresas.getById(value.idCedente).then(
           function (rs) {
             value.open = false;
             value.cedentes = rs.data;
           }
         );
-        apiOperacoes.getCarteiraById(value.uuidCarteira).then(
+        apiOperacoes.getCarteiraById(value.idCarteira).then(
           function (rs) {
             value.carteira = rs.data;
           }
@@ -149,7 +149,7 @@ angular.module('wbaApp')
         controller: function ($scope, $modalInstance, carteiras, cedentes) {
           $scope.carteiras = carteiras;
           $scope.cedentes = cedentes;
-          $scope.salvar = function (item) {
+          $scope.save = function (item) {
             $modalInstance.close(item);
           };
 
@@ -166,9 +166,10 @@ angular.module('wbaApp')
           apiOperacoes.saveOperacao(item).then(
             function (res) {
               console.log(res);
+              toaster.pop('success','Operações','Operação criada com sucesso')
             },
             function (err) {
-              console.log(err);
+              toaster.pop('error','Operações',err.statusText);
             }
           )
         }

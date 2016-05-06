@@ -14,7 +14,7 @@
             <ul class="nav nav-tabs form-wzrd actions">
               <li ui-sref-active="active"><a ui-sref="wba.operacoes.editar.digitacao">Importação</a></li>
               <li ui-sref-active="active" class="last"><a ui-sref="wba.operacoes.editar.analise">Resumo</a></li>
-              <!-- <li ui-sref-active="active" class="last"><a ui-sref="wba.operacoes.editar.liberacao" class="disabled">Liberação</a></li> -->
+               <li ui-sref-active="active" class="last"><a ui-sref="wba.operacoes.editar.tarifas">Tarifas</a></li>
             </ul>
           </div>
         </div>
@@ -102,7 +102,7 @@
                           <label>
                             Método de Cálculo
                           </label>
-                          <input type="text" class="form-control" disabled="">
+                          <input type="text" class="form-control" ng-model="operacao.metodoCalculoDesagio" disabled>
                         </div>
                         <div class="form-group col-md-4">
                           <label>
@@ -116,6 +116,79 @@
                           <!--</button>-->
                         <!--</div>-->
                       </fieldset>
+                    </form>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <label>Utilizar dados da Carteira: </label> &nbsp; <input type="checkbox" class=" switchery-xs" checked ui-switch="{color: $parent.getBrandColor('success')}" ng-init="useCarteiraData=false" ng-model="useCarteiraData" />
+                </div>
+                <div class="col-md-12" ng-show="useCarteiraData">
+                  <div class="resumo-operacao">
+
+                    <form role="form" class="form">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Método de Cálculo Deságio</label>
+                              <select name="metodoCalculoDesagio" ng-model="operacao.metodoCalculoDesagio" class="form-control">
+                                <option value="">Selecione..</option>
+                                <option value="EFETIVO">Efetivo</option>
+                                <option value="NOMINAL">Nominal</option>
+                                <option value="MISTO">Misto</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Fator Cálculo</label>
+                              <input type="text" ng-model="operacao.fatorCalculo" class="form-control" ng-currency>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Taxa Juros Recompra Menor 30 dias</label>
+                              <input type="text" ng-model="operacao.taxaJurosRecompraMenor30Dias" class="form-control" ng-currency>
+                            </div>
+                          </div>
+                        </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="control-label">Taxa Juros Recompra Maior 30Dias</label>
+                            <input type="text" ng-model="operacao.taxaJurosRecompraMaior30Dias" class="form-control" ng-currency>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="control-label">Valor limite para confirmar Auto.</label>
+                            <input type="text" ng-model="operacao.valorLimiteParaConfirmarAutomaticamente" class="form-control" ng-currency>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-9">
+                          <div class="form-group">
+                            <label class="control-label">Confirmar títulos acima do limite</label>
+
+                            <label class="radio-inline icheck">
+                              <input icheck type="radio" ng-model="operacao.deveConfirmarTitulosPorValorAcimaLimite" ng-value="true" name="optionsRadiosInline" > Sim
+                            </label>
+                            <label class="radio-inline icheck">
+                              <input icheck type="radio" ng-model="deveConfirmarTitulosPorValorAcimaLimite" ng-value="false" name="optionsRadiosInline" > Não
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <button class="btn btn-primary"><i class="fa fa-save"></i> Adicionar informações</button>
+                        </div>
+                      </div>
+
+
+
+
+
+
+
                     </form>
                   </div>
                 </div>

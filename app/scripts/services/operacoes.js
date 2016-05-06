@@ -150,8 +150,6 @@ angular.module('wbaApp')
       });
     };
 
-    //
-
     var _getTarifas = function () {
       return $http({
         url: baseUrl.apiOperacoes + '/tarifas',
@@ -218,7 +216,7 @@ angular.module('wbaApp')
 
     var _getRecebiveisByOperacao = function (id) {
       return $http({
-        url: baseUrl.apiOperacoes + '/operacoes/' + id + '/recebivel',
+        url: baseUrl.apiOperacoes + '/operacoes/' + id + '/recebiveis',
         method: 'GET'
       }).then(
         function (results) {
@@ -226,34 +224,66 @@ angular.module('wbaApp')
         }
       )
     };
-
-
+    var _getTarifasByOperacao     = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes/' + id + '/tarifas',
+        metho: 'GET'
+      }).then(
+        function (res) {
+          return res
+        }
+      )
+    };
+    var _calcularLancamentos = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes/' + id + '/calcular',
+        method: 'PUT'
+      }).then(
+        function (res) {
+          return res
+        }
+      )
+    };
+    var _getLancamentosByOperacao = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes/' + id + '/lancamentos',
+        metho: 'GET'
+      }).then(
+        function (res) {
+          return res
+        }
+      )
+    };
 
 
     // Comercial
-    api.getCarteiras        = _getCarteiras;
-    api.getCarteiraById     = _getCarteiraById;
-    api.saveCarteira        = _saveCarteira;
-    api.updateCarteira      = _updateCarteira;
-    api.deleteCarteira      = _deleteCarteira;
-    api.addTarifaToCarteira = _addTarifaToCarteira;
+    api.getCarteiras              = _getCarteiras;
+    api.getCarteiraById           = _getCarteiraById;
+    api.saveCarteira              = _saveCarteira;
+    api.updateCarteira            = _updateCarteira;
+    api.deleteCarteira            = _deleteCarteira;
+    api.addTarifaToCarteira       = _addTarifaToCarteira;
 
-    api.getTarifas          = _getTarifas;
-    api.getTarifaById       = _getTarifaById;
-    api.saveTarifa          = _saveTarifa;
-    api.updateTarifa        = _updateTarifa;
-    api.deleteTarifa        = _deleteTarifa;
+    api.getTarifas                = _getTarifas;
+    api.getTarifaById             = _getTarifaById;
+    api.saveTarifa                = _saveTarifa;
+    api.updateTarifa              = _updateTarifa;
+    api.deleteTarifa              = _deleteTarifa;
 
-    api.getOperacoes        = _getOperacoes;
-    api.getOperacaoById     = _getOperacaoById;
-    api.saveOperacao        = _saveOperacao;
-    api.updateOperacao      = _updateOperacao;
-    api.addRecebivel        = _addRecebivel;
-    api.updateRecebivel     = _updateRecebivel;
-    api.addTarifaToOperacao = _addTarifaToOperacao;
-    api.liberarOperacao     = _liberarOperacao;
+    api.getOperacoes              = _getOperacoes;
+    api.getOperacaoById           = _getOperacaoById;
+    api.saveOperacao              = _saveOperacao;
+    api.updateOperacao            = _updateOperacao;
+    api.addRecebivel              = _addRecebivel;
+    api.updateRecebivel           = _updateRecebivel;
+    api.addTarifaToOperacao       = _addTarifaToOperacao;
+    api.liberarOperacao           = _liberarOperacao;
 
-    api.getRecebiveisByOperacao = _getRecebiveisByOperacao;
+    api.getRecebiveisByOperacao   = _getRecebiveisByOperacao;
+
+    api.getTarifasByOperacao      = _getTarifasByOperacao;
+    api.getLancamentosByOperacao  = _getLancamentosByOperacao;
+    api.calcularLancamentos       = _calcularLancamentos;
 
     return api;
 

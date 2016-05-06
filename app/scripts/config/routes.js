@@ -322,12 +322,14 @@ angular.module('wbaApp')
       })
       .state('wba.operacoes.editar.analise',{
         url: '/analise',
-        templateUrl: 'views/wba/operacoes/editar-analise.html'
+        templateUrl: 'views/wba/operacoes/editar-analise.html',
+        controller: 'AnaliseOperacaoController'
       })
 
-      .state('wba.operacoes.editar.liberacao',{
-        url: '/liberacao',
-        templateUrl: 'views/wba/operacoes/editar-liberacao.html'
+      .state('wba.operacoes.editar.tarifas',{
+        url: '/tarifas',
+        templateUrl: 'views/wba/operacoes/editar-tarifas.html',
+        controller: 'TarifasOperacaoController'
       })
 
 

@@ -12,14 +12,15 @@
           <div class="input-group">
             <input
               type="text"
-              ng-model="operacao.uuidCedente"
+              ng-model="operacao.idCedente"
               placeholder="Selecione o cedente.."
-              typeahead="ced as ced.nomeFantasia for ced in cedentes"
+              typeahead="ced.id as ced.nomeFantasia for ced in cedentes"
+              typeahead-input-formatte="ced.nomeFantasia"
               typeahead-loading="loadingLocations"
               class="form-control">
             <i ng-show="loadingLocations" class="pull-right glyphicon glyphicon-refresh"></i>
             <span class="input-group-btn">
-              <button class="btn btn-primary-alt" ui-sref="wba.empresas.novo.empresa">
+              <button class="btn btn-primary-alt" ui-sref="wba.empresas.novo.empresa" ng-click="cancel()">
                 <i class="fa fa-plus"></i> &nbsp; Cedente
               </button>
             </span>
@@ -32,7 +33,7 @@
         </label>
         <div class="col-md-10">
           <div class="input-group">
-            <select ng-model="operacao.uuidCarteira" class="form-control" ng-options="cart.uuid as cart.nome for cart in carteiras" required>
+            <select ng-model="operacao.idCarteira" class="form-control" ng-options="cart.uuid as cart.nome for cart in carteiras" required>
               <option value="">Selecione</option>
             </select>
             <div class="input-group-btn">

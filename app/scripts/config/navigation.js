@@ -93,22 +93,26 @@ angular
             iconClasses: 'ti ti-bolt',
             children: [
               {
-                label: 'Simulação',
+                label: 'Operações',
                 url: '#/operacoes/listar'
-              }
+              },
+              {
+                label: 'Carteiras',
+                url: '#/operacoes/carteiras/listar'
+              },
               // ,
               // {
               //   label: 'Consulta',
               //   url: '#/operacoes/recebiveis/listar'
               // },
-              // {
-              //   label: 'Tarifas',
-              //   url: '#/operacoes/tarifas/listar'
-              // },
-              // {
-              //   label: 'Workflow',
-              //   url: '#/operacoes/workflow/listar'
-              // }
+              {
+                label: 'Tarifas',
+                url: '#/operacoes/tarifas/listar'
+              },
+              {
+                label: 'Workflow',
+                url: '#/operacoes/workflow/listar'
+              }
             ]
           },
           {

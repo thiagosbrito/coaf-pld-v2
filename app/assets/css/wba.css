@@ -366,3 +366,8 @@ table.table.table-striped.fix-table-vertical-alignment thead {
   20% {
     -webkit-transform: scaleY(1);
     transform: scaleY(1); } }
+
+
+.panel-width-animated {
+  transition: width .6s ease !important;
+}
