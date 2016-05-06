@@ -18,6 +18,26 @@ angular.module('wbaApp')
         )
       };
 
+      $scope.calcularLancamentos = function() {
+        apiOperacoes.calcularLancamentos($stateParams.operacaoId).then(
+          function (res) {
+            if (res) {
+              console.log(res);
+            }
+          },
+          function (err) {
+            console.log(err);
+          }
+        ).then(
+          apiOperacoes.getLancamentosByOperacao($stateParams.operacaoId).then(
+            function (res) {
+              $scope.lancamentos = res.data;
+            }
+          )
+        )
+      };
+
+
 
       $scope.deleteTarifa = function (id) {
         SweetAlert.swal({
@@ -35,6 +55,7 @@ angular.module('wbaApp')
                 function(res) {
                   toaster.pop('success','Tarifa','Tarifa excluída com sucesso!');
                   $scope.getTarifas();
+                  $scope.calcularLancamentos();
                 },
                 function (err) {
                   toaster.pop('error','Tarifa',err.statusText);
