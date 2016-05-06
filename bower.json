@@ -19,7 +19,7 @@
     "flot": "~0.8.2",
     "flot.tooltip": "*",
     "angular-ui-tree": "2.1.5",
-    "moment": "~2.8.0",
+    "moment": "^2.13.0",
     "bower-jvectormap": "~1.2.2",
     "ng-grid": "2.0.11",
     "angular-xeditable": "0.1.8",

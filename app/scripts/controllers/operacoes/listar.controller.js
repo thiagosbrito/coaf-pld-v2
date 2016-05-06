@@ -246,5 +246,19 @@ angular.module('wbaApp')
         }
       );
     }
+
+    $scope.update = function (data) {
+      data.idCedente = $scope.selectedCedente.id;
+      data.idCarteira = $scope.selectedCarteira.uuid;
+      apiOperacoes.updateOperacao(data).then(
+        function(res) {
+          toaster.pop('success','Operações','Operação atualizada com sucesso');
+          $state.go('wba.operacoes.listar');
+        },
+        function (err) {
+          toaster.pop('error','Operações',err.statusText)
+        }
+      )
+    }
   }
 ])

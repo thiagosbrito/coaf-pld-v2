@@ -120,9 +120,9 @@
                   </div>
                 </div>
                 <div class="col-md-12">
-                  <label>Utilizar dados da Carteira: </label> &nbsp; <input type="checkbox" class=" switchery-xs" checked ui-switch="{color: $parent.getBrandColor('success')}" ng-init="useCarteiraData=false" ng-model="useCarteiraData" />
+                  <label>Utilizar dados da Carteira: </label> &nbsp; <input type="checkbox" class=" switchery-xs" checked ui-switch="{color: $parent.getBrandColor('success')}" ng-init="useCarteiraData=true" ng-model="useCarteiraData" />
                 </div>
-                <div class="col-md-12" ng-show="useCarteiraData">
+                <div class="col-md-12" ng-show="!useCarteiraData">
                   <div class="resumo-operacao">
 
                     <form role="form" class="form">
@@ -174,12 +174,12 @@
                               <input icheck type="radio" ng-model="operacao.deveConfirmarTitulosPorValorAcimaLimite" ng-value="true" name="optionsRadiosInline" > Sim
                             </label>
                             <label class="radio-inline icheck">
-                              <input icheck type="radio" ng-model="deveConfirmarTitulosPorValorAcimaLimite" ng-value="false" name="optionsRadiosInline" > Não
+                              <input icheck type="radio" ng-model="operacao.deveConfirmarTitulosPorValorAcimaLimite" ng-value="false" name="optionsRadiosInline" > Não
                             </label>
                           </div>
                         </div>
                         <div class="col-md-3">
-                          <button class="btn btn-primary"><i class="fa fa-save"></i> Adicionar informações</button>
+                          <button class="btn btn-primary" ng-click="update(operacao)"><i class="fa fa-save"></i> Atualizar informações</button>
                         </div>
                       </div>
 

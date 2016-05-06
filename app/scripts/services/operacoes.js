@@ -127,7 +127,7 @@ angular.module('wbaApp')
     };
     var _updateRecebivel = function (id, data) {
       return $http({
-        url: baseUrl.apiOperacoes + '/recebiveis/' + id + '/recebivel',
+        url: baseUrl.apiOperacoes + '/recebiveis/' + id,
         method: 'PUT',
         data: data,
         headers: {
@@ -142,6 +142,18 @@ angular.module('wbaApp')
         url: baseUrl.apiOperacoes + '/operacoes/' + idOperacao + '/tarifas/' + idTarifa,
         method: 'POST',
         data: tarifa,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(function (results) {
+        return results;
+      });
+    };
+
+    var _deleteTarifaToOperacao = function (idOperacao, idTarifa) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes/' + idOperacao + '/tarifas/' + idTarifa,
+        method: 'DELETE',
         headers: {
           'Content-Type':'application/json'
         }
@@ -277,6 +289,7 @@ angular.module('wbaApp')
     api.addRecebivel              = _addRecebivel;
     api.updateRecebivel           = _updateRecebivel;
     api.addTarifaToOperacao       = _addTarifaToOperacao;
+    api.deleteTarifaToOperacao    = _deleteTarifaToOperacao;
     api.liberarOperacao           = _liberarOperacao;
 
     api.getRecebiveisByOperacao   = _getRecebiveisByOperacao;
