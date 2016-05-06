@@ -70,7 +70,22 @@ angular.module('wbaApp')
       };
 
       $scope.updateTitulo = function (titulo) {
-        apiOperacoes.updateRecebivel($stateParams.operacaoId, titulo).then(
+
+        titulo = _.omit(titulo, 'dpEmissao');
+        titulo = _.omit(titulo, 'dpVencimento');
+        titulo = _.omit(titulo, 'dpDataLimite');
+
+        if(titulo.dateLimiteDesconto) {
+          titulo.dateLimiteDesconto = moment(titulo.dateLimiteDesconto).format('DD/MM/YYYY');
+        }
+        if(titulo.emissao) {
+          titulo.emissao = moment(titulo.emissao).format('DD/MM/YYYY');
+        }
+        if(titulo.vencimento) {
+          titulo.vencimento = moment(titulo.vencimento).format('DD/MM/YYYY');
+        }
+
+        apiOperacoes.updateRecebivel(titulo.uuid, titulo).then(
           function (res) {
             toaster.pop('success','Título','Título atualizado com sucesso');
           },

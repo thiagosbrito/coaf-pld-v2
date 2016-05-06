@@ -68,8 +68,8 @@ angular.module('wbaApp')
     $scope.operacao = operacao;
 
     $scope.update = function (data) {
-      data.uuidCedente = $scope.selectedCedente.id;
-      data.uuidCarteira = $scope.selectedCarteira.uuid;
+      data.idCedente = $scope.selectedCedente.id;
+      data.idCarteira = $scope.selectedCarteira.uuid;
       apiOperacoes.updateOperacao(data).then(
         function(res) {
           toaster.pop('success','Operações','Operação atualizada com sucesso');
@@ -79,7 +79,7 @@ angular.module('wbaApp')
           toaster.pop('error','Operações',err.statusText)
         }
       )
-    }
+    };
 
     $scope.today = function() {
       $scope.dt = new Date();

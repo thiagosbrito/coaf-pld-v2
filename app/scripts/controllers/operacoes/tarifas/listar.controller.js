@@ -26,7 +26,7 @@ angular.module('wbaApp')
       $scope.getTarifas();
 
       $scope.openModalTarifa = function (action, id) {
-      
+
         var modalInstance = $modal.open({
           templateUrl: 'views/wba/operacoes/tarifas/modal-' + action + '.html',
           controller: function ($scope, $modalInstance) {
@@ -53,7 +53,7 @@ angular.module('wbaApp')
         modalInstance.result.then(
           function (item) {
             if(id) {
-              apiOperacoes.saveTarifa(item).then(
+              apiOperacoes.updateTarifa(item).then(
                 function (res) {
                   toaster.pop('success','Tarifa','Tarifa atualizada com sucesso!')
                   $scope.getTarifas();
@@ -91,8 +91,8 @@ angular.module('wbaApp')
            confirmButtonColor: "#DD6B55",
            confirmButtonText: "Prosseguir",
            closeOnConfirm: true
-        }, 
-        function(isConfirm){ 
+        },
+        function(isConfirm){
            if(isConfirm) {
             apiOperacoes.deleteTarifa(item).then(
               function(res) {
