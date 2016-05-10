@@ -39,16 +39,16 @@
             <div ng-class="{'col-md-6': ableForm, 'col-md-12': !ableForm}">
               <tree-dnd
                 tree-data="tree_data"
+                callbacks="callbacks"
                 tree-control="my_tree"
                 column-defs="definition_cols"
                 expand-on="expanding_property"
-                template-url="tree-dnd-template-render.html"
-                enable-drop="true"
-                enable-drag="true"
+                enable-drop="false"
+                enable-drag="false"
                 enable-collapse="true"
-                icon-leaf="none"
-                icon-expand="glyphicon glyphicon-chevron-down"
-                icon-collapse="glyphicon glyphicon-chevron-right"
+                icon-leaf="fa fa-square-o"
+                icon-expand="fa fa-minus-square-o"
+                icon-collapse="fa fa-plus-square-o"
               </tree-dnd>
             </div>
             <div class="col-md-6" ng-if="ableForm">

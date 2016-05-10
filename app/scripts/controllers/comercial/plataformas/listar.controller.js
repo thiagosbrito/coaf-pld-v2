@@ -23,13 +23,32 @@ angular.module('wbaApp')
             if(res) {
               platform.hierarquias.push(res.data);
               platform.tree = [];
+
+              var checkChildren = function (item) {
+                  if(item.hierarquias) {
+                    angular.forEach(item.hierarquias, function (value) {
+                      value.hierarquiaPai = parseInt(value.hierarquiaPai);
+                      platform.tree.push(value);
+                      if(value.hierarquias) {
+                        checkChildren(value);
+                      }
+                      else {
+                        return false
+                      }
+                    })
+                  }
+              };
+
               angular.forEach(platform.hierarquias, function (v){
                 platform.tree.push(v);
                 angular.forEach(v.hierarquias, function(h) {
+                  // checkChildren(h);
                   h.hierarquiaPai = parseInt(h.hierarquiaPai);
                   platform.tree.push(h);
                   angular.forEach(h.hierarquias, function (c) {
+                    c.hierarquiaPai = parseInt(c.hierarquiaPai);
                     platform.tree.push(c);
+
                   })
                 });
               });
@@ -73,6 +92,39 @@ angular.module('wbaApp')
           },
           controller: function ($scope, $modalInstance, Upload, $timeout, plataforma, cedentes) {
 
+            $scope.$callbacks = {
+              // function accept called when item Drapping move-over target
+              accept:      function (scopeDrag, scopeTarget, align) {
+                return true;
+              },
+
+              beforeDrag:  function (scopeDrag) {
+                return true;
+              },
+              dropped:     function (info, accepted) {
+                console.log(info);
+                return false;
+              },
+              dragStart:   function (event) {},
+              dragMove:    function (event) {},
+              dragStop:    function (event, skiped) {
+
+              },
+              beforeDrop:  function (event) {
+                return true;
+              },
+              calsIndent:  function (level) {
+                if (level - 1 < 1) {
+                  return $scope.indent_plus + ($scope.indent_unit ? $scope.indent_unit : 'px');
+                } else {
+                  return ($scope.indent * (level - 1)) + $scope.indent_plus + ($scope.indent_unit ? $scope.indent_unit : 'px');
+                }
+              },
+              dragEnabled: function () {
+                return $scope.dragEnabled;
+              }
+            };
+
             $scope.treatData = function (data) {
               data.hrqs = [];
               angular.forEach(data.hierarquias, function (p){
@@ -108,19 +160,19 @@ angular.module('wbaApp')
               },
               {
 
-                field: "parentNome",
+                field: "hierarquiaPai",
                 displayName: "hierarquia pai",
                 sortable: true,
                 sortingType: "string"
               },
               {
-                field: "uuidCedente",
+                field: "idCedente",
                 displayName: "Cedente",
                 sortable: true,
                 sortingType: "string"
               },
               {
-                field: "uuidPlataforma",
+                field: "idPlataforma",
                 displayName: "Plataforma",
                 sortable: true,
                 sortingType: "string"
