@@ -159,34 +159,9 @@ angular.module('wbaApp')
                 sortingType : "string"
               },
               {
-
-                field: "hierarquiaPai",
-                displayName: "hierarquia pai",
-                sortable: true,
-                sortingType: "string"
-              },
-              {
-                field: "idCedente",
-                displayName: "Cedente",
-                sortable: true,
-                sortingType: "string"
-              },
-              {
-                field: "idPlataforma",
-                displayName: "Plataforma",
-                sortable: true,
-                sortingType: "string"
-              },
-              {
-                field: "uuidUsuario",
-                displayName: "Usuário",
-                sortable: true,
-                sortingType: "string"
-              },
-              {
                 field: "ativo",
                 displayName: "ativo",
-                // cellTemplate: "<i class='fa' ng-class='{\"fa-check green\":{{row.branch[col.field]}}, \"fa-times red\": {{!row.branch[col.field]}}}'></i>",
+                cellTemplate: "<i class='fa {{node.ativo | ativo}}'></i>",
                 cellTemplateScope: {
                   click: function(data) {         // this works too: $scope.someMethod;
                     console.log(data);
@@ -268,37 +243,12 @@ angular.module('wbaApp')
           sortingType : "string"
         },
         {
-
-          field: "parentNome",
-          displayName: "hierarquia pai",
-          sortable: true,
-          sortingType: "string"
-        },
-        {
-          field: "uuidCedente",
-          displayName: "Cedente",
-          sortable: true,
-          sortingType: "string"
-        },
-        {
-          field: "uuidPlataforma",
-          displayName: "Plataforma",
-          sortable: true,
-          sortingType: "string"
-        },
-        {
-          field: "uuidUsuario",
-          displayName: "Usuário",
-          sortable: true,
-          sortingType: "string"
-        },
-        {
           field: "ativo",
           displayName: "ativo",
-          // cellTemplate: "<i class='fa' ng-class='{\"fa-check green\":{{row.branch[col.field]}}, \"fa-times red\": {{!row.branch[col.field]}}}'></i>",
+          cellTemplate: "<i class='fa {{node.ativo | ativo}}'></i>",
           cellTemplateScope: {
-            click: function(data) {         // this works too: $scope.someMethod;
-              console.log(data);
+            click: function(e, d) {         // this works too: $scope.someMethod;
+              console.log(e, d);
             }
           }
         }
