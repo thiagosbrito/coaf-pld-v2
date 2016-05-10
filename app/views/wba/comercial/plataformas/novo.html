@@ -37,10 +37,7 @@
                     <div class="row">
                       <div class="col-md-12">
                         <label class="radio-inline">
-                          <input type="radio" name="ativo" ng-model="plataforma.ativo" id="inlineRadio1" ng-value="true"> Sim
-                        </label>
-                        <label class="radio-inline">
-                          <input type="radio" name="ativo" ng-model="plataform.ativo" id="inlineRadio2" ng-value="false"> Não
+                          <input type="checkbox" class="switchery-sm" ui-switch="{color: $parent.getBrandColor('primary')}" ng-model="plataforma.ativo" />
                         </label>
                       </div>
                     </div>
