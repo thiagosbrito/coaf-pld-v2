@@ -1,0 +1,26 @@
+<div class="modal-header">
+  Workflow
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-12">
+      <p>
+        <strong>Nome: </strong> {{info.fileName}}
+      </p>
+      <p>
+        <strong>processDefinitionKey: </strong> {{info.processDefinitionKey}}
+      </p>
+      <p>
+        <strong>processDefinitionId: </strong> {{info.processDefinitionId}}
+      </p>
+      <p>
+        <strong>deploymentId: </strong>{{info.deploymentId}}
+      </p>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()">
+    <i class="fa fa-times"></i> Fechar
+  </button>
+</div>

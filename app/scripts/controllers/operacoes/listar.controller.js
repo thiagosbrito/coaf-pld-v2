@@ -245,7 +245,7 @@ angular.module('wbaApp')
           )
         }
       );
-    }
+    };
 
     $scope.update = function (data) {
       data.idCedente = $scope.selectedCedente.id;

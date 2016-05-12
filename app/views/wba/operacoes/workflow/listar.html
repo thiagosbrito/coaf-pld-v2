@@ -1,0 +1,59 @@
+<ol class="breadcrumb" style="margin: 0 0 15px 0">
+  <li><a ui-sref="wba.dashboard">Dashboard</a></li>
+  <li><a ui-sref="wba.operacoes.listar">Operações</a></li>
+  <li class="active">Workflows</li>
+</ol>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading header-section">
+
+          <h2>Workflows</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" tooltip="Upload de Workflow" type="file" ngf-select="uploadFiles($file, $invalidFiles)" accept="application/xml">
+              <i class="fa fa-upload"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <button class="btn pull-right btn-primary" type="file" ngf-select="uploadFiles($file, $invalidFiles)" accept="application/xml">
+                <i class="fa fa-upload"></i> Upload de Workflow
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table-striped table-bordered table" style="margin-top: 20px;">
+                <thead>
+                  <tr>
+                    <th>Nome do Arquivo</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="w in workflows">
+                    <td ng-bind="w.fileName"></td>
+                    <td width="90">
+                      <div class="btn-group">
+                        <button class="btn btn-warning" ng-click="getWorkflowInfo(w.uuid)">
+                          <i class="fa fa-info-circle"></i>
+                        </button>
+                        <button class="btn btn-primary" ng-click="getWorkflowImage(w.uuid)">
+                          <i class="fa fa-eye"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

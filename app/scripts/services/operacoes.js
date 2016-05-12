@@ -162,6 +162,32 @@ angular.module('wbaApp')
       });
     };
 
+    var _getWorkflows = function () {
+      return $http({
+        url: baseUrl.apiOperacoes + '/workflows',
+        method: 'GET'
+      }).then(function (results) {
+        return results;
+      });
+    };
+    var _getWorkflowById = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/workflows/' + id,
+        method: 'GET'
+      }).then(function (results) {
+        return results;
+      });
+    };
+
+    var _getWorkflowImage = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/workflows/' + id + '/imagem',
+        method: 'GET'
+      }).then(function (results) {
+        return results;
+      });
+    }
+
     var _getTarifas = function () {
       return $http({
         url: baseUrl.apiOperacoes + '/tarifas',
@@ -297,6 +323,10 @@ angular.module('wbaApp')
     api.getTarifasByOperacao      = _getTarifasByOperacao;
     api.getLancamentosByOperacao  = _getLancamentosByOperacao;
     api.calcularLancamentos       = _calcularLancamentos;
+
+    api.getWorkflows              = _getWorkflows;
+    api.getWorkflowById           = _getWorkflowById;
+    api.getWorkflowImage          = _getWorkflowImage;
 
     return api;
 

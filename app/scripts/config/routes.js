@@ -367,6 +367,16 @@ angular.module('wbaApp')
       //   templateUrl: 'views/wba/operacoes/tarifas/editar.html'
       // })
 
+      .state('wba.operacoes.workflow', {
+        url: '/workflow',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.operacoes.workflow.listar', {
+        url: '/listar',
+        templateUrl: 'views/wba/operacoes/workflow/listar.html',
+        controller: 'WorkflowListarController'
+      })
+
 
       // Routews for Cobranca Module
       .state('wba.cobranca',{
