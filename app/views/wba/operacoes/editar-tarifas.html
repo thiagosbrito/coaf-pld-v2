@@ -4,36 +4,71 @@
       <div class="panel-heading">
         Tarifas
         <div class="panel-ctrls">
-          <a class="button-icon" ng-click="expandTars = !expandTars">
-            <i class="ti ti-fullscreen"></i>
+          <a class="button-icon" ng-click="addTarifa()">
+            <i class="ti" ng-class="{'ti-plus': !expandTars, 'ti-minus': expandTars}"></i>
           </a>
         </div>
       </div>
       <div class="panel-body">
-        <table class="table table-reponsive table-striped table-bordered">
-          <thead>
-          <th>Cód</th>
-          <th>Descrição</th>
-          <th>Escopo</th>
-          <th>Ordem</th>
-          <th>Tipo</th>
-          <th>Valor</th>
-          <th></th>
-          </thead>
-          <tbody>
-          <tr ng-repeat="tar in tarifas">
-            <td>{{tar.codigoLancamento}}</td>
-            <td>{{tar.descricao}}</td>
-            <td>{{tar.escopo}}</td>
-            <td>{{tar.ordem}}</td>
-            <td>{{tar.tipo}}</td>
-            <td>{{tar.valor | currency}}</td>
-            <td>
-              <button class="btn btn-danger-alt" ng-click="deleteTarifa(tar.uuid)"><i class="fa fa-trash-o"></i></button>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+        <div ng-class="{'col-md-12': !expandTars, 'col-md-6': expandTars}">
+          <table class="table table-reponsive table-striped table-bordered" ng-if="tarifas.length > 0">
+            <thead>
+            <th ng-if="!expandTars">Cód</th>
+            <th>Descrição</th>
+            <th ng-if="!expandTars">Escopo</th>
+            <th ng-if="!expandTars">Ordem</th>
+            <th ng-if="!expandTars">Tipo</th>
+            <th>Valor</th>
+            <th ng-if="!expandTars"></th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="tar in tarifas">
+              <td ng-if="!expandTars">{{tar.codigoLancamento}}</td>
+              <td>{{tar.descricao}}</td>
+              <td ng-if="!expandTars">{{tar.escopo}}</td>
+              <td ng-if="!expandTars">{{tar.ordem}}</td>
+              <td ng-if="!expandTars">{{tar.tipo}}</td>
+              <td>{{tar.valor | currency}}</td>
+              <td ng-if="!expandTars">
+                <button class="btn btn-danger-alt" ng-click="deleteTarifa(tar.uuid)"><i class="fa fa-trash-o"></i></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <p class="text-center" ng-if="tarifas.length == 0" ng-hide="expandTars">
+            Não existem tarifas cadastras para esta operação, deseja adicionar uma tarifa? &nbsp;<a ng-click="addTarifa()">Sim, adicionar tarifa.</a>
+          </p>
+        </div>
+        <div ng-class="{'hidden': !expandTars, 'col-md-6': expandTars}">
+          <form role="form" class="form form-horizontal">
+            <fieldset>
+              <div class="form-group">
+                <label class="col-md-2 control-label">
+                  Tarifa:
+                </label>
+                <div class="col-md-10">
+                  <select class="form-control" ng-model="idTarifa" ng-options="tar.uuid as tar.descricao for tar in listTarifas">
+                    <option value="">Selecione...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-2 control-label">
+                  Valor:
+                </label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" ng-model="tarifa.valor" ng-currency>
+                </div>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary pull-right" ng-click="adicionarTarifaOperacao(idTarifa, tarifa.valor)">
+                  <i class="fa fa-save"></i> Adicionar tarifa
+                </button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+
       </div>
     </div>
   </div>

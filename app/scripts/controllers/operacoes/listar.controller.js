@@ -144,9 +144,17 @@ angular.module('wbaApp')
                 return res.data;
               }
             )
+          },
+          workflow: function () {
+            return apiOperacoes.getWorkflows().then(
+              function (res) {
+                return res.data
+              }
+            )
           }
         },
-        controller: function ($scope, $modalInstance, carteiras, cedentes) {
+        controller: function ($scope, $modalInstance, carteiras, cedentes, workflow) {
+          $scope.workflows = workflow;
           $scope.carteiras = carteiras;
           $scope.cedentes = cedentes;
           $scope.save = function (item) {
@@ -163,10 +171,12 @@ angular.module('wbaApp')
 
       modalInstance.result.then(
         function (item) {
+          item.idCedente = item.idCedente.id;
           apiOperacoes.saveOperacao(item).then(
             function (res) {
               console.log(res);
-              toaster.pop('success','Operações','Operação criada com sucesso')
+              toaster.pop('success','Operações','Operação criada com sucesso');
+              $scope.getOperacoes();
             },
             function (err) {
               toaster.pop('error','Operações',err.statusText);

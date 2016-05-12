@@ -14,8 +14,7 @@
               type="text"
               ng-model="operacao.idCedente"
               placeholder="Selecione o cedente.."
-              typeahead="ced.id as ced.nomeFantasia for ced in cedentes"
-              typeahead-input-formatte="ced.nomeFantasia"
+              typeahead="ced as ced.nomeFantasia for ced in cedentes"
               typeahead-loading="loadingLocations"
               class="form-control">
             <i ng-show="loadingLocations" class="pull-right glyphicon glyphicon-refresh"></i>
@@ -31,7 +30,7 @@
         <label class="col-md-2 control-label">
           Carteira
         </label>
-        <div class="col-md-10">
+        <div ng-class="{'col-md-10': carteiras.length > 0, 'col-md-5': carteiras.length == 0}">
           <div class="input-group">
             <select ng-model="operacao.idCarteira" class="form-control" ng-options="cart.uuid as cart.nome for cart in carteiras" required>
               <option value="">Selecione</option>
@@ -42,6 +41,13 @@
               </button>
             </div>
           </div>
+
+        </div>
+        <div ng-class="{'col-md-5': carteiras.length == 0}" ng-hide="carteiras.length > 0">
+          <p class="help-block">
+            <i class="fa fa-times-circle"></i>
+            Não existem carteiras cadastras
+          </p>
         </div>
       </div>
       <div class="form-group">
@@ -49,7 +55,9 @@
           Workflow
         </label>
         <div class="col-md-10">
-          <select name="" id="" class="form-control"></select>
+          <select ng-model="operacao.uuidWorkflowDeployment" class="form-control" ng-options="w.deploymentId as w.fileName for w in workflows">
+            <option value="">Selecione...</option>
+          </select>
         </div>
       </div>
     </fieldset>
