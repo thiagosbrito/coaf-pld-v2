@@ -15,6 +15,8 @@ angular.module('wbaApp')
 
       $scope.operacao = operacao;
 
+      console.log($scope.operacao);
+
       $scope.openModalImportacao = function () {
         var modalInstance = $modal.open({
           templateUrl: 'views/wba/operacoes/modal-importacao.html',

@@ -44,6 +44,7 @@ angular.module('wbaApp')
           $scope.loading = false;
           $scope.recebiveis = res.data;
           angular.forEach($scope.recebiveis, function (value, key) {
+            console.log(value);
             value.dpVencimento  = false;
             value.dpEmissao     = false;
             value.dpDataLimite  = false;
@@ -156,11 +157,35 @@ angular.module('wbaApp')
         $scope.recebiveis = [{}];
       }
       else {
-        $scope.recebiveis.push({});
+        $scope.recebiveis.push({
+          ativo: true,
+          dateLimiteDesconto: "",
+          emissao: "",
+          nossoNumero: "",
+          numero: "",
+          percentualDesconto: 0,
+          uuid: "",
+          valor: 0,
+          valorLiquido: 0,
+          vencimento: ""
+        });
       }
     }
 
     $scope.saveTitulo = function (titulo) {
+      titulo = _.omit(titulo, 'dpEmissao');
+      titulo = _.omit(titulo, 'dpVencimento');
+      titulo = _.omit(titulo, 'dpDataLimite');
+
+      if(titulo.dateLimiteDesconto) {
+        titulo.dateLimiteDesconto = moment(titulo.dateLimiteDesconto).format('DD/MM/YYYY');
+      }
+      if(titulo.emissao) {
+        titulo.emissao = moment(titulo.emissao).format('DD/MM/YYYY');
+      }
+      if(titulo.vencimento) {
+        titulo.vencimento = moment(titulo.vencimento).format('DD/MM/YYYY');
+      }
       apiOperacoes.addRecebivel($stateParams.operacaoId, titulo).then(
         function (res) {
           toaster.pop('success','Recebível','Item adicionado a operação');
