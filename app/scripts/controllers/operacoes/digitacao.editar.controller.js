@@ -11,11 +11,21 @@ angular.module('wbaApp')
     '$modal',
     '$log',
     'toaster',
-    function ($scope, $state, $stateParams, operacao, SweetAlert, apiOperacoes, $modal, $log, toaster) {
+    'apiEmpresas',
+    function ($scope, $state, $stateParams, operacao, SweetAlert, apiOperacoes, $modal, $log, toaster, apiEmpresas) {
 
       $scope.operacao = operacao;
 
-      console.log($scope.operacao);
+      $scope.getSacados = function () {
+        apiEmpresas.getEmpresaByType('SACADO').then(
+          function (res) {
+            $scope.sacados = res.data;
+          },
+          function (err) {
+            toaster.pop('error','Sacados',err.statusText);
+          }
+        )
+      }();
 
       $scope.openModalImportacao = function () {
         var modalInstance = $modal.open({
@@ -24,15 +34,29 @@ angular.module('wbaApp')
           resolve: {
             operacaoId: function () {
               return $stateParams.operacaoId
+            },
+            sacados: function () {
+              return apiEmpresas.getEmpresaByType('SACADO').then(
+                function (res) {
+                  return res.data
+                }
+              )
             }
           },
-          controller: function ($scope, $modalInstance, Upload, $timeout, operacaoId, apiOperacoes) {
+          controller: function ($scope, $modalInstance, Upload, $timeout, operacaoId, apiOperacoes, sacados) {
+
+            $scope.sacados = sacados;
 
             $scope.cancel = function () {
               $modalInstance.dismiss('cancel');
             };
 
             $scope.addRecebivel = function (item) {
+              item.uuidSacado = item.uuidSacado.id;
+              item = _.omit(item, 'dpDataLimite');
+              item = _.omit(item, 'dpEmissao');
+              item = _.omit(item, 'dpVencimento');
+              item.vencimento = moment(item.vencimento).format('DD/MM/YYYY');
               apiOperacoes.addRecebivel(operacaoId, item).then(
                 function (res) {
                   console.log(res)
@@ -120,7 +144,7 @@ angular.module('wbaApp')
         titulo = _.omit(titulo, 'dpEmissao');
         titulo = _.omit(titulo, 'dpVencimento');
         titulo = _.omit(titulo, 'dpDataLimite');
-
+        titulo.uuidSacado = titulo.uuidSacado.id;
         if(titulo.dateLimiteDesconto) {
           titulo.dateLimiteDesconto = moment(titulo.dateLimiteDesconto).format('DD/MM/YYYY');
         }
@@ -134,6 +158,7 @@ angular.module('wbaApp')
         apiOperacoes.updateRecebivel(titulo.uuid, titulo).then(
           function (res) {
             toaster.pop('success','Título','Título atualizado com sucesso');
+            $state.go($state.current, {}, {reload: true});
           },
           function (err) {
             toaster.pop('error','Títulos',err.statusText);

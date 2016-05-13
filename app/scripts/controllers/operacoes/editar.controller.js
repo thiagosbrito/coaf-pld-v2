@@ -13,7 +13,8 @@ angular.module('wbaApp')
   'operacao',
   'Upload',
   '$timeout',
-  function ($scope, $state, $stateParams, apiOperacoes, apiEmpresas, toaster, SweetAlert, $modal, operacao, Upload, $timeout) {
+  'uuid4',
+  function ($scope, $state, $stateParams, apiOperacoes, apiEmpresas, toaster, SweetAlert, $modal, operacao, Upload, $timeout, uuid4) {
 
     apiEmpresas.getAll().then(
       function (res) {
@@ -48,6 +49,11 @@ angular.module('wbaApp')
             value.dpVencimento  = false;
             value.dpEmissao     = false;
             value.dpDataLimite  = false;
+            apiEmpresas.getById(value.uuidSacado).then(
+              function (res) {
+                value.uuidSacado = res.data;
+              }
+            );
           });
         },
         function (err) {
@@ -151,16 +157,7 @@ angular.module('wbaApp')
       }
       else {
         $scope.recebiveis.push({
-          ativo: true,
-          dateLimiteDesconto: "",
-          emissao: "",
-          nossoNumero: "",
-          numero: "",
-          percentualDesconto: 0,
-          uuid: "",
-          valor: 0,
-          valorLiquido: 0,
-          vencimento: ""
+          ativo: true
         });
       }
     }
@@ -170,6 +167,7 @@ angular.module('wbaApp')
       titulo = _.omit(titulo, 'dpVencimento');
       titulo = _.omit(titulo, 'dpDataLimite');
 
+      titulo.uuidSacado = titulo.uuidSacado.id;
       if(titulo.dateLimiteDesconto) {
         titulo.dateLimiteDesconto = moment(titulo.dateLimiteDesconto).format('DD/MM/YYYY');
       }
@@ -182,6 +180,7 @@ angular.module('wbaApp')
       apiOperacoes.addRecebivel($stateParams.operacaoId, titulo).then(
         function (res) {
           toaster.pop('success','Recebível','Item adicionado a operação');
+          $state.go($state.current, {}, {reload: true});
         },
         function (err) {
           toaster.pop('error','Recebível',err.statusText);

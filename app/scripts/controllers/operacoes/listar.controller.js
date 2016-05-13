@@ -139,7 +139,7 @@ angular.module('wbaApp')
             )
           },
           cedentes: function () {
-            return apiEmpresas.getCedentes().then(
+            return apiEmpresas.getEmpresaByType('CEDENTE').then(
               function (res) {
                 return res.data;
               }
