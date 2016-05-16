@@ -69,12 +69,8 @@
                     <th>Valor</th>
                     <th>Vencimento</th>
                     <th>Número</th>
-                    <th>% Desconto</th>
-                    <th>Data limite Desconto</th>
-                    <th>Emissão</th>
-                    <th>Nosso Número</th>
                     <th>Valor Líquido</th>
-                    <th>Status</th>
+                    <th>Sacado</th>
                     <th></th>
                   </tr>
                   </thead>
@@ -83,57 +79,28 @@
                     <td>
                       <input type="text" ng-model="rec.valor" class="form-control" ng-currency>
                     </td>
-                    <td>
-                      <input
-                        type="text"
-                        class="form-control"
-                        datepicker-popup="dd/MM/yyyy"
-                        ng-model="rec.vencimento"
-                        is-open="opened"
-                        min-date="minDate"
-                        datepicker-options="dateOptions"
-                        date-disabled="disabled(date, mode)"
-                        close-text="Fechar"
-                        current-text="Hoje"
-                        clear-text="Limpar"
-                        ng-click="open($event)">
-                    </td>
-                    <td><input type="text" ng-model="rec.numero" class="form-control"></td>
-                    <td><input type="text" ng-model="rec.percentualDesconto" class="form-control"></td>
-                    <td>
-                      <input
-                        type="text"
-                        class="form-control"
-                        datepicker-popup="dd/MM/yyyy"
-                        ng-model="rec.dateLimiteDesconto"
-                        is-open="opened"
-                        min-date="minDate"
-                        datepicker-options="dateOptions"
-                        date-disabled="disabled(date, mode)"
-                        close-text="Fechar"
-                        current-text="Hoje"
-                        clear-text="Limpar"
-                        ng-click="open($event)">
+                    <td width="140">
+                      <p class="input-group datepicker-holder">
+                        <input
+                          type="text"
+                          class="form-control"
+                          datepicker-popup="dd/MM/yyyy"
+                          ng-model="rec.vencimento"
+                          is-open="rec.dpVencimento"
+                          close-text="Fechar"
+                          current-text="Hoje"
+                          clear-text="Limpar" />
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="open($event, rec, 'vencimento')"><i class="ti ti-calendar"></i></button>
+                        </span>
+                      </p>
                     </td>
                     <td>
-                      <input
-                        type="text"
-                        class="form-control"
-                        datepicker-popup="dd/MM/yyyy"
-                        ng-model="rec.emissao"
-                        is-open="opened"
-                        min-date="minDate"
-                        datepicker-options="dateOptions"
-                        date-disabled="disabled(date, mode)"
-                        close-text="Fechar"
-                        current-text="Hoje"
-                        clear-text="Limpar"
-                        ng-click="open($event)">
+                      <input type="text" ng-model="rec.numero" class="form-control">
                     </td>
-                    <td><input type="text" ng-model="rec.nossoNumero" class="form-control"></td>
                     <td><input type="text" ng-model="rec.valorLiquido" ng-currency class="form-control"></td>
-                    <td class="">
-                      <i class="fa fa-circle" ng-class="{'green': rec.ativo, 'red': !rec.ativo}"></i>
+                    <td class="text-center" width="250">
+                      <input type="text" ng-model="rec.uuidSacado" typeahead="sac as sac.nomeFantasia for sac in sacados | filter:$viewValue" class="form-control">
                     </td>
                     <td>
                       <button class="btn btn-primary" ng-click="addRecebivel(rec)">

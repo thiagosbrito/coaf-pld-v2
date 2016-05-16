@@ -229,11 +229,11 @@ angular.module('wbaApp')
       )
     };
 
-    var _getCedentes = function (cnpj) {
+    var _getEmpresaByType = function (type, cnpj) {
       if(cnpj)
-        var url = baseUrl.apiEmpresas + '/empresas?tipo=CEDENTE&numeroInscricao=' + cnpj;
+        var url = baseUrl.apiEmpresas + '/empresas?tipo=' + type + '&numeroInscricao=' + cnpj;
       else
-        var url = baseUrl.apiEmpresas + '/empresas?tipo=CEDENTE';
+        var url = baseUrl.apiEmpresas + '/empresas?tipo=' + type;
       return $http({
         url: url,
         method: 'GET'
@@ -245,12 +245,12 @@ angular.module('wbaApp')
     };
 
     // empresas
-    api.getAll      = _getAll;
-    api.getCedentes = _getCedentes;
-    api.getById     = _getById;
-    api.save        = _save;
-    api.update      = _update;
-    api.delete      = _delete;
+    api.getAll              = _getAll;
+    api.getEmpresaByType   = _getEmpresaByType;
+    api.getById             = _getById;
+    api.save                = _save;
+    api.update              = _update;
+    api.delete              = _delete;
 
     // tipo Representantes
     api.getTipoRepresentante        = _getTipoRepresentante;

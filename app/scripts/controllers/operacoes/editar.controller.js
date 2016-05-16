@@ -13,7 +13,8 @@ angular.module('wbaApp')
   'operacao',
   'Upload',
   '$timeout',
-  function ($scope, $state, $stateParams, apiOperacoes, apiEmpresas, toaster, SweetAlert, $modal, operacao, Upload, $timeout) {
+  'uuid4',
+  function ($scope, $state, $stateParams, apiOperacoes, apiEmpresas, toaster, SweetAlert, $modal, operacao, Upload, $timeout, uuid4) {
 
     apiEmpresas.getAll().then(
       function (res) {
@@ -44,9 +45,15 @@ angular.module('wbaApp')
           $scope.loading = false;
           $scope.recebiveis = res.data;
           angular.forEach($scope.recebiveis, function (value, key) {
+            console.log(value);
             value.dpVencimento  = false;
             value.dpEmissao     = false;
             value.dpDataLimite  = false;
+            apiEmpresas.getById(value.uuidSacado).then(
+              function (res) {
+                value.uuidSacado = res.data;
+              }
+            );
           });
         },
         function (err) {
@@ -85,22 +92,16 @@ angular.module('wbaApp')
       $scope.dt = new Date();
     };
     $scope.today();
-
     $scope.clear = function () {
       $scope.dt = null;
     };
-
-    // Disable weekend selection
     $scope.disabled = function(date, mode) {
       return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
     };
-
     $scope.toggleMin = function() {
       $scope.minDate = $scope.minDate ? null : new Date();
     };
     $scope.toggleMin();
-
-
     $scope.open = function($event, instance, mode) {
       $event.preventDefault();
       $event.stopPropagation();
@@ -119,7 +120,6 @@ angular.module('wbaApp')
         instance.dpEmissao = true;
       };
     };
-
     $scope.dateOptions = {
       formatYear: 'yy',
       startingDay: 1,
@@ -156,14 +156,31 @@ angular.module('wbaApp')
         $scope.recebiveis = [{}];
       }
       else {
-        $scope.recebiveis.push({});
+        $scope.recebiveis.push({
+          ativo: true
+        });
       }
     }
 
     $scope.saveTitulo = function (titulo) {
+      titulo = _.omit(titulo, 'dpEmissao');
+      titulo = _.omit(titulo, 'dpVencimento');
+      titulo = _.omit(titulo, 'dpDataLimite');
+
+      titulo.uuidSacado = titulo.uuidSacado.id;
+      if(titulo.dateLimiteDesconto) {
+        titulo.dateLimiteDesconto = moment(titulo.dateLimiteDesconto).format('DD/MM/YYYY');
+      }
+      if(titulo.emissao) {
+        titulo.emissao = moment(titulo.emissao).format('DD/MM/YYYY');
+      }
+      if(titulo.vencimento) {
+        titulo.vencimento = moment(titulo.vencimento).format('DD/MM/YYYY');
+      }
       apiOperacoes.addRecebivel($stateParams.operacaoId, titulo).then(
         function (res) {
           toaster.pop('success','Recebível','Item adicionado a operação');
+          $state.go($state.current, {}, {reload: true});
         },
         function (err) {
           toaster.pop('error','Recebível',err.statusText);

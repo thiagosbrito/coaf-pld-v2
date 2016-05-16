@@ -8,12 +8,26 @@ angular.module('wbaApp')
     'toaster',
     function ($scope, $stateParams, apiOperacoes, SweetAlert, toaster) {
 
+      $scope.expandTars = false;
 
+      $scope.addTarifa = function () {
+        $scope.expandTars = true;
+        $scope.tarifas.push({});
+      };
+
+      $scope.getTarifasList = function () {
+        apiOperacoes.getTarifas().then(
+          function (res) {
+            $scope.listTarifas = res.data;
+          }
+        )
+      };
 
       $scope.getTarifas = function () {
         apiOperacoes.getTarifasByOperacao($stateParams.operacaoId).then(
           function (res) {
             $scope.tarifas = res.data;
+            $scope.getTarifasList();
           }
         )
       };
@@ -66,6 +80,22 @@ angular.module('wbaApp')
               return false
             }
           });
+      };
+      $scope.clearFormTarifa = function () {
+        $scope.idTarifa = null;
+        $scope.tarifa = {}
+      };
+      $scope.adicionarTarifaOperacao = function (idTarifa, valor) {
+        apiOperacoes.addTarifaToOperacao($stateParams.operacaoId, idTarifa, {valor: valor}).then(
+          function (res) {
+            toaster.pop('success','Tarifa','Tarifa adicionada à operação com sucesso');
+            $scope.getTarifas();
+            $scope.clearFormTarifa()
+          },
+          function (err) {
+            toaster.pop('error','Tarifa',err.statusText)
+          }
+        )
       };
 
       $scope.getTarifas();

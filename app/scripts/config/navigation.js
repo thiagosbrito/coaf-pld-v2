@@ -39,6 +39,16 @@ angular
             url: '#/dashboard'
           },
           {
+            label: 'Empresas',
+            iconClasses: 'ti ti-home',
+            children: [
+              {
+                label: 'Empresas',
+                url: '#/empresas/listar'
+              }
+            ]
+          },
+          {
             label: 'Comercial',
             iconClasses: 'ti ti-panel',
             children: [
@@ -90,7 +100,7 @@ angular
           // },
           {
             label: 'Operações',
-            iconClasses: 'ti ti-bolt',
+            iconClasses: 'ti ti-settings',
             children: [
               {
                 label: 'Operações',
@@ -159,10 +169,20 @@ angular
             ]
           },
           {
-            label: 'Relatórios',
-            iconClasses: 'ti ti-stats-up'
+            label: 'Segurança',
+            iconClasses: 'ti ti-lock',
+            children: [
+              {
+                label: 'Usuários e Permissões',
+                url: '#/usuarios-permissoes/organizacoes/listar'
+              }
+            ]
           },
           {
+            label: 'Relatórios',
+            iconClasses: 'ti ti-stats-up'
+          }
+          /*{
             label: 'Configurações',
             iconClasses: 'ti ti-settings',
             children: [
@@ -188,7 +208,7 @@ angular
               //   url: '#/usuarios-permissoes/grupos/listar'
               // }
             ]
-          }
+          }*/
           // ,
           // {
           //   label: 'Notificações',
