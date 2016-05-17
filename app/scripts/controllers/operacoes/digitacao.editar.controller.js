@@ -14,6 +14,30 @@ angular.module('wbaApp')
     'apiEmpresas',
     function ($scope, $state, $stateParams, operacao, SweetAlert, apiOperacoes, $modal, $log, toaster, apiEmpresas) {
 
+      $scope.getRecebiveisByOperacao = function () {
+        $scope.loading = true;
+        apiOperacoes.getRecebiveisByOperacao($stateParams.operacaoId).then(
+          function (res) {
+            $scope.loading = false;
+            $scope.recebiveis = res.data;
+            angular.forEach($scope.recebiveis, function (value, key) {
+              value.dpVencimento  = false;
+              value.dpEmissao     = false;
+              value.dpDataLimite  = false;
+              apiEmpresas.getById(value.uuidSacado).then(
+                function (res) {
+                  value.uuidSacado = res.data;
+                }
+              );
+            });
+          },
+          function (err) {
+            toaster.pop('error','Recebiveis',err.statusText);
+          }
+        )
+      }
+      $scope.getRecebiveisByOperacao();
+
       $scope.operacao = operacao;
 
       $scope.getSacados = function () {
@@ -59,10 +83,12 @@ angular.module('wbaApp')
               item.vencimento = moment(item.vencimento).format('DD/MM/YYYY');
               apiOperacoes.addRecebivel(operacaoId, item).then(
                 function (res) {
-                  console.log(res)
+                  toaster.pop('success','Recebível','Recebível adicionado à operação com sucesso');
+                  $modalInstance.dismiss('cancel');
+                  $scope.getRecebiveisByOperacao();
                 },
                 function (err) {
-                  console.log(err)
+                  toaster.pop('error','Recebível',err.statusText);
                 }
               )
             };
@@ -144,7 +170,8 @@ angular.module('wbaApp')
         titulo = _.omit(titulo, 'dpEmissao');
         titulo = _.omit(titulo, 'dpVencimento');
         titulo = _.omit(titulo, 'dpDataLimite');
-        titulo.uuidSacado = titulo.uuidSacado.id;
+        if(titulo.uuidSacado)
+          titulo.uuidSacado = titulo.uuidSacado.id;
         if(titulo.dateLimiteDesconto) {
           titulo.dateLimiteDesconto = moment(titulo.dateLimiteDesconto).format('DD/MM/YYYY');
         }
@@ -159,6 +186,7 @@ angular.module('wbaApp')
           function (res) {
             toaster.pop('success','Título','Título atualizado com sucesso');
             $state.go($state.current, {}, {reload: true});
+            $scope.getRecebiveisByOperacao();
           },
           function (err) {
             toaster.pop('error','Títulos',err.statusText);
