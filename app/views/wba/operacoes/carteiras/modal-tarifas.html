@@ -1,0 +1,33 @@
+<div class="modal-header">
+  Adicionar tarifa à carteira
+</div>
+<div class="modal-body">
+  <form class="form form-horizontal">
+    <fieldset>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Tarifa
+        </label>
+        <div class="col-md-10">
+          <select ng-model="tarifa.uuid" class="form-control"
+                  ng-options="tar.uuid as tar.codigoLancamento for tar in tarifas">
+            <option value="">Selecione...</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Valor
+        </label>
+        <div class="col-md-10">
+          <input type="text" name="valor" class="form-control" ng-model="tarifa.valor" ng-currency>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary pull-right" ng-click="saveTarifa(tarifa)">
+    <i class="fa fa-save"></i> Salvar tarifa
+  </button>
+</div>
