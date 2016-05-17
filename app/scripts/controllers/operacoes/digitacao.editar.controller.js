@@ -164,7 +164,9 @@ angular.module('wbaApp')
           }
         });
       };
-
+      $scope.addTitulo = function () {
+        $scope.recebiveis.push({ativo: true});
+      };
       $scope.updateTitulo = function (titulo) {
 
         titulo = _.omit(titulo, 'dpEmissao');
