@@ -344,8 +344,30 @@ angular.module('wbaApp')
       })
       .state('wba.operacoes.carteiras.editar',{
         url: '/editar/:carteiraId',
-        templateUrl: 'views/wba/operacoes/carteiras/editar.html' ,
+        templateUrl: 'views/wba/operacoes/carteiras/editar.html',
+        abstract: true,
+        resolve: {
+          carteira: function ($stateParams, apiOperacoes) {
+            return apiOperacoes.getCarteiraById($stateParams.carteiraId).then(
+              function (res) {
+                return res.data
+              }
+            )
+          }
+        },
+        controller: function (carteira, $scope) {
+          $scope.carteira = carteira;
+        }
+      })
+      .state('wba.operacoes.carteiras.editar.carteira',{
+        url: '/carteira',
+        templateUrl: 'views/wba/operacoes/carteiras/editar-carteira.html' ,
         controller: 'CarteirasEditarController'
+      })
+      .state('wba.operacoes.carteiras.editar.tarifas',{
+        url: '/tarifas',
+        templateUrl: 'views/wba/operacoes/carteiras/editar-carteira-tarifas.html',
+        controller: 'EditarTarifasCarteiraController'
       })
 
       .state('wba.operacoes.tarifas',{

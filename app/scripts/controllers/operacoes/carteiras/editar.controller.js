@@ -10,23 +10,16 @@ angular.module('wbaApp')
     'toaster',
     '$modal',
     'SweetAlert',
-    function ($scope, $state, $stateParams, apiOperacoes, toaster, $modal, SweetAlert) {
+    'carteira',
+    function ($scope, $state, $stateParams, apiOperacoes, toaster, $modal, SweetAlert, carteira) {
 
-      $scope.getCarteira = function () {
-        apiOperacoes.getCarteiraById($stateParams.carteiraId).then(
-          function (res) {
-            console.log(res.data);
-            $scope.carteira = res.data;
-          }
-        )
-      }
-      $scope.getCarteira();
+      $scope.carteira = carteira;
 
       apiOperacoes.getTarifas().then(
         function (res) {
           $scope.tarifas = res.data;
         }
-      )
+      );
 
       $scope.saveTarifa = function (tarifa) {
         var obj = {

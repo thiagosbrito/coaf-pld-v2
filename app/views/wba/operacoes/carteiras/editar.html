@@ -8,112 +8,26 @@
   <div class="row">
     <div class="col-md-12">
       <div class="panel panel-indigo">
+        <!--<div class="panel-heading">-->
+          <!--Atualizar carteira - {{carteira.nome}}-->
+          <!--<div class="options">-->
+            <!--<ul class="nav nav-tabs actions">-->
+              <!--<li ui-sref-active="active"><a ui-sref="wba.operacoes.carteiras.editar.carteira">Carteira</a></li>-->
+              <!--<li ui-sref-active="active" class="last"><a ui-sref="wba.operacoes.carteiras.editar.tarifas">Tarifas</a></li>-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
         <div class="panel-heading">
-          Atualizar carteira - {{carteira.nome}}
+          <h2>Carteira - {{carteira.nome}}</h2>
+          <div class="options">
+            <ul class="nav nav-tabs actions">
+              <li ui-sref-active="active"><a ui-sref="wba.operacoes.carteiras.editar.carteira">Carteira</a></li>
+              <li ui-sref-active="active" class="last"><a ui-sref="wba.operacoes.carteiras.editar.tarifas">Tarifas</a></li>
+            </ul>
+          </div>
         </div>
-        <div class="panel-body">
-          <div class="col-md-9">
-            <form role="form" class="form-horizontal">
-              <fieldset>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">Nome</label>
-                  <div class="col-md-10">
-                    <input type="text" ng-model="carteira.nome" class="form-control">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">Fator Cálculo</label>
-                  <div class="col-md-10">
-                    <input type="text" ng-model="carteira.fatorCalculo" class="form-control" ng-currency>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">Método de Cálculo Deságio</label>
-                  <div class="col-md-10">
-                    <select name="metodoCalculoDesagio" ng-model="carteira.metodoCalculoDesagio" class="form-control">
-                      <option value="">Selecione..</option>
-                      <option value="EFETIVO">Efetivo</option>
-                      <option value="NOMINAL">Nominal</option>
-                      <option value="MISTO">Misto</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">Taxa Juros Recompra Menor 30 dias</label>
-                  <div class="col-md-10">
-                    <input type="text" ng-model="carteira.taxaJurosRecompraMenor30Dias" class="form-control" ng-currency>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">Taxa Juros Recompra Maior 30Dias</label>
-                  <div class="col-md-10">
-                    <input type="text" ng-model="carteira.taxaJurosRecompraMaior30Dias" class="form-control" ng-currency>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">Confirmar títulos acima do limite</label>
-                  <div class="col-md-10">
-                    <label class="radio-inline icheck">
-                      <input icheck type="radio" ng-model="carteira.deveConfirmarTitulosPorValorAcimaLimite" ng-value="true" name="optionsRadiosInline" > Sim
-                    </label>
-                    <label class="radio-inline icheck">
-                      <input icheck type="radio" ng-model="carteira.deveConfirmarTitulosPorValorAcimaLimite" ng-value="false" name="optionsRadiosInline" > Não
-                    </label>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">Valor limite para confirmar Auto.</label>
-                  <div class="col-md-10">
-                    <input type="text" ng-model="carteira.valorLimiteParaConfirmarAutomaticamente" class="form-control" ng-currency>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-md-12">
-                    <button class="btn btn-primary pull-right" ng-click="updateCarteira(carteira)"><i class="fa fa-save"></i> Salvar</button>
-                  </div>
-                </div>
-              </fieldset>
-            </form>
-          </div>
-          <div class="col-md-3">
-            <div class="panel panel-indigo">
-              <div class="panel-heading">
-                Tarifas
-              </div>
-              <div class="panel-body">
-                <form class="form form-horizontal">
-                  <fieldset>
-                    <div class="form-group">
-                      <label class="col-md-2 control-label">
-                        Tarifa
-                      </label>
-                      <div class="col-md-10">
-                        <select ng-model="tarifa.uuid" class="form-control"
-                                ng-options="tar.uuid as tar.codigoLancamento for tar in tarifas">
-                          <option value="">Selecione...</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="col-md-2 control-label">
-                        Valor
-                      </label>
-                      <div class="col-md-10">
-                        <input type="text" name="valor" class="form-control" ng-model="tarifa.valor" ng-currency>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="col-md-10 col-md-offset-2">
-                        <button class="btn btn-primary pull-right" ng-click="saveTarifa(tarifa)">
-                          <i class="fa fa-save"></i> Salvar tarifa
-                        </button>
-                      </div>
-                    </div>
-                  </fieldset>
-                </form>
-              </div>
-            </div>
-          </div>
+        <div class="panel-body" ui-view>
+
         </div>
       </div>
     </div>

@@ -71,6 +71,17 @@ angular.module('wbaApp')
       });
     };
 
+    var _getTarifasByCarteira = function (idCarteira) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/carteiras/' + idCarteira + '/tarifas',
+        method: 'GET'
+      }).then(
+        function (res) {
+          return res
+        }
+      )
+    };
+
     // OPERACOES
     var _getOperacoes = function () {
       return $http({
@@ -301,6 +312,7 @@ angular.module('wbaApp')
     api.updateCarteira            = _updateCarteira;
     api.deleteCarteira            = _deleteCarteira;
     api.addTarifaToCarteira       = _addTarifaToCarteira;
+    api.getTarifasByCarteira      = _getTarifasByCarteira;
 
     api.getTarifas                = _getTarifas;
     api.getTarifaById             = _getTarifaById;

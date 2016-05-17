@@ -38,30 +38,32 @@ angular.module('wbaApp')
       }
     );
 
-    $scope.getRecebiveisByOperacao = function () {
-      $scope.loading = true;
-      apiOperacoes.getRecebiveisByOperacao($stateParams.operacaoId).then(
-        function (res) {
-          $scope.loading = false;
-          $scope.recebiveis = res.data;
-          angular.forEach($scope.recebiveis, function (value, key) {
-            console.log(value);
-            value.dpVencimento  = false;
-            value.dpEmissao     = false;
-            value.dpDataLimite  = false;
-            apiEmpresas.getById(value.uuidSacado).then(
-              function (res) {
-                value.uuidSacado = res.data;
-              }
-            );
-          });
-        },
-        function (err) {
-          toaster.pop('error','Recebiveis',err.statusText);
-        }
-      )
-    }
-    $scope.getRecebiveisByOperacao();
+    $scope.$on('recebivelAdded', function (value) {
+      console.log("EMIT: ",value)
+    });
+    // $scope.getRecebiveisByOperacao = function () {
+    //   $scope.loading = true;
+    //   apiOperacoes.getRecebiveisByOperacao($stateParams.operacaoId).then(
+    //     function (res) {
+    //       $scope.loading = false;
+    //       $scope.recebiveis = res.data;
+    //       angular.forEach($scope.recebiveis, function (value, key) {
+    //         value.dpVencimento  = false;
+    //         value.dpEmissao     = false;
+    //         value.dpDataLimite  = false;
+    //         apiEmpresas.getById(value.uuidSacado).then(
+    //           function (res) {
+    //             value.uuidSacado = res.data;
+    //           }
+    //         );
+    //       });
+    //     },
+    //     function (err) {
+    //       toaster.pop('error','Recebiveis',err.statusText);
+    //     }
+    //   )
+    // }
+    // $scope.getRecebiveisByOperacao();
 
     // apiOperacoes.getOperacaoById($stateParams.operacaoId).then(
     //   function (res) {
@@ -160,7 +162,7 @@ angular.module('wbaApp')
           ativo: true
         });
       }
-    }
+    };
 
     $scope.saveTitulo = function (titulo) {
       titulo = _.omit(titulo, 'dpEmissao');
