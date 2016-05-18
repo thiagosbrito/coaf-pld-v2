@@ -107,27 +107,17 @@
                               </th>
                             </tr>
                             <tr>
+                              <th>Número</th>
                               <th>Valor</th>
                               <th>Vencimento</th>
-                              <th>Número</th>
-                              <th>% Desconto</th>
-                              <th>Data limite Desconto</th>
-                              <th>Emissão</th>
-                              <th>Nosso Número</th>
-                              <th>Valor Líquido</th>
                               <th>Status</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr ng-repeat="rec in item.recebiveis">
+                              <td>{{rec.numero}}</td>
                               <td>{{rec.valor | currency}}</td>
                               <td>{{rec.vencimento | date: 'dd/MM/yyyy'}}</td>
-                              <td>{{rec.numero}}</td>
-                              <td>{{rec.percentualDesconto}}</td>
-                              <td>{{rec.dateLimiteDesconto | date: 'dd/MM/yyyy'}}</td>
-                              <td>{{rec.emissao | date: 'dd/MM/yyyy'}}</td>
-                              <td>{{rec.nossoNumero}}</td>
-                              <td>{{rec.valorLiquido | currency}}</td>
                               <td class="">
                                 <i class="fa fa-circle" ng-class="{'green': rec.ativo, 'red': !rec.ativo}"></i>
                               </td>

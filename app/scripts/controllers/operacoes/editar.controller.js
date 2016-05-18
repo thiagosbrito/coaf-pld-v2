@@ -16,6 +16,29 @@ angular.module('wbaApp')
   'uuid4',
   function ($scope, $state, $stateParams, apiOperacoes, apiEmpresas, toaster, SweetAlert, $modal, operacao, Upload, $timeout, uuid4) {
 
+    $scope.detailsOpen = false;
+
+    $scope.calcularLancamentos = function() {
+      apiOperacoes.calcularLancamentos($stateParams.operacaoId).then(
+        function (res) {
+          if (res) {
+            console.log(res);
+          }
+        },
+        function (err) {
+          console.log(err);
+        }
+      ).then(
+        apiOperacoes.getLancamentosByOperacao($stateParams.operacaoId).then(
+          function (res) {
+            $scope.lancamentos = res.data;
+          }
+        )
+      )
+    };
+
+    $scope.calcularLancamentos();
+
     apiEmpresas.getAll().then(
       function (res) {
         $scope.cedentes = res.data;
