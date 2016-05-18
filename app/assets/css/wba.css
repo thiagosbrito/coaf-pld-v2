@@ -371,3 +371,6 @@ table.table.table-striped.fix-table-vertical-alignment thead {
 .panel-width-animated {
   transition: width .6s ease !important;
 }
+
+
+.ace_editor { height: 120px }

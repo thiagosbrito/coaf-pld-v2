@@ -23,5 +23,6 @@ angular.module('wbaApp', [
   'ngScrollbars',
   'uiSwitch',
   'uuid4',
-  'ntt.TreeDnD'
+  'ntt.TreeDnD',
+  'ui.ace'
   ]);

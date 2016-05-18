@@ -1,0 +1,57 @@
+<ol class="breadcrumb">
+  <li><a ui-sref="wba.dashboard">Dashboard</a></li>
+  <li>Documentação</li>
+  <li class="active">Templates</li>
+</ol>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading">
+          <h2>Documentação</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" ng-click="novoTemplate()" tooltip="Criar template">
+              <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <p class="text-center" ng-show="templates.length == 0">
+            Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
+          </p>
+          <table class="table table-striped" ng-show="templates.length > 0">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Tipo</th>
+                <th>Carteira</th>
+                <th>Cedente</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="temp in templates">
+                <td ng-bind="temp.titulo"></td>
+                <td ng-bind="temp.descricao"></td>
+                <td ng-bind="temp.tipo_template"></td>
+                <td ng-bind="temp.uuidCarteira.nome"></td>
+                <td ng-bind="temp.uuidPessoa"></td>
+                <td width="90">
+                  <div class="btn-group pull-right">
+                    <button class="btn btn-danger" ng-click="deleteTemplate(temp)"><i class="fa fa-trash-o"></i>
+                    </button>
+                    <button class="btn btn-primary" ng-click="editTemplate(temp)"><i class="fa fa-pencil"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- container-fluid -->

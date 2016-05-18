@@ -1,0 +1,105 @@
+<div class="modal-header">
+  Criar Template
+</div>
+<div class="modal-body">
+  <form role="form" class="form-horizontal">
+    <fieldset>
+      <div class="form-group">
+        <label class="control-label col-md-2">
+          Tipo
+        </label>
+        <div class="col-md-10">
+          <select class="form-control" ng-model="template.tipo_template">
+            <option value="">Selecione...</option>
+            <option value="CADASTRO">Cadastro</option>
+            <option value="OPERACAO">Operação</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2">
+          Título
+        </label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" ng-model="template.titulo">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2">
+          Descrição
+        </label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" ng-model="template.descricao">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Json:
+        </label>
+        <div class="col-md-10">
+          <div ui-ace="{
+            useWrapMode : true,
+            showGutter: true,
+            mode: 'javascript',
+            onLoad: aceLoaded,
+            onChange: aceChanged
+          }"
+               ng-model="template.json_schema"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2">
+          Path Relatório
+        </label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" ng-model="template.path_relatorio">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2">
+          Tipo Pessoa
+        </label>
+        <div class="col-md-10">
+          <select ng-model="template.tipo_pessoa" class="form-control">
+            <option value=""></option>
+            <option value="SACADO">Sacado</option>
+            <option value="CEDENTE">Cedente</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2">
+          Carteira
+        </label>
+        <div class="col-md-10">
+          <input
+            type="text"
+            ng-model="template.uuidCarteira"
+            typeahead="cat as cat.nome for cat in carteiras"
+            typeahead-loading="loadingLocations"
+            class="form-control">
+          <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2">
+          Pessoa
+        </label>
+        <div class="col-md-10">
+          <input
+            type="text"
+            ng-model="template.uuidPessoa"
+            typeahead="emp as emp.nomeFantasia for emp in empresas"
+            typeahead-loading="loadingLocations"
+            class="form-control">
+          <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()"><i class="fa fa-times"></i> Cancelar</button>
+  <button class="btn btn-primary pull-right" ng-click="update(template)"><i class="fa fa-save"></i> Salvar</button>
+</div>
