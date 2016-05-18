@@ -369,6 +369,11 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/operacoes/carteiras/editar-carteira-tarifas.html',
         controller: 'EditarTarifasCarteiraController'
       })
+      .state('wba.operacoes.carteiras.editar.templates',{
+        url: '/templates',
+        templateUrl: 'views/wba/operacoes/carteiras/editar-carteira-templates.html',
+        controller: 'EditarTemplatesCarteiraController'
+      })
 
       .state('wba.operacoes.tarifas',{
         url: '/tarifas',

@@ -70,8 +70,9 @@ angular.module('wbaApp')
     };
     var _getTemplateByCarteira = function (carteiraId) {
       return $http({
-        url: baseUrl.apiDocumentacao + '/templates/carteira/' + carteiraId + '/buscarTemplates',
-        method: 'GET'
+        url: baseUrl.apiDocumentacao + '/templates/carteira/' + carteiraId,
+        method: 'GET',
+        header : {'Content-Type' : 'application/json; charset=UTF-8'}
       }).then(
         function (result) {
           return result

@@ -1,0 +1,29 @@
+<div class="row">
+  <!--<div class="col-md-12">-->
+    <!--<button class="btn btn-primary pull-right" ng-click="addTarifa()">-->
+      <!--<i class="fa fa-plus"></i> Adicionar tarifa-->
+    <!--</button>-->
+  <!--</div>-->
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Título</th>
+        <th>Descrição</th>
+        <th>Tipo</th>
+        <th>Carteira</th>
+        <th>Cedente</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="temp in templates">
+        <td ng-bind="temp.titulo"></td>
+        <td ng-bind="temp.descricao"></td>
+        <td ng-bind="temp.tipo_template"></td>
+        <td ng-bind="temp.uuidCarteira.nome"></td>
+        <td ng-bind="temp.uuidPessoa"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -14,11 +14,20 @@ angular.module('wbaApp')
     'SweetAlert',
     function ($scope, $state, $stateParams, toaster, $modal, apiEmpresas, apiOperacoes, apiDocumentacao, uuid4, SweetAlert) {
 
-
+      $scope.getCarteiras = function () {
+        apiOperacoes.getCarteiras().then(
+          function (res) {
+            $scope.carteiras = res.data;
+          }
+        )
+      }();
       $scope.getTemplates = function () {
         apiDocumentacao.getTemplates().then(
           function (res) {
-            $scope.templates = res.data
+            $scope.templates = res.data;
+            angular.forEach($scope.templates, function (value) {
+              value.uuidCarteira = _.findWhere($scope.carteiras, {uuid: value.uuidCarteira});
+            });
           },
           function (err) {
             toaster.pop('error','Templates',err.statusText)
