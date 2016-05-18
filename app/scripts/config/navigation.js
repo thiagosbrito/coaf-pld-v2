@@ -179,6 +179,16 @@ angular
             ]
           },
           {
+            label: "Documentação",
+            iconClasses: "ti ti-file",
+            children: [
+              {
+                label: "Templates",
+                url: "#/documentacao/templates/listar"
+              }
+            ]
+          },
+          {
             label: 'Relatórios',
             iconClasses: 'ti ti-stats-up'
           }

@@ -493,5 +493,20 @@ angular.module('wbaApp')
         url: '/notificacao'
       })
 
+      // Routes for Documentacao Module's
+      .state('wba.documentacao', {
+        url: '/documentacao',
+        template: '<div ui-view=""></div>'
+      })
+
+      .state('wba.documentacao.templates',{
+        url: '/templates',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.documentacao.templates.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/documentacao/templates/listar.html',
+        controller: 'TemplatesListarController'
+      })
   }
 ])
