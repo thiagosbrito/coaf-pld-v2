@@ -15,9 +15,9 @@
             <thead>
             <th ng-if="!expandTars">Cód</th>
             <th>Descrição</th>
-            <th ng-if="!expandTars">Escopo</th>
+
             <th ng-if="!expandTars">Ordem</th>
-            <th ng-if="!expandTars">Tipo</th>
+
             <th>Valor</th>
             <th ng-if="!expandTars"></th>
             </thead>
@@ -25,10 +25,13 @@
             <tr ng-repeat="tar in tarifas">
               <td ng-if="!expandTars">{{tar.codigoLancamento}}</td>
               <td>{{tar.descricao}}</td>
-              <td ng-if="!expandTars">{{tar.escopo}}</td>
+
               <td ng-if="!expandTars">{{tar.ordem}}</td>
-              <td ng-if="!expandTars">{{tar.tipo}}</td>
-              <td>{{tar.valor | currency}}</td>
+
+              <td>
+                <span ng-if="tar.tipo == 'VALOR'">{{tar.valor | currency}}</span>
+                <span ng-if="tar.tipo == 'PORCENTAGEM'">{{tar.valor}}%</span>
+              </td>
               <td ng-if="!expandTars">
                 <button class="btn btn-danger-alt" ng-click="deleteTarifa(tar.uuid)"><i class="fa fa-trash-o"></i></button>
               </td>
