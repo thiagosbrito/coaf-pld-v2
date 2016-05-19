@@ -26,7 +26,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/bancos',
         method: 'POST',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results){
         return results
       })
@@ -35,7 +38,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/bancos',
         method: 'PUT',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results){
         return results
       })
@@ -44,7 +50,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/bancos',
         method: 'DELETE',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results){
         return results
       })
@@ -72,15 +81,22 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/bancos/' + bancoId + '/alineas',
         method: 'POST',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results) {
         return results
       })
     };
-    var _deleteAlinea = function (bancoId) {
+    var _deleteAlinea = function (bancoId, data) {
       return $http({
         url: baseUrl.apiFinanceiro + '/bancos/' + bancoId + '/alineas',
-        method: 'DELETE'
+        method: 'DELETE',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then(function (results) {
         return results
       })
@@ -108,7 +124,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/bancos/' + bancoId + '/instrucoesCobranca',
         method: 'POST',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results) {
         return results
       })
@@ -117,15 +136,22 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/bancos/' + bancoId + '/instrucoesCobranca',
         method: 'PUT',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results) {
         return results
       })
     };
-    var _deleteInstrucoes = function (bancoId) {
+    var _deleteInstrucoes = function (bancoId, data) {
       return $http({
         url: baseUrl.apiFinanceiro + '/bancos/' + bancoId + '/instrucoesCobranca',
-        method: 'DELETE'
+        method: 'DELETE',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then(function (results) {
         return results
       })
@@ -153,7 +179,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/codigos-lancamentos',
         method: 'POST',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results){
         return results
       })
@@ -162,7 +191,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/codigos-lancamentos',
         method: 'PUT',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results){
         return results
       })
@@ -171,7 +203,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/codigos-lancamentos',
         method: 'DELETE',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results){
         return results
       })
@@ -199,7 +234,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/contas',
         method: 'POST',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results){
         return results
       })
@@ -208,7 +246,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/contas',
         method: 'PUT',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results){
         return results
       })
@@ -217,7 +258,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/contas',
         method: 'DELETE',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results){
         return results
       })
@@ -245,7 +289,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/contas/' + contaId + '/informacao-bancaria',
         method: 'POST',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results) {
         return results
       })
@@ -254,7 +301,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/contas/' + contaId + '/informacao-bancaria',
         method: 'PUT',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results) {
         return results
       })
@@ -263,7 +313,10 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiFinanceiro + '/contas/' + contaId + '/informacao-bancaria',
         method: 'DELETE',
-        data: data
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
       }).then( function (results) {
         return results
       })
