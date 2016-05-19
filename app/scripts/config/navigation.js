@@ -144,27 +144,28 @@ angular
             ]
           },
           {
-            label: 'Cobrança',
+            label: 'Financeiro',
             iconClasses: 'ti ti-money',
             children: [
-              // {
-              //   label: 'Boletos',
-              //   url: '#/cobranca/boletos/inicio'
-              // },
               {
-                label: 'Cobranças',
-                url: '#/cobranca/listar'
+                label: 'Bancos',
+                url: '#/financeiro/bancos/listar'
+              },
+              {
+                label: 'Contas',
+                url: '#/financeiro/contas/listar'
+              },
+              {
+                label: 'Lançamentos',
+                url: '#/financeiro/lancamentos/listar'
+              },
+              {
+                label: 'Instruções',
+                url: '#/financeiro/instrucoes/listar'
               }
               // {
-              //   label: 'Arquivos Eletrônicos',
-              //   children: [
-              //     {
-              //       label: 'Remessa'
-              //     },
-              //     {
-              //       label: 'Retorno'
-              //     }
-              //   ]
+              //   label: 'Cobranças',
+              //   url: '#/cobranca/listar'
               // }
             ]
           },
