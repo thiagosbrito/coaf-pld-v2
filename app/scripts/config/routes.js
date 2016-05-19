@@ -513,5 +513,40 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/documentacao/templates/listar.html',
         controller: 'TemplatesListarController'
       })
+
+      // BANCOS
+
+      .state('wba.financeiro',{
+        url: '/financeiro',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.financeiro.bancos',{
+        url: '/bancos',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.financeiro.bancos.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/financeiro/bancos/listar.html',
+        controller: 'BancosListarController'
+      })
+      .state('wba.financeiro.bancos.editar',{
+        url: '/editar/:bancoId',
+        templateUrl: 'views/wba/financeiro/bancos/editar.html'
+      })
+      .state('wba.financeiro.bancos.editar.banco',{
+        url: '/banco',
+        templateUrl: 'views/wba/financeiro/bancos/editar-banco.html',
+        controller: 'BancoEditarController'
+      })
+      .state('wba.financeiro.bancos.editar.alineas',{
+        url: '/alineas',
+        templateUrl: 'views/wba/financeiro/bancos/editar-banco-alineas.html',
+        controller: 'AlineasEditarController'
+      })
+      .state('wba.financeiro.bancos.editar.instrucoes',{
+        url: '/instrucoes',
+        templateUrl: 'views/wba/financeiro/bancos/editar-banco-instrucoes.html',
+        controller: 'InstrucoesEditarController'
+      })
   }
-])
+]);

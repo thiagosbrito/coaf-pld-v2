@@ -1,0 +1,45 @@
+<div class="modal-header">
+  Cadastrar Alinea
+</div>
+<div class="modal-body">
+  <form class="form form-horizontal">
+    <fieldset>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Código
+        </label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" ng-model="instrucao.codigo">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Descrição
+        </label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" ng-model="instrucao.descricao">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Banco
+        </label>
+        <div class="col-md-10">
+          <input
+            type="text"
+            ng-model="instrucao.uuidBanco"
+            placeholder="Selecione o banco.."
+            typeahead="bnc as bnc.nome for bnc in bancos | filter: $viewValue"
+            typeahead-loading="loadingLocations"
+            class="form-control"
+            disabled>
+          <i ng-show="loadingLocations" class="pull-right glyphicon glyphicon-refresh"></i>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()"><i class="fa fa-times"></i> Cancelar</button>
+  <button class="btn btn-primary pull-right" ng-click="save(instrucao)"><i class="fa fa-save"></i> Salvar</button>
+</div>

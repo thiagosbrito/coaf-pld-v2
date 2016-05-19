@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-primary pull-right" ng-click="addInstrucao()">
+      <i class="fa fa-plus"></i> Adicionar Instrução
+    </button>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Descrição</th>
+    <th>Reapresentável</th>
+    <th>Banco</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="ins in instrucoes">
+    <td ng-bind="ins.codigo"></td>
+    <td ng-bind="ins.descricao"></td>
+    <td>{{ins.uuidBanco}}</td>
+    <td>
+      <div class="btn-group">
+
+        <button class="btn btn-danger-alt" ng-click="deleteInstrucao(ins)">
+          <i class="fa fa-trash-o"></i>
+        </button>
+        <button class="btn btn-primary" ng-click="editInstrucao(ins)">
+          <i class="fa fa-pencil"></i>
+        </button>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

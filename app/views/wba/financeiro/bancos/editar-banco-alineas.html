@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-primary pull-right" ng-click="addAlinea()">
+      <i class="fa fa-plus"></i> Adicionar Alinea
+    </button>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Reapresentável</th>
+      <th>Banco</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="al in alineas">
+      <td ng-bind="al.descricao"></td>
+      <td ng-bind="al.reapresentavel"></td>
+      <td ng-bind="al.uuidBanco.nome"></td>
+      <td>
+        <button class="btn btn-danger" ng-click="deleteAlineas(al)">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

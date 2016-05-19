@@ -1,0 +1,35 @@
+<form role="form" class="form form-horizontal">
+  <fieldset>
+    <div class="form-group">
+      <label for="" class="col-md-2 control-label">
+        Nome
+      </label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" ng-model="banco.nome">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="col-md-2 control-label">
+        Número
+      </label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" ng-model="banco.numero">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="" class="col-md-2 control-label">
+        Ativo
+      </label>
+      <div class="col-md-10">
+        <switch id="enabled" name="enabled" ng-model="banco.ativo" class="green"></switch>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-10 col-md-offset-2">
+        <button class="btn btn-primary pull-right" ng-click="update(banco)">
+          <i class="fa fa-save"></i> Atualizar
+        </button>
+      </div>
+    </div>
+  </fieldset>
+</form>
