@@ -81,10 +81,10 @@ angular.module('wbaApp')
           },
           function(isConfirm) {
             if (isConfirm) {
-              alinea.uuidBanco = alinea.uuidBanco.uuid;
-              apiFinanceiro.deleteAlinea(alinea).then(
+              apiFinanceiro.deleteAlinea(alinea.uuidBanco, alinea).then(
                 function (res) {
                   SweetAlert.swal("Excluído", "Seu registro foi excluído com sucesso.", "success");
+                  $scope.getAlineas();
                 }
               );
             } else {

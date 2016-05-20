@@ -7,7 +7,7 @@ angular.module('wbaApp')
     '$modal',
     'SweetAlert',
     'toaster',
-    'apiFinanciero',
+    'apiFinanceiro',
     function ($scope, $state, $stateParams, $modal, SweetAlert, toaster, apiFinanceiro) {
 
       $scope.getContas = function () {
@@ -22,7 +22,7 @@ angular.module('wbaApp')
       };
       $scope.getContas();
       $scope.getInfos = function () {
-        apiFinanceiro.getInstrucoes($stateParams.bancoId).then(
+        apiFinanceiro.getInfo($stateParams.bancoId).then(
           function (res) {
             $scope.instrucoes = res.data;
             angular.forEach($scope.instrucoes, function (value){
@@ -37,16 +37,17 @@ angular.module('wbaApp')
       $scope.getInfos();
       $scope.addInfo = function () {
         var modalInstance = $modal.open({
-          templateUrl: 'views/wba/financeiro/bancos/modal-add-instrucao.html',
+          templateUrl: 'views/wba/financeiro/contas/modal-add-info.html',
           resolve: {
-            bancos: function () {
-              return $scope.bancos
+            contas: function () {
+              return $scope.contas
             }
           },
-          controller: function ($scope, $modalInstance, bancos, $stateParams) {
-            $scope.bancos = bancos;
-            $scope.instrucao = {};
-            $scope.instrucao.uuidBanco = _.findWhere(bancos, {uuid: $stateParams.bancoId});
+          controller: function ($scope, $modalInstance, contas, $stateParams) {
+            $scope.contas = contas;
+            $scope.info = {};
+            $scope.info.uuidConta = _.findWhere(contas, {uuid: $stateParams.contaId});
+            $scope.info.ativo = true;
             $scope.save = function (item) {
               $modalInstance.close(item);
             };
@@ -57,10 +58,10 @@ angular.module('wbaApp')
         });
         modalInstance.result.then(
           function (item) {
-            if(item.uuidBanco){
-              item.uuidBanco = item.uuidBanco.uuid
+            if(item.uuidConta){
+              item.uuidConta = item.uuidConta.uuid
             }
-            apiFinanceiro.addInstrucoes(item.uuidBanco, item).then(
+            apiFinanceiro.addInstrucoes(item.uuidConta, item).then(
               function (res) {
                 toaster.pop('success','Instrução de Cobrança','Instrução de Cobrança cadastrada com sucesso');
                 $scope.getInstrucoes();
@@ -72,7 +73,7 @@ angular.module('wbaApp')
           }
         );
       };
-      $scope.editInfo = function (instrucao) {
+      $scope.editInfo = function (info) {
         var modalInstance = $modal.open({
           templateUrl: 'views/wba/financeiro/bancos/modal-edit-instrucao.html',
           resolve: {

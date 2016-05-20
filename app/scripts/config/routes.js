@@ -565,11 +565,11 @@ angular.module('wbaApp')
       .state('wba.financeiro.contas.editar.conta',{
         url: '/conta',
         templateUrl: 'views/wba/financeiro/contas/editar-conta.html',
-        controller: 'ContaEditarController'
+        controller: 'ContasEditarController'
       })
       .state('wba.financeiro.contas.editar.info',{
         url: '/informacao-bancaria',
-        templateUrl: 'views/wba/financeiro/contas/editar-conta-info.html',
+        templateUrl: 'views/wba/financeiro/contas/editar-info.html',
         controller: 'ContasInfoEditarController'
       })
 

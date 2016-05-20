@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-12">
+    <button class="btn btn-primary pull-right" ng-click="addInfo()">
+      <i class="fa fa-plus"></i> Adicionar informações
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Agência</th>
+        <th>Número</th>
+        <th>Ativo</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="inf in infos">
+        <td ng-bind="inf.agencia"></td>
+        <td ng-bind="inf.numero"></td>
+        <td>
+          <i class="fa" ng-class="{'fa-times red': !inf.ativo, 'fa-check green': inf.ativo}"></i>
+        </td>
+        <td width="80">
+          <div class="btn-group pull-right">
+            <button class="btn btn-danger-alt" ng-click="deleteInfo(inf)"><i class="fa fa-trash-o"></i></button>
+            <button class="btn btn-primary" ng-click="editInfo(inf)"><i class="fa fa-pencil"></i></button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
