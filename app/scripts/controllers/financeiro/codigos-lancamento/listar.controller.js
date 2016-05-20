@@ -36,10 +36,10 @@ angular.module('wbaApp')
         });
         modalInstance.result.then(
           function (item) {
-            apiFinanceiro.addBanco(item).then(
+            apiFinanceiro.addCodigo(item).then(
               function (res) {
                 toaster.pop('success','Códigos de Lançamento','Código cadastrado com sucesso');
-                $scope.getBancos();
+                $scope.getCodigos();
               },
               function (err) {
                 toaster.pop('error','Códigos de Lançamento',err.statusText);
@@ -62,13 +62,13 @@ angular.module('wbaApp')
         });
         modalInstance.result.then(
           function (item) {
-            apiFinanceiro.addBanco(item).then(
+            apiFinanceiro.updateCodigo(item).then(
               function (res) {
                 toaster.pop('success','Códigos de Lançamento','Código atualizado com sucesso');
-                $scope.getBancos();
+                $scope.getCodigos();
               },
               function (err) {
-                toaster.pop('error','Bancos',err.statusText);
+                toaster.pop('error','Códigos',err.statusText);
               }
             )
           }
