@@ -156,8 +156,8 @@ angular
                 url: '#/financeiro/contas/listar'
               },
               {
-                label: 'Lançamentos',
-                url: '#/financeiro/lancamentos/listar'
+                label: 'Códigos de Lançamento',
+                url: '#/financeiro/codigos-lancamento/listar'
               },
               {
                 label: 'Instruções',

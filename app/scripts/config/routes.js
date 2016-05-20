@@ -548,5 +548,39 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/financeiro/bancos/editar-banco-instrucoes.html',
         controller: 'InstrucoesEditarController'
       })
+
+      .state('wba.financeiro.contas',{
+        url: '/contas',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.financeiro.contas.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/financeiro/contas/listar.html',
+        controller: 'ContasListarController'
+      })
+      .state('wba.financeiro.contas.editar',{
+        url: '/editar/:contaId',
+        templateUrl: 'views/wba/financeiro/contas/editar.html'
+      })
+      .state('wba.financeiro.contas.editar.conta',{
+        url: '/conta',
+        templateUrl: 'views/wba/financeiro/contas/editar-conta.html',
+        controller: 'ContaEditarController'
+      })
+      .state('wba.financeiro.contas.editar.info',{
+        url: '/informacao-bancaria',
+        templateUrl: 'views/wba/financeiro/contas/editar-conta-info.html',
+        controller: 'ContasInfoEditarController'
+      })
+
+      .state('wba.financeiro.codigos',{
+        url: '/codigos-lancamento',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.financeiro.codigos.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/financeiro/codigos-lancamento/listar.html',
+        controller: 'CodigosListarController'
+      })
   }
 ]);

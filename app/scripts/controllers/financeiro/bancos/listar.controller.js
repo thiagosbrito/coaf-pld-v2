@@ -21,7 +21,6 @@ angular.module('wbaApp')
         )
       };
       $scope.getBancos();
-
       $scope.addBanco = function () {
         var modalInstance = $modal.open({
           templateUrl: 'views/wba/financeiro/bancos/modal-add-banco.html',
@@ -48,7 +47,6 @@ angular.module('wbaApp')
           }
         );
       };
-
       $scope.editBanco = function (banco) {
         var modalInstance = $modal.open({
           templateUrl: 'views/wba/financeiro/bancos/modal-edit-banco.html',
@@ -81,7 +79,6 @@ angular.module('wbaApp')
           }
         );
       };
-
       $scope.deleteBanco = function (banco) {
         SweetAlert.swal({
             title: "Você tem certeza?",

@@ -1,23 +1,27 @@
 'use strict';
 angular.module('wbaApp')
-  .controller('InstrucoesEditarController',[
+  .controller('ContasInfoEditarController',[
     '$scope',
+    "$state",
     '$stateParams',
-    '$state',
-    'apiFinanceiro',
     '$modal',
     'SweetAlert',
     'toaster',
-    function ($scope, $stateParams, $state, apiFinanceiro, $modal, SweetAlert, toaster) {
+    'apiFinanciero',
+    function ($scope, $state, $stateParams, $modal, SweetAlert, toaster, apiFinanceiro) {
 
-      $scope.getBancos = function () {
-        apiFinanceiro.getBancos().then(
+      $scope.getContas = function () {
+        apiFinanceiro.getContas().then(
           function (res) {
-            $scope.bancos = res.data
+            $scope.contas = res.data
+          },
+          function (err) {
+            toaster.pop('error','Contas',err.statusText)
           }
-        );
-      }();
-      $scope.getInstrucoes = function () {
+        )
+      };
+      $scope.getContas();
+      $scope.getInfos = function () {
         apiFinanceiro.getInstrucoes($stateParams.bancoId).then(
           function (res) {
             $scope.instrucoes = res.data;
@@ -30,8 +34,8 @@ angular.module('wbaApp')
           }
         )
       };
-      $scope.getInstrucoes();
-      $scope.addInstrucao = function () {
+      $scope.getInfos();
+      $scope.addInfo = function () {
         var modalInstance = $modal.open({
           templateUrl: 'views/wba/financeiro/bancos/modal-add-instrucao.html',
           resolve: {
@@ -68,7 +72,7 @@ angular.module('wbaApp')
           }
         );
       };
-      $scope.editInstrucao = function (instrucao) {
+      $scope.editInfo = function (instrucao) {
         var modalInstance = $modal.open({
           templateUrl: 'views/wba/financeiro/bancos/modal-edit-instrucao.html',
           resolve: {
@@ -108,5 +112,6 @@ angular.module('wbaApp')
           }
         );
       };
+
     }
   ]);

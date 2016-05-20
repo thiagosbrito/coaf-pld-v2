@@ -1,0 +1,28 @@
+<ol class="breadcrumb">
+  <li><a ui-sref="wba.dashboard">Dashboard</a></li>
+  <li>Financeiro</li>
+  <li class="active">Contas</li>
+</ol>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading">
+          <h2>Conta</h2>
+          <div class="options">
+            <ul class="nav nav-tabs actions">
+              <li ui-sref-active="active"><a ui-sref="wba.financeiro.contas.editar.conta">Banco</a></li>
+              <li ui-sref-active="active" class="last"><a ui-sref="wba.financeiro.contas.editar.infos">Alineas</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel-body" ui-view>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- container-fluid -->

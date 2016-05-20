@@ -1,0 +1,56 @@
+<ol class="breadcrumb">
+  <li><a ui-sref="wba.dashboard">Dashboard</a></li>
+  <li>Financeiro</li>
+  <li class="active">Contas</li>
+</ol>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading">
+          <h2>Contas</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" ng-click="addConta()" tooltip="Criar conta">
+              <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <p class="text-center" ng-show="contas.length == 0">
+            Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
+          </p>
+          <table class="table table-striped" ng-show="contas.length > 0">
+            <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Número</th>
+              <th width="80" class="text-center">Ativo</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="cnt in contas">
+              <td ng-bind="cnt.nome"></td>
+              <td ng-bind="cnt.numero"></td>
+              <td class="text-center">
+                <i class="fa" ng-class="{'fa-times red': !cnt.ativo, 'fa-check green': cnt.ativo}"></i>
+              </td>
+              <!--<td ng-bind="temp.uuidPessoa"></td>-->
+              <td width="90">
+                <div class="btn-group pull-right">
+                  <button class="btn btn-danger-alt" ng-click="deleteConta(cnt)"><i class="fa fa-trash-o"></i>
+                  </button>
+                  <button class="btn btn-primary" ui-sref="wba.financeiro.contas.editar.conta({contaId: cnt.uuid})"><i class="fa fa-pencil"></i></button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- container-fluid -->
