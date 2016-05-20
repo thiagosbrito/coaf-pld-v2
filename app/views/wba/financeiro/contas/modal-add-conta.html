@@ -1,0 +1,68 @@
+<div class="modal-header">
+  Cadastrar Conta
+</div>
+<div class="modal-body">
+  <form role="form" class="form form-horizontal">
+    <fieldset>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Nome
+        </label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" ng-model="conta.nome">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Tipo Conta
+        </label>
+        <div class="col-md-10">
+          <select class="form-control" ng-model="conta.tipoConta">
+            <option value=""></option>
+            <option value="CORRENTE">Conta corrente</option>
+            <option value="POUPANCA">Conta poupança</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Banco
+        </label>
+        <div class="col-md-10">
+          <input
+            type="text"
+            ng-model="conta.uuidBanco"
+            placeholder="Selecione o banco.."
+            typeahead="bnc as bnc.nome for bnc in bancos | filter: $viewValue"
+            typeahead-loading="loadingLocations"
+            class="form-control">
+          <i ng-show="loadingLocations" class="pull-right glyphicon glyphicon-refresh"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Saldo
+        </label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" ng-model="conta.saldo" ng-currency>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Ativo
+        </label>
+        <div class="col-md-10">
+          <switch id="enabled" name="enabled" ng-model="conta.ativo" class="green"></switch>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()">
+    <i class="fa fa-times"></i> Cancelar
+  </button>
+  <button class="btn btn-primary pull-right" ng-click="save(conta)">
+    <i class="fa fa-save"></i> Salvar
+  </button>
+</div>

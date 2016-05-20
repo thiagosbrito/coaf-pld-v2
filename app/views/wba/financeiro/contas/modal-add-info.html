@@ -1,0 +1,57 @@
+<div class="modal-header">
+  Cadastrar Informações Bancárias
+</div>
+<div class="modal-body">
+  <form role="form" class="form form-horizontal">
+    <fieldset>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Agência
+        </label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" ng-model="info.agencia">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Número
+        </label>
+        <div class="col-md-10">
+          <input type="text" ng-model="info.numero" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Conta
+        </label>
+        <div class="col-md-10">
+          <input
+            type="text"
+            ng-model="alinea.uuidBanco"
+            placeholder="Selecione a conta.."
+            typeahead="cnt as cnt.nome for cnt in contas | filter: $viewValue"
+            typeahead-loading="loadingLocations"
+            class="form-control"
+            disabled>
+          <i ng-show="loadingLocations" class="pull-right glyphicon glyphicon-refresh"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          Ativo
+        </label>
+        <div class="col-md-10">
+          <switch id="enabled" name="enabled" ng-model="info.ativo" class="green"></switch>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()">
+    <i class="fa fa-times"></i> Cancelar
+  </button>
+  <button class="btn btn-primary pull-right" ng-click="save(info)">
+    <i class="fa fa-save"></i> Salvar
+  </button>
+</div>
