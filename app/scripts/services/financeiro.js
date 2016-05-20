@@ -161,7 +161,7 @@ angular.module('wbaApp')
 
     var _getCodigos = function () {
       return $http({
-        url: baseUrl.apiFinanceiro + '/codigos-lancamentos',
+        url: baseUrl.apiFinanceiro + '/codigos-lancamento',
         method: 'GET'
       }).then(function (results) {
         return results;
@@ -169,7 +169,7 @@ angular.module('wbaApp')
     };
     var _getCodigoById = function (codigoId) {
       return $http({
-        url: baseUrl.apiFinanceiro + '/codigos-lancamentos/' + codigoId,
+        url: baseUrl.apiFinanceiro + '/codigos-lancamento/' + codigoId,
         method: 'GET'
       }).then( function (results){
         return results
@@ -177,7 +177,7 @@ angular.module('wbaApp')
     };
     var _addCodigo = function (data) {
       return $http({
-        url: baseUrl.apiFinanceiro + '/codigos-lancamentos',
+        url: baseUrl.apiFinanceiro + '/codigos-lancamento',
         method: 'POST',
         data: data,
         headers: {
@@ -189,7 +189,7 @@ angular.module('wbaApp')
     };
     var _updateCodigo = function (data) {
       return $http({
-        url: baseUrl.apiFinanceiro + '/codigos-lancamentos',
+        url: baseUrl.apiFinanceiro + '/codigos-lancamento',
         method: 'PUT',
         data: data,
         headers: {
@@ -201,7 +201,7 @@ angular.module('wbaApp')
     };
     var _deleteCodigo = function (data) {
       return $http({
-        url: baseUrl.apiFinanceiro + '/codigos-lancamentos',
+        url: baseUrl.apiFinanceiro + '/codigos-lancamento',
         method: 'DELETE',
         data: data,
         headers: {

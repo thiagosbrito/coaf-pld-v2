@@ -572,5 +572,15 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/financeiro/contas/editar-conta-info.html',
         controller: 'ContasInfoEditarController'
       })
+
+      .state('wba.financeiro.codigos',{
+        url: '/codigos-lancamento',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.financeiro.codigos.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/financeiro/codigos-lancamento/listar.html',
+        controller: 'CodigosListarController'
+      })
   }
 ]);

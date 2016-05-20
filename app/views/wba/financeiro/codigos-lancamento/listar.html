@@ -1,0 +1,58 @@
+<ol class="breadcrumb">
+  <li><a ui-sref="wba.dashboard">Dashboard</a></li>
+  <li>Financeiro</li>
+  <li class="active">Códigos de Lançamento</li>
+</ol>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading">
+          <h2>Códigos de Lançamento</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" ng-click="addCodigo()" tooltip="Criar código de lançamento">
+              <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <p class="text-center" ng-show="codigos.length == 0">
+            Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
+          </p>
+          <table class="table table-striped" ng-show="codigos.length > 0">
+            <thead>
+            <tr>
+              <th>Código</th>
+              <th>Código Contábil</th>
+              <th>Descrição</th>
+              <th width="80" class="text-center">Ativo</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="cod in codigo">
+              <td ng-bind="cod.codigo"></td>
+              <td ng-bind="cod.codigoContabil"></td>
+              <td ng-bind="cod.descricao"></td>
+              <td class="text-center">
+                <i class="fa" ng-class="{'fa-times red': !cod.ativo, 'fa-check green': cod.ativo}"></i>
+              </td>
+              <!--<td ng-bind="temp.uuidPessoa"></td>-->
+              <td width="90">
+                <div class="btn-group pull-right">
+                  <button class="btn btn-danger-alt" ng-click="deleteCodigo(cod)"><i class="fa fa-trash-o"></i>
+                  </button>
+                  <button class="btn btn-primary" ng-click="editCodigo(cod)"><i class="fa fa-pencil"></i></button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- container-fluid -->
