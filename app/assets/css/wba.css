@@ -374,3 +374,24 @@ table.table.table-striped.fix-table-vertical-alignment thead {
 
 
 .ace_editor { height: 120px }
+
+.row.vertical-divider {
+  overflow: hidden;
+}
+.row.vertical-divider > div[class^="col-"] {
+  text-align: center;
+  padding-bottom: 100px;
+  margin-bottom: -100px;
+  border-left: 1px solid #F2F7F9;
+  border-right: 1px solid #F2F7F9;
+}
+.row.vertical-divider div[class^="col-"]:first-child {
+  border-left: none;
+}
+.row.vertical-divider div[class^="col-"]:last-child {
+  border-right: none;
+}
+.fix-switch {
+  float: left;
+  top: 4px !important;
+}

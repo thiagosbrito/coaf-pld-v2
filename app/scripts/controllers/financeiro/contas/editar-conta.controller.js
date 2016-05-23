@@ -7,7 +7,13 @@ angular.module('wbaApp')
     'toaster',
     'apiFinanceiro',
     function ($scope, $state, $stateParams, toaster, apiFinanceiro) {
-      $scope.addInfo = false;
+      $scope.openInfoBox = false;
+
+      $scope.addInfo = function () {
+        $scope.openInfoBox = true;
+        $scope.info = {};
+        $scope.info.ativo = true;
+      };
 
       $scope.getInfo = function () {
         apiFinanceiro.getInfo($stateParams.contaId).then(
