@@ -20,19 +20,27 @@ angular.module('wbaApp')
         )
       }
       $scope.getAlineas();
+      $scope.getBancos = function () {
+        apiFinanceiro.getBancos().then(
+          function (res) {
+            $scope.bancos = res.data
+          }
+        );
+      }();
 
       $scope.addAlinea = function () {
         var modalInstance = $modal.open({
           templateUrl: 'views/wba/financeiro/bancos/modal-add-alinea.html',
-          controller: function ($scope, $modalInstance, apiFinanceiro) {
+          resolve: {
+            bancos: function () {
+              return $scope.bancos
+            }
+          },
+          controller: function ($scope, $modalInstance, apiFinanceiro, bancos) {
+            $scope.bancos = bancos;
             $scope.alinea = {};
             $scope.alinea.reapresentavel = true;
-            apiFinanceiro.getBancos().then(
-              function (res) {
-                $scope.bancos = res.data
-              }
-            );
-
+            $scope.alinea.uuidBanco = _.findWhere(bancos,{uuid: $stateParams.bancoId});
             $scope.save = function (item) {
               $modalInstance.close(item);
             };
@@ -58,5 +66,32 @@ angular.module('wbaApp')
           }
         );
       };
+
+      $scope.deleteAlinea = function (alinea) {
+        SweetAlert.swal({
+            title: "Você tem certeza?",
+            text: "Se prosseguir essa operação não poderá ser desfeita",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Prosseguir",
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: false,
+            closeOnCancel: false
+          },
+          function(isConfirm) {
+            if (isConfirm) {
+              apiFinanceiro.deleteAlinea(alinea.uuidBanco, alinea).then(
+                function (res) {
+                  SweetAlert.swal("Excluído", "Seu registro foi excluído com sucesso.", "success");
+                  $scope.getAlineas();
+                }
+              );
+            } else {
+              SweetAlert.swal("Alineas", "Seu item não foi excluído.", "error");
+            }
+
+          });
+      }
     }
   ]);

@@ -13,10 +13,10 @@
     </div>
     <div class="form-group">
       <label class="control-label col-md-2">
-        Código Bancário
+        Código Contábil
       </label>
       <div class="col-md-10">
-        <input type="text" class="form-control" ng-model="codigo.codigoBancario">
+        <input type="text" class="form-control" ng-model="codigo.codigoContabil">
       </div>
     </div>
     <div class="form-group">
@@ -32,12 +32,16 @@
         Ativo
       </label>
       <div class="col-md-10">
-        <switch id="enabled" name="enabled" ng-model="codigo.ativo" class="green"></switch>
+        <switch id="enabled" name="enabled" ng-model="codigo.ativo" class="green fix-switch"></switch>
       </div>
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-danger-alt pull-left" ng-click="cancel()"></button>
-  <button class="btn btn-primary pull-right" ng-click="update(codigo)"></button>
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()">
+    <i class="fa fa-times"></i> Cancelar
+  </button>
+  <button class="btn btn-primary pull-right" ng-click="update(codigo)">
+    <i class="fa fa-save"></i> Atualizar
+  </button>
 </div>

@@ -108,5 +108,32 @@ angular.module('wbaApp')
           }
         );
       };
+
+      $scope.deleteInstrucao = function (instrucao) {
+        SweetAlert.swal({
+            title: "Você tem certeza?",
+            text: "Se prosseguir essa operação não poderá ser desfeita",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Prosseguir",
+            cancelButtonText: "Cancelar",
+            closeOnConfirm: false,
+            closeOnCancel: false
+          },
+        function(isConfirm) {
+            if (isConfirm) {
+              apiFinanceiro.deleteInstrucoes(instrucao.uuidBanco, instrucao).then(
+                function (res) {
+                  SweetAlert.swal("Excluído", "Seu registro foi excluído com sucesso.", "success");
+                  $scope.getInstrucoes();
+                }
+              );
+            } else {
+              SweetAlert.swal("Instruções de Cobrança", "Seu item não foi excluído.", "error");
+            }
+
+          });
+      }
     }
   ]);

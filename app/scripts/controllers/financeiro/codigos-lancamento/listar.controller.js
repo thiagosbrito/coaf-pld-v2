@@ -26,6 +26,10 @@ angular.module('wbaApp')
         var modalInstance = $modal.open({
           templateUrl: 'views/wba/financeiro/codigos-lancamento/modal-add-codigo.html',
           controller: function ($scope, $modalInstance) {
+
+            $scope.codigo = {};
+            $scope.codigo.ativo = true;
+            
             $scope.save = function (item) {
               $modalInstance.close(item);
             };
@@ -48,10 +52,16 @@ angular.module('wbaApp')
           }
         );
       };
-      $scope.editCodigo = function () {
+      $scope.editCodigo = function (cod) {
         var modalInstance = $modal.open({
-          templateUrl: 'views/wba/financeiro/bancos/modal-edit-banco.html',
-          controller: function ($scope, $modalInstance) {
+          templateUrl: 'views/wba/financeiro/codigos-lancamento/modal-edit-codigo.html',
+          resolve: {
+            codigo: function () {
+              return cod;
+            }
+          },
+          controller: function ($scope, $modalInstance, codigo) {
+            $scope.codigo = codigo;
             $scope.update = function (item) {
               $modalInstance.close(item);
             };

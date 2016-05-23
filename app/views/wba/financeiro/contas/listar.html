@@ -25,7 +25,9 @@
             <thead>
             <tr>
               <th>Nome</th>
-              <th>Número</th>
+              <th>Tipo de Conta</th>
+              <th>Banco</th>
+              <th>Saldo</th>
               <th width="80" class="text-center">Ativo</th>
               <th></th>
             </tr>
@@ -33,7 +35,9 @@
             <tbody>
             <tr ng-repeat="cnt in contas">
               <td ng-bind="cnt.nome"></td>
-              <td ng-bind="cnt.numero"></td>
+              <td ng-bind="cnt.tipoConta"></td>
+              <td ng-bind="cnt.uuidBanco.nome"></td>
+              <td>{{cnt.saldo | currency}}</td>
               <td class="text-center">
                 <i class="fa" ng-class="{'fa-times red': !cnt.ativo, 'fa-check green': cnt.ativo}"></i>
               </td>

@@ -560,16 +560,28 @@ angular.module('wbaApp')
       })
       .state('wba.financeiro.contas.editar',{
         url: '/editar/:contaId',
-        templateUrl: 'views/wba/financeiro/contas/editar.html'
+        templateUrl: 'views/wba/financeiro/contas/editar.html',
+        controller: function ($scope, $stateParams, apiFinanceiro, toaster) {
+          $scope.getContaInfo = function () {
+            apiFinanceiro.getContaById($stateParams.contaId).then(
+              function (res) {
+                $scope.conta = res.data;
+              },
+              function (err) {
+                toaster.pop('error','Contas',err.statusText)
+              }
+            )
+          }();
+        }
       })
       .state('wba.financeiro.contas.editar.conta',{
         url: '/conta',
         templateUrl: 'views/wba/financeiro/contas/editar-conta.html',
-        controller: 'ContaEditarController'
+        controller: 'ContasEditarController'
       })
       .state('wba.financeiro.contas.editar.info',{
         url: '/informacao-bancaria',
-        templateUrl: 'views/wba/financeiro/contas/editar-conta-info.html',
+        templateUrl: 'views/wba/financeiro/contas/editar-info.html',
         controller: 'ContasInfoEditarController'
       })
 

@@ -158,11 +158,12 @@ angular
               {
                 label: 'Códigos de Lançamento',
                 url: '#/financeiro/codigos-lancamento/listar'
-              },
-              {
-                label: 'Instruções',
-                url: '#/financeiro/instrucoes/listar'
               }
+              // ,
+              // {
+              //   label: 'Instruções',
+              //   url: '#/financeiro/instrucoes/listar'
+              // }
               // {
               //   label: 'Cobranças',
               //   url: '#/cobranca/listar'
