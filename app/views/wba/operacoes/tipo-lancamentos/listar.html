@@ -1,0 +1,53 @@
+<ol class="breadcrumb">
+  <li><a href="#/">Dashboard</a></li>
+  <li>Operações</li>
+  <li class="active">Tipos Lançamentos</li>
+</ol>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading">
+          <h2>Tipos de Lançamentos</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" ng-click="addTipo()" tooltip="Adicionar Tipo de Lançamento">
+              <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th class="text-center">Descrição</th>
+                <th class="text-center">Tipo de Operação</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="tp in tipos">
+                <td>{{tp.codigo}}</td>
+                <td class="text-center">{{tp.descricao}}</td>
+                <td class="text-center">{{tp.tipo_operacao}}</td>
+                <td>
+                  <div class="btn-group pull-right">
+                    <button class="btn btn-danger-alt" ng-click="deleteTipo(tp)">
+                      <i class="fa fa-trash-o"></i>
+                    </button>
+                    <button class="btn btn-primary" ng-click="editTipo(tp)">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- container-fluid -->

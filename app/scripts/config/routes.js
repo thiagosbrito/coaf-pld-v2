@@ -404,6 +404,16 @@ angular.module('wbaApp')
         controller: 'WorkflowListarController'
       })
 
+      .state('wba.operacoes.tipo-lancamentos',{
+        url: '/tipo-lancamento',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.operacoes.tipo-lancamentos.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/operacoes/tipo-lancamentos/listar.html',
+        controller: 'TiposLancamentoListarController'
+      })
+
 
       // Routews for Cobranca Module
       .state('wba.cobranca',{

@@ -305,6 +305,70 @@ angular.module('wbaApp')
     };
 
 
+    var _getTipoLancamentos = function () {
+      return $http({
+        url: baseUrl.apiOperacoes + '/tipolancamento',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+    var _getTipoLancamentoById = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/tipolancamento/' + id,
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+    var _addTipoLancamento = function (data) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/tipolancamento',
+        method: 'POST',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+    var _updateTipoLancamento = function (data) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/tipolancamento',
+        method: 'PUT',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+    var _deleteTipoLancamento = function (data) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/tipolancamento',
+        method: 'DELETE',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+
+
     // Comercial
     api.getCarteiras              = _getCarteiras;
     api.getCarteiraById           = _getCarteiraById;
@@ -339,6 +403,12 @@ angular.module('wbaApp')
     api.getWorkflows              = _getWorkflows;
     api.getWorkflowById           = _getWorkflowById;
     api.getWorkflowImage          = _getWorkflowImage;
+
+    api.getTipoLancamentos        = _getTipoLancamentos;
+    api.getTipoLancamentoById     = _getTipoLancamentoById;
+    api.addTipoLancamento         = _addTipoLancamento;
+    api.updateTipoLancamento      = _updateTipoLancamento;
+    api.deleteTipoLancamento      = _deleteTipoLancamento;
 
     return api;
 

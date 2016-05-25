@@ -1,0 +1,39 @@
+<div class="modal-header">
+  Adicionar Tipo de Lançamento
+</div>
+<div class="modal-body">
+  <form role="form" class="form form-horizontal">
+    <div class="form-group">
+      <label class="col-md-2 control-label">
+        Código
+      </label>
+      <div class="col-md-6">
+        <input type="text" class="form-control" ng-model="tipo.codigo">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label">
+        Descrição
+      </label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" ng-model="tipo.descricao">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label">
+        Tipo de Operação
+      </label>
+      <div class="col-md-4">
+        <select ng-model="tipo.tipo_operacao" class="form-control">
+          <option value="">Selecione...</option>
+          <option value="CREDITO">Crédito</option>
+          <option value="DEBITO">Débito</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()"><i class="fa fa-times"></i> Cancelar</button>
+  <button class="btn btn-primary" ng-click="save(tipo)"><i class="fa fa-save"></i> Salvar</button>
+</div>

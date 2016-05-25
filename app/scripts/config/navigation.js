@@ -122,6 +122,10 @@ angular
               {
                 label: 'Workflow',
                 url: '#/operacoes/workflow/listar'
+              },
+              {
+                label: 'Tipos de Lançamentos',
+                url: '#/operacoes/tipo-lancamento/listar'
               }
             ]
           },
