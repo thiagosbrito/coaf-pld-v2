@@ -100,7 +100,7 @@ angular.module('wbaApp')
               apiOperacoes.deleteTipoLancamento(item).then(
                 function(res) {
                   toaster.pop('success','Tipo Lançamento','Tipo de Lançamento excluído com sucesso!');
-                  $scope.getTarifas();
+                  $scope.getTipos();
                 },
                 function (err) {
                   toaster.pop('error','Tipo ançamento','Desculpe-noe, houve um erro ao processar suas informações, por favor, tente novamente.');

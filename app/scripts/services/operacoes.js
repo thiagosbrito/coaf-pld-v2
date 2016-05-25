@@ -355,9 +355,8 @@ angular.module('wbaApp')
     };
     var _deleteTipoLancamento = function (data) {
       return $http({
-        url: baseUrl.apiOperacoes + '/tipolancamento',
+        url: baseUrl.apiOperacoes + '/tipolancamento/' + data.uuid,
         method: 'DELETE',
-        data: data,
         headers: {
           'Content-Type':'application/json'
         }
