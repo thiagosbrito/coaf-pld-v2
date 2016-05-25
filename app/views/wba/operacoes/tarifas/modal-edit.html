@@ -5,17 +5,14 @@
   <form role="form" class="form-horizontal">
     <fieldset>
       <div class="form-group">
-        <label class="col-md-2 control-label">Cód.</label>
+        <label class="col-md-2 control-label">Tipo de Lancam.</label>
         <div class="col-md-4">
-          <input type="text" ng-model="tarifa.codigoLancamento" class="form-control">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-2 control-label">
-          Descrição
-        </label>
-        <div class="col-md-10">
-          <input type="text" class="form-control" ng-model="tarifa.descricao">
+          <select
+            class="form-control"
+            ng-model="tarifa.uuidTipoLancamento"
+            ng-options="tipo as tipo.codigo for tipo in tipos">
+            <option value="">Selecione...</option>
+          </select>
         </div>
       </div>
       <div class="form-group">

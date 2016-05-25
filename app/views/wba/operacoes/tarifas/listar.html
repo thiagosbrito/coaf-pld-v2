@@ -25,21 +25,19 @@
             <table class="table table-striped fix-table-vertical-alignment" ng-show="tarifas.length > 0">
               <thead>
                 <tr>
-                  <th>Cód.</th>
-                  <th>Descrição</th>
-                  <th>Ordem</th>
-                  <th>Escopo</th>
-                  <th>Tipo</th>
+                  <th>Tipo Lancam.</th>
+                  <th class="text-center">Ordem</th>
+                  <th class="text-center">Escopo</th>
+                  <th class="text-center">Tipo</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr ng-repeat="item in tarifas track by $index">
-                  <td ng-bind="item.codigoLancamento"></td>
-                  <td ng-bind="item.descricao"></td>
-                  <td ng-bind="item.ordem"></td>
-                  <td ng-bind="item.escopo"></td>
-                  <td ng-bind="item.tipo"></td>
+                  <td ng-bind="item.uuidTipoLancamento"></td>
+                  <td ng-bind="item.ordem" class="text-center"></td>
+                  <td ng-bind="item.escopo" class="text-center"></td>
+                  <td ng-bind="item.tipo" class="text-center"></td>
                   <td>
                     <div class="btn-group pull-right">
                       <button class="btn btn-danger-alt" ng-click="delete(item)">

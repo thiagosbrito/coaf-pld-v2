@@ -13,10 +13,26 @@ angular.module('wbaApp')
     '$log',
     function ($scope, $state, $stateParams, apiOperacoes, toaster, $modal, SweetAlert, $log) {
 
+      $scope.getTipos = function () {
+        apiOperacoes.getTipoLancamentos().then(
+          function (res) {
+            $scope.tipos = res.data
+          },
+          function (err) {
+            toaster.pop('error','Tipos de Lançamentos',err.statusText)
+          }
+        )
+      }();
+
       $scope.getTarifas = function () {
         apiOperacoes.getTarifas().then(
           function (res) {
             $scope.tarifas = res.data;
+            angular.forEach($scope.tarifas, function (value){
+              if(value.uuidTipoLancamento) {
+                value.uuidTipoLancamento = _.findWhere($scope.tipos,{uuid: value.uuidTipoLancamento})
+              }
+            });
           },
           function (err) {
             toaster.pop('error','Tarifas',err.statusText);
@@ -29,7 +45,16 @@ angular.module('wbaApp')
 
         var modalInstance = $modal.open({
           templateUrl: 'views/wba/operacoes/tarifas/modal-' + action + '.html',
-          controller: function ($scope, $modalInstance) {
+          controller: function ($scope, $modalInstance, apiOperacoes) {
+
+            apiOperacoes.getTipoLancamentos().then(
+              function (res) {
+                $scope.tipos = res.data;
+              },
+              function (err) {
+                toaster.pop('error','Tipos de Lançamentos',err.statusText)
+              }
+            );
 
             if(action == 'edit') {
               apiOperacoes.getTarifaById(id).then(
@@ -52,25 +77,28 @@ angular.module('wbaApp')
         // modal para cadastro de representante
         modalInstance.result.then(
           function (item) {
+            if(item.uuidTipoLancamento) {
+              item.uuidTipoLancamento = item.uuidTipoLancamento.uuid;
+            };
             if(id) {
               apiOperacoes.updateTarifa(item).then(
                 function (res) {
-                  toaster.pop('success','Tarifa','Tarifa atualizada com sucesso!')
+                  toaster.pop('success','Tarifa','Tarifa atualizada com sucesso!');
                   $scope.getTarifas();
                 },
                 function (err) {
-
+                  toaster.pop('error','Tarifas',err.statusText)
                 }
               )
             }
             else {
               apiOperacoes.saveTarifa(item).then(
                 function (res) {
-                  toaster.pop('success','Tarifa','Tarifa cadastrada com sucesso!')
+                  toaster.pop('success','Tarifa','Tarifa cadastrada com sucesso!');
                   $scope.getTarifas();
                 },
                 function (err) {
-
+                  toaster.pop('error','Tarifas',err.statusText)
                 }
               )
             }
