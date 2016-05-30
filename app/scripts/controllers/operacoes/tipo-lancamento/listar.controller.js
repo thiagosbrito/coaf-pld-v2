@@ -82,7 +82,7 @@ angular.module('wbaApp')
             )
           }
         );
-      }
+      };
 
       $scope.deleteTipo = function (item) {
 
