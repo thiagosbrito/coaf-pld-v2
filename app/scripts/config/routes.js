@@ -7,7 +7,7 @@ angular.module('wbaApp')
   '$routeProvider',
   '$httpProvider',
   '$locationProvider',
-  function($stateProvider, $urlRouterProvider, $routeProvider, $httpProvider,$locationProvider) {
+  function($stateProvider, $urlRouterProvider, $routeProvider, $httpProvider, $locationProvider) {
     'use strict';
 
     // $locationProvider.html5mode = true;
@@ -18,13 +18,16 @@ angular.module('wbaApp')
     $httpProvider.defaults.headers.put = {};
     $httpProvider.defaults.headers.patch = {};
 
-    $urlRouterProvider.otherwise('/dashboard');
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
       .state('wba',{
         url: '',
         abstract: true,
         templateUrl: 'views/main/main.html',
+        controller: function ($scope, $state) {
+          $scope.state = $state;
+        },
         resolve: {
           loadCalendar : ['$ocLazyLoad', function ($ocLazyLoad) {
             return  $ocLazyLoad.load([
@@ -40,6 +43,13 @@ angular.module('wbaApp')
             param.templateFile = 'extras-inbox'
           }
           return 'views/' + param.templateFile + '.html';
+        }
+      })
+      .state('wba.login',{
+        url: '/login',
+        templateUrl: 'views/wba/auth/login.html',
+        controller: function ($scope, $state) {
+          $scope.state = $state
         }
       })
       .state('wba.dashboard',{

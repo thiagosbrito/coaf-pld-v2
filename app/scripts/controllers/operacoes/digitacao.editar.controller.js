@@ -14,6 +14,17 @@ angular.module('wbaApp')
     'apiEmpresas',
     function ($scope, $state, $stateParams, operacao, SweetAlert, apiOperacoes, $modal, $log, toaster, apiEmpresas) {
 
+      $scope.allSelected = false;
+      $scope.selectAll = function () {
+        $scope.allSelected = true;
+        angular.forEach($scope.recebiveis, function(value) {
+          value.checked = !value.checked;
+        });
+      };
+
+      $scope.verifySelected = function (value) {
+
+      };
       $scope.getRecebiveisByOperacao = function () {
         $scope.loading = true;
         apiOperacoes.getRecebiveisByOperacao($stateParams.operacaoId).then(
@@ -21,6 +32,7 @@ angular.module('wbaApp')
             $scope.loading = false;
             $scope.recebiveis = res.data;
             angular.forEach($scope.recebiveis, function (value, key) {
+              value.checked = false;
               value.dpVencimento  = false;
               value.dpEmissao     = false;
               value.dpDataLimite  = false;

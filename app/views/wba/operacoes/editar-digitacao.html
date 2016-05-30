@@ -29,6 +29,9 @@
         <table class="table table-striped" ng-if="recebiveis.length > 0">
           <thead>
             <tr>
+              <th>
+                <input icheck type="checkbox" id="inlinecheckbox1" ng-change="selectAll()" ng-model="allSelected">
+              </th>
               <th class="text-center">Valor</th>
               <th class="text-center">Venc.</th>
               <th class="text-center">Número</th>
@@ -40,6 +43,9 @@
           </thead>
           <tbody>
             <tr ng-repeat="rec in recebiveis">
+              <td>
+                <input icheck type="checkbox" id="inlinecheckbox1" value="" ng-model="rec.checked" ng-change="verifySelected(rec.checked)">
+              </td>
               <td class="text-center" width="120">
                 <input type="text" ng-model="rec.valor" class="form-control" ng-currency>
               </td>
