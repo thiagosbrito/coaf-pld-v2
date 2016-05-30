@@ -60,6 +60,7 @@ angular.module('wbaApp')
               apiOperacoes.getTarifaById(id).then(
                 function (res) {
                   $scope.tarifa = res.data
+                  $scope.tarifa.uuidTipoLancamento = _.findWhere($scope.tipos,{uuid: $scope.tarifa.uuidTipoLancamento});
                 }
               )
             }

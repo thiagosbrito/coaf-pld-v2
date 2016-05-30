@@ -34,7 +34,7 @@
               </thead>
               <tbody>
                 <tr ng-repeat="item in tarifas track by $index">
-                  <td ng-bind="item.uuidTipoLancamento"></td>
+                  <td ng-bind="item.uuidTipoLancamento.descricao"></td>
                   <td ng-bind="item.ordem" class="text-center"></td>
                   <td ng-bind="item.escopo" class="text-center"></td>
                   <td ng-bind="item.tipo" class="text-center"></td>
