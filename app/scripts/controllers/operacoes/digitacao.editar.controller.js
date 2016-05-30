@@ -189,6 +189,7 @@ angular.module('wbaApp')
             toaster.pop('success','Título','Título atualizado com sucesso');
             $state.go($state.current, {}, {reload: true});
             $scope.getRecebiveisByOperacao();
+            $scope.$emit('operacaoUpdated');
           },
           function (err) {
             toaster.pop('error','Títulos',err.statusText);
