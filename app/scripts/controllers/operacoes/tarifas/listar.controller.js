@@ -123,6 +123,7 @@ angular.module('wbaApp')
         },
         function(isConfirm){
            if(isConfirm) {
+             item.uuidTipoLancamento = item.uuidTipoLancamento.uuid;
             apiOperacoes.deleteTarifa(item).then(
               function(res) {
                 toaster.pop('success','Tarifa','Tarifa excluída com sucesso!');

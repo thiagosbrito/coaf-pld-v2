@@ -229,7 +229,7 @@ angular.module('wbaApp')
     };
     var _updateTarifa = function (data) {
       return $http({
-        url: baseUrl.apiOperacoes + '/tarifas',
+        url: baseUrl.apiOperacoes + '/tarifas/' + data.uuid,
         method: 'PUT',
         data: data,
         headers: {
@@ -241,7 +241,7 @@ angular.module('wbaApp')
     };
     var _deleteTarifa = function (data) {
       return $http({
-        url: baseUrl.apiOperacoes + '/tarifas',
+        url: baseUrl.apiOperacoes + '/tarifas/' + data.uuid,
         method: 'DELETE',
         data: data,
         headers: {

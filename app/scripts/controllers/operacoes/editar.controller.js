@@ -64,6 +64,11 @@ angular.module('wbaApp')
     $scope.$on('recebivelAdded', function (value) {
       console.log("EMIT: ",value)
     });
+
+    $scope.$on('operacaoUpdated', function () {
+      console.log('Updated true');
+      $scope.calcularLancamentos();
+    });
     // $scope.getRecebiveisByOperacao = function () {
     //   $scope.loading = true;
     //   apiOperacoes.getRecebiveisByOperacao($stateParams.operacaoId).then(
