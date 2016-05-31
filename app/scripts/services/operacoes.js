@@ -367,6 +367,20 @@ angular.module('wbaApp')
       )
     };
 
+    var _enviarRecebiveis = function (data) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/recebiveis/enviar-confirmacao',
+        method: 'POST',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    }
 
     // Comercial
     api.getCarteiras              = _getCarteiras;
@@ -392,6 +406,7 @@ angular.module('wbaApp')
     api.addTarifaToOperacao       = _addTarifaToOperacao;
     api.deleteTarifaToOperacao    = _deleteTarifaToOperacao;
     api.liberarOperacao           = _liberarOperacao;
+    api.enviarRecebiveis          = _enviarRecebiveis;
 
     api.getRecebiveisByOperacao   = _getRecebiveisByOperacao;
 
