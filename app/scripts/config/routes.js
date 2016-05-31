@@ -495,23 +495,45 @@ angular.module('wbaApp')
         queue: 4
       })
 
-      // Routews for Checagem Module
+      // CHECAGEM
       .state('wba.checagem',{
         url: '/checagem',
         template: '<div ui-view=""></div>'
       })
-      .state('wba.checagem.agendamentos',{
-        url: '/agendamentos',
-        templateUrl: 'views/wba/checagem/agendamentos.html'
+      .state('wba.checagem.conferencia-documentos',{
+        url: '/conferencia-documentos',
+        template: '<div ui-view=""></div>'
       })
-      .state('wba.checagem.confirmacao',{
+      .state('wba.checagem.conferencia-documentos.pesquisar',{
+        url: '/pesquisar',
+        templateUrl: 'views/wba/checagem/conferencia-documentos/pesquisar.html'
+      })
+      .state('wba.checagem.confirmacao-titulos',{
         url: '/confirmacao-titulos',
-        templateUrl: 'views/wba/checagem/confirmacao.html'
+        template: '<div ui-view=""></div>'
       })
-      .state('wba.checagem.conferencia',{
-        url: '/conferencia',
-        templateUrl: 'views/wba/checagem/conferencia.html'
+      .state('wba.checagem.confirmacao-titulos.pesquisar',{
+        url: '/pesquisar',
+        templateUrl: 'views/wba/checagem/confirmacao-titulos/pesquisar.html'
       })
+      .state('wba.checagem.estados-confirmacao',{
+        url: '/estados-confirmacao',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.checagem.estados-confirmacao.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/checagem/estados-confirmacao/listar.html'
+      })
+      .state('wba.checagem.documentos-conferencia',{
+        url: '/documentos-conferencia',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.checagem.documentos-conferencia.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/checagem/documentos-conferencia/listar.html'
+      })
+      // END of CHECAGEM
+
 
       // Routews for Notificacao Module
       .state('wba.notificacao',{
