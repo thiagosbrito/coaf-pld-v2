@@ -173,6 +173,7 @@ angular.module('wbaApp')
             apiChecagem.addNotaConferencia(conferencia.uuid, $scope.nota).then(
               function (res) {
                 toaster.pop('success','Adicionar Nota à Conferência','Nota adicionada com sucesso');
+                $scope.getConferenciasByData(moment().format('YYYY-MM-DD'));
               },
               function (err){
                 toaster.pop('error','Adicionar Nota à Conferência',err.statusText);
@@ -215,6 +216,7 @@ angular.module('wbaApp')
             apiChecagem.agendarConferencia(id, {dataAgendamento: agendamento}).then(
               function (res) {
                 toaster.pop('success','Agendar Conferencia','Data de agendamento cadastrada com sucesso');
+                $scope.getConferenciasByData(moment().format('YYYY-MM-DD'));
               },
               function (err){
                 toaster.pop('error','Agendar Conferencia',err.statusText);
@@ -258,6 +260,7 @@ angular.module('wbaApp')
             apiChecagem.confirmarConferencia(id, {dataEntrega: entrega}).then(
               function (res) {
                 toaster.pop('success','Confirmar Conferencia','Data de entrega cadastrada com sucesso');
+                $scope.getConferencias(moment().format('YYYY-MM-DD'));
               },
               function (err){
                 toaster.pop('error','Confirmar Conferencia',err.statusText);

@@ -11,6 +11,36 @@
       <div class="panel panel-indigo">
         <div class="panel-heading">
           <h2>Estados de Confirmação</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" ng-click="addEstado()" tooltip="Adicionar Estado de Confirmação">
+              <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="est in estados">
+                <td>{{est.nome}}</td>
+                <td>
+                  <div class="btn-group pull-right">
+                    <button class="btn btn-danger-alt btn-sm" ng-click="deleteEstado(est.uuid)">
+                      <i class="fa fa-trash-o"></i>
+                    </button>
+                    <button class="btn btn-primary btn-sm" ng-click="updateEstado(est)">
+                      <i class="fa fa-pencil"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

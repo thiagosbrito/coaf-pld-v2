@@ -528,7 +528,8 @@ angular.module('wbaApp')
       })
       .state('wba.checagem.estados-confirmacao.listar',{
         url: '/listar',
-        templateUrl: 'views/wba/checagem/estados-confirmacao/listar.html'
+        templateUrl: 'views/wba/checagem/estados-confirmacao/listar.html',
+        controller: 'EstadosConfirmacaoListarController'
       })
       .state('wba.checagem.documentos-conferencia',{
         url: '/documentos-conferencia',

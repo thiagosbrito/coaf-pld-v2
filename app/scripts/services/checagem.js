@@ -4,6 +4,7 @@ angular.module('wbaApp')
 
     var api = {};
 
+    // CPONFERENCIA DE DOCUMENTOS API
     var _findConferenciasByData = function (data) {
       return $http({
         url: baseUrl.apiChecagem + '/conferencias/search/findByDataAgendamento?dataAgendamento=' + data,
@@ -115,6 +116,67 @@ angular.module('wbaApp')
       )
     };
 
+    // ESTADOS DE CONFIRMAÇÃO API
+    var _getEstados = function () {
+      return $http({
+        url: baseUrl.apiChecagem + '/estados',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+    var _getEstadoById = function (id) {
+      return $http({
+        url: baseUrl.apiChecagem + '/estados/' + id,
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+    var _addEstado = function (data) {
+      return $http({
+        url: baseUrl.apiChecagem + '/estados',
+        method: 'POST',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+    var _updateEstado = function (id, data) {
+      return $http({
+        url: baseUrl.apiChecagem + '/estados/' + id,
+        method: 'PUT',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+    var _deleteEstado = function (id) {
+      return $http({
+        url: baseUrl.apiChecagem + '/estados/' + id,
+        method: 'DELETE'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+
+
     api.findConferenciasByData      = _findConferenciasByData;
     api.findConferenciasByOperacao  = _findConferenciasByOperacao;
     api.addConferencia              = _addConferencia;
@@ -124,6 +186,13 @@ angular.module('wbaApp')
     api.confirmarConferencia        = _confirmarConferencia;
     api.getNotasConferencia         = _getNotasConferencia;
     api.addNotaConferencia          = _addNotaConferencia;
+
+    api.getEstados                  = _getEstados;
+    api.getEstadoById               = _getEstadoById;
+    api.addEstado                   = _addEstado;
+    api.updateEstado                = _updateEstado;
+    api.deleteEstado                = _deleteEstado;
+
 
 
 
