@@ -24,5 +24,7 @@ angular.module('wbaApp', [
   'uiSwitch',
   'uuid4',
   'ntt.TreeDnD',
-  'ui.ace'
+  'ui.ace',
+  'ngTagsInput',
+  'naif.base64'
   ]);

@@ -1,0 +1,45 @@
+<ol class="breadcrumb">
+  <li><a href="#/">Dashboard</a></li>
+  <li>Checagem</li>
+  <li class="active">Estados de Confirmação</li>
+</ol>
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading">
+          <h2>Anexos - Conferência de Documentos</h2>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3 col-md-offset-9">
+              <button class="btn btn-primary btn-block" ng-click="addAnexo()">
+                <i class="fa fa-plus"></i> Adicionar Anexo
+              </button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Anexos</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="anx in anexos">
+                    <td>{{anx}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- container-fluid -->
+
+

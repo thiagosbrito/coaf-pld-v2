@@ -19129,7 +19129,7 @@ body.topnav-collapsed header.navbar.navbar-default .navbar-collapse .open .tt-dr
 /*!
  * Yamm!3
  * Yet another megamenu for Bootstrap 3
- * 
+ *
  * http://geedmo.github.com/yamm3
  */
 .yamm .nav,
@@ -20003,14 +20003,11 @@ body.error .error-wrapper h1 {
 }
 /*#topnav .navbar-brand {
   background: url("../img/logo.png") no-repeat left 0 center;
-}*/*/
+}*/
 #topnav .dropdown-menu,
 #topnav .tt-dropdown-menu {
   background-color: #ffffff;
-  border: 0px solid #cccccc;
-  border: 0px solid #e0e0e0;
   border-radius: 2px;
-  -webkit-box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.24);
   box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.24);
 }
 #topnav .navbar-nav .open .dropdown-menu,

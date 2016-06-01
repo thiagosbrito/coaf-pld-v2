@@ -1,0 +1,104 @@
+<ol class="breadcrumb">
+  <li><a href="#/">Dashboard</a></li>
+  <li>Checagem</li>
+  <li class="active">Estados de Confirmação</li>
+</ol>
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-indigo">
+        <div class="panel-heading">
+          <h2>Conferência de Documentos</h2>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-3">
+              <label>
+                Buscar por data de Agendamento
+              </label>
+              <p class="input-group datepicker-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  datepicker-popup="dd/MM/yyyy"
+                  ng-model="filtroData"
+                  ng-change="getConferenciasByData(filtroData)"
+                  is-open="opened"
+                  datepicker-options="dateOptions"
+                  close-text="Fechar" />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+            <div class="col-md-6">
+              <label>
+                Buscar por Operação
+              </label>
+              <input
+                type="text"
+                ng-model="filtroOperacao"
+                typeahead="ope as ope.numero for ope in operacoes | filter:$viewValue"
+                class="form-control"
+                typeahead-on-select="getConferenciasByOperacao($item, $model, $label)">
+            </div>
+            <div class="col-md-3">
+              <label>
+                &nbsp;
+              </label>
+              <button class="btn btn-primary btn-block" ng-click="addConferencia()">
+                <i class="fa fa-plus"></i> Adicionar
+              </button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Operação</th>
+                    <th>Data de Agendamento</th>
+                    <th>Data de Entrega</th>
+                    <th>Referência</th>
+                    <th>Notas</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="conf in conferencias">
+                    <td>{{conf.operacao.numero}}</td>
+                    <td>{{conf.dataAgendamento | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{conf.dataEntrega | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{conf.referencia}}</td>
+                    <td>{{conf.notas.length}}</td>
+                    <td>
+                      <div class="btn-group pull-right">
+                        <button class="btn btn-info btn-sm" tooltip="Agendar" ng-click="agendarConferencia(conf.uuid)">
+                          <i class="fa fa-calendar"></i>
+                        </button>
+                        <button class="btn btn-warning btn-sm" tooltip="Anexo" ui-sref="wba.checagem.conferencia-documentos.anexos({conferenciaId: conf.uuid})">
+                          <i class="fa fa-paperclip"></i>
+                        </button>
+                        <button class="btn btn-success btn-sm" tooltip="Confirmar" ng-click="confirmarConferencia(conf.uuid)">
+                          <i class="fa fa-check"></i>
+                        </button>
+                        <button class="btn btn-primary btn-sm" tooltip="Notas" ng-click="addNota(conf)">
+                          <i class="fa fa-sticky-note"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- container-fluid -->
+
+

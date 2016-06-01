@@ -14,6 +14,80 @@ angular.module('wbaApp')
     'apiEmpresas',
     function ($scope, $state, $stateParams, operacao, SweetAlert, apiOperacoes, $modal, $log, toaster, apiEmpresas) {
 
+      $scope.isAllSelected = {};
+      $scope.isAllSelected.checked = false;
+      $scope.itensSelecionados = [];
+
+      $scope.toggleAll = function () {
+
+        angular.forEach($scope.recebiveis, function(value) {
+          value.selected = $scope.isAllSelected.checked;
+          if(value.selected == true) {
+            if(_.contains($scope.itensSelecionados, {uuid: value.uuid})) {
+              return false
+            }
+            else {
+              $scope.itensSelecionados.push({uuid: value.uuid})
+            }
+          }
+          else {
+            $scope.itensSelecionados = [];
+          }
+        });
+      };
+
+      $scope.toggleItem = function (item) {
+        if(item.selected == true) {
+          if(_.contains($scope.itensSelecionados, item.uuid)) {
+            return false
+          }
+          else {
+            $scope.itensSelecionados.push({uuid: item.uuid});
+            if ($scope.itensSelecionados.length == $scope.recebiveis.length) {
+             $scope.isAllSelected.checked = true
+            }
+          }
+        }
+        if (item.selected == false) {
+          $scope.itensSelecionados = _.without($scope.itensSelecionados, {uuid: item.uuid});
+          $scope.isAllSelected.checked = false;
+        }
+      };
+
+      $scope.sendConfirm = function () {
+
+        SweetAlert.swal({
+            title: "Você tem certeza?",
+            text: "Se prosseguir essa operação não poderá ser desfeita",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Prosseguir",
+            closeOnConfirm: true
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              var data = {};
+              data.uuid = $stateParams.operacaoId;
+              data.idCarteira = operacao.idCarteira;
+              data.recebiveis = $scope.itensSelecionados;
+              apiOperacoes.enviarRecebiveis(data).then(
+                function (res) {
+                  toaster.pop('success','Enviar Títulos para Confirmação','Títulos enviados com sucesso');
+                },
+                function (err) {
+                  toaster.pop('error','Enviar Títulos para Confirmação',err.statusText);
+                }
+              )
+            }
+            else {
+              SweetAlert.swal("Títulos não enviados", "Você cancelou a operação, nenhum arquivo foi enviado.", "error");
+            }
+          }
+        );
+      };
+
+
       $scope.getRecebiveisByOperacao = function () {
         $scope.loading = true;
         apiOperacoes.getRecebiveisByOperacao($stateParams.operacaoId).then(

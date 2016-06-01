@@ -134,16 +134,20 @@ angular
             iconClasses: 'ti ti-check-box',
             children: [
               {
-                label: 'Agendamentos',
-                url: '#/checagem/agendamentos'
+                label: 'Conferência de Documentos',
+                url: '#/checagem/conferencia-documentos/pesquisar'
               },
               {
                 label: 'Confirmação de Títulos',
-                url: '#/checagem/confirmacao-titulos'
+                url: '#/checagem/confirmacao-titulos/pesquisar'
               },
               {
-                label: 'Conferência',
-                url: '#/checagem/conferencia'
+                label: 'Estados de Confirmação',
+                url: '#/checagem/estados-confirmacao/listar'
+              },
+              {
+                label: 'Documentos de Conferência',
+                url: '#/checagem/documentos-conferencia/listar'
               }
             ]
           },

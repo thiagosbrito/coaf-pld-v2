@@ -29,6 +29,9 @@
         <table class="table table-striped" ng-if="recebiveis.length > 0">
           <thead>
             <tr>
+              <th>
+                <input icheck type="checkbox" ng-model="isAllSelected.checked" ng-change="toggleAll()">
+              </th>
               <th class="text-center">Valor</th>
               <th class="text-center">Venc.</th>
               <th class="text-center">Número</th>
@@ -40,6 +43,9 @@
           </thead>
           <tbody>
             <tr ng-repeat="rec in recebiveis">
+              <td>
+                <input icheck type="checkbox" ng-model="rec.selected" ng-change="toggleItem(rec)">
+              </td>
               <td class="text-center" width="120">
                 <input type="text" ng-model="rec.valor" class="form-control" ng-currency>
               </td>
@@ -89,9 +95,15 @@
         </table>
 				<div class="row" ng-if="recebiveis.length > 0">
           <div class="col-md-12">
-						<button class="btn btn-primary pull-right" style="margin-top: -8px" ng-click="addTitulo()">
-							<i class="fa fa-plus"></i> Adicionar título
-						</button>
+						<button class="btn btn-primary pull-right" ng-click="addTitulo()">
+              <i class="fa fa-plus"></i> Adicionar título
+            </button>
+            <span class="pull-right">
+              &nbsp;
+            </span>
+            <button class="btn btn-info pull-right" ng-if="itensSelecionados.length > 0" ng-click="sendConfirm()">
+              <i class="fa fa-send"></i> Enviar confimação
+            </button>
           </div>
         </div>
       </tab>

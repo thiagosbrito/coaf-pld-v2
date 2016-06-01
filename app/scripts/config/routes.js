@@ -7,7 +7,7 @@ angular.module('wbaApp')
   '$routeProvider',
   '$httpProvider',
   '$locationProvider',
-  function($stateProvider, $urlRouterProvider, $routeProvider, $httpProvider,$locationProvider) {
+  function($stateProvider, $urlRouterProvider, $routeProvider, $httpProvider, $locationProvider) {
     'use strict';
 
     // $locationProvider.html5mode = true;
@@ -18,13 +18,16 @@ angular.module('wbaApp')
     $httpProvider.defaults.headers.put = {};
     $httpProvider.defaults.headers.patch = {};
 
-    $urlRouterProvider.otherwise('/dashboard');
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
       .state('wba',{
         url: '',
         abstract: true,
         templateUrl: 'views/main/main.html',
+        controller: function ($scope, $state) {
+          $scope.state = $state;
+        },
         resolve: {
           loadCalendar : ['$ocLazyLoad', function ($ocLazyLoad) {
             return  $ocLazyLoad.load([
@@ -40,6 +43,13 @@ angular.module('wbaApp')
             param.templateFile = 'extras-inbox'
           }
           return 'views/' + param.templateFile + '.html';
+        }
+      })
+      .state('wba.login',{
+        url: '/login',
+        templateUrl: 'views/wba/auth/login.html',
+        controller: function ($scope, $state) {
+          $scope.state = $state
         }
       })
       .state('wba.dashboard',{
@@ -485,23 +495,51 @@ angular.module('wbaApp')
         queue: 4
       })
 
-      // Routews for Checagem Module
+      // CHECAGEM
       .state('wba.checagem',{
         url: '/checagem',
         template: '<div ui-view=""></div>'
       })
-      .state('wba.checagem.agendamentos',{
-        url: '/agendamentos',
-        templateUrl: 'views/wba/checagem/agendamentos.html'
+      .state('wba.checagem.conferencia-documentos',{
+        url: '/conferencia-documentos',
+        template: '<div ui-view=""></div>'
       })
-      .state('wba.checagem.confirmacao',{
+      .state('wba.checagem.conferencia-documentos.pesquisar',{
+        url: '/pesquisar',
+        templateUrl: 'views/wba/checagem/conferencia-documentos/pesquisar.html',
+        controller: 'ConferenciaDocumentosPesquisarController'
+      })
+      .state('wba.checagem.conferencia-documentos.anexos',{
+        url: '/:conferenciaId//anexos',
+        templateUrl: 'views/wba/checagem/conferencia-documentos/anexos.html',
+        controller: 'ConferenciaDocumentosAnexosController'
+      })
+      .state('wba.checagem.confirmacao-titulos',{
         url: '/confirmacao-titulos',
-        templateUrl: 'views/wba/checagem/confirmacao.html'
+        template: '<div ui-view=""></div>'
       })
-      .state('wba.checagem.conferencia',{
-        url: '/conferencia',
-        templateUrl: 'views/wba/checagem/conferencia.html'
+      .state('wba.checagem.confirmacao-titulos.pesquisar',{
+        url: '/pesquisar',
+        templateUrl: 'views/wba/checagem/confirmacao-titulos/pesquisar.html'
       })
+      .state('wba.checagem.estados-confirmacao',{
+        url: '/estados-confirmacao',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.checagem.estados-confirmacao.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/checagem/estados-confirmacao/listar.html'
+      })
+      .state('wba.checagem.documentos-conferencia',{
+        url: '/documentos-conferencia',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.checagem.documentos-conferencia.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/checagem/documentos-conferencia/listar.html'
+      })
+      // END of CHECAGEM
+
 
       // Routews for Notificacao Module
       .state('wba.notificacao',{
