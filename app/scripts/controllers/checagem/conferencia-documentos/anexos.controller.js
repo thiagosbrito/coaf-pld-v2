@@ -21,11 +21,14 @@ angular.module('wbaApp')
       };
       $scope.getAnexosConferencia();
 
+
+
       $scope.addAnexo = function () {
         var modalInstance = $modal.open({
           animation: true,
           templateUrl: 'views/wba/checagem/conferencia-documentos/modal-add-anexos.html',
           controller: function ($scope, $modalInstance) {
+
             $scope.open = function($event) {
               $event.preventDefault();
               $event.stopPropagation();
@@ -48,10 +51,8 @@ angular.module('wbaApp')
         });
 
         modalInstance.result.then(
-          function (anexos) {
-            $scope.anexos = anexos;
-            $scope.anexos = $scope.anexos.map(function(anexo) { return anexo.text; });
-            apiChecagem.addAnexoConferencia($stateParams.conferenciaId, $scope.anexos).then(
+          function (anexo) {
+            apiChecagem.addAnexoConferencia($stateParams.conferenciaId, anexo).then(
               function (res) {
                 toaster.pop('success','Adicionar Anexos à Conferência','Anexo(s) adicionado(s) com sucesso');
                 $scope.getAnexosConferencia();

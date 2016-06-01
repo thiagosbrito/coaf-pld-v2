@@ -75,7 +75,8 @@
     "angular-uuid4": "^0.3.1",
     "angular-tree-dnd": "^3.0.4",
     "angular-ui-ace": "bower",
-    "ng-tags-input": "^3.1.1"
+    "ng-tags-input": "^3.1.1",
+    "angular-base64-upload": "^0.1.19"
   },
   "resolutions": {
     "jquery": "~1.11.0",

@@ -1,19 +1,19 @@
 <div class="modal-header">
-  Adicionar nota
+  Agendar Conferência
 </div>
 <div class="modal-body">
   <form role="form" class="form-horizontal">
     <div class="form-group">
-      <label class="col-md-2 control-label">
-        Data Ocorrência
+      <label class="col-md-3 control-label">
+        Data de Agendamento
       </label>
-      <div class="col-md-5">
+      <div class="col-md-9">
         <p class="input-group datepicker-holder">
           <input
             type="text"
             class="form-control"
             datepicker-popup="dd/MM/yyyy"
-            ng-model="nota.dataOcorrencia"
+            ng-model="dataAgendamento"
             is-open="opened"
             datepicker-options="dateOptions"
             close-text="Fechar" />
@@ -23,26 +23,11 @@
         </p>
       </div>
     </div>
-    <div class="form-group">
-      <label class="col-md-2 control-label">
-        Nota
-      </label>
-      <div class="col-md-10">
-        <textarea rows="10" class="form-control" ng-model="nota.descricao"></textarea>
-      </div>
-    </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-danger-alt pull-left" ng-click="cancel()">
+  <button class="btn btn-danger-alt pull-left">
     <i class="fa fa-times"></i> Cancelar
   </button>
-  <button class="btn btn-primary pull-right" ng-click="save(nota)">
-    <i class="fa fa-save"></i> Salvar
-  </button>
+  <button class="btn btn-primary pull-right" ng-click="save(dataAgendamento)"><i class="fa fa-save"></i> Salvar</button>
 </div>
-<!-- TODO
-
-  1. Listagem nao esta retornando o arrays de notas
-
--->

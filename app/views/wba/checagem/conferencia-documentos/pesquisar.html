@@ -72,7 +72,7 @@
                     <td>{{conf.dataAgendamento | date: 'dd/MM/yyyy'}}</td>
                     <td>{{conf.dataEntrega | date: 'dd/MM/yyyy'}}</td>
                     <td>{{conf.referencia}}</td>
-                    <td>{{conf.uuid}}</td>
+                    <td>{{conf.notas.length}}</td>
                     <td>
                       <div class="btn-group pull-right">
                         <button class="btn btn-info btn-sm" tooltip="Agendar" ng-click="agendarConferencia(conf.uuid)">
@@ -81,7 +81,7 @@
                         <button class="btn btn-warning btn-sm" tooltip="Anexo" ui-sref="wba.checagem.conferencia-documentos.anexos({conferenciaId: conf.uuid})">
                           <i class="fa fa-paperclip"></i>
                         </button>
-                        <button class="btn btn-success btn-sm" tooltip="Confirmar">
+                        <button class="btn btn-success btn-sm" tooltip="Confirmar" ng-click="confirmarConferencia(conf.uuid)">
                           <i class="fa fa-check"></i>
                         </button>
                         <button class="btn btn-primary btn-sm" tooltip="Notas" ng-click="addNota(conf)">

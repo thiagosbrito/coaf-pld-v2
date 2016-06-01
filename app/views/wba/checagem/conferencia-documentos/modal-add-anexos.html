@@ -5,10 +5,10 @@
   <form role="form" class="form-horizontal">
     <div class="form-group">
       <label class="col-md-2 control-label">
-        Anexos
+        Anexo
       </label>
       <div class="col-md-10">
-        <tags-input ng-model="anexos"></tags-input>
+        <input type="file" ng-model="file" base-sixty-four-input class="form-control">
       </div>
     </div>
   </form>
@@ -17,7 +17,7 @@
   <button class="btn btn-danger-alt pull-left" ng-click="cancel()">
     <i class="fa fa-times"></i> Cancelar
   </button>
-  <button class="btn btn-primary pull-right" ng-click="save(anexos)">
+  <button class="btn btn-primary pull-right" ng-click="save(file.base64)">
     <i class="fa fa-save"></i> Salvar
   </button>
 </div>

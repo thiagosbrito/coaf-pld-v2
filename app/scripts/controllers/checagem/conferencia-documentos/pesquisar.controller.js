@@ -78,9 +78,7 @@ angular.module('wbaApp')
         )
       };
       $scope.getConferenciasByData(moment().format('YYYY-MM-DD'));
-
       $scope.filtroOperacao = null;
-
       $scope.getConferenciasByOperacao = function ($item, $model, $label) {
 
         apiChecagem.findConferenciasByOperacao($item.uuid).then(
@@ -101,7 +99,6 @@ angular.module('wbaApp')
           }
         )
       };
-
       $scope.addConferencia = function () {
 
         var modalInstance = $modal.open({
@@ -114,18 +111,6 @@ angular.module('wbaApp')
           },
           controller: function ($scope, operacoes, $modalInstance) {
             $scope.operacoes = operacoes;
-            $scope.open = function($event) {
-              $event.preventDefault();
-              $event.stopPropagation();
-
-              $scope.opened = true;
-            };
-
-            $scope.dateOptions = {
-              formatYear: 'yy',
-              startingDay: 1
-            };
-
             $scope.cancel = function () {
               $modalInstance.dismiss('cancel');
             };
@@ -140,11 +125,10 @@ angular.module('wbaApp')
           function (conferencia) {
             $scope.conferencia = conferencia;
             $scope.conferencia.uuidOperacao = $scope.conferencia.uuidOperacao.uuid;
-            $scope.conferencia.dataAgendamento = moment($scope.conferencia.dataAgendamento).format('YYYY-MM-DD');
             apiChecagem.addConferencia($scope.conferencia).then(
               function (res) {
                 toaster.pop('success','Conferência de Documentos','Cadastro realizado com sucesso');
-                $scope.getConferenciasByData($scope.conferencia.dataAgendamento);
+                $scope.getConferenciasByData(moment().format('YYYY-MM-DD'));
               },
               function (err){
                 toaster.pop('error','Conferência de Documentos',err.statusText);
@@ -200,16 +184,91 @@ angular.module('wbaApp')
           }
         );
       };
-
       $scope.agendarConferencia =  function (id) {
-        apiChecagem.agendarConferencia(id).then(
-          function (res) {
-            toaster.pop('success','Agendar Conferência','Conferência agendada com sucesso')
-          },
-          function (err) {
-            toaster.pop('error','Agendar Conferência',err.statusText)
+        var modalInstance = $modal.open({
+          animation: true,
+          templateUrl: 'views/wba/checagem/conferencia-documentos/modal-agendar-conferencia.html',
+          controller: function ($scope, $modalInstance) {
+            $scope.open = function($event) {
+              $event.preventDefault();
+              $event.stopPropagation();
+              $scope.opened = true;
+            };
+
+            $scope.dateOptions = {
+              formatYear: 'yy',
+              startingDay: 1
+            };
+            $scope.cancel = function () {
+              $modalInstance.dismiss('cancel');
+            };
+
+            $scope.save = function (agendamento) {
+              $modalInstance.close(agendamento);
+            }
           }
-        )
+        });
+
+        modalInstance.result.then(
+          function (agendamento) {
+            agendamento = moment(agendamento).format('YYYY-MM-DD');
+            apiChecagem.agendarConferencia(id, {dataAgendamento: agendamento}).then(
+              function (res) {
+                toaster.pop('success','Agendar Conferencia','Data de agendamento cadastrada com sucesso');
+              },
+              function (err){
+                toaster.pop('error','Agendar Conferencia',err.statusText);
+              }
+            )
+          },
+          function () {
+            return false
+          }
+        );
+
+      };
+      $scope.confirmarConferencia =  function (id) {
+        var modalInstance = $modal.open({
+          animation: true,
+          templateUrl: 'views/wba/checagem/conferencia-documentos/modal-confirmar-conferencia.html',
+          controller: function ($scope, $modalInstance) {
+            $scope.open = function($event) {
+              $event.preventDefault();
+              $event.stopPropagation();
+              $scope.opened = true;
+            };
+
+            $scope.dateOptions = {
+              formatYear: 'yy',
+              startingDay: 1
+            };
+            $scope.cancel = function () {
+              $modalInstance.dismiss('cancel');
+            };
+
+            $scope.save = function (entrega) {
+              $modalInstance.close(entrega);
+            }
+          }
+        });
+
+        modalInstance.result.then(
+          function (entrega) {
+            entrega = moment(entrega).format('YYYY-MM-DD');
+            apiChecagem.confirmarConferencia(id, {dataEntrega: entrega}).then(
+              function (res) {
+                toaster.pop('success','Confirmar Conferencia','Data de entrega cadastrada com sucesso');
+              },
+              function (err){
+                toaster.pop('error','Confirmar Conferencia',err.statusText);
+              }
+            )
+          },
+          function () {
+            return false
+          }
+        );
+
       };
     }
   ]);
