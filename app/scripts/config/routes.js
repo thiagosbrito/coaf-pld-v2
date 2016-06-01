@@ -506,7 +506,13 @@ angular.module('wbaApp')
       })
       .state('wba.checagem.conferencia-documentos.pesquisar',{
         url: '/pesquisar',
-        templateUrl: 'views/wba/checagem/conferencia-documentos/pesquisar.html'
+        templateUrl: 'views/wba/checagem/conferencia-documentos/pesquisar.html',
+        controller: 'ConferenciaDocumentosPesquisarController'
+      })
+      .state('wba.checagem.conferencia-documentos.anexos',{
+        url: '/:conferenciaId//anexos',
+        templateUrl: 'views/wba/checagem/conferencia-documentos/anexos.html',
+        controller: 'ConferenciaDocumentosAnexosController'
       })
       .state('wba.checagem.confirmacao-titulos',{
         url: '/confirmacao-titulos',

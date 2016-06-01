@@ -8,7 +8,7 @@ angular.module('wbaApp')
     "apiCobrancas"    :     "http://api.erp.idtrust.com.br:9000/cobrancas/v1",
     "apiDocumentacao" :     "http://api.erp.idtrust.com.br:9000/documentacao/v1",
     "apiFinanceiro"   :     "http://api.erp.idtrust.com.br:9000/financeiro/v1",
-    "apiChecagem"     :     "http://api.erp.idtrust.com.br:9000/checagem/"
+    "apiChecagem"     :     "http://api.erp.idtrust.com.br:9000/checagem"
   })
   .constant('nanoScrollerDefaults', {
     nanoClass: 'scroll-pane',
