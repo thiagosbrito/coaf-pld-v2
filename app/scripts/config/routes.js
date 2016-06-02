@@ -384,6 +384,11 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/operacoes/carteiras/editar-carteira-templates.html',
         controller: 'EditarTemplatesCarteiraController'
       })
+      .state('wba.operacoes.carteiras.editar.documentos',{
+        url: '/documentos-conferencia',
+        templateUrl: 'views/wba/operacoes/carteiras/editar-carteira-documentos.html',
+        controller: 'EditarDocumentoCarteiraController'
+      })
 
       .state('wba.operacoes.tarifas',{
         url: '/tarifas',
@@ -634,7 +639,6 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/financeiro/contas/editar-info.html',
         controller: 'ContasInfoEditarController'
       })
-
       .state('wba.financeiro.codigos',{
         url: '/codigos-lancamento',
         template: '<div ui-view=""></div>'
@@ -643,6 +647,16 @@ angular.module('wbaApp')
         url: '/listar',
         templateUrl: 'views/wba/financeiro/codigos-lancamento/listar.html',
         controller: 'CodigosListarController'
+      })
+
+      .state('wba.financeiro.centro-custo',{
+        url: '/centro-custo',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.financeiro.centro-custo.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/financeiro/centro-custo/listar.html',
+        controller: 'CentroCustoListarController'
       })
   }
 ]);

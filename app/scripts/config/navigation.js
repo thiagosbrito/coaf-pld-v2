@@ -166,6 +166,10 @@ angular
               {
                 label: 'Códigos de Lançamento',
                 url: '#/financeiro/codigos-lancamento/listar'
+              },
+              {
+                label: 'Centro de Custo',
+                url: '#/financeiro/centro-custo/listar'
               }
               // ,
               // {
