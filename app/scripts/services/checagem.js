@@ -176,6 +176,85 @@ angular.module('wbaApp')
       )
     };
 
+    // DOCUMENTOS DE CONFERENCIA API
+
+    var _getDocumentosConferencia = function () {
+      return $http({
+        url: baseUrl.apiChecagem + '/documentoConferencia',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results;
+        }
+      );
+    };
+    var _getDocumentoConferenciaById = function (id) {
+      return $http({
+        url: baseUrl.apiChecagem + '/documentoConferencia/' + id,
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results;
+        }
+      );
+    };
+    var _addDocumentoConferencia = function (data) {
+      return $http({
+        url: baseUrl.apiChecagem + '/documentoConferencia',
+        method: 'POST',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results;
+        }
+      );
+    };
+    var _updateDocumentoConferencia = function (id, data) {
+      return $http({
+        url: baseUrl.apiChecagem + '/documentoConferencia/' + id,
+        method: 'PUT',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results;
+        }
+      );
+    };
+    var _deleteDocumentoConferencia = function (id, data) {
+      return $http({
+        url: baseUrl.apiChecagem + '/documentoConferencia/' + id,
+        method: 'DELETE',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results;
+        }
+      );
+    };
+    var _associarCarteira = function (idDocumento, idCarteira) {
+      return $http({
+        url: baseUrl.apiChecagem + '/documentoConferencia/' + idDocumento + '/carteira',
+        method: 'POST',
+        data: {idCarteira: idCarteira},
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results;
+        }
+      );
+    };
+
 
     api.findConferenciasByData      = _findConferenciasByData;
     api.findConferenciasByOperacao  = _findConferenciasByOperacao;
@@ -192,6 +271,13 @@ angular.module('wbaApp')
     api.addEstado                   = _addEstado;
     api.updateEstado                = _updateEstado;
     api.deleteEstado                = _deleteEstado;
+
+    api.getDocumentosConferencia    = _getDocumentosConferencia;
+    api.getDocumentoConferenciaById = _getDocumentoConferenciaById
+    api.addDocumentoConferencia     = _addDocumentoConferencia;
+    api.updateDocumentoConferencia  = _updateDocumentoConferencia;
+    api.deleteDocumentoConferencia  = _deleteDocumentoConferencia;
+    api.associarCarteira            = _associarCarteira;
 
 
 

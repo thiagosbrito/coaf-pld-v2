@@ -537,7 +537,8 @@ angular.module('wbaApp')
       })
       .state('wba.checagem.documentos-conferencia.listar',{
         url: '/listar',
-        templateUrl: 'views/wba/checagem/documentos-conferencia/listar.html'
+        templateUrl: 'views/wba/checagem/documentos-conferencia/listar.html',
+        controller: 'DocumentosConferenciaListarController'
       })
       // END of CHECAGEM
 

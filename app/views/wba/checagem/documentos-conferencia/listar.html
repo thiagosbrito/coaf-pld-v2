@@ -1,7 +1,7 @@
 <ol class="breadcrumb">
   <li><a href="#/">Dashboard</a></li>
   <li>Checagem</li>
-  <li class="active">Estados de Confirmação</li>
+  <li class="active">Documentos de Conferência</li>
 </ol>
 <div class="container-fluid">
   <div class="row">
@@ -9,6 +9,39 @@
       <div class="panel panel-indigo">
         <div class="panel-heading">
           <h2>Documentos de Conferência</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" ng-click="addDocumento()" tooltip="Adicionar Documento de Conferência">
+              <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Descrição</th>
+                <th>Tipo</th>
+                <th>Template</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="doc in documentos">
+                <td>{{doc.titulo}}</td>
+                <td>{{doc.descricao}}</td>
+                <td>{{doc.tipo}}</td>
+                <td>{{doc.templateId.descricao}}</td>
+                <td>
+                  <div class="btn-group pull-right">
+                    <button class="btn btn-danger-alt btn-sm" ng-click="deleteDocumento(doc.uuid)"><i class="fa fa-trash-o"></i></button>
+                    <button class="btn btn-warning btn-sm" ng-click="associarCarteira(doc)"><i class="fa fa-link"></i></button>
+                    <button class="btn btn-primary btn-sm" ng-click="updateDocumento(doc)"><i class="fa fa-pencil"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
