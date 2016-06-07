@@ -1,0 +1,52 @@
+<div class="modal-header">
+  Criar Documento de Conferência
+</div>
+<div class="modal-body">
+  <form role="form" class="form-horizontal">
+    <div class="form-group">
+      <label class="col-md-2">
+        Template
+      </label>
+      <div class="col-md-10">
+        <input
+          type="text"
+          class="form-control"
+          ng-model="doc.templateId"
+          typeahead="tpl as tpl.descricao for tpl in templates | filter:$viewValue"
+          typeahead-on-select="setInfoToDoc($item)">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2">
+        Título
+      </label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" ng-model="doc.titulo" disabled>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2">
+        Descrição
+      </label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" ng-model="doc.descricao" disabled>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2">
+        Tipo
+      </label>
+      <div class="col-md-5">
+        <select class="form-control" ng-model="doc.tipo">
+          <option value="">Selecione...</option>
+          <option value="CEDENTE">Cedente</option>
+          <option value="SACADO">Sacado</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()"><i class="fa fa-times"></i> Cancelar</button>
+  <button class="btn btn-primary pull-right" ng-click="save(doc)"><i class="fa fa-save"></i> Salvar</button>
+</div>

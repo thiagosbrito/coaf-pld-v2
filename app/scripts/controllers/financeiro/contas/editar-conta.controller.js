@@ -16,6 +16,7 @@ angular.module('wbaApp')
       };
 
       $scope.getInfo = function () {
+        $scope.openInfoBox = true;
         apiFinanceiro.getInfo($stateParams.contaId).then(
           function (res) {
             $scope.info = res.data;

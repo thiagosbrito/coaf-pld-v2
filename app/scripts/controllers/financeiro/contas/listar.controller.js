@@ -108,29 +108,29 @@ angular.module('wbaApp')
       };
       $scope.deleteConta = function (conta) {
         SweetAlert.swal({
-            title: "Você tem certeza?",
-            text: "Se prosseguir essa operação não poderá ser desfeita",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Prosseguir",
-            cancelButtonText: "Cancelar",
-            closeOnConfirm: false,
-            closeOnCancel: false
-          },
-          function(isConfirm) {
-            if (isConfirm) {
-              apiFinanceiro.deleteConta(conta).then(
-                function (res) {
-                  SweetAlert.swal("Excluído", "Seu item foi excluído com sucsso.", "success");
-                  $scope.getContas();
-                }
-              );
-            } else {
-              SweetAlert.swal("Contas", "Seu item não foi excluído.", "error");
-            }
+          title: "Você tem certeza?",
+          text: "Se prosseguir essa operação não poderá ser desfeita",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Prosseguir",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: false,
+          closeOnCancel: false
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+            apiFinanceiro.deleteConta(conta).then(
+              function (res) {
+                SweetAlert.swal("Excluído", "Seu item foi excluído com sucsso.", "success");
+                $scope.getContas();
+              }
+            );
+          } else {
+            SweetAlert.swal("Contas", "Seu item não foi excluído.", "error");
+          }
 
-          });
+        });
 
       }
 

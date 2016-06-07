@@ -18,7 +18,7 @@ angular.module('wbaApp')
     $httpProvider.defaults.headers.put = {};
     $httpProvider.defaults.headers.patch = {};
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/dashboard');
 
     $stateProvider
       .state('wba',{
@@ -384,6 +384,11 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/operacoes/carteiras/editar-carteira-templates.html',
         controller: 'EditarTemplatesCarteiraController'
       })
+      .state('wba.operacoes.carteiras.editar.documentos',{
+        url: '/documentos-conferencia',
+        templateUrl: 'views/wba/operacoes/carteiras/editar-carteira-documentos.html',
+        controller: 'EditarDocumentoCarteiraController'
+      })
 
       .state('wba.operacoes.tarifas',{
         url: '/tarifas',
@@ -520,7 +525,8 @@ angular.module('wbaApp')
       })
       .state('wba.checagem.confirmacao-titulos.pesquisar',{
         url: '/pesquisar',
-        templateUrl: 'views/wba/checagem/confirmacao-titulos/pesquisar.html'
+        templateUrl: 'views/wba/checagem/confirmacao-titulos/pesquisar.html',
+        controller: 'ConfirmacaoTitulosListarController'
       })
       .state('wba.checagem.estados-confirmacao',{
         url: '/estados-confirmacao',
@@ -528,7 +534,8 @@ angular.module('wbaApp')
       })
       .state('wba.checagem.estados-confirmacao.listar',{
         url: '/listar',
-        templateUrl: 'views/wba/checagem/estados-confirmacao/listar.html'
+        templateUrl: 'views/wba/checagem/estados-confirmacao/listar.html',
+        controller: 'EstadosConfirmacaoListarController'
       })
       .state('wba.checagem.documentos-conferencia',{
         url: '/documentos-conferencia',
@@ -536,7 +543,8 @@ angular.module('wbaApp')
       })
       .state('wba.checagem.documentos-conferencia.listar',{
         url: '/listar',
-        templateUrl: 'views/wba/checagem/documentos-conferencia/listar.html'
+        templateUrl: 'views/wba/checagem/documentos-conferencia/listar.html',
+        controller: 'DocumentosConferenciaListarController'
       })
       // END of CHECAGEM
 
@@ -632,7 +640,6 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/financeiro/contas/editar-info.html',
         controller: 'ContasInfoEditarController'
       })
-
       .state('wba.financeiro.codigos',{
         url: '/codigos-lancamento',
         template: '<div ui-view=""></div>'
@@ -641,6 +648,25 @@ angular.module('wbaApp')
         url: '/listar',
         templateUrl: 'views/wba/financeiro/codigos-lancamento/listar.html',
         controller: 'CodigosListarController'
+      })
+
+      .state('wba.financeiro.centro-custo',{
+        url: '/centro-custo',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.financeiro.centro-custo.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/financeiro/centro-custo/listar.html',
+        controller: 'CentroCustoListarController'
+      })
+      .state('wba.financeiro.transacoes',{
+        url: '/transacoes',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.financeiro.transacoes.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/financeiro/transacoes/listar.html',
+        controller: 'TransacoesListarController'
       })
   }
 ]);

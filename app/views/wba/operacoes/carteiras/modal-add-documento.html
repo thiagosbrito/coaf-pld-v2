@@ -1,0 +1,19 @@
+<div class="modal-header">
+  Adicionar Documento de Conferência
+</div>
+<div class="modal-body">
+  <form role="form" class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-md-2">
+        Documento p/ Conferência
+      </label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" ng-model="documento" typeahead="doc as doc.titulo for doc in documentos">
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()"><i class="fa fa-times"></i> Cancelar</button>
+  <button class="btn btn-primary pull-right" ng-click="save(documento)"><i class="fa fa-save"></i> Salvar</button>
+</div>

@@ -1,7 +1,7 @@
 <ol class="breadcrumb">
   <li><a href="#/">Dashboard</a></li>
-  <li>Checagem</li>
-  <li class="active">Estados de Confirmação</li>
+  <li>Financeiro</li>
+  <li class="active">Centro de Custo</li>
 </ol>
 
 <div class="container-fluid">
@@ -10,9 +10,9 @@
     <div class="col-md-12">
       <div class="panel panel-indigo">
         <div class="panel-heading">
-          <h2>Estados de Confirmação</h2>
+          <h2>Centro de Custo</h2>
           <div class="panel-ctrls">
-            <a class="button-icon" ng-click="addEstado()" tooltip="Adicionar Estado de Confirmação">
+            <a class="button-icon" ng-click="addCentroCusto()" tooltip="Criar Centro de Custo">
               <i class="fa fa-plus"></i>
             </a>
           </div>
@@ -22,20 +22,20 @@
             <thead>
               <tr>
                 <th>Nome</th>
+                <th>Ativo</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="est in estados">
-                <td>{{est.nome}}</td>
+              <tr ng-repeat="cc in centrosCusto">
+                <td>{{cc.nome}}</td>
+                <td>
+                  <i class="fa" ng-class="{'fa-check green': cc.ativo, 'fa-times red': !cc.ativo}"></i>
+                </td>
                 <td>
                   <div class="btn-group pull-right">
-                    <button class="btn btn-danger-alt btn-sm" ng-click="deleteEstado(est.uuid)">
-                      <i class="fa fa-trash-o"></i>
-                    </button>
-                    <button class="btn btn-primary btn-sm" ng-click="updateEstado(est)">
-                      <i class="fa fa-pencil"></i>
-                    </button>
+                    <button class="btn btn-danger-alt" ng-click="deleteCentroCusto(cc)"><i class="fa fa-trash-o"></i></button>
+                    <button class="btn btn-primary" ng-click="updateCentroCusto(cc)"><i class="fa fa-pencil"></i></button>
                   </div>
                 </td>
               </tr>
@@ -47,5 +47,3 @@
   </div>
 
 </div> <!-- container-fluid -->
-
-

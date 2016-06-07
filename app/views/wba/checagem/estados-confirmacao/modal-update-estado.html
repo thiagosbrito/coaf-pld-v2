@@ -1,0 +1,19 @@
+<div class="modal-header">
+  Criar Estado de Confirmação
+</div>
+<div class="modal-body">
+  <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label for="" class="col-md-2">
+        Nome
+      </label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" ng-model="estado.nome">
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()"><i class="fa fa-times"></i> Cancelar</button>
+  <button class="btn btn-primary pull-right" ng-click="save(estado)"><i class="fa fa-save"></i> Atualizar</button>
+</div>

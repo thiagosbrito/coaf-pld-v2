@@ -13,7 +13,7 @@
             type="text"
             class="form-control"
             datepicker-popup="dd/MM/yyyy"
-            ng-model="dataEntrega"
+            ng-model="confirmacao.dataEntrega"
             is-open="opened"
             datepicker-options="dateOptions"
             close-text="Fechar" />
@@ -23,11 +23,19 @@
         </p>
       </div>
     </div>
+    <div class="form-group">
+      <label class="col-md-2">
+        Responsável
+      </label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" ng-model="confirmacao.responsavel">
+      </div>
+    </div>
   </form>
 </div>
 <div class="modal-footer">
   <button class="btn btn-danger-alt pull-left">
     <i class="fa fa-times"></i> Cancelar
   </button>
-  <button class="btn btn-primary pull-right" ng-click="save(dataEntrega)"><i class="fa fa-save"></i> Salvar</button>
+  <button class="btn btn-primary pull-right" ng-click="save(confirmacao)"><i class="fa fa-save"></i> Salvar</button>
 </div>

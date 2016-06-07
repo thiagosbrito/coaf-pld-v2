@@ -380,7 +380,18 @@ angular.module('wbaApp')
           return results
         }
       )
-    }
+    };
+    
+    var _getRecebivelById = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/recebiveis/' + id,
+        method: 'GET'
+      }).then(
+        function (result) {
+          return result
+        }
+      )
+    };
 
     // Comercial
     api.getCarteiras              = _getCarteiras;
@@ -423,6 +434,8 @@ angular.module('wbaApp')
     api.addTipoLancamento         = _addTipoLancamento;
     api.updateTipoLancamento      = _updateTipoLancamento;
     api.deleteTipoLancamento      = _deleteTipoLancamento;
+    
+    api.getRecebivelById          = _getRecebivelById;
 
     return api;
 

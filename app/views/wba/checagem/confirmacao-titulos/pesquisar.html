@@ -10,9 +10,54 @@
         <div class="panel-heading">
           <h2>Confirmação de Títulos</h2>
         </div>
+        <div class="panel-body">
+          Filtro
+        </div>
+      </div>
+      <div class="panel panel-info" ng-repeat="tit in confTitulos">
+        <div class="panel-heading">
+          <h2>SACADO - {{tit.sacado.razaoSocial}}</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon" ng-click="tit.collapse = !tit.collapse" tooltip="Expandir">
+              <i class="fa" ng-class="{'fa-chevron-down': !tit.collapse, 'fa-chevron-right': tit.collapse}"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body" collapse="tit.collapse">
+          <table class="table table-striped ng-cloak">
+            <thead>
+              <tr>
+                <th>Carteira</th>
+                <th class="text-center">Duplicata</th>
+                <th class="text-center">Responsável</th>
+                <th class="text-center">Estado de Confirmaçao</th>
+                <th class="text-center">Data de Agendamento</th>
+                <th class="text-center">Data de Confirmaçao</th>
+                <th class="text-center">Notas</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="t in tit.titulos">
+                <td>{{t.titulo.uuidCarteira.nome}}</td>
+                <td class="text-center">{{t.titulo.uuidDuplicata.numero}}</td>
+                <td class="text-center">{{t.titulo.responsavel}}</td>
+                <td class="text-center">{{t.titulo.estadoConfirmacao}}</td>
+                <td class="text-center">{{t.titulo.dataAgendamento | date: 'dd/MM/yyyy'}}</td>
+                <td class="text-center">{{t.titulo.dataConfirmacao | date: 'dd/MM/yyyy'}}</td>
+                <td class="text-center">{{t.titulo.notas.length}}</td>
+                <td>
+                  <div class="btn-group">
+                    <button class="btn btn-sm btn-info" ng-click="addNota(t)"><i class="fa fa-sticky-note"></i></button>
+                    <button class="btn btn-sm btn-primary" ng-click="agendar(t)"><i class="fa fa-calendar"></i></button>
+                    <button class="btn btn-sm btn-success" ng-click="confirmar(t)"><i class="fa fa-check"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 </div> <!-- container-fluid -->
-
-

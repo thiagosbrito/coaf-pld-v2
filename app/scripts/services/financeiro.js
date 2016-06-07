@@ -322,6 +322,71 @@ angular.module('wbaApp')
       })
     };
 
+    // CENTRO DE CUSTOS
+
+    var _getCentroCusto = function () {
+      return $http({
+        url: baseUrl.apiFinanceiro + '/centro-custo',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+    var _getCentroCustoById = function (id) {
+      return $http({
+        url: baseUrl.apiFinanceiro + '/centro-custo/' + id,
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+    var _addCentroCusto = function (data) {
+      return $http({
+        url: baseUrl.apiFinanceiro + '/centro-custo',
+        method: 'POST',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+    var _updateCentroCusto = function (data) {
+      return $http({
+        url: baseUrl.apiFinanceiro + '/centro-custo',
+        method: 'PUT',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+    var _deleteCentroCusto = function (data) {
+      return $http({
+        url: baseUrl.apiFinanceiro + '/centro-custo',
+        method: 'DELETE',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+
 
     api.getBancos           = _getBancos;
     api.getBancoById        = _getBancoById;
@@ -357,6 +422,12 @@ angular.module('wbaApp')
     api.addInfo             = _addInfo;
     api.updateInfo          = _updateInfo;
     api.deleteInfo          = _deleteInfo;
+
+    api.getCentroCusto      = _getCentroCusto;
+    api.getCentroCustoById  = _getCentroCustoById;
+    api.addCentroCusto      = _addCentroCusto;
+    api.updateCentroCusto   = _updateCentroCusto;
+    api.deleteCentroCusto   = _deleteCentroCusto;
 
     return api;
 
