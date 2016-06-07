@@ -18,7 +18,7 @@ angular.module('wbaApp')
     $httpProvider.defaults.headers.put = {};
     $httpProvider.defaults.headers.patch = {};
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/dashboard');
 
     $stateProvider
       .state('wba',{
@@ -525,7 +525,8 @@ angular.module('wbaApp')
       })
       .state('wba.checagem.confirmacao-titulos.pesquisar',{
         url: '/pesquisar',
-        templateUrl: 'views/wba/checagem/confirmacao-titulos/pesquisar.html'
+        templateUrl: 'views/wba/checagem/confirmacao-titulos/pesquisar.html',
+        controller: 'ConfirmacaoTitulosListarController'
       })
       .state('wba.checagem.estados-confirmacao',{
         url: '/estados-confirmacao',
@@ -657,6 +658,15 @@ angular.module('wbaApp')
         url: '/listar',
         templateUrl: 'views/wba/financeiro/centro-custo/listar.html',
         controller: 'CentroCustoListarController'
+      })
+      .state('wba.financeiro.transacoes',{
+        url: '/transacoes',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.financeiro.transacoes.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/financeiro/transacoes/listar.html',
+        controller: 'TransacoesListarController'
       })
   }
 ]);

@@ -5,6 +5,16 @@ angular.module('wbaApp')
     var api = {};
 
     // CPONFERENCIA DE DOCUMENTOS API
+    var _getConferencias = function () {
+      return $http({
+        url: baseUrl.apiChecagem + '/conferencias',
+        method: 'GET'
+      }).then(
+        function (results){
+          return results
+        }
+      )
+    };
     var _findConferenciasByData = function (data) {
       return $http({
         url: baseUrl.apiChecagem + '/conferencias/search/findByDataAgendamento?dataAgendamento=' + data,
@@ -244,43 +254,130 @@ angular.module('wbaApp')
       return $http({
         url: baseUrl.apiChecagem + '/documentoConferencia/' + idDocumento + '/carteira',
         method: 'POST',
-        data: {idCarteira: idCarteira},
-        headers: {
-          'Content-Type':'application/json'
-        }
+        data: idCarteira
       }).then(
         function (results) {
           return results;
         }
       );
     };
+    var _getDocumentosByCarteira = function (carteiraId) {
+      return $http({
+        url: baseUrl.apiChecagem + '/documentosParaConferir/search/findByIdCarteira?id=' + carteiraId,
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
 
+    var _getTitulosConfirmacao = function () {
+      return $http({
+        url: baseUrl.apiChecagem + '/titulos',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
 
-    api.findConferenciasByData      = _findConferenciasByData;
-    api.findConferenciasByOperacao  = _findConferenciasByOperacao;
-    api.addConferencia              = _addConferencia;
-    api.agendarConferencia          = _agendarConferencia;
-    api.getAnexosConferencia        = _getAnexosConferencia;
-    api.addAnexoConferencia         = _addAnexoConferencia;
-    api.confirmarConferencia        = _confirmarConferencia;
-    api.getNotasConferencia         = _getNotasConferencia;
-    api.addNotaConferencia          = _addNotaConferencia;
+    var _getTitulosBySacado = function () {
+      return $http({
+        url: baseUrl.apiChecagem + '/titulos/confirmacao/sacado',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
 
-    api.getEstados                  = _getEstados;
-    api.getEstadoById               = _getEstadoById;
-    api.addEstado                   = _addEstado;
-    api.updateEstado                = _updateEstado;
-    api.deleteEstado                = _deleteEstado;
+    var _addNotaConfirmacao = function (id, data) {
+      return $http({
+        url: baseUrl.apiChecagem + '/titulos/' + id + '/notas',
+        method: 'PUT',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
 
-    api.getDocumentosConferencia    = _getDocumentosConferencia;
-    api.getDocumentoConferenciaById = _getDocumentoConferenciaById
-    api.addDocumentoConferencia     = _addDocumentoConferencia;
-    api.updateDocumentoConferencia  = _updateDocumentoConferencia;
-    api.deleteDocumentoConferencia  = _deleteDocumentoConferencia;
-    api.associarCarteira            = _associarCarteira;
+    var _agendarConfirmacao = function (id, data) {
+      return $http({
+        url: baseUrl.apiChecagem + '/titulos/' + id + '/agendamento',
+        method: 'PUT',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
 
+    var _confirmarConfirmacao = function (id, data) {
+      return $http({
+        url: baseUrl.apiChecagem + '/titulos/' + id + '/confirmar',
+        method: 'PUT',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
 
+    var _getNotasByTitulosConfirmacao = function (id) {
+      return $http({
+        url: baseUrl.apiChecagem + '/titulos/' + id + '/notas',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
 
+    api.getConferencias               = _getConferencias;
+    api.findConferenciasByData        = _findConferenciasByData;
+    api.findConferenciasByOperacao    = _findConferenciasByOperacao;
+    api.addConferencia                = _addConferencia;
+    api.agendarConferencia            = _agendarConferencia;
+    api.getAnexosConferencia          = _getAnexosConferencia;
+    api.addAnexoConferencia           = _addAnexoConferencia;
+    api.confirmarConferencia          = _confirmarConferencia;
+    api.getNotasConferencia           = _getNotasConferencia;
+    api.addNotaConferencia            = _addNotaConferencia;
+    api.getEstados                    = _getEstados;
+    api.getEstadoById                 = _getEstadoById;
+    api.addEstado                     = _addEstado;
+    api.updateEstado                  = _updateEstado;
+    api.deleteEstado                  = _deleteEstado;
+    api.getDocumentosConferencia      = _getDocumentosConferencia;
+    api.getDocumentoConferenciaById   = _getDocumentoConferenciaById;
+    api.addDocumentoConferencia       = _addDocumentoConferencia;
+    api.updateDocumentoConferencia    = _updateDocumentoConferencia;
+    api.deleteDocumentoConferencia    = _deleteDocumentoConferencia;
+    api.associarCarteira              = _associarCarteira;
+    api.getDocumentosByCarteira       = _getDocumentosByCarteira;
+    api.getTitulosConfirmacao         = _getTitulosConfirmacao;
+    api.getTitulosBySacado            = _getTitulosBySacado;
+    api.addNotaConfirmacao            = _addNotaConfirmacao;
+    api.agendarConfirmacao            = _agendarConfirmacao;
+    api.confirmarConfirmacao          = _confirmarConfirmacao;
+    api.getNotasByTitulosConfirmacao  = _getNotasByTitulosConfirmacao;
 
     return api;
 

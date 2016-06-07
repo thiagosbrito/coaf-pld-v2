@@ -17,36 +17,25 @@ angular.module('wbaApp')
         $scope.dt = new Date();
       };
       $scope.today();
-
       $scope.clear = function () {
         $scope.dt = null;
       };
-
-      // Disable weekend selection
-      $scope.disabled = function(date, mode) {
-        return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-      };
-
       $scope.toggleMin = function() {
         $scope.minDate = $scope.minDate ? null : new Date();
       };
       $scope.toggleMin();
-
       $scope.open = function($event) {
         $event.preventDefault();
         $event.stopPropagation();
 
         $scope.opened = true;
       };
-
       $scope.dateOptions = {
         formatYear: 'yy',
         startingDay: 1
       };
-
       $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
       $scope.format = $scope.formats[0];
-
       // end of definitions
 
       apiOperacoes.getOperacoes().then(
@@ -57,6 +46,25 @@ angular.module('wbaApp')
           toaster.pop('error','Operaçoes',err.statusText)
         }
       );
+
+      $scope.getConferencias = function () {
+        apiChecagem.getConferencias().then(
+          function (res) {
+            $scope.conferencias = res.data._embedded.conferencia;
+            angular.forEach($scope.conferencias, function (value){
+              value.uuid = value._links.self.href.split('/');
+              value.uuid = value.uuid[value.uuid.length - 1];
+              apiOperacoes.getOperacaoById(value.uuidOperacao).then(
+                function (res) {
+                  value.operacao = res.data
+                }
+              )
+            });
+          },
+          function (err) {}
+        )
+      };
+      $scope.getConferencias();
       $scope.getConferenciasByData = function (data) {
         data = moment(data).format('YYYY-MM-DD');
         apiChecagem.findConferenciasByData(data).then(
@@ -77,7 +85,7 @@ angular.module('wbaApp')
           }
         )
       };
-      $scope.getConferenciasByData(moment().format('YYYY-MM-DD'));
+
       $scope.filtroOperacao = null;
       $scope.getConferenciasByOperacao = function ($item, $model, $label) {
 
@@ -216,7 +224,7 @@ angular.module('wbaApp')
             apiChecagem.agendarConferencia(id, {dataAgendamento: agendamento}).then(
               function (res) {
                 toaster.pop('success','Agendar Conferencia','Data de agendamento cadastrada com sucesso');
-                $scope.getConferenciasByData(moment().format('YYYY-MM-DD'));
+                $scope.getConferenciasByData(agendamento);
               },
               function (err){
                 toaster.pop('error','Agendar Conferencia',err.statusText);
@@ -257,7 +265,7 @@ angular.module('wbaApp')
         modalInstance.result.then(
           function (entrega) {
             entrega = moment(entrega).format('YYYY-MM-DD');
-            apiChecagem.confirmarConferencia(id, {dataEntrega: entrega}).then(
+            apiChecagem.confirmarConferencia(id, {dataEntrega: entrega.dataEntrega, responsavel: entrega.responsavel}).then(
               function (res) {
                 toaster.pop('success','Confirmar Conferencia','Data de entrega cadastrada com sucesso');
                 $scope.getConferencias(moment().format('YYYY-MM-DD'));

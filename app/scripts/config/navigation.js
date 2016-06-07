@@ -170,6 +170,10 @@ angular
               {
                 label: 'Centro de Custo',
                 url: '#/financeiro/centro-custo/listar'
+              },
+              {
+                label: 'Transaçoes',
+                url: '#/financeiro/transacoes/listar'
               }
               // ,
               // {
