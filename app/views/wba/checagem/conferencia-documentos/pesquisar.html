@@ -73,7 +73,10 @@
                     <td>{{conf.dataAgendamento | date: 'dd/MM/yyyy'}}</td>
                     <td>{{conf.dataEntrega | date: 'dd/MM/yyyy'}}</td>
                     <td>{{conf.referencia}}</td>
-                    <td>{{conf.notas.length}}</td>
+                    <td>
+                      <a ng-if="conf.notas.length > 0"  ng-click="readNotas(conf.notas)">{{conf.notas.length}}</a>
+                      <span ng-if="conf.notas == 0">0</span>
+                    </td>
                     <td>
                       <div class="btn-group pull-right">
                         <button class="btn btn-info btn-sm" tooltip="Agendar" ng-click="agendarConferencia(conf.uuid)">

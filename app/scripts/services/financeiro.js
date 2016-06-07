@@ -266,6 +266,16 @@ angular.module('wbaApp')
         return results
       })
     };
+    var _getLancamentosConta = function (id) {
+      return $http({
+        url: baseUrl.apiFinanceiro + '/contas/' + id + '/lancamentos',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
 
     // INFORMAÇÕES BANCARIAS
 
@@ -416,6 +426,7 @@ angular.module('wbaApp')
     api.addConta            = _addConta;
     api.updateConta         = _updateConta;
     api.deleteConta         = _deleteConta;
+    api.getLancamentosConta = _getLancamentosConta;
 
     api.getInfo             = _getInfo;
     api.getInfoById         = _getInfoById;

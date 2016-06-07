@@ -43,10 +43,22 @@ angular.module('wbaApp')
         )
       }();
 
+      $scope.getLancamentos = function (){
+        apiFinanceiro.getLancamentosConta($stateParams.contaId).then(
+          function (res) {
+            $scope.lancamentos = res.data
+          },
+          function (err) {
+            toaster.pop('error','Lançamentos',err.statusText);
+          }
+        )
+      };
+
       apiFinanceiro.getContaById($stateParams.contaId).then(
         function (res) {
           $scope.conta = res.data
           $scope.conta.uuidBanco = _.findWhere($scope.bancos, {uuid: $scope.conta.uuidBanco});
+          $scope.getLancamentos();
         },
         function (err) {
           toaster.pop('error','Contas',err.statusText)

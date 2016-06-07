@@ -181,5 +181,27 @@ angular.module('wbaApp')
           }
         );
       };
+      $scope.readNotas = function (notas) {
+        var modalInstance = $modal.open({
+          animation: true,
+          templateUrl: 'views/wba/checagem/confirmacao-titulos/modal-ler-notas.html',
+          resolve: {
+            notas: function () {
+              return notas
+            }
+          },
+          controller: function ($scope, $modalInstance, notas) {
+            $scope.notas = notas;
+            angular.forEach($scope.notas, function (value){
+              value.dataOcorrencia = moment(value.dataOcorrencia).format('DD/MM/YYYY');
+            });
+            $scope.cancel = function () {
+              $modalInstance.dismiss('cancel');
+            };
+
+
+          }
+        });
+      }
     }
   ]);
