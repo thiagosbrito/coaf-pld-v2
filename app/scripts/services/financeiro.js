@@ -397,6 +397,23 @@ angular.module('wbaApp')
       )
     };
 
+    // TRANSACOES
+
+    var _addTransacao = function (data) {
+      return $http({
+        url: baseUrl.apiFinanceiro + '/transacoes',
+        method: 'POST',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+
 
     api.getBancos           = _getBancos;
     api.getBancoById        = _getBancoById;
@@ -440,6 +457,7 @@ angular.module('wbaApp')
     api.updateCentroCusto   = _updateCentroCusto;
     api.deleteCentroCusto   = _deleteCentroCusto;
 
+    api.addTransacao        = _addTransacao;
     return api;
 
   }]);

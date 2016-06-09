@@ -381,7 +381,7 @@ angular.module('wbaApp')
         }
       )
     };
-    
+
     var _getRecebivelById = function (id) {
       return $http({
         url: baseUrl.apiOperacoes + '/recebiveis/' + id,
@@ -434,7 +434,7 @@ angular.module('wbaApp')
     api.addTipoLancamento         = _addTipoLancamento;
     api.updateTipoLancamento      = _updateTipoLancamento;
     api.deleteTipoLancamento      = _deleteTipoLancamento;
-    
+
     api.getRecebivelById          = _getRecebivelById;
 
     return api;

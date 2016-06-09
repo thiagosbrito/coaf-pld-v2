@@ -7,7 +7,36 @@ angular.module('wbaApp')
     'toaster',
     'apiFinanceiro',
     function ($scope, $state, $stateParams, toaster, apiFinanceiro) {
+
+      // definitions for date
+      $scope.today = function() {
+        $scope.dt = new Date();
+      };
+      $scope.today();
+      $scope.clear = function () {
+        $scope.dt = null;
+      };
+      $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+      };
+      $scope.toggleMin();
+      $scope.open = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+      };
+      $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+      };
+      $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+      $scope.format = $scope.formats[0];
+      // end of definitions
+
       $scope.openInfoBox = false;
+      $scope.transacao = {};
+      $scope.transacao.lancamentos = [];
 
       $scope.addInfo = function () {
         $scope.openInfoBox = true;
@@ -46,7 +75,7 @@ angular.module('wbaApp')
       $scope.getLancamentos = function (){
         apiFinanceiro.getLancamentosConta($stateParams.contaId).then(
           function (res) {
-            $scope.lancamentos = res.data
+            $scope.lancamentos = res.data;
           },
           function (err) {
             toaster.pop('error','Lançamentos',err.statusText);
@@ -96,6 +125,30 @@ angular.module('wbaApp')
             }
           )
         }
+      };
+
+      $scope.lancamento = {};
+
+      $scope.addLancamentoToTransacao = function (lancamento) {
+        lancamento.createdAt = new Date();
+        lancamento.createdAt = moment(lancamento.createdAt).toISOString();
+        lancamento.uuidConta = $stateParams.contaId;
+        $scope.transacao.lancamentos.push(lancamento);
+        $scope.lancamento = {};
+      };
+
+      $scope.addTransacao = function (transacao) {
+        transacao.createdAt = new Date();
+        transacao.dataContabil = moment(transacao.dataContabil).toISOString()
+        transacao.createdAt = moment(transacao.createdAt).toISOString();
+        apiFinanceiro.addTransacao(transacao).then(
+          function (res) {
+            toaster.pop('success','Transações','Transação cadastrada com sucesso');
+          },
+          function (err) {
+            toaster.pop('error','Transações',err.statusText);
+          }
+        )
       };
 
     }
