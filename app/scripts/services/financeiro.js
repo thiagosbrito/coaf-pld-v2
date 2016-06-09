@@ -266,9 +266,9 @@ angular.module('wbaApp')
         return results
       })
     };
-    var _getLancamentosConta = function (id) {
+    var _getLancamentosConta = function (id, page, itens) {
       return $http({
-        url: baseUrl.apiFinanceiro + '/contas/' + id + '/lancamentos',
+        url: baseUrl.apiFinanceiro + '/contas/' + id + '/lancamentos?pagina=' + page + '&quantidadeElementos=' + parseInt(itens),
         method: 'GET'
       }).then(
         function (results) {

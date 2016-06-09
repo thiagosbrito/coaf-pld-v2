@@ -38,6 +38,31 @@ angular.module('wbaApp')
       $scope.transacao = {};
       $scope.transacao.lancamentos = [];
 
+      $scope.origem = {};
+      $scope.destino = {};
+
+      $scope.page = 0;
+      $scope.itensPerPage = 10;
+
+      apiFinanceiro.getContaById($stateParams.contaId).then(
+        function (res) {
+          $scope.conta = res.data;
+          $scope.origem.uuidConta = $scope.conta;
+          $scope.conta.uuidBanco = _.findWhere($scope.bancos, {uuid: $scope.conta.uuidBanco});
+          $scope.getLancamentos();
+        },
+        function (err) {
+          toaster.pop('error','Contas',err.statusText)
+        }
+      );
+
+      apiFinanceiro.getContas().then(
+        function (res) {
+          $scope.contas = res.data;
+        }
+      );
+
+
       $scope.addInfo = function () {
         $scope.openInfoBox = true;
         $scope.info = {};
@@ -73,26 +98,20 @@ angular.module('wbaApp')
       }();
 
       $scope.getLancamentos = function (){
-        apiFinanceiro.getLancamentosConta($stateParams.contaId).then(
+        apiFinanceiro.getLancamentosConta($stateParams.contaId, $scope.page, $scope.itensPerPage).then(
           function (res) {
             $scope.lancamentos = res.data;
+            angular.forEach($scope.lancamentos, function (value) {
+              value.uuidConta = _.findWhere($scope.contas, {uuid: value.uuidConta});
+            });
+
+            console.log($scope.lancamentos);
           },
           function (err) {
             toaster.pop('error','Lançamentos',err.statusText);
           }
         )
       };
-
-      apiFinanceiro.getContaById($stateParams.contaId).then(
-        function (res) {
-          $scope.conta = res.data
-          $scope.conta.uuidBanco = _.findWhere($scope.bancos, {uuid: $scope.conta.uuidBanco});
-          $scope.getLancamentos();
-        },
-        function (err) {
-          toaster.pop('error','Contas',err.statusText)
-        }
-      );
 
       $scope.update = function (conta, info) {
         apiFinanceiro.updateConta(conta).then(
@@ -129,12 +148,19 @@ angular.module('wbaApp')
 
       $scope.lancamento = {};
 
-      $scope.addLancamentoToTransacao = function (lancamento) {
-        lancamento.createdAt = new Date();
-        lancamento.createdAt = moment(lancamento.createdAt).toISOString();
-        lancamento.uuidConta = $stateParams.contaId;
-        $scope.transacao.lancamentos.push(lancamento);
-        $scope.lancamento = {};
+      $scope.addLancamentoToTransacao = function (origem, destino) {
+
+        origem.createdAt = new Date();
+        origem.createdAt = moment(origem.createdAt).toISOString();
+        destino.createdAt = new Date();
+        destino.createdAt = moment(origem.createdAt).toISOString();
+        origem.uuidConta = origem.uuidConta.uuid;
+        destino.uuidConta = destino.uuidConta.uuid;
+        $scope.transacao.lancamentos.push(origem);
+        $scope.transacao.lancamentos.push(destino);
+        $scope.origem = {};
+        $scope.origem.uuidConta = $scope.conta;
+        $scope.destino = {};
       };
 
       $scope.addTransacao = function (transacao) {
@@ -144,6 +170,7 @@ angular.module('wbaApp')
         apiFinanceiro.addTransacao(transacao).then(
           function (res) {
             toaster.pop('success','Transações','Transação cadastrada com sucesso');
+            $scope.getLancamentos();
           },
           function (err) {
             toaster.pop('error','Transações',err.statusText);

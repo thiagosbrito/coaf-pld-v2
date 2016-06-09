@@ -157,11 +157,19 @@
         <hr>
         <div class="row vertical-divider">
           <div class="col-md-12">
-            <h5>Lançamentos</h5>
+            <h5 class="text-left">Lançamentos</h5>
             <div class="row">
-              <div class="col-md-8">
+              <div class="col-md-3">
                 <div class="form-group">
-                  <div class="col-md-10 col-md-offset-1">
+                  <div class="col-md-12">
+                    <div class="alert alert-warning" ng-if="transacao.lancamentos.length == 0">
+                      <i class="fa fa-info-circle fa-5x"></i>
+                      <p>
+                        Não existem lançamentos cadastrados
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-md-12" style="padding: 0" ng-if="transacao.lancamentos.length > 0">
                     <table class="table table-striped table-bordered">
                       <thead>
                       <tr>
@@ -179,13 +187,45 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="control-label col-md-2">
-                    Valor
-                  </label>
-                  <div class="col-md-10">
-                    <input type="text" class="form-control" ng-model="lancamento.valor" ng-currency>
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5>Conta Origem</h5>
+                    <div class="form-group">
+                      <label class="control-label col-md-2">
+                        Conta
+                      </label>
+                      <div class="col-md-10">
+                        <input type="text" class="form-control" typeahead="cnt as cnt.nome for cnt in contas" ng-model="origem.uuidConta" disabled>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-2">
+                        Valor
+                      </label>
+                      <div class="col-md-10">
+                        <input type="text" class="form-control" ng-model="origem.valor" ng-currency>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <h5>Conta Destino</h5>
+                    <div class="form-group">
+                      <label class="control-label col-md-2">
+                        Conta
+                      </label>
+                      <div class="col-md-10">
+                        <input type="text" class="form-control" typeahead="cnt as cnt.nome for cnt in contas" ng-model="destino.uuidConta">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-2">
+                        Valor
+                      </label>
+                      <div class="col-md-10">
+                        <input type="text" class="form-control" ng-model="destino.valor" ng-currency>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -193,7 +233,7 @@
                     &nbsp;
                   </label>
                   <div class="col-md-10">
-                    <button class="btn btn-info pull-right" ng-click="addLancamentoToTransacao(lancamento)">
+                    <button class="btn btn-info pull-right" ng-click="addLancamentoToTransacao(origem, destino)">
                       <i class="fa fa-plus"></i>
                       Adicionar Lançamento
                     </button>
@@ -229,10 +269,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td></td>
-              <td class="text-center"></td>
-              <td class="text-center"></td>
+            <tr ng-repeat="lnc in lancamentos">
+              <td>{{lnc.createdAt}}</td>
+              <td class="text-center">
+                {{lnc.uuidConta.nome}}
+              </td>
+              <td class="text-center" ng-class="{'red': lnc.valor < 0}">
+                {{lnc.valor | currency}}
+              </td>
             </tr>
           </tbody>
         </table>
