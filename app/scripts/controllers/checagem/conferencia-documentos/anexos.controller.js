@@ -9,18 +9,62 @@ angular.module('wbaApp')
     'toaster',
     function ($scope, $state, $stateParams, apiChecagem, $modal, toaster) {
 
+      function b64toBlob(b64Data, contentType, sliceSize) {
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+          var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+          var byteNumbers = new Array(slice.length);
+          for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+          }
+
+          var byteArray = new Uint8Array(byteNumbers);
+
+          byteArrays.push(byteArray);
+        }
+
+        var blob = new Blob(byteArrays, {type: contentType});
+        return blob;
+      }
+
       $scope.getAnexosConferencia = function () {
         apiChecagem.getAnexosConferencia($stateParams.conferenciaId).then(
           function (res) {
-            $scope.notas = res.data
+            $scope.anexo = res.data;
+            $scope.pdfUrl = b64toBlob($scope.anexo, 'application/pdf');
+            $scope.pdfUrl = URL.createObjectURL($scope.pdfUrl);
+
           },
           function (err) {
-            toaster.pop('error','Notas',err.statusText)
+            toaster.pop('error','Anexos',err.statusText)
           }
         );
       };
       $scope.getAnexosConferencia();
 
+      // PDF settings
+      $scope.scroll = 0;
+      $scope.loading = 'loading';
+      $scope.getNavStyle = function(scroll) {
+        if(scroll > 100) return 'pdf-controls fixed';
+        else return 'pdf-controls';
+      };
+      $scope.onError = function(error) {
+        console.log(error);
+      };
+      $scope.onLoad = function() {
+        $scope.loading = '';
+      };
+      $scope.onProgress = function(progress) {
+        $scope.progress = progress.loaded / progress.total;
+      };
+      // END OF PDF settings
 
 
       $scope.addAnexo = function () {
@@ -52,12 +96,14 @@ angular.module('wbaApp')
 
         modalInstance.result.then(
           function (anexo) {
-            apiChecagem.addAnexoConferencia($stateParams.conferenciaId, anexo).then(
+            console.log(anexo.pdf);
+            apiChecagem.addAnexoConferencia($stateParams.conferenciaId, anexo.pdf).then(
               function (res) {
                 toaster.pop('success','Adicionar Anexos à Conferência','Anexo(s) adicionado(s) com sucesso');
                 $scope.getAnexosConferencia();
               },
               function (err){
+                console.log(err);
                 toaster.pop('error','Adicionar Anexos à Conferência',err.statusText);
               }
             )

@@ -76,7 +76,9 @@
     "angular-tree-dnd": "^3.0.4",
     "angular-ui-ace": "bower",
     "ng-tags-input": "^3.1.1",
-    "angular-base64-upload": "^0.1.19"
+    "angular-base64-upload": "^0.1.19",
+    "angular-pdf": "^1.3.0",
+    "pdfjs-dist": "^1.5.292"
   },
   "resolutions": {
     "jquery": "~1.11.0",

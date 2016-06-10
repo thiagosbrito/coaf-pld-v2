@@ -23,18 +23,7 @@
           <hr>
           <div class="row">
             <div class="col-md-12">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Anexos</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="anx in anexos">
-                    <td>{{anx}}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <ng-pdf scale="page-fit" template-url="views/wba/checagem/conferencia-documentos/pdf-viewer.html" canvasid="pdf"></ng-pdf>
             </div>
           </div>
         </div>

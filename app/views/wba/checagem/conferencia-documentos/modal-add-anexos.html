@@ -8,7 +8,7 @@
         Anexo
       </label>
       <div class="col-md-10">
-        <input type="file" ng-model="file" base-sixty-four-input class="form-control">
+        <input type="file" ng-model="anexos.pdf" accept="application/pdf"  app-filereader />Z
       </div>
     </div>
   </form>
@@ -17,7 +17,7 @@
   <button class="btn btn-danger-alt pull-left" ng-click="cancel()">
     <i class="fa fa-times"></i> Cancelar
   </button>
-  <button class="btn btn-primary pull-right" ng-click="save(file.base64)">
+  <button class="btn btn-primary pull-right" ng-click="save(anexos)">
     <i class="fa fa-save"></i> Salvar
   </button>
 </div>

@@ -26,5 +26,7 @@ angular.module('wbaApp', [
   'ntt.TreeDnD',
   'ui.ace',
   'ngTagsInput',
-  'naif.base64'
+  'naif.base64',
+  'pdf',
+  'appFilereader'
   ]);
