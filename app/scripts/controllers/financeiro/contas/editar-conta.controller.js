@@ -44,6 +44,8 @@ angular.module('wbaApp')
       $scope.page = 0;
       $scope.itensPerPage = 10;
 
+      $scope.showTransForm = false;
+
       apiFinanceiro.getContaById($stateParams.contaId).then(
         function (res) {
           $scope.conta = res.data;
@@ -164,6 +166,7 @@ angular.module('wbaApp')
       };
 
       $scope.addTransacao = function (transacao) {
+        $scope.showTransForm = false;
         transacao.createdAt = new Date();
         transacao.dataContabil = moment(transacao.dataContabil).toISOString()
         transacao.createdAt = moment(transacao.createdAt).toISOString();
