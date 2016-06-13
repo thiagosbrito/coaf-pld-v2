@@ -11,6 +11,7 @@ angular.module('wbaApp')
     'apiDocumentacao',
     function ($scope, $state, $stateParams, toaster, $modal, apiOperacoes, apiChecagem, apiDocumentacao) {
 
+      $scope.documentosParaConferir = [];
       $scope.addDocumento = function () {
         var modalInstance = $modal.open({
           animation: true,
@@ -62,6 +63,15 @@ angular.module('wbaApp')
         apiChecagem.getDocumentosByCarteira(id).then(
           function (res) {
             $scope.documentos = res.data._embedded.documentoParaConferir;
+            angular.forEach($scope.documentos, function (value){
+              value.uuid = value._links.self.href.split('/');
+              value.uuid = value.uuid[value.uuid.length - 1];
+              apiChecagem.getDocumentosParaConferirCarteira(value.uuid).then(
+                function (res) {
+                  console.log(res.data);
+                }
+              )
+            })
           },
           function (err) {
             toaster.pop('error','Documentos para Conferir',err.statusText);

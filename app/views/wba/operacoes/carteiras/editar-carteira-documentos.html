@@ -5,27 +5,29 @@
     </button>
   </div>
   <div class="col-md-12">
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th>Cód.</th>
-        <th>Descrição</th>
-        <th>Escopo</th>
-        <th>Tipo</th>
-        <th>Valor</th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr ng-repeat="tar in tarifas">
-        <td ng-bind="tar.codigoLancamento"></td>
-        <td ng-bind="tar.descricao"></td>
-        <td ng-bind="tar.escopo"></td>
-        <td ng-bind="tar.tipo"></td>
-        <td>{{tar.valor | currency}}</td>
-        <td></td>
-      </tr>
-      </tbody>
-    </table>
+
+<pre>{{documentos | json}}</pre>
+    <!--<table class="table table-striped">-->
+      <!--<thead>-->
+      <!--<tr>-->
+        <!--<th>Cód.</th>-->
+        <!--<th>Descrição</th>-->
+        <!--<th>Escopo</th>-->
+        <!--<th>Tipo</th>-->
+        <!--<th>Valor</th>-->
+        <!--<th></th>-->
+      <!--</tr>-->
+      <!--</thead>-->
+      <!--<tbody>-->
+      <!--<tr ng-repeat="tar in tarifas">-->
+        <!--<td ng-bind="tar.codigoLancamento"></td>-->
+        <!--<td ng-bind="tar.descricao"></td>-->
+        <!--<td ng-bind="tar.escopo"></td>-->
+        <!--<td ng-bind="tar.tipo"></td>-->
+        <!--<td>{{tar.valor | currency}}</td>-->
+        <!--<td></td>-->
+      <!--</tr>-->
+      <!--</tbody>-->
+    <!--</table>-->
   </div>
 </div>

@@ -271,7 +271,16 @@ angular.module('wbaApp')
         }
       )
     };
-
+    var _getDocumentosParaConferirCarteira = function (id){
+      return $http({
+        url: baseUrl.apiChecagem + '/documentosParaConferir/' + id + '/documentoConferencia',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
     var _getTitulosConfirmacao = function () {
       return $http({
         url: baseUrl.apiChecagem + '/titulos',
@@ -282,7 +291,6 @@ angular.module('wbaApp')
         }
       )
     };
-
     var _getTitulosBySacado = function () {
       return $http({
         url: baseUrl.apiChecagem + '/titulos/confirmacao/sacado',
@@ -293,7 +301,6 @@ angular.module('wbaApp')
         }
       )
     };
-
     var _addNotaConfirmacao = function (id, data) {
       return $http({
         url: baseUrl.apiChecagem + '/titulos/' + id + '/notas',
@@ -308,7 +315,6 @@ angular.module('wbaApp')
         }
       )
     };
-
     var _agendarConfirmacao = function (id, data) {
       return $http({
         url: baseUrl.apiChecagem + '/titulos/' + id + '/agendamento',
@@ -323,7 +329,6 @@ angular.module('wbaApp')
         }
       )
     };
-
     var _confirmarConfirmacao = function (id, data) {
       return $http({
         url: baseUrl.apiChecagem + '/titulos/' + id + '/confirmar',
@@ -338,7 +343,6 @@ angular.module('wbaApp')
         }
       )
     };
-
     var _getNotasByTitulosConfirmacao = function (id) {
       return $http({
         url: baseUrl.apiChecagem + '/titulos/' + id + '/notas',
@@ -378,7 +382,7 @@ angular.module('wbaApp')
     api.agendarConfirmacao            = _agendarConfirmacao;
     api.confirmarConfirmacao          = _confirmarConfirmacao;
     api.getNotasByTitulosConfirmacao  = _getNotasByTitulosConfirmacao;
-
+    api.getDocumentosParaConferirCarteira = _getDocumentosParaConferirCarteira;
     return api;
 
   }]);

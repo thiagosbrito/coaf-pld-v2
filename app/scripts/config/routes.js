@@ -515,7 +515,7 @@ angular.module('wbaApp')
         controller: 'ConferenciaDocumentosPesquisarController'
       })
       .state('wba.checagem.conferencia-documentos.anexos',{
-        url: '/:conferenciaId//anexos',
+        url: '/:conferenciaId/anexos',
         templateUrl: 'views/wba/checagem/conferencia-documentos/anexos.html',
         controller: 'ConferenciaDocumentosAnexosController'
       })

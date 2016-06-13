@@ -266,6 +266,16 @@ angular.module('wbaApp')
         return results
       })
     };
+    var _getLancamentosConta = function (id, page, itens) {
+      return $http({
+        url: baseUrl.apiFinanceiro + '/contas/' + id + '/lancamentos?pagina=' + page + '&quantidadeElementos=' + parseInt(itens),
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
 
     // INFORMAÇÕES BANCARIAS
 
@@ -387,6 +397,23 @@ angular.module('wbaApp')
       )
     };
 
+    // TRANSACOES
+
+    var _addTransacao = function (data) {
+      return $http({
+        url: baseUrl.apiFinanceiro + '/transacoes',
+        method: 'POST',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+
 
     api.getBancos           = _getBancos;
     api.getBancoById        = _getBancoById;
@@ -416,6 +443,7 @@ angular.module('wbaApp')
     api.addConta            = _addConta;
     api.updateConta         = _updateConta;
     api.deleteConta         = _deleteConta;
+    api.getLancamentosConta = _getLancamentosConta;
 
     api.getInfo             = _getInfo;
     api.getInfoById         = _getInfoById;
@@ -429,6 +457,7 @@ angular.module('wbaApp')
     api.updateCentroCusto   = _updateCentroCusto;
     api.deleteCentroCusto   = _deleteCentroCusto;
 
+    api.addTransacao        = _addTransacao;
     return api;
 
   }]);

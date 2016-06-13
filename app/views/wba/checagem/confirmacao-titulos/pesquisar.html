@@ -45,7 +45,10 @@
                 <td class="text-center">{{t.titulo.estadoConfirmacao}}</td>
                 <td class="text-center">{{t.titulo.dataAgendamento | date: 'dd/MM/yyyy'}}</td>
                 <td class="text-center">{{t.titulo.dataConfirmacao | date: 'dd/MM/yyyy'}}</td>
-                <td class="text-center">{{t.titulo.notas.length}}</td>
+                <td class="text-center">
+                  <a ng-if="t.titulo.notas.length > 0" ng-click="readNotas(t.titulo.notas)">{{t.titulo.notas.length}}</a>
+                  <span ng-if="t.titulo.notas == 0">0</span>
+                </td>
                 <td>
                   <div class="btn-group">
                     <button class="btn btn-sm btn-info" ng-click="addNota(t)"><i class="fa fa-sticky-note"></i></button>
