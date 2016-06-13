@@ -270,7 +270,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="lnc in lancamentos">
-              <td>{{lnc.createdAt}}</td>
+              <td>{{lnc.createdAt | date: 'dd/MM/yyyy'}}</td>
               <td class="text-center">
                 {{lnc.uuidConta.nome}}
               </td>
