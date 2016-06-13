@@ -285,7 +285,7 @@ angular.module('wbaApp')
 
         modalInstance.result.then(
           function (entrega) {
-            entrega = moment(entrega).format('YYYY-MM-DD');
+            entrega.dataEntrega = moment(entrega).format('YYYY-MM-DD');
             apiChecagem.confirmarConferencia(id, {dataEntrega: entrega.dataEntrega, responsavel: entrega.responsavel}).then(
               function (res) {
                 toaster.pop('success','Confirmar Conferencia','Data de entrega cadastrada com sucesso');
