@@ -60,7 +60,17 @@
                             <option value="">Selecione...</option>
                           </select>
                         </div>
-
+                        <div class="form-group">
+                          <label>Workflow</label>
+                          <select
+                            class="form-control"
+                            ng-disabled="operacao.workflowDeploymentSelecionado != null"
+                            ng-model="operacao.workflowDeploymentSelecionado"
+                            ng-options="wrk as wrk.fileName for wrk in workflows"
+                            ng-change="showSaveButton = true">
+                            <option value=""></option>
+                          </select>
+                        </div>
                         <div class="form-group" ng-show="detailsOpen">
                           <label for="">Dt. Operação</label>
                           <p class="input-group datepicker-holder">
@@ -90,6 +100,11 @@
                             Float
                           </label>
                           <input type="text" class="form-control" disabled="">
+                        </div>
+                        <div class="form-group" ng-if="showSaveButton">
+                          <button class="btn btn-primary btn-block" ng-click="update(operacao)">
+                            <i class="fa fa-save"></i> Salvar
+                          </button>
                         </div>
                         <div class="form-group" style="margin-bottom: 0px !important;">
                           <button class="btn btn-default-alt btn-block" ng-click="detailsOpen = !detailsOpen">

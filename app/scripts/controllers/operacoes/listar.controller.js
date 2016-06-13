@@ -28,6 +28,14 @@ angular.module('wbaApp')
       scrollInertia: 0,
       axis: 'y'
     };
+    $scope.getWorkflows = function () {
+      apiOperacoes.getWorkflows().then(
+        function (res) {
+          $scope.workflows = res.data;
+          console.log($scope.workflows);
+        }
+      )
+    }();
 
     $scope.addRecebiveisToArray = function (operacoes) {
       angular.forEach(operacoes, function (value, key) {
@@ -102,11 +110,12 @@ angular.module('wbaApp')
         );
     };
 
-    $scope.liberarOperacao = function (id) {
+    $scope.liberarOperacao = function (item) {
 
       SweetAlert.swal({
         title: "Você tem certeza?",
-        text: "Se prosseguir essa operação não poderá ser desfeita",
+        text: "Se prosseguir essa operação não poderá ser desfeita!",
+        html: true,
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
@@ -115,7 +124,7 @@ angular.module('wbaApp')
       },
       function(isConfirm){
         if (isConfirm) {
-          apiOperacoes.liberarOperacao(id).then(
+          apiOperacoes.liberarOperacao({uuidOperacao: item.uuid, uuidWorkflow: item.workflowDeploymentSelecionado}).then(
             function (res) {
               toaster.pop('success','Operação','Operação liberada com sucesso');
             },
@@ -146,11 +155,7 @@ angular.module('wbaApp')
             )
           },
           workflow: function () {
-            return apiOperacoes.getWorkflows().then(
-              function (res) {
-                return res.data
-              }
-            )
+            return $scope.workflows;
           }
         },
         controller: function ($scope, $modalInstance, carteiras, cedentes, workflow) {

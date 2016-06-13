@@ -39,6 +39,17 @@ angular.module('wbaApp')
 
     $scope.calcularLancamentos();
 
+    $scope.getWorkflows = function () {
+      apiOperacoes.getWorkflows().then(
+        function (res) {
+          $scope.workflows = res.data;
+          if($scope.operacao)  {
+            $scope.operacao.workflowDeploymentSelecionado = _.findWhere($scope.workflows, {uuid: $scope.operacao.workflowDeploymentSelecionado});
+          }
+        }
+      )
+    }();
+
     apiEmpresas.getAll().then(
       function (res) {
         $scope.cedentes = res.data;
@@ -104,9 +115,17 @@ angular.module('wbaApp')
 
     $scope.operacao = operacao;
 
+
     $scope.update = function (data) {
-      data.idCedente = $scope.selectedCedente.id;
-      data.idCarteira = $scope.selectedCarteira.uuid;
+      if($scope.selectedCedente) {
+        data.idCedente = $scope.selectedCedente.id;
+      }
+      if($scope.selectedCarteira) {
+        data.idCarteira = $scope.selectedCarteira.uuid;
+      }
+      if(data.workflowDeploymentSelecionado) {
+        data.workflowDeploymentSelecionado = data.workflowDeploymentSelecionado.uuid
+      }
       apiOperacoes.updateOperacao(data).then(
         function(res) {
           toaster.pop('success','Operações','Operação atualizada com sucesso');
