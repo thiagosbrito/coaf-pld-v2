@@ -150,6 +150,11 @@ angular.module('wbaApp')
 
       $scope.lancamento = {};
 
+      $scope.setValueToDestinyAcc = function (value) {
+        value = value * -1;
+        $scope.destino.valor = value;
+      };
+
       $scope.addLancamentoToTransacao = function (origem, destino) {
 
         origem.createdAt = new Date();

@@ -204,7 +204,7 @@
                         Valor
                       </label>
                       <div class="col-md-10">
-                        <input type="text" class="form-control" ng-model="origem.valor" ng-currency>
+                        <input type="text" class="form-control" ng-model="origem.valor" ng-currency ng-change="setValueToDestinyAcc(origem.valor)">
                       </div>
                     </div>
                   </div>
@@ -223,7 +223,7 @@
                         Valor
                       </label>
                       <div class="col-md-10">
-                        <input type="text" class="form-control" ng-model="destino.valor" ng-currency>
+                        <input type="text" class="form-control" ng-model="destino.valor" ng-currency disabled>
                       </div>
                     </div>
                   </div>
