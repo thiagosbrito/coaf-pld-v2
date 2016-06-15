@@ -24,17 +24,17 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-md-2">
+      <label class="col-md-3 control-label">
         Responsável
       </label>
-      <div class="col-md-10">
+      <div class="col-md-9">
         <input type="text" class="form-control" ng-model="confirmacao.responsavel">
       </div>
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-danger-alt pull-left">
+  <button class="btn btn-danger-alt pull-left" ng-click="cancel()">
     <i class="fa fa-times"></i> Cancelar
   </button>
   <button class="btn btn-primary pull-right" ng-click="save(confirmacao)"><i class="fa fa-save"></i> Salvar</button>

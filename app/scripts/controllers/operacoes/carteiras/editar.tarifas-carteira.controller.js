@@ -37,7 +37,7 @@ angular.module('wbaApp')
             };
             $scope.getTarifas();
 
-            $scope.close = function () {
+            $scope.cancel = function () {
               $modalInstance.dismiss('cancel');
             };
             $scope.saveTarifa = function (item) {

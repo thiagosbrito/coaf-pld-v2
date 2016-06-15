@@ -12,6 +12,7 @@
           <h2>Conferência de Documentos</h2>
         </div>
         <div class="panel-body">
+
           <div class="row">
             <div class="col-md-3">
               <label>
@@ -22,8 +23,9 @@
                   type="text"
                   class="form-control"
                   datepicker-popup="dd/MM/yyyy"
-                  ng-model="filtroData"
-                  ng-change="getConferenciasByData(filtroData)"
+                  ng-model="filtroConferencia.data"
+                  ng-click="filtroConferencia.operacao = null"
+                  ng-change="getFilteredConferencias(filtroConferencia)"
                   is-open="opened"
                   datepicker-options="dateOptions"
                   close-text="Fechar" />
@@ -32,16 +34,25 @@
                 </span>
               </p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label>
                 Buscar por Operação
               </label>
               <input
                 type="text"
-                ng-model="filtroOperacao"
+                ng-model="filtroConferencia.operacao"
+                ng-click="filtroConferencia.data = null"
                 typeahead="ope as ope.numero for ope in operacoes | filter:$viewValue"
                 class="form-control"
-                typeahead-on-select="getConferenciasByOperacao($item, $model, $label)">
+                typeahead-on-select="getFilteredConferencias(filtroConferencia)">
+            </div>
+            <div class="col-md-2">
+              <label>
+                &nbsp;
+              </label>
+              <button class="btn btn-default btn-block" ng-click="getFilteredConferencias(null)">
+                Limpar filtro
+              </button>
             </div>
             <div class="col-md-3">
               <label>
@@ -58,22 +69,21 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>Operação</th>
-
-                    <th>Data de Agendamento</th>
-                    <th>Data de Entrega</th>
-                    <th>Referência</th>
-                    <th>Notas</th>
+                    <th class="text-center" width="50">Operação</th>
+                    <th class="text-center">Data de Agendamento</th>
+                    <th class="text-center">Data de Entrega</th>
+                    <th class="text-center">Referência</th>
+                    <th class="text-center">Notas</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr ng-repeat="conf in conferencias">
-                    <td>{{conf.operacao.numero}}</td>
-                    <td>{{conf.dataAgendamento | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{conf.dataEntrega | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{conf.referencia}}</td>
-                    <td>
+                    <td class="text-center">{{conf.operacao.numero}}</td>
+                    <td class="text-center">{{conf.dataAgendamento | date: 'dd/MM/yyyy'}}</td>
+                    <td class="text-center">{{conf.dataEntrega | date: 'dd/MM/yyyy'}}</td>
+                    <td class="text-center">{{conf.referencia}}</td>
+                    <td class="text-center">
                       <a ng-if="conf.notas.length > 0"  ng-click="readNotas(conf.notas)">{{conf.notas.length}}</a>
                       <span ng-if="conf.notas == 0">0</span>
                     </td>

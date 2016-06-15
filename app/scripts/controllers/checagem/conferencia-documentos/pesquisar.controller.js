@@ -10,7 +10,8 @@ angular.module('wbaApp')
     'toaster',
     'SweetAlert',
     '$modal',
-    function ($scope, $state, $stateParams, apiChecagem, apiOperacoes, toaster, SweetAlert, $modal) {
+    'buscasFiltro',
+    function ($scope, $state, $stateParams, apiChecagem, apiOperacoes, toaster, SweetAlert, $modal, buscasFiltro) {
 
       // definitions for date
       $scope.today = function() {
@@ -65,6 +66,27 @@ angular.module('wbaApp')
         )
       };
       $scope.getConferencias();
+      $scope.filtroOperacao = buscasFiltro.data;
+      $scope.filtroConferencia = {};
+
+      $scope.getFilteredConferencias = function (filterData) {
+        buscasFiltro.storeData(filterData);
+
+        if(filterData == null) {
+          $scope.filtroConferencia = {};
+          $scope.getConferencias();
+        }
+        else {
+          if(moment.isDate(filterData.data)) {
+            $scope.filtroConferencia = buscasFiltro.data;
+            $scope.getConferenciasByData(filterData.data)
+          }else {
+            $scope.filtroConferencia = buscasFiltro.data;
+            $scope.getConferenciasByOperacao(filterData.operacao);
+          }
+        }
+      };
+
       $scope.getConferenciasByData = function (data) {
         data = moment(data).format('YYYY-MM-DD');
         apiChecagem.findConferenciasByData(data).then(
@@ -85,8 +107,6 @@ angular.module('wbaApp')
           }
         )
       };
-
-      $scope.filtroOperacao = null;
       $scope.getConferenciasByOperacao = function ($item, $model, $label) {
 
         apiChecagem.findConferenciasByOperacao($item.uuid).then(
@@ -107,6 +127,7 @@ angular.module('wbaApp')
           }
         )
       };
+
       $scope.addConferencia = function () {
 
         var modalInstance = $modal.open({
@@ -136,7 +157,7 @@ angular.module('wbaApp')
             apiChecagem.addConferencia($scope.conferencia).then(
               function (res) {
                 toaster.pop('success','Conferência de Documentos','Cadastro realizado com sucesso');
-                $scope.getConferenciasByData(moment().format('YYYY-MM-DD'));
+                $scope.getConferencias();
               },
               function (err){
                 toaster.pop('error','Conferência de Documentos',err.statusText);
@@ -264,7 +285,7 @@ angular.module('wbaApp')
 
         modalInstance.result.then(
           function (entrega) {
-            entrega = moment(entrega).format('YYYY-MM-DD');
+            entrega.dataEntrega = moment(entrega).format('YYYY-MM-DD');
             apiChecagem.confirmarConferencia(id, {dataEntrega: entrega.dataEntrega, responsavel: entrega.responsavel}).then(
               function (res) {
                 toaster.pop('success','Confirmar Conferencia','Data de entrega cadastrada com sucesso');

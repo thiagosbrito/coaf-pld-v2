@@ -668,5 +668,10 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/financeiro/transacoes/listar.html',
         controller: 'TransacoesListarController'
       })
+      .state('wba.financeiro.extras',{
+        url: '/extras',
+        templateUrl: 'views/wba/financeiro/extras/listar.html',
+        controller: 'ExtrasListarController'
+      })
   }
 ]);

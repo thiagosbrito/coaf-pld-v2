@@ -252,9 +252,9 @@ angular.module('wbaApp')
       });
     };
 
-    var _liberarOperacao = function (id) {
+    var _liberarOperacao = function (data) {
       return $http({
-        url: baseUrl.apiOperacoes + '/operacoes/' + id + '/iniciar',
+        url: baseUrl.apiOperacoes + '/operacoes/' + data.uuidOperacao + '/iniciar?uuidWorkflowDeployment=' + data.uuidWorkflow,
         method: 'PUT'
       }).then(
         function (results) {

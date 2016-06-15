@@ -8,10 +8,16 @@
         Anexo
       </label>
       <div class="col-md-10">
-        <input type="file" ng-model="anexos.pdf" accept="application/pdf"  app-filereader />Z
+        <input type="file" accept="application/pdf"  fileread="anexos.pdf" class="form-control"/>
+        {{}}
       </div>
     </div>
   </form>
+  <div class="row">
+    <div class="col-md-12">
+<pre>{{anexos}}</pre>
+    </div>
+  </div>
 </div>
 <div class="modal-footer">
   <button class="btn btn-danger-alt pull-left" ng-click="cancel()">

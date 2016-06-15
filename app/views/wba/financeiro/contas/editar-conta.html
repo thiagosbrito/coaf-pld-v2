@@ -204,7 +204,7 @@
                         Valor
                       </label>
                       <div class="col-md-10">
-                        <input type="text" class="form-control" ng-model="origem.valor" ng-currency>
+                        <input type="text" class="form-control" ng-model="origem.valor" ng-currency ng-change="setValueToDestinyAcc(origem.valor)">
                       </div>
                     </div>
                   </div>
@@ -223,7 +223,7 @@
                         Valor
                       </label>
                       <div class="col-md-10">
-                        <input type="text" class="form-control" ng-model="destino.valor" ng-currency>
+                        <input type="text" class="form-control" ng-model="destino.valor" ng-currency disabled>
                       </div>
                     </div>
                   </div>
@@ -233,7 +233,7 @@
                     &nbsp;
                   </label>
                   <div class="col-md-10">
-                    <button class="btn btn-info pull-right" ng-click="addLancamentoToTransacao(origem, destino)">
+                    <button class="btn btn-info pull-right" ng-click="addLancamentoToTransacao(origem, destino);">
                       <i class="fa fa-plus"></i>
                       Adicionar Lançamento
                     </button>
@@ -270,7 +270,7 @@
           </thead>
           <tbody>
             <tr ng-repeat="lnc in lancamentos">
-              <td>{{lnc.createdAt}}</td>
+              <td>{{lnc.createdAt | date: 'dd/MM/yyyy'}}</td>
               <td class="text-center">
                 {{lnc.uuidConta.nome}}
               </td>

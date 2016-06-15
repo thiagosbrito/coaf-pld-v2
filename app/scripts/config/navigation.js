@@ -172,8 +172,8 @@ angular
                 url: '#/financeiro/centro-custo/listar'
               },
               {
-                label: 'Transaçoes',
-                url: '#/financeiro/transacoes/listar'
+                label: 'Extras',
+                url: '#/financeiro/extras'
               }
               // ,
               // {

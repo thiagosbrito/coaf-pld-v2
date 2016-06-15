@@ -414,6 +414,19 @@ angular.module('wbaApp')
       )
     };
 
+    // LANCAMENTOS
+
+    var _getAllLancamentos = function () {
+      return $http({
+        url: baseUrl.apiFinanceiro + '/lancamentos',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+
 
     api.getBancos           = _getBancos;
     api.getBancoById        = _getBancoById;
@@ -458,6 +471,8 @@ angular.module('wbaApp')
     api.deleteCentroCusto   = _deleteCentroCusto;
 
     api.addTransacao        = _addTransacao;
+
+    api.getAllLancamentos   = _getAllLancamentos;
     return api;
 
   }]);

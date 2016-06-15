@@ -35,6 +35,8 @@ angular.module('wbaApp')
         }
       )
     };
+    
+    
     var _addConferencia = function (data) {
       return $http({
         url: baseUrl.apiChecagem + '/conferencias',
