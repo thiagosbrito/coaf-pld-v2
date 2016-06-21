@@ -10,3 +10,32 @@ before_script:
   - 'bower install'
 before_install:
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
+before_deploy:
+  - gem install aws-sdk -v 2.1.21
+  - gem install mime-types -v 2.6.2
+  - grunt zipDist
+deploy:
+  - provider: s3
+    edge:
+      branch: s3-backward-compat
+    access_key_id: 'AKIAJA6FGTAA44QM4ZCQ'
+    secret_access_key: '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'
+    bucket: 'codedeploy.idtrust.com.br'
+    skip_cleanup: true
+    region: 'sa-east-1'
+    upload-dir: 'dev/erp-portal'
+    local-dir: 'dist-deploy'
+    on:
+      branch: 'develop'
+      node: '5'
+  - provider: codedeploy
+    access_key_id: 'AKIAJA6FGTAA44QM4ZCQ'
+    secret_access_key: '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'
+    bucket: 'codedeploy.idtrust.com.br'
+    key: dev/erp-portal/portal-$TRAVIS_BUILD_NUMBER.zip
+    application: wba-gestao-portal
+    deployment_group: 'development'
+    region: 'sa-east-1'
+    on:
+      branch: 'develop'
+      node: '5'
