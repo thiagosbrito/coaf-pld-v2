@@ -541,6 +541,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('zipDist',function(target) {
     var opt = grunt.config.get('zip');
+    fs.mkdirSync('dist-deploy');
     var file = new Zip();
     opt.files.forEach(function(f) {
       var input = fs.readFileSync(f.path);
