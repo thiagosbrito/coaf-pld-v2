@@ -1,4 +1,4 @@
-angular.module('ui.bootstrap.popover')
+angular.module('ui.bootstrap.popover',[ 'ui.bootstrap.tooltip' ])
   .directive( 'popoverHtmlUnsafePopup', function () {
     return {
       restrict: 'EA',
