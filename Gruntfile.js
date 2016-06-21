@@ -15,8 +15,18 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  var fs = require('fs'),
+      Zip = require('jszip');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
+    zip: {
+      'files': [
+        {path:'codedeploy/appspec.yml', dest: 'appspec.yml', options: {unixPermissions:'666'}},
+        {path:'codedeploy/deploy.sh', dest: 'do-deploy.sh', options: {unixPermissions:'755'}},
+        {path:'codedeploy/deploy.sh', dest: 'deploy.sh', options: {unixPermissions:'755'}}
+      ]
+    },
 
     // Project settings
     yeoman: {
@@ -528,4 +538,16 @@ module.exports = function (grunt) {
     // 'test',
     'build'
   ]);
+
+  grunt.registerTask('zipDist',function(target) {
+    var opt = grunt.config.get('zip');
+    var file = new Zip();
+    opt.files.forEach(function(f) {
+      var input = fs.readFileSync(f.path);
+      file.file(f.dest,input,f.options);
+    });
+    var output = file.generate({type:'nodebuffer', compression:'STORE',platform:'UNIX'});
+    fs.writeFileSync('dist-deploy/portal-'+process.env.TRAVIS_BUILD_NUMBER+'.zip', output);
+  });
+
 };

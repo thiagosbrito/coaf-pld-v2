@@ -1,0 +1,10 @@
+version: 0.0
+os: linux
+files:
+  - source: 'do-deploy.sh'
+    destination: '/tmp'
+
+hooks:
+  AfterInstall:
+    - location: deploy.sh
+  
