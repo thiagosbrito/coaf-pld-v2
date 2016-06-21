@@ -13,7 +13,7 @@ before_install:
 before_deploy:
   - gem install aws-sdk -v 2.1.21
   - gem install mime-types -v 2.6.2
-  - grunt zipDist
+  - grunt zipDist --force
 deploy:
   - provider: s3
     edge:
