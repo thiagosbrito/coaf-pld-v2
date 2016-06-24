@@ -18,7 +18,7 @@ angular.module('wbaApp')
             $scope.representantes = res.data;
           },
           function (err) {
-            toaster.pop('error','Representantes',err.statustext);
+            toaster.pop('error','Representantes',err.statusText);
           }
         );
       };
@@ -51,7 +51,7 @@ angular.module('wbaApp')
                 $scope.getRepresentantes();
               },
               function (err) {
-                toaster.pop('error','Representantes','Desculpe, algum erro ocorreu, favor, verifique as informações e tente novamente!')
+                toaster.pop('error','Representantes',err.statusText)
               }
             )
           }
@@ -104,7 +104,7 @@ angular.module('wbaApp')
                       $scope.getTiposRepresentantes();
                     },
                     function (err) {
-                      toaster.pop('error','Tipo de Representante','Desculpe, algum erro ocorreu, favor, verifique as informações e tente novamente!')
+                      toaster.pop('error','Tipo de Representante',err.statusText);
                     }
                   )
                 }

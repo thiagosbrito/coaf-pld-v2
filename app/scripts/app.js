@@ -28,5 +28,7 @@ angular.module('wbaApp', [
   'ngTagsInput',
   'naif.base64',
   'pdf',
-  'appFilereader'
+  'appFilereader',
+  'ui.mask',
+  'ngCpfCnpj'
   ]);
