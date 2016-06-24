@@ -58,7 +58,8 @@ angular.module('wbaApp')
             if(id) {
               apiEmpresas.getAddressById($stateParams.empresaId, id).then(
                 function (res) {
-                  $scope.endereco = res.data
+                  $scope.endereco = res.data;
+                  console.log($scope.endereco);
                 }
               )
             }

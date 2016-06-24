@@ -25,7 +25,7 @@
         <tr ng-repeat="rep in representantes track by $index">
           <td ng-bind="rep.nome"></td>
           <td ng-bind="rep.email"></td>
-          <td ng-bind="rep.cpf"></td>
+          <td>{{rep.cpf | cpf}}</td>
           <td ng-bind="rep.papel"></td>
           <td>
             <div class="btn-group">

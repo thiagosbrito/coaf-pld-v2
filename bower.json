@@ -61,7 +61,7 @@
     "angular-ui-router": "~0.2.18",
     "angular-input-masks": "~2.3.0",
     "angular-loading-bar": "~0.8.0",
-    "ng-filters-br": "~1.0.2",
+    "ng-filters-br": "^1.0.2",
     "AngularJS-Toaster": "angularjs-toaster#~1.2.0",
     "angular-csrf-cross-domain": "~0.0.3",
     "ngSweetAlert": "angular-sweetalert#~1.1.0",

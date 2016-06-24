@@ -18,19 +18,19 @@
       <div class="form-group">
         <label class="col-md-2 control-label">Nome</label>
         <div class="col-md-10">
-          <input type="text" ng-model="rep.nome" class="form-control">
+          <input type="text" ng-model="rep.nome" name="nome" class="form-control">
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-2 control-label">CPF</label>
         <div class="col-md-8">
-          <input type="text" ng-model="rep.cpf" class="form-control" ui-br-cpf-mask>
+          <input type="text" ng-model="rep.cpf" name="cpf" class="form-control" ui-br-cpf-mask>
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-2 control-label">Email</label>
         <div class="col-md-8">
-          <input type="email" ng-model="rep.email" class="form-control">
+          <input type="email" ng-model="rep.email" name="email" class="form-control">
         </div>
       </div>
     </fieldset>
@@ -38,5 +38,5 @@
 </div>
 <div class="modal-footer">
   <button class="btn btn-danger-alt pull-left" ng-click="close()"><i class="fa fa-times"></i> Cancelar</button>
-  <button class="btn btn-primary pull-right" ng-click="salvar(rep)"><i class="fa fa-save"></i> Salvar</button>
+  <button class="btn btn-primary pull-right" ng-click="salvar(rep)" ng-disabled="orgForm.$invalid"><i class="fa fa-save"></i> Salvar</button>
 </div>
