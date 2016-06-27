@@ -167,8 +167,16 @@ angular.module('wbaApp')
                     console.log(data);
                   }
                 }
+              },
+              {
+                displayName: "",
+                cellTemplate: "<button class='btn btn-primary' ng-click='editNode(node)'><i class='fa fa-pencil'></i></div>"
               }
             ];
+
+            $scope.editNode = function (node) {
+              console.log(node);
+            };
 
             $scope.save = function (item) {
               $modalInstance.close(item);

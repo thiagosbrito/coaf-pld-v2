@@ -27,9 +27,32 @@ angular.module('wbaApp')
         apiOperacoes.getTarifasByOperacao($stateParams.operacaoId).then(
           function (res) {
             $scope.tarifas = res.data;
+            angular.forEach($scope.tarifas, function (value) {
+              value.editTar = false;
+            });
             $scope.getTarifasList();
           }
         )
+      };
+
+      $scope.enableEdit = function (item) {
+        if(item.editTar == true) {
+          item = _.omit(item, 'editTar');
+          item = _.omit(item, 'uuidTipoLancamento');
+          apiOperacoes.updateTarifa(item).then(
+            function (res) {
+              toaster.pop('success','Tarifa','Tarifa atualizada com sucesso');
+              item.editTar = false;
+            },
+            function (err) {
+              toaster.pop('error','Tarifa',err.statusText);
+            }
+          );
+        }
+        else {
+          item.editTar = true;
+        }
+
       };
 
       $scope.calcularLancamentos = function() {
