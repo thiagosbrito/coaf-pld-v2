@@ -15,12 +15,38 @@ angular.module('wbaApp')
 
       $scope.plataformas = [];
       $scope.tree_data = [];
+      $scope.getHierarquias = function () {
+        apiComercial.getHierarquias().then(
+          function (res) {
+            $scope.hierarquias = res.data
+          })
+      }();
+
+      $scope.setParent = function (obj) {
+        obj.pai = _.findWhere($scope.hierarquias, {uuid: obj.hierarquiaPai});
+        obj.pai = _.omit(obj.pai,'__children__');
+        obj.pai = _.omit(obj.pai,'__dept__');
+        obj.pai = _.omit(obj.pai,'__expanded__');
+        obj.pai = _.omit(obj.pai,'__hashKey__');
+        obj.pai = _.omit(obj.pai,'__icon__');
+        obj.pai = _.omit(obj.pai,'__index__');
+        obj.pai = _.omit(obj.pai,'__index_real__');
+        obj.pai = _.omit(obj.pai,'__level__');
+        obj.pai = _.omit(obj.pai,'__parent__');
+        obj.pai = _.omit(obj.pai,'__parent_real__')
+        obj.pai = _.omit(obj.pai,'__selected__');
+        obj.pai = _.omit(obj.pai,'__uid__');
+        obj.pai = _.omit(obj.pai,'__visible__');
+        return obj;
+      };
 
       $scope.getHierarquiasIntoPlatform = function (platform) {
         platform.hierarquias = [];
         apiComercial.getHierarquiaByPlatformId(platform.uuid).then(
           function (res) {
             if(res) {
+
+
               platform.hierarquias.push(res.data);
               platform.tree = [];
 
@@ -29,6 +55,7 @@ angular.module('wbaApp')
                     angular.forEach(item.hierarquias, function (value) {
                       value.hierarquiaPai = parseInt(value.hierarquiaPai);
                       platform.tree.push(value);
+                      $scope.setParent(value);
                       if(value.hierarquias) {
                         checkChildren(value);
                       }
@@ -39,20 +66,10 @@ angular.module('wbaApp')
                   }
               };
 
-              angular.forEach(platform.hierarquias, function (v){
-                platform.tree.push(v);
-                angular.forEach(v.hierarquias, function(h) {
-                  // checkChildren(h);
-                  h.hierarquiaPai = parseInt(h.hierarquiaPai);
-                  platform.tree.push(h);
-                  angular.forEach(h.hierarquias, function (c) {
-                    c.hierarquiaPai = parseInt(c.hierarquiaPai);
-                    platform.tree.push(c);
+              checkChildren(platform);
 
-                  })
-                });
-              });
               platform.tree = $TreeDnDConvert.line2tree(platform.tree, 'uuid', 'hierarquiaPai');
+
               return platform
             }
           }
@@ -90,7 +107,22 @@ angular.module('wbaApp')
               )
             }
           },
-          controller: function ($scope, $modalInstance, Upload, $timeout, plataforma, cedentes) {
+          controller: function ($scope, $modalInstance, Upload, $timeout, plataforma, cedentes, apiComercial) {
+
+            $scope.getData = function (){
+              apiComercial.getPlataformas().then(
+                function (res) {
+                  $scope.plataformas = res.data;
+                }
+              );
+              apiComercial.getHierarquias().then(
+                function (res) {
+                  $scope.hierarquias = res.data;
+                }
+              )
+            }();
+
+            $scope.isEditing = true;
 
             $scope.$callbacks = {
               // function accept called when item Drapping move-over target
@@ -140,13 +172,17 @@ angular.module('wbaApp')
                   });
                 }
               });
-              console.log(data);
               return data;
             };
+
             $scope.cedentes = cedentes;
+
             $scope.plataforma = plataforma;
+
             $scope.tree_data = plataforma.tree;
+
             $scope.treatData(plataforma);
+
             var tree;
             $scope.my_tree = tree = {};
             $scope.expanding_property = "nome";
@@ -175,8 +211,50 @@ angular.module('wbaApp')
             ];
 
             $scope.editNode = function (node) {
-              console.log(node);
+              $scope.isReading = true;
+              $scope.isEditing = false;
+              $scope.hierarquia = node;
             };
+
+            $scope.cancelEditing = function () {
+              $scope.isReading = false;
+              $scope.isEditing = true;
+              $scope.hierarquia = null;
+            };
+
+            $scope.updateHierarquia = function (hierarquia) {
+              hierarquia = _.omit(hierarquia,'__children__');
+              hierarquia = _.omit(hierarquia,'__dept__');
+              hierarquia = _.omit(hierarquia,'__expanded__');
+              hierarquia = _.omit(hierarquia,'__hashKey__');
+              hierarquia = _.omit(hierarquia,'__icon__');
+              hierarquia = _.omit(hierarquia,'__index__');
+              hierarquia = _.omit(hierarquia,'__index_real__');
+              hierarquia = _.omit(hierarquia,'__level__');
+              hierarquia = _.omit(hierarquia,'__parent__');
+              hierarquia = _.omit(hierarquia,'__parent_real__');
+              hierarquia = _.omit(hierarquia,'__selected__');
+              hierarquia = _.omit(hierarquia,'__uid__');
+              hierarquia = _.omit(hierarquia,'__visible__');
+              hierarquia.hierarquia = hierarquia.hierarquias;
+              hierarquia = _.omit(hierarquia,'hierarquias');
+              hierarquia = _.omit(hierarquia,'uuidsCedente');
+              hierarquia.uuidCedente = null;
+              hierarquia.hierarquiaPai = hierarquia.pai;
+              hierarquia = _.omit(hierarquia,'pai');
+              // hierarquia = _.omit(hierarquia,'uuid');
+              apiComercial.updateHierarquia(hierarquia).then(
+                function (res) {
+                  toaster.pop('success','Atualizar Hierarquia','Dados alterados com sucesso');
+                  $scope.isReading = false;
+                  $scope.isEditing = true;
+                  $scope.hierarquia = null;
+                },
+                function (err) {
+                  toaster.pop('error','Atualizar Hierarquia',err.statusText);
+                }
+              )
+            }
 
             $scope.save = function (item) {
               $modalInstance.close(item);
