@@ -172,18 +172,21 @@ angular
                 url: '#/financeiro/centro-custo/listar'
               },
               {
-                label: 'Extras',
-                url: '#/financeiro/extras'
-              }
-              // ,
+                label: 'Títulos',
+                url: '#/financeiro/titulos/listar'
+              },
               // {
               //   label: 'Instruções',
               //   url: '#/financeiro/instrucoes/listar'
-              // }
-              // {
-              //   label: 'Cobranças',
-              //   url: '#/cobranca/listar'
-              // }
+              // },
+              {
+                label: 'Cobranças',
+                url: '#/cobranca/listar'
+              },
+              {
+                label: 'Extras',
+                url: '#/financeiro/extras'
+              }
             ]
           },
           {

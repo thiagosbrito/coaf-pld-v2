@@ -668,6 +668,15 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/financeiro/transacoes/listar.html',
         controller: 'TransacoesListarController'
       })
+      .state('wba.financeiro.titulos',{
+        url: '/titulos',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.financeiro.titulos.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/financeiro/titulos/listar.html',
+        controller: 'TitulosListarController'
+      })
       .state('wba.financeiro.extras',{
         url: '/extras',
         templateUrl: 'views/wba/financeiro/extras/listar.html',
