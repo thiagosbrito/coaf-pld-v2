@@ -33,7 +33,7 @@ angular.module('wbaApp')
       }
       $scope.getTiposRepresentantes();
 
-      $scope.delete = function (id) {
+      $scope.delete = function (rep) {
         SweetAlert.swal({
            title: "Você tem certeza?",
            text: "Se prosseguir essa operação não poderá ser desfeita",
@@ -45,7 +45,7 @@ angular.module('wbaApp')
         }, 
         function(isConfirm){ 
           if (isConfirm) {
-            apiEmpresas.deleteRepresentante($stateParams.empresaId, id).then(
+            apiEmpresas.deleteRepresentante($stateParams.empresaId, rep.id).then(
               function (res) {
                 toaster.pop('success','Representantes','Representante excluído com sucesso!');
                 $scope.getRepresentantes();
@@ -58,17 +58,25 @@ angular.module('wbaApp')
         });
       }
 
-      $scope.openModal = function (action) {
+      $scope.openModal = function (obj, action) {
       
         var modalInstance = $modal.open({
           templateUrl: 'views/wba/empresas/modal-' + action + '-representantes.html',
-          controller: function ($scope, $modalInstance) { 
+          resolve: {
+            representante: function () {
+              return obj
+            }
+          },
+          controller: function ($scope, $modalInstance, representante) { 
             
+            $scope.rep = representante;
+
 
             $scope.getTiposRepresentantes = function () {
               apiEmpresas.getTipoRepresentante().then(
                 function (res) {
                   $scope.tiposReps = res.data;
+                  $scope.rep.uuidTipoRepresentante = _.findWhere($scope.tiposReps, {id: parseInt($scope.rep.uuidTipoRepresentante)})
                 }
               )
             }
@@ -119,6 +127,7 @@ angular.module('wbaApp')
             if (action === 'new') {
               var papel = _.findWhere($scope.tiposReps, {id: item.uuidTipoRepresentante});
               item.papel = papel.nome;
+              item.uuidTipoRepresentante = item.uuidTipoRepresentante.id;
               apiEmpresas.saveRepresentante($scope.empresaId, item).then(
                 function (res) {
                   toaster.pop('success','Representante','Representante cadastrado com sucesso!');
@@ -132,6 +141,7 @@ angular.module('wbaApp')
             if (action === 'edit') {
               var papel = _.findWhere($scope.tiposReps, {id: item.uuidTipoRepresentante});
               item.papel = papel.nome;
+              item.uuidTipoRepresentante = item.uuidTipoRepresentante.id;
               apiEmpresas.updateRepresentante($scope.empresaId, item).then(
                 function (res) {
                   toaster.pop('success','Representante','Representante atualizado com sucesso!');
