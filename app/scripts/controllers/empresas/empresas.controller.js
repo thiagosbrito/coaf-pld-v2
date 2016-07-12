@@ -35,7 +35,7 @@ angular.module('wbaApp')
                 toaster.pop('success','Empresa','Empresa inativada com sucesso!')
               },
               function (err) {
-                toaster.pop('error','Empresa','Desculpe-noe, houve um erro ao processar suas informações, por favor, tente novamente.');
+                toaster.pop('error','Empresa',err.statusText);
               }
             )
            }

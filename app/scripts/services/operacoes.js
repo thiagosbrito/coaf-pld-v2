@@ -273,6 +273,8 @@ angular.module('wbaApp')
         }
       )
     };
+
+
     var _getTarifasByOperacao     = function (id) {
       return $http({
         url: baseUrl.apiOperacoes + '/operacoes/' + id + '/tarifas',
@@ -393,6 +395,18 @@ angular.module('wbaApp')
       )
     };
 
+
+    var _getRecebiveis = function () {
+      return $http({
+        url: baseUrl.apiOperacoes + '/recebiveis',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+
     // Comercial
     api.getCarteiras              = _getCarteiras;
     api.getCarteiraById           = _getCarteiraById;
@@ -436,6 +450,8 @@ angular.module('wbaApp')
     api.deleteTipoLancamento      = _deleteTipoLancamento;
 
     api.getRecebivelById          = _getRecebivelById;
+
+    api.getRecebiveis             = _getRecebiveis;
 
     return api;
 

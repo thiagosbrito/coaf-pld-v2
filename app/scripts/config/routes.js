@@ -428,6 +428,15 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/operacoes/tipo-lancamentos/listar.html',
         controller: 'TiposLancamentoListarController'
       })
+      .state('wba.operacoes.titulos',{
+        url: '/titulos',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.operacoes.titulos.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/operacoes/titulos/listar.html',
+        controller: 'OperacoesTitulosListarController'
+      })
 
 
       // Routews for Cobranca Module

@@ -409,3 +409,13 @@ table.table.table-striped.fix-table-vertical-alignment thead {
 .rotate180 {-webkit-transform: rotate(180deg); transform: rotate(180deg); }
 .rotate270 {-webkit-transform: rotate(270deg); transform: rotate(270deg); }
 .fixed { position: fixed; top: 0; left: calc(50% - 480px); z-index: 100; width: 100%; padding: 1em; background: rgba(238, 238, 238,.9); width: 960px; }
+
+
+.titulos-header {
+  background-color: #3f51b5;
+  color: #FFF;
+  padding: 10px 19px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin: 0 auto;
+}

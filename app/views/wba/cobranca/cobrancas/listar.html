@@ -39,9 +39,13 @@
                   <input icheck type="checkbox" ng-model="cob.selected" ng-change="changeSingle(cob.uuid, cob.selected)">
                 </td>
                 <td ng-bind="cob.descricao"></td>
-                <td class="text-center"><span class="label" ng-class="{'label-warning': cob.tipoCobrancaEletronica == 'SIMPLES', 'label-info': cob.tipoCobrancaEletronica == 'DIRETA'}">{{cob.tipoCobrancaEletronica | lowercase}}</span></td>
-                <td ng-bind="cob.uuidBanco" class="text-center"></td>
-                <td ng-bind="cob.uuidCarteira" class="text-center"></td>
+                <td class="text-center">
+                  <span class="label" ng-class="{'label-warning': cob.tipoCobrancaEletronica == 'SIMPLES', 'label-info': cob.tipoCobrancaEletronica == 'DIRETA'}">
+                    {{cob.tipoCobrancaEletronica | lowercase}}
+                  </span>
+                </td>
+                <td ng-bind="cob.banco.nome" class="text-center"></td>
+                <td ng-bind="cob.carteira.nome" class="text-center"></td>
                 <td class="text-center" width="60">
                   <i class="fa" ng-class="{'fa-times red': !cob.ativo, 'fa-check green': cob.ativo}"></i>
                 </td>

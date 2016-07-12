@@ -110,11 +110,11 @@ angular
                 label: 'Carteiras',
                 url: '#/operacoes/carteiras/listar'
               },
-              // ,
-              // {
-              //   label: 'Consulta',
-              //   url: '#/operacoes/recebiveis/listar'
-              // },
+              ,
+              {
+                label: 'Títulos',
+                url: '#/operacoes/titulos/listar'
+              },
               {
                 label: 'Tarifas',
                 url: '#/operacoes/tarifas/listar'
@@ -171,19 +171,18 @@ angular
                 label: 'Centro de Custo',
                 url: '#/financeiro/centro-custo/listar'
               },
+              // {
+              //   label: 'Instruções',
+              //   url: '#/financeiro/instrucoes/listar'
+              // },
+              {
+                label: 'Cobranças',
+                url: '#/cobranca/listar'
+              },
               {
                 label: 'Extras',
                 url: '#/financeiro/extras'
               }
-              // ,
-              // {
-              //   label: 'Instruções',
-              //   url: '#/financeiro/instrucoes/listar'
-              // }
-              // {
-              //   label: 'Cobranças',
-              //   url: '#/cobranca/listar'
-              // }
             ]
           },
           {

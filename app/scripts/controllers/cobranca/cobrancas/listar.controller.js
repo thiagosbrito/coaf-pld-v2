@@ -8,39 +8,35 @@ angular.module('wbaApp')
     'SweetAlert',
     'apiCobrancas',
     'apiOperacoes',
-    'uuid4',
+    'apiFinanceiro',
     '$modal',
     '$log',
     'Upload',
-    function ($scope, $state, $stateParams, toaster, SweetAlert, apiCobrancas, apiOperacoes, uuid4, $modal, $log, Upload) {
+    function ($scope, $state, $stateParams, toaster, SweetAlert, apiCobrancas, apiOperacoes, apiFinanceiro, $modal, $log, Upload) {
 
-      $scope.bancos = [
-        {
-          "uuid": uuid4.generate(),
-          "numeroBanco": '001',
-          "nomeBanco": 'BANCO DO BRASIL S.A'
-        },
-        {
-          "uuid": uuid4.generate(),
-          "numeroBanco": '237',
-          "nomeBanco": 'BANCO BRADESCO S.A'
-        },
-        {
-          "uuid": uuid4.generate(),
-          "numeroBanco": '341',
-          "nomeBanco": 'BANCO ITAÚ S.A'
-        },
-        {
-          "uuid": uuid4.generate(),
-          "numeroBanco": '033',
-          "nomeBanco": 'BANCO SANTANDER S.A'
-        },
-        {
-          "uuid": uuid4.generate(),
-          "numeroBanco": '104',
-          "nomeBanco": 'CAIXA ECONÔMICA FEDERAL'
-        }
-      ];
+
+      $scope.getBancos = function () {
+        apiFinanceiro.getBancos().then(
+          function (res) {
+            $scope.bancos = res.data;
+          },
+          function (err) {
+            toaster.pop('error','Bancos',err.statusText);
+          }
+        )
+      }();
+
+      $scope.getCarteiras = function () {
+        apiOperacoes.getCarteiras().then(
+          function (res) {
+            $scope.carteiras = res.data;
+          },
+          function (err) {
+            toaster.pop('error','Carteiras',err.statusText);
+          }
+        )
+      }();
+      
 
       $scope.downloadCnab = function (id) {
         apiCobrancas.getCnab(id).then(
@@ -58,11 +54,10 @@ angular.module('wbaApp')
           function (res) {
             $scope.cobrancas = res.data;
             angular.forEach($scope.cobrancas, function (value, key) {
-              // TODO: após implementada a API para bancos, substituir no grid o cob.uuidBanco por cob.banco.nomeBanco
               value.banco = _.findWhere($scope.bancos, {uuid: value.uuidBanco})
-              value.carteira = _.findWhere($scope.carteiras, {uuid: value.uuidBanco})
+              value.carteira = _.findWhere($scope.carteiras, {uuid: value.uuidCarteira})
             });
-
+            console.log($scope.cobrancas);
           },
           function (err) {
             toaster.pop('error','Cobrancas',err.statusText)

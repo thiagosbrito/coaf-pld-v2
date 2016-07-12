@@ -45,7 +45,6 @@
                           <select
                             class="form-control"
                             ng-model="selectedCedente"
-                            disabled
                             ng-options="ced as ced.razaoSocial for ced in cedentes">
                             <option value="">Selecione...</option>
                           </select>
@@ -54,7 +53,6 @@
                           <label>Carteira:</label>
                           <select
                             ng-model="selectedCarteira"
-                            disabled
                             class="form-control"
                             ng-options="cart as cart.nome for cart in carteiras">
                             <option value="">Selecione...</option>
@@ -78,7 +76,6 @@
                               type="text"
                               class="form-control"
                               datepicker-popup="dd/MM/yyyy"
-                              disabled
                               ng-model="operacao.dataOperacao"
                               is-open="isOpened"
                               close-text="Fechar"
@@ -93,15 +90,15 @@
                           <label>
                             Método de Cálculo
                           </label>
-                          <input type="text" class="form-control" ng-model="operacao.metodoCalculoDesagio" disabled>
+                          <input type="text" class="form-control" ng-model="operacao.metodoCalculoDesagio">
                         </div>
                         <div class="form-group" ng-show="detailsOpen">
                           <label>
                             Float
                           </label>
-                          <input type="text" class="form-control" disabled="">
+                          <input type="text" class="form-control" ng-model="operacao.float">
                         </div>
-                        <div class="form-group" ng-if="showSaveButton">
+                        <div class="form-group" ng-show="detailsOpen">
                           <button class="btn btn-primary btn-block" ng-click="update(operacao)">
                             <i class="fa fa-save"></i> Salvar
                           </button>

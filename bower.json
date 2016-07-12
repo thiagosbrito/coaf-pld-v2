@@ -59,9 +59,9 @@
     "themify-icons": "~0.1.0",
     "velocity": "~1.2.2",
     "angular-ui-router": "~0.2.18",
-    "angular-input-masks": "~2.1.1",
+    "angular-input-masks": "~2.3.0",
     "angular-loading-bar": "~0.8.0",
-    "ng-filters-br": "~1.0.2",
+    "ng-filters-br": "^1.0.2",
     "AngularJS-Toaster": "angularjs-toaster#~1.2.0",
     "angular-csrf-cross-domain": "~0.0.3",
     "ngSweetAlert": "angular-sweetalert#~1.1.0",
@@ -78,7 +78,9 @@
     "ng-tags-input": "^3.1.1",
     "angular-base64-upload": "^0.1.19",
     "angular-pdf": "^1.3.0",
-    "pdfjs-dist": "^1.5.292"
+    "pdfjs-dist": "^1.5.292",
+    "angular-ui-mask": "^1.8.6",
+    "ng-cpf-cnpj": "^0.0.5"
   },
   "resolutions": {
     "jquery": "~1.11.0",
@@ -88,7 +90,7 @@
     "bootstrap": ">=3.0 <4.0",
     "bootstrap-datepicker": "~1.3.1",
     "angular-cookies": "~1.3.10",
-    "pdfjs-dist" : "^1.5.292"
+    "pdfjs-dist": "^1.5.292"
   },
   "devDependencies": {
     "twbs-bootstrap-sass": "~3.1.1",

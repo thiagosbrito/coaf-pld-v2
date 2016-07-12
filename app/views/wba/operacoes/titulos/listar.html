@@ -1,0 +1,128 @@
+<ol class="breadcrumb">
+    <li><a ui-sref="wba.dashboard">Dashboard</a></li>
+    <li>Operações</li>
+    <li class="active">Títulos</li>
+</ol>
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-indigo">
+              <div class="panel-heading">
+                <h2>Títulos</h2>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th class="text-center">Valor</th>
+                          <th class="text-center">Valor Líq.</th>
+                          <th class="text-center">% Desconto</th>
+                          <th class="text-center">$ Desconto</th>
+                          <th class="text-center">Data Limite</th>
+                          <th class="text-center">Vencimento</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="tit in titulos">
+                          <td>{{tit.numero}}</td>
+                          <td class="text-center">{{tit.valor | currency}}</td>
+                          <td class="text-center">{{tit.valorLiquido | currency}}</td>
+                          <td class="text-center">{{tit.percentualDesconto}}%</td>
+                          <td class="text-center">{{tit.valorDesconto | currency}}</td>
+                          <td class="text-center">{{tit.dateLimiteDesconto | date: 'dd/MM/yyyy'}}</td>
+                          <td class="text-center">{{tit.vencimento | date: 'dd/MM/yyyy'}}</td>
+                          <td>
+                            <div class="btn-group">
+                              <button class="btn btn-warning btn-sm" tooltip="Detalhes do Título" ng-click="showSacadoInfo(tit)"><i class="fa fa-info-circle"></i></button>
+                              <button class="btn btn-primary btn-sm" tooltip="Editar título" ng-click="editTitulo(tit)"><i class="fa fa-pencil"></i></button>
+                              <button class="btn btn-success btn-sm" tooltip="Enviar para Confirmação" ng-click="enviarConfirmacao(tit)">
+                                <i class="fa fa-check"></i>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table> 
+                    <!-- <div class="well" ng-repeat="tit in titulos">
+                      <h4 class="titulos-header">Titulo #: <span class="label label-primary">{{tit.numero}}</span></h4>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>Valor</th>
+                                <th>Valor Líq.</th>
+                                <th>% Desconto</th>
+                                <th>$ Desconto</th>
+                                <th>Data Limite</th>
+                                <th>Vencimento</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>{{tit.valor | currency}}</td>
+                                <td>{{tit.valorLiquido | currency}}</td>
+                                <td>{{tit.percentualDesconto}}%</td>
+                                <td>{{tit.valorDesconto | currency}}</td>
+                                <td>{{tit.dateLimiteDesconto | date: 'dd/MM/yyyy'}}</td>
+                                <td>{{tit.vencimento | date: 'dd/MM/yyyy'}}</td>
+                                <td>
+                                  <div class="btn-group">
+                                    <button class="btn btn-primary btn-sm" tooltip="Enviar para Confirmação" ng-click="enviarConfirmacao(tit)">
+                                      <i class="fa fa-check"></i>
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>        
+                        </div>
+                        <div class="col-md-12 text-center">
+                          <div>
+                            <button class="btn btn-link" ng-click="tit.infoOpened = !tit.infoOpened">
+                              <i class="fa fa-info-circle"></i> Informações do Sacado <i class="fa" ng-class="{'fa-chevron-down': !tit.infoOpened, 'fa-chevron-up': tit.infoOpened}"></i>
+                            </button>
+                          </div>
+                          <div class="info-sacado text-left" collapse="!tit.infoOpened">
+                            <div class="row">
+                              <div class="col-md-8 col-md-offset-2">
+                                <p>
+                                  <strong>Nome:</strong> {{tit.nome_sacado}}
+                                </p>
+                                <p>
+                                  <strong>Endereço:</strong> {{tit.endereco_sacado}}, {{tit.numero_endereco_sacado}}
+                                </p>
+                                <p>
+                                  <strong>CEP:</strong> {{tit.cep_sacado}}
+                                </p>
+                                <p>
+                                  <strong>Bairro:</strong> {{tit.bairro_sacado}}
+                                </p>
+                                <p>
+                                  <strong>Cidade / UF:</strong> {{tit.cidade_sacado}} / {{tit.uf_sacado}}
+                                </p>
+                                <p>
+                                  <strong>Número Inscrição:</strong> {{tit.numero_inscricao_sacado}}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>        -->
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- container-fluid -->

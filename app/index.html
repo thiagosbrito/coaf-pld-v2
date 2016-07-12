@@ -11,7 +11,7 @@
 	<!-- prochtml:remove:dist -->
 	<!-- <link href="../../assets/less/styles.less" rel="stylesheet/less" media="all">  -->
 	<link href="assets/css/wba.css" rel="stylesheet" media="all">
-	<link href="bower_components/AngularJs-Toaster/toaster.min.css" rel="stylesheet" />
+	<link href="bower_components/AngularJS-Toaster/toaster.css" rel="stylesheet" />
 	<link href="bower_components/sweetalert/dist/sweetalert.css" rel="stylesheet">
 	<!-- /prochtml -->
 
@@ -40,7 +40,7 @@
 	<link rel="stylesheet" href="bower_components/bootstrap-daterangepicker/daterangepicker-bs3.css" />
 	<link rel="stylesheet" href="bower_components/nvd3/src/nv.d3.css" />
 	<link rel="stylesheet" href="bower_components/skylo/vendor/styles/skylo.css" />
-	<link rel="stylesheet" href="bower_components/themify-icons/themify-icons.css" />
+	<link rel="stylesheet" href="bower_components/themify-icons/css/themify-icons.css" />
 	<link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" />
   <link rel="stylesheet" href="bower_components/angular-tree-dnd/dist/ng-tree-dnd.css" />
   <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css">
@@ -314,7 +314,10 @@
   <script src="bower_components/angular-pdf/dist/angular-pdf.js"></script>
   <script src="bower_components/pdfjs-dist/build/pdf.js"></script>
   <script src="bower_components/pdfjs-dist/build/pdf.worker.js"></script>
-
+  <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+  <script src="bower_components/cpf_cnpj/build/cpf.js"></script>
+  <script src="bower_components/cpf_cnpj/build/cnpj.js"></script>
+  <script src="bower_components/ng-cpf-cnpj/lib/ngCpfCnpj.js"></script>
 
 
 	<!-- endbower -->
@@ -336,6 +339,7 @@
 
 	<!-- Filters -->
 	<script src="scripts/filters/cnpj.filter.js"></script>
+  <script src="scripts/filters/cpf.filter.js"></script>
   <script src="scripts/filters/ativo.filter.js"></script>
   <script src="scripts/filters/capitalize.filter.js"></script>
 
@@ -390,6 +394,7 @@
   <script src="scripts/controllers/operacoes/tarifas.controller.js"></script>
   <script src="scripts/controllers/operacoes/workflow/listar.controller.js"></script>
   <script src="scripts/controllers/operacoes/tipo-lancamento/listar.controller.js"></script>
+  <script src="scripts/controllers/operacoes/titulos/listar.controller.js"></script>
 
 	<script src="scripts/controllers/empresas/editar-empresa.controller.js"></script>
 	<script src="scripts/controllers/empresas/editar-endereco.controller.js"></script>
@@ -414,6 +419,7 @@
   <script src="scripts/controllers/financeiro/centro-custo/listar.controller.js"></script>
   <script src="scripts/controllers/financeiro/transacoes/listar.controller.js"></script>
   <script src="scripts/controllers/financeiro/extras/listar.controller.js"></script>
+
 
 
 

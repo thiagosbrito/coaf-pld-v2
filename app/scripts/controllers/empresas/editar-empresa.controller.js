@@ -28,7 +28,7 @@ angular.module('wbaApp')
             }
           },
           function (err) {
-            toaster.pop('error','Empresas','Ops, bad server, no cookies for ya! :(')
+            toaster.pop('error','Empresas',err.statusText);
           }
         )
       }

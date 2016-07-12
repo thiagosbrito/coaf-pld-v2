@@ -39,6 +39,9 @@ angular.module('wbaApp')
       );
       
       $scope.update = function () {
+        if($scope.hierarquia.uuidPlataforma) {
+          $scope.hierarquia.uuidPlataforma = $scope.hierarquia.uuidPlataforma.uuid;
+        };
         apiComercial.updateHierarquia($scope.hierarquia).then(
           function (res) {
             toaster.pop('success','Hierarquia','Hierarquia atualizada com sucesso!');
