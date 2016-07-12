@@ -428,6 +428,15 @@ angular.module('wbaApp')
         templateUrl: 'views/wba/operacoes/tipo-lancamentos/listar.html',
         controller: 'TiposLancamentoListarController'
       })
+      .state('wba.operacoes.titulos',{
+        url: '/titulos',
+        template: '<div ui-view=""></div>'
+      })
+      .state('wba.operacoes.titulos.listar',{
+        url: '/listar',
+        templateUrl: 'views/wba/operacoes/titulos/listar.html',
+        controller: 'OperacoesTitulosListarController'
+      })
 
 
       // Routews for Cobranca Module
@@ -667,15 +676,6 @@ angular.module('wbaApp')
         url: '/listar',
         templateUrl: 'views/wba/financeiro/transacoes/listar.html',
         controller: 'TransacoesListarController'
-      })
-      .state('wba.financeiro.titulos',{
-        url: '/titulos',
-        template: '<div ui-view=""></div>'
-      })
-      .state('wba.financeiro.titulos.listar',{
-        url: '/listar',
-        templateUrl: 'views/wba/financeiro/titulos/listar.html',
-        controller: 'TitulosListarController'
       })
       .state('wba.financeiro.extras',{
         url: '/extras',
