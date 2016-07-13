@@ -15,6 +15,39 @@ angular.module('wbaApp')
   'apiEmpresas',
   function ($scope, $state, $stateParams, apiOperacoes, toaster, $modal, SweetAlert, $log, Upload, apiEmpresas) {
 
+
+    $scope.getCedentes = function () {
+      apiEmpresas.getEmpresaByType('CEDENTE').then(
+        function (res) {
+          $scope.ceds = res.data;
+        },
+        function (err) {
+          toaster.pop('success','Cedentes',err.statusText);
+        }
+      )
+    }();
+
+    $scope.openBegin = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope.beginOpen = true;
+    };
+
+    $scope.openEnd = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope.endOpen = true;
+    };
+
+    $scope.filtro = {
+      dataInicial: new Date(),
+      dataFinal: new Date(),
+      page: 0,
+      qtd: 10
+    };
+
     $scope.config = {
       autoHideScrollbar: true,
       theme: 'minimal',
@@ -58,17 +91,36 @@ angular.module('wbaApp')
       });
     };
 
-    $scope.getOperacoes = function () {
-      apiOperacoes.getOperacoes().then(
+    $scope.getOperacoes = function (filter) {
+      if ($scope.cedente) {
+        filter.uuidCedente = $scope.cedente.id;
+      }
+      filter.dataInicial  = moment(filter.dataInicial).format('YYYY-MM-DD');
+      filter.dataFinal    = moment(filter.dataFinal).format('YYYY-MM-DD');
+      apiOperacoes.getOperacoes(filter).then(
         function (res) {
           $scope.operacoes = res.data;
+          var lengthFilter = $scope.filtro;
+          lengthFilter = _.omit(lengthFilter, 'qtd');
+          lengthFilter = _.omit(lengthFilter, 'page');
+          console.log(lengthFilter);
+          apiOperacoes.getOperacoes(lengthFilter).then(
+            function (res) {
+              $scope.totalItens = res.data.length;
+              console.log($scope.totalItens);
+            }
+          );
           $scope.addRecebiveisToArray($scope.operacoes);
-          console.log($scope.operacoes);
         }
       )
     }
 
-    $scope.getOperacoes();
+    $scope.getOperacoes($scope.filtro);
+
+    $scope.pageChanged = function () {
+      $scope.filtro.page = $scope.page - 1;
+      $scope.getOperacoes($scope.filtro);
+    }
 
     $scope.openModalTarifas = function (idOperacao) {
       var modalInstance = $modal.open({

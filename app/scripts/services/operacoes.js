@@ -83,11 +83,42 @@ angular.module('wbaApp')
     };
 
     // OPERACOES
-    var _getOperacoes = function () {
+    var _getOperacoes = function (filtro) {
+
+      // function EncodeQueryData(data) {
+      //    var ret = [];
+      //    for (var d in data)
+      //       ret.push(encodeURIComponent(d) + "=" + encodeURIComponent(data[d]));
+      //    return ret.join("&");
+      // };
+
+      var url = baseUrl.apiOperacoes + '/operacoes?dataInicial=' + filtro.dataInicial + 
+                '&dataFinal=' + filtro.dataFinal + 
+                '&pagina=' + filtro.page + 
+                '&quantidadeElementos=' + filtro.qtd;
+      if (filtro.uuidCedente) {
+        url = baseUrl.apiOperacoes + '/operacoes?uuidCedente='+ filtro.uuidCedente + 
+              '&dataInicial=' + filtro.dataInicial + 
+              '&dataFinal=' + filtro.dataFinal + 
+              '&pagina=' + filtro.page + 
+              '&quantidadeElementos=' + filtro.qtd;
+      }
+      if (filtro.page == undefined && filtro.qtd == undefined) {
+        if(filtro.uuidCedente) {
+          url = baseUrl.apiOperacoes + '/operacoes?uuidCedente='+ filtro.uuidCedente + 
+              '&dataInicial=' + filtro.dataInicial + 
+              '&dataFinal=' + filtro.dataFinal   
+        }
+        else {
+          url = baseUrl.apiOperacoes + '/operacoes?dataInicial=' + filtro.dataInicial + 
+                '&dataFinal=' + filtro.dataFinal;
+        }
+      }
       return $http({
-        url: baseUrl.apiOperacoes + '/operacoes',
+        url: url,
         method: 'GET'
-      }).then(function (results) {
+      }).then(
+      function (results) {
         return results;
       });
     };
