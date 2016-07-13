@@ -11,13 +11,91 @@
 
           <h2>Operações</h2>
           <div class="panel-ctrls">
+            <a class="button-icon" ng-click="showFilter = !showFilter" tooltip="Filtrar resultados">
+              <i class="fa fa-filter"></i>
+            </a>
             <a class="button-icon" ng-click="novaOperacao()" tooltip="Adicionar Operação">
               <i class="fa fa-plus"></i>
             </a>
           </div>
         </div>
         <div class="panel-body">
-
+          <div class="filter" collapse="showFilter">
+            <div class="row">
+              <div class="col-md-12">
+                <span style="font-style: italic; font-size: 10px">* os campos de data são obrigatórios</span>
+              </div>
+            </div>
+            <div class="row">
+              <form role="form" name="formFilter">
+                <div class="col-md-3">
+                  <label>
+                    Data Inicial*
+                  </label>
+                  <p class="input-group datepicker-holder">
+                    <input
+                      type="text"
+                      class="form-control"
+                      datepicker-popup="dd/MM/yyyy"
+                      disabled
+                      required
+                      ng-model="filtro.dataInicial"
+                      is-open="beginOpen"
+                      close-text="Fechar"
+                      current-text="Hoje"
+                      clear-text="Limpar" />
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary" ng-click="openBegin($event)"><i class="ti ti-calendar"></i></button>
+                    </span>
+                  </p>
+                </div>
+                <div class="col-md-3">
+                  <label>
+                    Data Final*
+                  </label>
+                  <p class="input-group datepicker-holder">
+                    <input
+                      type="text"
+                      class="form-control"
+                      datepicker-popup="dd/MM/yyyy"
+                      disabled
+                      required
+                      ng-model="filtro.dataFinal"
+                      is-open="endOpen"
+                      close-text="Fechar"
+                      current-text="Hoje"
+                      clear-text="Limpar" />
+                    <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary" ng-click="openEnd($event)"><i class="ti ti-calendar"></i></button>
+                    </span>
+                  </p>
+                </div>
+                <div class="col-md-5">
+                  <label>Cedente</label>
+                  <input type="text" class="form-control" typeahead="cedente as cedente.nomeFantasia for cedente in ceds | filter: $viewValue" ng-model="cedente">
+                </div>
+                <div class="col-md-1">
+                  <label>Itens</label>
+                  <select ng-model="filtro.qtd" class="form-control">
+                    <option value=""></option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+            <div class="row">
+              <div class="col-md-3 col-md-offset-9">
+                <label>&nbsp;</label>
+                <button class="btn btn-primary btn-block" ng-click="getOperacoes(filtro)" ng-disabled="formFilter.$invalid">
+                  <i class="fa fa-search"></i> Filtrar
+                </button>
+              </div>
+            </div>
+            <hr>
+          </div>
           <p class="text-center" ng-show="operacoes.length == 0">
             Nenhum resultado foi encontrado, clique no botão <i class="fa fa-plus"></i> para adicionar um item.
           </p>
@@ -133,6 +211,9 @@
             </tbody>
           </table>
           <!-- <pager total-items="totalItems" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager> -->
+        </div>
+        <div class="panel-footer">
+          <pagination total-items="totalItens" items-per-page="filtro.qtd" class="pull-right" previous-text="« Anterior" next-text="Próximo »" ng-model="page" ng-change="pageChanged()"></pagination>
         </div>
       </div>
     </div>
