@@ -37,6 +37,18 @@ angular.module('wbaApp')
       )
     };
 
+    $scope.getEstado = function (id) {
+      apiOperacoes.getEstadoAtual(id).then(
+        function (res) {
+          console.log(res)
+        },
+        function (err) {
+          console.log(err)
+        }
+      )
+    };
+    $scope.getEstado($stateParams.operacaoId);
+
     $scope.calcularLancamentos();
 
     $scope.getWorkflows = function () {

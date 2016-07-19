@@ -46,9 +46,12 @@ angular.module('wbaApp')
           function (res) {
             if(res) {
 
-
               platform.hierarquias.push(res.data);
               platform.tree = [];
+
+              var getComissao = function (item) {
+                console.log(item);
+              }
 
               var checkChildren = function (item) {
                   if(item.hierarquias) {
@@ -67,10 +70,12 @@ angular.module('wbaApp')
               };
 
               checkChildren(platform);
+              getComissao(platform);
 
               platform.tree = $TreeDnDConvert.line2tree(platform.tree, 'uuid', 'hierarquiaPai');
 
               return platform
+
             }
           }
         )
@@ -108,10 +113,12 @@ angular.module('wbaApp')
             }
           },
           controller: function ($scope, $modalInstance, Upload, $timeout, plataforma, cedentes, apiComercial) {
-            $scope.selectedCedentes = [];
-            $scope.cedentes = cedentes;
+            $scope.cedentes = {};
+            $scope.cedentes.lista = cedentes;
+            $scope.cedentes.selectedCedentes = [];
             $scope.plataforma = plataforma;
             $scope.tree_data = plataforma.tree;
+
 
             $scope.getData = function (){
               apiComercial.getPlataformas().then(
@@ -125,8 +132,23 @@ angular.module('wbaApp')
                 }
               )
             }();
-
+            $scope.isReading = false;
             $scope.isEditing = true;
+            $scope.isAdding = true;
+
+            $scope.getComissao = function (item) {
+              apiComercial.getComissaoByHierarquiaId(item.uuid).then(
+                function (res) {
+                  console.log(res);
+                },
+                function (err) {
+                  console.log(err);
+                }
+              );
+              item.comissao = 0;
+              console.log(item);
+              return item;
+            };
 
             $scope.$callbacks = {
               // function accept called when item Drapping move-over target
@@ -164,12 +186,16 @@ angular.module('wbaApp')
             $scope.treatData = function (data) {
               data.hrqs = [];
               angular.forEach(data.hierarquias, function (p){
+                $scope.getComissao(p);
                 data.hrqs.push(p);
                 if(p.hierarquias) {
                   angular.forEach(p.hierarquias, function(h) {
+                    h.comissao = 0;
+                    $scope.getComissao(h);
                     data.hrqs.push(h);
                     if(h.hierarquias) {
                       angular.forEach(h.hierarquias, function (c){
+                        $scope.getComissao(c);
                         data.hrqs.push(c)
                       });
                     }
@@ -183,18 +209,26 @@ angular.module('wbaApp')
 
             var tree;
             $scope.my_tree = tree = {};
-            $scope.expanding_property = "nome";
+            $scope.expanding_property = {
+              field: 'nome',
+              displayName: 'Nome'
+            };
             $scope.definition_cols = [
 
               {
                 field: "tipoHierarquia",
-                displayName: "tipo de hierarquia",
+                displayName: "Tipo de Hierarquia",
                 sortable : true,
                 sortingType : "string"
               },
               {
+                field: "comissao",
+                displayName: "Comissão",
+                cellTemplate: "<span ng-bind-html=\"(node.comissao) + '%'\"></span>"
+              },
+              {
                 field: "ativo",
-                displayName: "ativo",
+                displayName: "Ativo",
                 cellTemplate: "<i class='fa {{node.ativo | ativo}}'></i>",
                 cellTemplateScope: {
                   click: function(data) {         // this works too: $scope.someMethod;
@@ -204,35 +238,56 @@ angular.module('wbaApp')
               },
               {
                 displayName: "",
-                cellTemplate: "<button class='btn btn-primary' ng-click='editNode(node)'><i class='fa fa-pencil'></i></div>"
+                cellTemplate: "<div class='btn-group'>" + 
+                                "<button class='btn btn-sm btn-primary' ng-click='editNode(node)' tooltip='Editar Hierarquia'>" +
+                                  "<i class='fa fa-pencil'></i>" +
+                                "</button>" +
+                                "<button class='btn btn-sm btn-info' ng-click='addComissao(node)' tooltip='Comissão Hierarquia'>" +
+                                  "<i class='fa fa-dollar'></i>" +
+                                "</button>" +
+                              "</div>"
               }
             ];
 
+            $scope.addComissao = function (node) {
+              $scope.isAdding = false;
+              $scope.isEditing = true;
+              $scope.isReading = true;
+              $scope.hierarquia = node;
+              console.log(node)
+            }
             $scope.editNode = function (node) {
               $scope.isReading = true;
+              $scope.isAdding = true;
               $scope.isEditing = false;
               $scope.hierarquia = node;
 
               if ($scope.hierarquia.uuidsCedente.length > 0) {
                 angular.forEach($scope.hierarquia.uuidsCedente, function (item) {
-                  var ced = _.findWhere($scope.cedentes, {id: item});
+                  var ced = _.findWhere($scope.cedentes.lista, {id: item});
                   ced.old = true;
-                  $scope.selectedCedentes.push(ced);
+                  $scope.cedentes.selectedCedentes.push(ced);
                 })
               };
 
-              console.log($scope.selectedCedentes);
+              console.log($scope.cedentes.selectedCedentes);
               
             };
 
             $scope.cancelEditing = function () {
               $scope.isReading = false;
               $scope.isEditing = true;
+              $scope.isAdding = true;
               $scope.hierarquia = null;
             };
             $scope.changedValue = function (item, model) {
               console.log(item, model);
-            }
+            };
+
+            $scope.addComissaoHierarquia = function (comissao) {
+              console.log(comissao);
+            };
+
             $scope.updateHierarquia = function (hierarquia) {
               hierarquia = _.omit(hierarquia,'__children__');
               hierarquia = _.omit(hierarquia,'__dept__');
@@ -254,10 +309,10 @@ angular.module('wbaApp')
               hierarquia.hierarquiaPai = hierarquia.pai;
               hierarquia = _.omit(hierarquia,'pai');
               // hierarquia = _.omit(hierarquia,'uuid');
-              if ($scope.selectedCedentes.length > 0) {
-                $scope.selectedCedentes = _.without($scope.selectedCedentes, {old: true});
-                console.log($scope.selectedCedentes);
-                var cedentes = $scope.selectedCedentes;
+              if ($scope.cedentes.selectedCedentes.length > 0) {
+                $scope.cedentes.selectedCedentes = _.without($scope.cedentes.selectedCedentes, {old: true});
+                console.log($scope.cedentes.selectedCedentes);
+                var cedentes = $scope.cedentes.selectedCedentes;
                 // hierarquia = _.omit(hierarquia, 'cedentes');
                 apiComercial.saveHierarquia(hierarquia).then(
                   function (res) {
@@ -269,14 +324,19 @@ angular.module('wbaApp')
                   }
                 );
                 angular.forEach(cedentes, function (cen) {
-                  apiComercial.adicionarCedente(hierarquia.uuid, cen.id).then(
-                    function (res) {
-                      toaster.pop('success','Cedentes','Cedente adicionado à Hierarquia com sucesso')
-                    },
-                    function (err) {
-                      toaster.pop('error','Cedentes',err.statusText);
-                    }
-                  )
+                  if (cen.old) {
+                    return false
+                  }
+                  else {
+                    apiComercial.adicionarCedente(hierarquia.uuid, cen.id).then(
+                      function (res) {
+                        toaster.pop('success','Cedentes','Cedente adicionado à Hierarquia com sucesso')
+                      },
+                      function (err) {
+                        toaster.pop('error','Cedentes',err.statusText);
+                      }
+                    )
+                  }
                 })
               }
               else {
@@ -452,7 +512,8 @@ angular.module('wbaApp')
             $scope.hierarquia = {};
             $scope.hierarquia.uuidPlataforma = plataformaId;
             $scope.plataformas = plataformas;
-            $scope.cedentes = cedentes;
+            $scope.cedentes = {};
+            $scope.cedentes.lista = cedentes;
             $scope.salvarHierarquia = function (hierarquia) {
               $modalInstance.close(hierarquia);
             };

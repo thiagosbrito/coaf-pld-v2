@@ -427,6 +427,20 @@ angular.module('wbaApp')
       )
     };
 
+    var _efetivarLancamento = function (id, data) {
+      return $http({
+        url: baseUrl.apiFinanceiro + '/lancamentos/' + id + '/efetivarLancamento?dataContabil=' + data,
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+
 
     api.getBancos           = _getBancos;
     api.getBancoById        = _getBancoById;
@@ -473,6 +487,7 @@ angular.module('wbaApp')
     api.addTransacao        = _addTransacao;
 
     api.getAllLancamentos   = _getAllLancamentos;
+    api.efetivarLancamento  = _efetivarLancamento;
     return api;
 
   }]);

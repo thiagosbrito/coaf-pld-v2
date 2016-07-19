@@ -108,19 +108,61 @@ angular.module('wbaApp')
       )
     };
 
+    var _getComissaoByHierarquiaId = function (id) {
+      return $http({
+        url: baseUrl.apiComercial + '/hierarquias/' + id + '/comissao',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+
+    var _addComissaoHierarquia = function (id, data) {
+      return $http({
+        url: baseUrl.apiComercial + '/hierarquias/' + id + '/comissao',
+        method: 'POST',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results 
+        }
+      )
+    };
+
+    var _updateComissaoHierarquia = function (id, data) {
+      return $http({
+        url: baseUrl.apiComercial + '/hierarquias/' + id + '/comissao',
+        method: 'PUT',
+        data: data,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+
     // Comercial
-    api.getPlataformas        = _getPlataformas;
-    api.getPlataformasById    = _getPlataformasById;
-    api.savePlataforma        = _savePlataforma;
-    api.updatePlataforma      = _updatePlataforma;
-
-    api.getHierarquias        = _getHierarquias;
-    api.getHierarquiasById    = _getHierarquiasById;
-    api.saveHierarquia        = _saveHierarquia;
-    api.updateHierarquia      = _updateHierarquia;
-
+    api.getPlataformas            = _getPlataformas;
+    api.getPlataformasById        = _getPlataformasById;
+    api.savePlataforma            = _savePlataforma;
+    api.updatePlataforma          = _updatePlataforma;
+    api.getHierarquias            = _getHierarquias;
+    api.getHierarquiasById        = _getHierarquiasById;
+    api.saveHierarquia            = _saveHierarquia;
+    api.updateHierarquia          = _updateHierarquia;
     api.getHierarquiaByPlatformId = _getHierarquiaByPlatformId;
-    api.adicionarCedente      = _adicionarCedente;
+    api.adicionarCedente          = _adicionarCedente;
+    api.getComissaoByHierarquiaId = _getComissaoByHierarquiaId;
+    api.addComissaoHierarquia     = _addComissaoHierarquia;
+    api.updateComissaoHierarquia  = _updateComissaoHierarquia;
 
     return api;
 

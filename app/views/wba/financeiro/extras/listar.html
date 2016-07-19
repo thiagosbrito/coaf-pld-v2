@@ -19,6 +19,7 @@
                 <th>Data</th>
                 <th>Conta</th>
                 <th>Valor</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -26,6 +27,11 @@
                 <td>{{lnc.createdAt | date: 'dd/MM/yyyy'}}</td>
                 <td>{{lnc.uuidConta.nome}}</td>
                 <td ng-class="{'red': lnc.valor < 0}">{{lnc.valor | currency}}</td>
+                <td>
+                  <button class="btn btn-primary" tooltip="Efetivar Lançamento" ng-click="efetivarLancamento(lnc.uuid)">
+                    <i class="fa fa-check"></i>
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>

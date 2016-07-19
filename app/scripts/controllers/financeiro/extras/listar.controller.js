@@ -24,5 +24,17 @@ angular.module('wbaApp')
           }
         )
       }();
+
+      $scope.efetivarLancamento = function (id) {
+        var dataContabil = moment().format('YYYY-MM-DD');
+        apiFinanceiro.efetivarLancamento(id, dataContabil).then(
+          function (res) {
+            toaster.pop('success','Efetivar Lançamento','Lançamento efetivado com sucesso');
+          },
+          function (err) {
+            toaster.pop('error','Efetivar Lançamento',err.statusText);
+          }
+        )
+      };
     }
   ]);

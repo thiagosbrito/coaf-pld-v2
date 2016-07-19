@@ -180,8 +180,8 @@ angular
                 url: '#/cobranca/listar'
               },
               {
-                label: 'Extras',
-                url: '#/financeiro/extras'
+                label: 'Lançamentos',
+                url: '#/financeiro/lancamentos'
               }
             ]
           },

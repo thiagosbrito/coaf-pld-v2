@@ -438,6 +438,28 @@ angular.module('wbaApp')
       )
     };
 
+    var _getEstadoAtual = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes/' + id + '/transicoes?estado=ATUAL',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+
+    var _goToNextState = function (id) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes/' + id + '/transicoes?proxima',
+        method: 'GET'
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    }
+
     // Comercial
     api.getCarteiras              = _getCarteiras;
     api.getCarteiraById           = _getCarteiraById;
@@ -483,6 +505,9 @@ angular.module('wbaApp')
     api.getRecebivelById          = _getRecebivelById;
 
     api.getRecebiveis             = _getRecebiveis;
+
+    api.getEstadoAtual            = _getEstadoAtual;
+    api.goToNextState             = _goToNextState;
 
     return api;
 
