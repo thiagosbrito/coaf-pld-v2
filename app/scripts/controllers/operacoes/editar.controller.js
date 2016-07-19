@@ -40,14 +40,43 @@ angular.module('wbaApp')
     $scope.getEstado = function (id) {
       apiOperacoes.getEstadoAtual(id).then(
         function (res) {
-          console.log(res)
+          console.log(res);
         },
         function (err) {
-          console.log(err)
+          console.log(err);
         }
       )
     };
     $scope.getEstado($stateParams.operacaoId);
+
+    $scope.nextState = function () {
+
+      SweetAlert.swal({
+        title: "Você tem certeza?",
+        text: "Se prosseguir essa operação não poderá ser desfeita",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Prosseguir",
+        closeOnConfirm: true
+      },
+        function (isConfirm) {
+          if (isConfirm) {
+            apiOperacoes.goToNextState($stateParams.operacaoId).then(
+              function (res) {
+                console.log(res);
+              },
+              function (err) {
+                toaster.pop('error','Próximo estado de Operação',err.statusText);
+              }
+            )
+          }
+          else {
+            SweetAlert.swal("Estado da Operação", "O estado da operação não foi alterado", "error");
+          }
+        }
+      )
+    };
 
     $scope.calcularLancamentos();
 
@@ -71,7 +100,7 @@ angular.module('wbaApp')
       function (err) {
         toaster.pop('error','Cedentes',err.statusText);
       }
-      );
+    );
 
     apiOperacoes.getCarteiras().then(
       function (res) {

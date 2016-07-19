@@ -438,6 +438,17 @@ angular.module('wbaApp')
       )
     };
 
+    var _deleteRecebivel = function (operacaoId, recebivelId) {
+      return $http({
+        url: baseUrl.apiOperacoes + '/operacoes/' + operacaoId + '/recebivel/' + recebivelId,
+        method: 'DELETE'
+      }).then(
+        function (result) {
+          return result
+        }
+      )
+    };
+
     var _getEstadoAtual = function (id) {
       return $http({
         url: baseUrl.apiOperacoes + '/operacoes/' + id + '/transicoes?estado=ATUAL',
@@ -451,8 +462,8 @@ angular.module('wbaApp')
 
     var _goToNextState = function (id) {
       return $http({
-        url: baseUrl.apiOperacoes + '/operacoes/' + id + '/transicoes?proxima',
-        method: 'GET'
+        url: baseUrl.apiOperacoes + '/operacoes/' + id + '/transicoes/proxima',
+        method: 'PUT'
       }).then(
         function (results) {
           return results
@@ -505,6 +516,7 @@ angular.module('wbaApp')
     api.getRecebivelById          = _getRecebivelById;
 
     api.getRecebiveis             = _getRecebiveis;
+    api.deleteRecebivel          = _deleteRecebivel;
 
     api.getEstadoAtual            = _getEstadoAtual;
     api.goToNextState             = _goToNextState;

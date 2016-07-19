@@ -5,7 +5,8 @@ angular.module('wbaApp')
     '$state',
     '$stateParams',
     'apiFinanceiro',
-    function ($scope, $state, $stateParams, apiFinanceiro) {
+    'toaster',
+    function ($scope, $state, $stateParams, apiFinanceiro, toaster) {
 
       $scope.getLancamentos = function () {
         apiFinanceiro.getAllLancamentos().then(
@@ -20,7 +21,7 @@ angular.module('wbaApp')
             });
           },
           function (err) {
-            console.log(err.statusText)
+            toaster.pop('error','Efetivar Lançamentos',err.statusText)
           }
         )
       }();

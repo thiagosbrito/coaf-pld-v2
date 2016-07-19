@@ -83,13 +83,18 @@
               <td class="text-center">
                 <switch id="enabled" name="enabled" ng-model="rec.ativo" class="green"></switch>
               </td>
-              <td>
-                <button class="btn btn-primary" ng-click="updateTitulo(rec)" ng-if="rec.uuid" ng-disabled="!rec.valor || !rec.vencimento || !rec.uuidSacado">
-                  <i class="fa fa-save"></i>
-                </button>
-                <button class="btn btn-primary" ng-click="saveTitulo(rec)" ng-if="!rec.uuid" ng-disabled="!rec.valor || !rec.vencimento || !rec.uuidSacado">
-                  <i class="fa fa-save"></i>
-                </button>
+              <td width="90">
+                <div class="btn-group">
+                  <button class="btn btn-sm btn-danger" ng-click="deleteRecebivel(rec.uuid)">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                  <button class="btn btn-sm btn-primary" ng-click="updateTitulo(rec)" ng-if="rec.uuid" ng-disabled="!rec.valor || !rec.vencimento || !rec.uuidSacado">
+                    <i class="fa fa-save"></i>
+                  </button>
+                  <button class="btn btn-sm btn-primary" ng-click="saveTitulo(rec)" ng-if="!rec.uuid" ng-disabled="!rec.valor || !rec.vencimento || !rec.uuidSacado">
+                    <i class="fa fa-save"></i>
+                  </button>
+                </div>
               </td>
             </tr>
           </tbody>

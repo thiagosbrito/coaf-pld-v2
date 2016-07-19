@@ -88,6 +88,35 @@ angular.module('wbaApp')
       };
 
 
+      $scope.deleteRecebivel = function (recebivelId) {
+        SweetAlert.swal({
+            title: "Você tem certeza?",
+            text: "Se prosseguir essa operação não poderá ser desfeita",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Prosseguir",
+            closeOnConfirm: true
+          },
+          function (isConfirm) {
+            if (isConfirm) {
+              apiOperacoes.deleteRecebivel($stateParams.operacaoId, recebivelId).then(
+                function (res) {
+                  toaster.pop('success','Remover Títulos','Título removido com sucesso');
+                  $scope.getRecebiveisByOperacao();
+                },
+                function (err) {
+                  toaster.pop('error','Remover Títulos',err.statusText);
+                }
+              )
+            }
+            else {
+              SweetAlert.swal("Títulos não removidos", "Você cancelou a operação, nenhum arquivo foi removido.", "error");
+            }
+          }
+        );
+      }
+
       $scope.getRecebiveisByOperacao = function () {
         $scope.loading = true;
         apiOperacoes.getRecebiveisByOperacao($stateParams.operacaoId).then(
