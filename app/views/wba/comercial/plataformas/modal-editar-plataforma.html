@@ -181,14 +181,24 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div class="form-group">
+                <div class="form-group">
                   <label class="col-md-2 control-label">
-                    Usuário
+                    Cedentes
                   </label>
-                  <div class="col-md-8">
-                    <em>select2</em>
+                  <div class="col-md-9">
+                    <ui-select multiple ng-model="selectedCedentes" on-remove="changedValue($item, $model)" close-on-select="false" title="Selecione os cedentes">
+                      <ui-select-match placeholder="Selecione ou procure um cedente na lista..">{{$item.nomeFantasia}}</ui-select-match>
+                      <ui-select-choices repeat="cedente in cedentes | filter: $select.search">
+                        <span ng-bind-html="cedente.nomeFantasia | highlight: $select.search"></span>
+                      </ui-select-choices>
+                    </ui-select>
                   </div>
-                </div> -->
+                </div>
+                <div class="form-group">
+<pre>
+{{selectedCedentes | json}}
+</pre>
+                </div>
                 <div class="form-group">
                   <label for="organizationName" class="col-md-2 control-label">Ativo</label>
                   <div class="col-md-6">

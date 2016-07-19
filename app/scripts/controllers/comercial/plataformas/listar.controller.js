@@ -108,6 +108,10 @@ angular.module('wbaApp')
             }
           },
           controller: function ($scope, $modalInstance, Upload, $timeout, plataforma, cedentes, apiComercial) {
+            $scope.selectedCedentes = [];
+            $scope.cedentes = cedentes;
+            $scope.plataforma = plataforma;
+            $scope.tree_data = plataforma.tree;
 
             $scope.getData = function (){
               apiComercial.getPlataformas().then(
@@ -175,12 +179,6 @@ angular.module('wbaApp')
               return data;
             };
 
-            $scope.cedentes = cedentes;
-
-            $scope.plataforma = plataforma;
-
-            $scope.tree_data = plataforma.tree;
-
             $scope.treatData(plataforma);
 
             var tree;
@@ -214,6 +212,17 @@ angular.module('wbaApp')
               $scope.isReading = true;
               $scope.isEditing = false;
               $scope.hierarquia = node;
+
+              if ($scope.hierarquia.uuidsCedente.length > 0) {
+                angular.forEach($scope.hierarquia.uuidsCedente, function (item) {
+                  var ced = _.findWhere($scope.cedentes, {id: item});
+                  ced.old = true;
+                  $scope.selectedCedentes.push(ced);
+                })
+              };
+
+              console.log($scope.selectedCedentes);
+              
             };
 
             $scope.cancelEditing = function () {
@@ -221,7 +230,9 @@ angular.module('wbaApp')
               $scope.isEditing = true;
               $scope.hierarquia = null;
             };
-
+            $scope.changedValue = function (item, model) {
+              console.log(item, model);
+            }
             $scope.updateHierarquia = function (hierarquia) {
               hierarquia = _.omit(hierarquia,'__children__');
               hierarquia = _.omit(hierarquia,'__dept__');
@@ -243,17 +254,53 @@ angular.module('wbaApp')
               hierarquia.hierarquiaPai = hierarquia.pai;
               hierarquia = _.omit(hierarquia,'pai');
               // hierarquia = _.omit(hierarquia,'uuid');
-              apiComercial.updateHierarquia(hierarquia).then(
-                function (res) {
-                  toaster.pop('success','Atualizar Hierarquia','Dados alterados com sucesso');
-                  $scope.isReading = false;
-                  $scope.isEditing = true;
-                  $scope.hierarquia = null;
-                },
-                function (err) {
-                  toaster.pop('error','Atualizar Hierarquia',err.statusText);
-                }
-              )
+              if ($scope.selectedCedentes.length > 0) {
+                $scope.selectedCedentes = _.without($scope.selectedCedentes, {old: true});
+                console.log($scope.selectedCedentes);
+                var cedentes = $scope.selectedCedentes;
+                // hierarquia = _.omit(hierarquia, 'cedentes');
+                apiComercial.saveHierarquia(hierarquia).then(
+                  function (res) {
+                    toaster.pop('success','Hierarquias','Hierarquia cadastrada com sucesso');
+                    $scope.getPlataformas();
+                  },
+                  function (err) {
+                    toaster.pop('error','Hierarquias',err.statusText);
+                  }
+                );
+                angular.forEach(cedentes, function (cen) {
+                  apiComercial.adicionarCedente(hierarquia.uuid, cen.id).then(
+                    function (res) {
+                      toaster.pop('success','Cedentes','Cedente adicionado à Hierarquia com sucesso')
+                    },
+                    function (err) {
+                      toaster.pop('error','Cedentes',err.statusText);
+                    }
+                  )
+                })
+              }
+              else {
+                apiComercial.saveHierarquia(item).then(
+                  function (res) {
+                    toaster.pop('success','Hierarquias','Hierarquia cadastrada com sucesso');
+                    $scope.getPlataformas();
+                  },
+                  function (err) {
+                    toaster.pop('error','Hierarquias',err.statusText);
+                  }
+                )
+              }
+              // apiComercial.updateHierarquia(hierarquia).then(
+              //   function (res) {
+              //     toaster.pop('success','Atualizar Hierarquia','Dados alterados com sucesso');
+              //     $scope.isReading = false;
+              //     $scope.isEditing = true;
+              //     $scope.hierarquia = null;
+              //   },
+              //   function (err) {
+              //     toaster.pop('error','Atualizar Hierarquia',err.statusText);
+              //   }
+              // )
             }
 
             $scope.save = function (item) {
@@ -271,15 +318,40 @@ angular.module('wbaApp')
         });
         modalInstance.result.then(
           function (item) {
-            apiComercial.saveHierarquia(item).then(
-              function (res) {
-                toaster.pop('success','Hierarquias','Hierarquia cadastrada com sucesso');
-                $scope.getPlataformas();
-              },
-              function (err) {
-                toaster.pop('error','Hierarquias',err.statusText);
-              }
-            )
+            if (item.cedentes.length > 0) {
+              var cedentes = item.cedentes;
+              item = _.omit(item, 'cedentes');
+              apiComercial.saveHierarquia(item).then(
+                function (res) {
+                  toaster.pop('success','Hierarquias','Hierarquia cadastrada com sucesso');
+                  $scope.getPlataformas();
+                },
+                function (err) {
+                  toaster.pop('error','Hierarquias',err.statusText);
+                }
+              );
+              angular.forEach(cedentes, function (cen) {
+                apiComercial.adicionarCedente(item.uuid, cen.id).then(
+                  function (res) {
+                    console.log(res)
+                  },
+                  function (err) {
+                    console.log(err)
+                  }
+                  )
+              })
+            }
+            else {
+              apiComercial.saveHierarquia(item).then(
+                function (res) {
+                  toaster.pop('success','Hierarquias','Hierarquia cadastrada com sucesso');
+                  $scope.getPlataformas();
+                },
+                function (err) {
+                  toaster.pop('error','Hierarquias',err.statusText);
+                }
+              )
+            }
           }
         );
       };

@@ -93,6 +93,21 @@ angular.module('wbaApp')
       )
     };
 
+    var _adicionarCedente = function (idHierarquia, idCedente) {
+      return $http({
+        url: baseUrl.apiComercial + '/hierarquias/' + idHierarquia + '/adicionarCedente',
+        method: 'POST',
+        data: idCedente,
+        headers: {
+          'Content-Type':'application/json'
+        }
+      }).then(
+        function (results) {
+          return results
+        }
+      )
+    };
+
     // Comercial
     api.getPlataformas        = _getPlataformas;
     api.getPlataformasById    = _getPlataformasById;
@@ -105,6 +120,7 @@ angular.module('wbaApp')
     api.updateHierarquia      = _updateHierarquia;
 
     api.getHierarquiaByPlatformId = _getHierarquiaByPlatformId;
+    api.adicionarCedente      = _adicionarCedente;
 
     return api;
 
