@@ -6,8 +6,11 @@ angular.module('wbaApp')
     'progressLoader',
     'wijetsService',
     '$location',
-    function($scope, $theme, $timeout, progressLoader, wijetsService, $location) {
-      'use strict';
+    'apiLogin',
+    '$state',
+    'toaster',
+    function($scope, $theme, $timeout, progressLoader, wijetsService, $location, apiLogin, $state, toaster) {
+      
       $scope.layoutFixedHeader = $theme.get('fixedHeader');
       $scope.layoutPageTransitionStyle = $theme.get('pageTransitionStyle');
       $scope.layoutDropdownTransitionStyle = $theme.get('dropdownTransitionStyle');
@@ -16,6 +19,21 @@ angular.module('wbaApp')
       'fadeInRightBig','fadeInUp','fadeInUpBig','flipInX','flipInY','lightSpeedIn','rotateIn','rotateInDownLeft',
       'rotateInDownRight','rotateInUpLeft','rotateInUpRight','rollIn','zoomIn','zoomInDown','zoomInLeft','zoomInRight',
       'zoomInUp'];
+
+
+      $scope.logout = function () {
+        apiLogin.doLogout().then(
+          function (res) {
+            $state.go('login');
+          },
+          function (err) {
+            if(err.status == 301) {
+              $state.go('login');
+            }
+            toaster.pop('error','Logout',err.statusText);
+          }
+        )
+      };
 
       $scope.layoutLoading = true;
 

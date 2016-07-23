@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
       <form role="form" class="form">
         <fieldset>
           <div class="form-group">
@@ -25,8 +25,8 @@
         </fieldset>
       </form>
     </div>
-    <div class="col-md-9">
-      <div class="panel panel-indigo" collapse="isReading">
+    <div class="col-md-10">
+      <div class="panel panel-indigo">
         <div class="panel-heading">
           <h2>Hierarquias</h2>
           <div class="panel-ctrls">
@@ -116,145 +116,6 @@
             </div>
           </div>
 
-        </div>
-      </div>
-      <div class="panel panel-indigo" collapse="isEditing">
-        <div class="panel-heading">
-          <h2>Editar Hierarquia</h2>
-        </div>
-        <div class="panel-body">
-          <form role="form" class="form form-horizontal">
-            <div class="form-group">
-              <fieldset>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Nome
-                  </label>
-                  <div class="col-md-8">
-                    <input type="text" class="form-control" ng-model="hierarquia.nome" required>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Tipo de Hierarquia
-                  </label>
-                  <div class="col-md-8">
-                    <select class="form-control" ng-model="hierarquia.tipoHierarquia">
-                      <option value="">Selecione...</option>
-                      <option value="COMERCIAL">Comercial</option>
-                      <option value="INDICANTE">Indicante</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Hierarquia Pai
-                  </label>
-                  <div class="col-md-8">
-                    <select class="form-control"
-                      ng-model="hierarquia.pai"
-                      ng-options="hie as hie.nome for hie in hierarquias track by hie.uuid">
-                      <option value="">Selecione uma hierarquia...</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Plataforma
-                  </label>
-                  <div class="col-md-8">
-                    <select class="form-control"
-                      ng-model="hierarquia.uuidPlataforma"
-                      ng-options="plataforma.uuid as plataforma.nome for plataforma in plataformas">
-                      <option value="">Selecione uma plataforma...</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Comissão
-                  </label>
-                  <div class="col-md-2">
-                    <div class="input-group">
-                      <input type="number" step="any" class="form-control"  aria-describedby="percent-suffix">
-                      <span class="input-group-addon" id="percent-suffix">%</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-md-2 control-label">
-                    Cedentes
-                  </label>
-                  <div class="col-md-9">
-                    <ui-select multiple ng-model="cedentes.selectedCedentes" on-remove="changedValue($item, $model, $select)" close-on-select="false" title="Selecione os cedentes">
-                      <ui-select-match placeholder="Selecione ou procure um cedente na lista..">{{$item.nomeFantasia}}</ui-select-match>
-                      <ui-select-choices repeat="cedente in cedentes.lista | filter: $select.search">
-                        <span ng-bind-html="cedente.nomeFantasia | highlight: $select.search"></span>
-                      </ui-select-choices>
-                    </ui-select>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="organizationName" class="col-md-2 control-label">Ativo</label>
-                  <div class="col-md-6">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <input
-                          type="checkbox"
-                          class=" switchery-xs"
-                          checked ui-switch="{color: $parent.getBrandColor('success')}"
-                          ng-init="hierarquia.ativo=true" ng-model="hierarquia.ativo" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </fieldset>
-            </div>
-          </form>
-        </div>
-        <div class="panel-footer">
-          <button
-            class="btn btn-danger-alt pull-left"
-            ng-click="cancelEditing()">
-              <i class="fa fa-times"></i> Cancelar
-          </button>
-          <button
-            class="btn btn-primary pull-right"
-            ng-disabled="formHierarquia.$invalid"
-            ng-click="updateHierarquia(hierarquia)"><i class="fa fa-save"></i> Salvar
-          </button>
-        </div>
-      </div>
-      <div class="panel panel-indigo" collapse="isAdding">
-        <div class="panel-heading">
-          <h2>Comissão Hierarquia</h2>
-        </div>
-        <div class="panel-body">
-          <form role="form" class="form form-horizontal">
-            <div class="form-group">
-              <label class="control-label col-md-2">
-                Comissão
-              </label>
-              <div class="col-md-2">
-                <div class="input-group">
-                  <input type="number" step="any" class="form-control" ng-model="comissao.percentualComissao"  aria-describedby="%">
-                  <span class="input-group-addon" id="%">%</span>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="panel-footer">
-          <button
-            class="btn btn-danger-alt pull-left"
-            ng-click="cancelEditing()">
-              <i class="fa fa-times"></i> Cancelar
-          </button>
-          <button
-            class="btn btn-primary pull-right"
-            ng-disabled="formHierarquia.$invalid"
-            ng-click="addComissaoHierarquia(comissao)"><i class="fa fa-save"></i> Salvar
-          </button>
         </div>
       </div>
     </div>

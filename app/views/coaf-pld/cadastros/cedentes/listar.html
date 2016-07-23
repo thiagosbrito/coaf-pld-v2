@@ -1,0 +1,73 @@
+<ol class="breadcrumb">
+    <li><a href="#/">Dashboard</a></li>
+    <li>Cadastro</li>
+    <li class="active">Cedentes</li>
+</ol>
+
+<div class="container-fluid">
+    
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h2>Cedentes</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon"
+              ng-click="novo()"
+              tooltip="Cadastrar Cedente"> <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form role="form" name="formFilter" class="form-horizontal">
+                <div class="form-group">
+                  <div class="input-group col-md-8 col-md-offset-2">
+                    <input type="text" class="form-control">
+                    <div class="input-group-btn">
+                      <button class="btn btn-primary">
+                        <i class="fa fa-search"></i> Filtrar por CNPJ
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>CNPJ</th>
+                <th>Razão Social</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="customer in customers | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <td>{{customer.id}}</td>
+                <td>{{customer.corporateIdNumber}}</td>
+                <td>{{customer.corporateName }}</td>
+                <td>
+                    <button class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel-footer">
+          <ul class="pager">
+            <li>
+              <a ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class='pull-left'>« Anterior</a>
+            </li>
+            <li>
+              <a class="pull-right" ng-disabled="currentPage >= customers.length/pageSize - 1" ng-click="currentPage=currentPage+1">Próximo »</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- container-fluid -->

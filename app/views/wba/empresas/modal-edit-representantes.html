@@ -7,10 +7,9 @@
       <div class="form-group">
         <label for="organizationName" class="col-md-2 control-label">Tipo</label>
         <div class="col-md-4">
-          <input type="text" class="form-control" typeahead="tRep as tRep.nome for tRep in tiposReps | filter: $viewValue" ng-model="rep.uuidTipoRepresentante">
-          <!-- <select class="form-control" ng-model="rep.uuidTipoRepresentante" ng-options="tRep.id as tRep.nome for tRep in tiposReps">
+          <select class="form-control" ng-model="rep.uuidTipoRepresentante" ng-options="tRep.id as tRep.nome for tRep in tiposReps">
             <option value="">Selecione..</option>
-          </select> -->
+          </select>
         </div>
         <div class="col-md-2">
           <button class="btn btn-link" ng-click="openModal()"><i class="fa fa-plus"></i> Tipo de Representante</button>
@@ -19,27 +18,19 @@
       <div class="form-group">
         <label class="col-md-2 control-label">Nome</label>
         <div class="col-md-10">
-          <input type="text" ng-model="rep.nome" name="nome" class="form-control">
+          <input type="text" ng-model="rep.nome" class="form-control">
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-2 control-label">CPF - {{orgForm.cpf.$error}}</label>
+        <label class="col-md-2 control-label">CPF</label>
         <div class="col-md-8">
-          <input type="text" ng-model="rep.cpf" name="cpf" class="form-control" ui-br-cpf-mask>
-        </div>
-        <div class="col-md-2">
-          <span ng-if="!orgForm.cpf.$error.cpf" style="margin-top: 7px; margin-left: -24px">
-            <i class="fa fa-check green pull-left" style="margin-top: 3px"></i> Válido
-          </span>
-          <span ng-if="orgForm.cpf.$error.cpf" style="margin-top: 7px; margin-left: -24px">
-            <i class="fa fa-times red pull-left" style="margin-top: 3px"></i> Inválido
-          </span>
+          <input type="text" ng-model="rep.cpf" class="form-control" ui-br-cpf-mask>
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-2 control-label">Email</label>
         <div class="col-md-8">
-          <input type="email" ng-model="rep.email" name="email" class="form-control">
+          <input type="email" ng-model="rep.email" class="form-control">
         </div>
       </div>
     </fieldset>
@@ -47,5 +38,5 @@
 </div>
 <div class="modal-footer">
   <button class="btn btn-danger-alt pull-left" ng-click="close()"><i class="fa fa-times"></i> Cancelar</button>
-  <button class="btn btn-primary pull-right" ng-click="salvar(rep)" ng-disabled="orgForm.$invalid"><i class="fa fa-save"></i> Salvar</button>
+  <button class="btn btn-primary pull-right" ng-click="salvar(rep)"><i class="fa fa-save"></i> Salvar</button>
 </div>

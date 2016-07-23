@@ -1,1 +1,84 @@
-<div ui-view></div>
+<div 
+  ng-class="{
+  'static-header': !getLayoutOption('fixedHeader'),
+  'layout-boxed': getLayoutOption('layoutBoxed'),
+  'sidebar-collapsed': getLayoutOption('leftbarCollapsed') && !getLayoutOption('leftbarShown'),
+  'show-sidebar': getLayoutOption('leftbarShown')
+  }" style="height: 100%">
+  
+  <toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
+
+  <ng-include ng-if="$state.current.name != 'coafPld.login'" src="'views/layout/header.html'" ng-class="{'navbar-fixed-top': getLayoutOption('fixedHeader')}" class="ng-cloak"></ng-include>
+
+  <div id="wrapper">
+    <nav id="headernav" class="navbar ng-hide sidebar-red" role="navigation" ng-show="getLayoutOption('layoutHorizontal') && !layoutLoading">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <i class="fa fa-reorder"></i>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse navbar-ex1-collapse" ng-class="{'large-icons-nav': getLayoutOption('layoutHorizontalLargeIcons')}" id="horizontal-navbar">
+        <ul ng-controller="NavigationController" class="nav navbar-nav">
+          <li ng-repeat="item in menu"
+              ng-if="!(item.hideOnHorizontal||item.separator)"
+              ng-class="{ hasChild: (item.children!==undefined),
+                      active: item.selected,
+                        open: (item.children!==undefined) && item.open,
+                   'nav-separator': item.separator==true }"
+              ng-include="'templates/nav_renderer_horizontal.html'"
+          ></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="layout-static">
+      <div class="static-sidebar-wrapper sidebar-red ng-cloak" ng-if="$state.current.name != 'coafPld.login'">
+        <div class="static-sidebar" role="navigation">
+          <div class="sidebar">
+            <div class="widget" ng-cloak>
+              <div class="widget-body">
+                <div class="userinfo">
+                  <div class="avatar">
+                    <img masked-image src="http://placehold.it/64x64" class="img-responsive img-circle">
+                  </div>
+                  <div class="info">
+                    <span class="username">Thiago Brito</span>
+                    <span class="useremail">thiago.brito@wba.com.br</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="widget stay-on-collapse">
+              <nav class="widget-body">
+                <ul ng-controller="NavigationController" class="acc-menu" sticky-scroll="40">
+                  <li ng-repeat="item in menu track by $index"
+                      ng-class="{ hasChild: (item.children!==undefined),
+                            active: item.selected,
+                              open: (item.children!==undefined) && item.open,
+                         'nav-separator': item.separator==true,
+                              'search-focus': (searchQuery.length>0 && item.selected) }"
+                      ng-show="!(searchQuery.length && !item.selected)"
+                      ng-include="'views/templates/nav_renderer.html'"
+                  ></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="static-content-wrapper">
+        <div class="static-content">
+          <div class="page-content" ui-view class="mainview-animation animated"></div> <!--wrap -->
+        </div>
+        <footer role="contentinfo" ng-show="!layoutLoading" ng-cloak>
+          <div class="clearfix">
+            <ul class="list-unstyled list-inline pull-left">
+              <li><h6 style="margin: 0;">&copy; 2016 - WBA Software</h6></li>
+            </ul>
+            <button class="pull-right btn btn-link btn-xs hidden-print" back-to-top><i class="ti ti-arrow-up"></i></button>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>

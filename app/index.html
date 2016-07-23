@@ -2,25 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>WBA-SASS</title>
-  <base href="/">
+  <title>COAF-PLD</title>
+	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="WBA Software">
 
-	<!-- prochtml:remove:dist -->
-	<!-- <link href="../../assets/less/styles.less" rel="stylesheet/less" media="all">  -->
-	<link href="assets/css/wba.css" rel="stylesheet" media="all">
-	<link href="bower_components/AngularJS-Toaster/toaster.css" rel="stylesheet" />
-	<link href="bower_components/sweetalert/dist/sweetalert.css" rel="stylesheet">
-	<!-- /prochtml -->
-
-   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600' rel='stylesheet' type='text/css'>
-
-	<!-- The following CSS are included as plugins and can be removed if unused-->
-
-	<!-- build:css assets/css/vendor.css -->
-	<!-- bower:css -->
+ 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
 	<link rel="stylesheet" href="bower_components/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" />
 	<link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css" />
@@ -42,161 +30,25 @@
 	<link rel="stylesheet" href="bower_components/skylo/vendor/styles/skylo.css" />
 	<link rel="stylesheet" href="bower_components/themify-icons/css/themify-icons.css" />
 	<link rel="stylesheet" href="bower_components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" />
-  <link rel="stylesheet" href="bower_components/angular-tree-dnd/dist/ng-tree-dnd.css" />
-  <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css">
-  <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.bootstrap.css">
-	<!-- endbower -->
+	<link rel="stylesheet" href="bower_components/angular-tree-dnd/dist/ng-tree-dnd.css" />
+	<link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css">
+	<link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.bootstrap.css">	
 	<link rel='stylesheet' type='text/css' href='assets/plugins/form-fseditor/fseditor.css' />
 	<link rel='stylesheet' type='text/css' href='assets/plugins/jcrop/css/jquery.Jcrop.min.css' />
 	<link rel="stylesheet" type='text/css' href="assets/plugins/iCheck/skins/all.css" />
 	<link rel="stylesheet" type='text/css' href="assets/plugins/google-code-prettify/prettify.css" />
+  <link rel="stylesheet" type="text/css" href="bower_components/AngularJS-Toaster/toaster.min.css" />
 	<link rel="stylesheet" type="text/css" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css"/>
-
   <link rel="stylesheet" type="text/css" href="bower_components/angular-ui-switch/angular-ui-switch.css">
-  <link rel="stylesheet" type="text/css" href="scripts/vendors/angular-bootstrap-grid-tree/src/treeGrid.css">
-
-	<!-- endbuild -->
-
-	<!-- build:css({.tmp,app}) assets/css/main.css -->
-	  <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/tree-grid.css">
-	<!-- endbuild -->
-
-
-	<!--[if lt IE 10]>
-        {{ "js/media.match.min.js" | asset_url | script_tag }}
-        {{ "js/respond.min.js" | asset_url | script_tag }}
-        {{ "js/placeholder.min.js" | asset_url | script_tag }}
-    <![endif]-->
-
-	<!-- prochtml:remove:dist -->
-	<script type="text/javascript">less = { env: 'development'};</script>
-	<script type="text/javascript" src="assets/plugins/misc/less.js"></script>
-	<!-- /prochtml -->
+  
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<link rel="stylesheet" href="assets/css/wba.css">
+  <link rel="stylesheet" href="assets/css/tree-grid.css">
+	
 </head>
 
-<body
-  ng-app="wbaApp"
-  ng-controller="MainController"
-  ng-class="{
-			  'static-header': !getLayoutOption('fixedHeader'),
-			  'focused-form': getLayoutOption('fullscreen'),
-			  'horizontal-nav': getLayoutOption('layoutHorizontal'),
-			  'layout-boxed': getLayoutOption('layoutBoxed'),
-			  'sidebar-collapsed': getLayoutOption('leftbarCollapsed') && !getLayoutOption('leftbarShown'),
-			  'show-sidebar': getLayoutOption('leftbarShown')
-			}"
-  ng-click="hideHeaderBar();hideChatBox()"
-  to-top-on-load
-  faux-offcanvas
->
-<toaster-container toaster-options="{'position-class': 'toast-top-full-width'}"></toaster-container>
-<ng-include src="'views/layout/header.html'" ng-class="{'navbar-fixed-top': getLayoutOption('fixedHeader')}"></ng-include>
-
-<div id="wrapper">
-
-  <nav id="headernav" class="navbar ng-hide sidebar-bluegraylight" role="navigation" ng-show="getLayoutOption('layoutHorizontal') && !layoutLoading">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-        <i class="fa fa-reorder"></i>
-      </button>
-    </div>
-    <div class="collapse navbar-collapse navbar-ex1-collapse" ng-class="{'large-icons-nav': getLayoutOption('layoutHorizontalLargeIcons')}" id="horizontal-navbar">
-      <ul ng-controller="NavigationController" class="nav navbar-nav">
-        <li ng-repeat="item in menu"
-            ng-if="!(item.hideOnHorizontal||item.separator)"
-            ng-class="{ hasChild: (item.children!==undefined),
-										active: item.selected,
-										  open: (item.children!==undefined) && item.open,
-							   'nav-separator': item.separator==true }"
-            ng-include="'templates/nav_renderer_horizontal.html'"
-        ></li>
-      </ul>
-    </div>
-  </nav>
-
-  <div id="layout-static">
-    <div class="static-sidebar-wrapper sidebar-bluegraylight">
-      <div class="static-sidebar" role="navigation">
-        <div class="sidebar">
-          <div class="widget" ng-cloak>
-            <div class="widget-body">
-              <div class="userinfo">
-                <div class="avatar">
-                  <img masked-image src="http://placehold.it/64x64" class="img-responsive img-circle">
-                </div>
-                <div class="info">
-                  <span class="username">Thiago Brito</span>
-                  <span class="useremail">thiago.brito@wba.com.br</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="widget stay-on-collapse">
-            <nav class="widget-body">
-              <ul ng-controller="NavigationController" class="acc-menu" sticky-scroll="40">
-                <li ng-repeat="item in menu track by $index"
-                    ng-class="{ hasChild: (item.children!==undefined),
-													active: item.selected,
-													  open: (item.children!==undefined) && item.open,
-										   'nav-separator': item.separator==true,
-					            			'search-focus': (searchQuery.length>0 && item.selected) }"
-                    ng-show="!(searchQuery.length && !item.selected)"
-                    ng-include="'views/templates/nav_renderer.html'"
-                ></li>
-              </ul>
-            </nav>
-          </div>
-
-          <!-- <div class="widget" id="widget-progress" ng-cloak>
-                          <div class="widget-heading">
-                              Progress
-                          </div>
-                          <div class="widget-body">
-                              <div class="mini-progressbar">
-                                  <div class="clearfix mb-sm">
-                                      <div class="pull-left">Bandwidth</div>
-                                      <div class="pull-right">50%</div>
-                                  </div>
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-lime" style="width: 50%"></div>
-                                  </div>
-                              </div>
-                              <div class="mini-progressbar">
-                                  <div class="clearfix mb-sm">
-                                      <div class="pull-left">Storage</div>
-                                      <div class="pull-right">25%</div>
-                                  </div>
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-info" style="width: 25%"></div>
-                                  </div>
-                              </div>
-                          </div>
-                  </div> -->
-
-        </div>
-      </div> <!-- #sidebar-->
-    </div>
-    <div class="static-content-wrapper">
-      <div class="static-content">
-        <div class="page-content" ui-view class="mainview-animation animated"></div> <!--wrap -->
-      </div>
-      <footer role="contentinfo" ng-show="!layoutLoading" ng-cloak>
-        <div class="clearfix">
-          <ul class="list-unstyled list-inline pull-left">
-            <li><h6 style="margin: 0;">&copy; 2016 - WBA Software</h6></li>
-          </ul>
-          <button class="pull-right btn btn-link btn-xs hidden-print" back-to-top><i class="ti ti-arrow-up"></i></button>
-        </div>
-      </footer>
-    </div>
-  </div>
-</div>
-
-
-<!-- Switcher -->
-
-<!-- /Switcher -->
+<body ng-app="wbaApp">
+  <div ui-view="" style="height: 100%"></div>
 
 	<!--[if lt IE 9]>
 	<script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -213,8 +65,8 @@
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/underscore/underscore.js"></script>
 	<script src="bower_components/angular/angular.js"></script>
-  	<script src="bower_components/angular-ui-ace/ui-ace.js"></script>
-  	<script src="bower_components/angular-locale-pt-br/angular-locale_pt-br.js"></script>
+  <script src="bower_components/angular-ui-ace/ui-ace.js"></script>
+  <script src="bower_components/angular-locale-pt-br/angular-locale_pt-br.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.js"></script>
 	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 	<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
@@ -222,8 +74,8 @@
 	<script src="bower_components/angular-animate/angular-animate.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 	<script src="bower_components/seiyria-bootstrap-slider/js/bootstrap-slider.js"></script>
-  	<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-  	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 	<script src="bower_components/jquery.ui/ui/jquery.ui.core.js"></script>
 	<script src="bower_components/jquery.ui/ui/jquery.ui.widget.js"></script>
 	<script src="bower_components/jquery.ui/ui/jquery.ui.mouse.js"></script>
@@ -293,7 +145,7 @@
 	<script src="bower_components/velocity/velocity.js"></script>
 	<script src="bower_components/velocity/velocity.ui.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-  <script src="bower_components/angular-input-masks/angular-input-masks-standalone.min.js"></script>
+  <script src="bower_components/angular-input-masks/angular-input-masks-standalone.js"></script>
   <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
   <script src="bower_components/AngularJS-Toaster/toaster.min.js"></script>
   <script src="bower_components/angular-csrf-cross-domain/dist/angular-csrf-cross-domain.min.js"></script>
@@ -314,10 +166,7 @@
   <script src="bower_components/angular-pdf/dist/angular-pdf.js"></script>
   <script src="bower_components/pdfjs-dist/build/pdf.js"></script>
   <script src="bower_components/pdfjs-dist/build/pdf.worker.js"></script>
-  <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
-  <script src="bower_components/cpf_cnpj/build/cpf.js"></script>
-  <script src="bower_components/cpf_cnpj/build/cnpj.js"></script>
-  <script src="bower_components/ng-cpf-cnpj/lib/ngCpfCnpj.js"></script>
+
 
 
 	<!-- endbower -->
@@ -339,99 +188,37 @@
 
 	<!-- Filters -->
 	<script src="scripts/filters/cnpj.filter.js"></script>
-  <script src="scripts/filters/cpf.filter.js"></script>
   <script src="scripts/filters/ativo.filter.js"></script>
   <script src="scripts/filters/capitalize.filter.js"></script>
+  <script src="scripts/filters/policy.filter.js"></script>
 
   <script src="scripts/directives/popover-html.js"></script>
   <script src="scripts/directives/fileReader.js"></script>
+  
 
 	<!-- Wba Scripts -->
-	<!-- Usuarios e Permissoes -->
-	<script src="scripts/services/empresas.js"></script>
-	<script src="scripts/services/comercial.js"></script>
-	<script src="scripts/services/organizacoes.js"></script>
-	<script src="scripts/services/operacoes.js"></script>
-  <script src="scripts/services/cobrancas.js"></script>
-	<script src="scripts/services/cep.js"></script>
-	<script src="scripts/services/documentacao.js"></script>
-  <script src="scripts/services/financeiro.js"></script>
-  <script src="scripts/services/checagem.js"></script>
-  <script src="scripts/services/buscas.filtro.js"></script>
+	<script src="scripts/services/auth.js"></script>
+  <script src="scripts/services/session.js"></script>
+  <script src="scripts/services/analises.js"></script>s
+  <script src="scripts/services/cadastros.js"></script>s
+	<script src="scripts/services/customers.js"></script>
+	<script src="scripts/services/users.js"></script>
+	<script src="scripts/services/permissions.js"></script>
+  <script src="scripts/services/policies.js"></script>
+  <script src="scripts/services/cep.js"></script>
+  <script src="scripts/services/transformRequestAsFormPost.js"></script>
+  
 
-	<script src="scripts/controllers/organizacoes/organizacoes.controller.js"></script>
-	<script src="scripts/controllers/organizacoes/usuarios.controller.js"></script>
-	<script src="scripts/controllers/organizacoes/grupos-usuario.controller.js"></script>
-	<script src="scripts/controllers/organizacoes/roles-usuario.controller.js"></script>
-	<script src="scripts/controllers/modulos-permissoes/modulos-permissoes.controller.js"></script>
-	<script src="scripts/controllers/grupos/grupos.controller.js"></script>
-	<script src="scripts/controllers/roles/roles.controller.js"></script>
-	<script src="scripts/controllers/empresas/empresas.controller.js"></script>
-	<script src="scripts/controllers/empresas/novo-empresa.controller.js"></script>
-	<script src="scripts/controllers/empresas/novo-endereco.controller.js"></script>
-	<script src="scripts/controllers/empresas/novo-representante.controller.js"></script>
-	<script src="scripts/controllers/empresas/novo-contato.controller.js"></script>
+  <script src="scripts/controllers/auth/login.controller.js"></script>
+  <script src="scripts/controllers/analises/operacoes/operacao.listar.controller.js"></script>
+  <script src="scripts/controllers/analises/operacoes/operacao.novo.controller.js"></script>
+  <script src="scripts/controllers/analises/operacoes/operacao.view.controller.js"></script>
 
-	<script src="scripts/controllers/comercial/plataformas/listar.controller.js"></script>
-	<script src="scripts/controllers/comercial/plataformas/novo.controller.js"></script>
-	<script src="scripts/controllers/comercial/plataformas/editar.controller.js"></script>
+  <script src="scripts/controllers/analises/cedentes/cedente.listar.controller.js"></script>
+  <script src="scripts/controllers/analises/cedentes/cedente.novo.controller.js"></script>
+  <script src="scripts/controllers/analises/cedentes/cedente.view.controller.js"></script>
 
-	<script src="scripts/controllers/comercial/hierarquias/listar.controller.js"></script>
-	<script src="scripts/controllers/comercial/hierarquias/novo.controller.js"></script>
-	<script src="scripts/controllers/comercial/hierarquias/editar.controller.js"></script>
-
-	<script src="scripts/controllers/operacoes/listar.controller.js"></script>
-	<script src="scripts/controllers/operacoes/novo.controller.js"></script>
-	<script src="scripts/controllers/operacoes/editar.controller.js"></script>
-	<script src="scripts/controllers/operacoes/carteiras/listar.controller.js"></script>
-	<script src="scripts/controllers/operacoes/carteiras/editar.controller.js"></script>
-  <script src="scripts/controllers/operacoes/carteiras/editar.tarifas-carteira.controller.js"></script>
-  <script src="scripts/controllers/operacoes/carteiras/editar.templates-carteira.controller.js"></script>
-  <script src="scripts/controllers/operacoes/carteiras/editar.documento-carteira.controller.js"></script>
-	<script src="scripts/controllers/operacoes/digitacao.editar.controller.js"></script>
-	<script src="scripts/controllers/operacoes/tarifas/listar.controller.js"></script>
-  <script src="scripts/controllers/operacoes/analise.controller.js"></script>
-  <script src="scripts/controllers/operacoes/tarifas.controller.js"></script>
-  <script src="scripts/controllers/operacoes/workflow/listar.controller.js"></script>
-  <script src="scripts/controllers/operacoes/tipo-lancamento/listar.controller.js"></script>
-  <script src="scripts/controllers/operacoes/titulos/listar.controller.js"></script>
-
-	<script src="scripts/controllers/empresas/editar-empresa.controller.js"></script>
-	<script src="scripts/controllers/empresas/editar-endereco.controller.js"></script>
-	<script src="scripts/controllers/empresas/editar-representante.controller.js"></script>
-	<script src="scripts/controllers/empresas/editar-contato.controller.js"></script>
-
-  <script src="scripts/controllers/cobranca/boletos/passo1.controller.js"></script>
-  <script src="scripts/controllers/cobranca/cobrancas/listar.controller.js"></script>
-  <script src="scripts/controllers/cobranca/cobrancas/editar.controller.js"></script>
-
-  <script src="scripts/controllers/documentacao/templates/listar.controller.js"></script>
-
-  <script src="scripts/controllers/financeiro/bancos/listar.controller.js"></script>
-  <script src="scripts/controllers/financeiro/bancos/editar-banco.controller.js"></script>
-  <script src="scripts/controllers/financeiro/bancos/editar-alineas.controller.js"></script>
-  <script src="scripts/controllers/financeiro/bancos/editar-instrucoes.controller.js"></script>
-
-  <script src="scripts/controllers/financeiro/contas/listar.controller.js"></script>
-  <script src="scripts/controllers/financeiro/contas/editar-conta.controller.js"></script>
-  <script src="scripts/controllers/financeiro/contas/editar-info.controller.js"></script>
-  <script src="scripts/controllers/financeiro/codigos-lancamento/listar.controller.js"></script>
-  <script src="scripts/controllers/financeiro/centro-custo/listar.controller.js"></script>
-  <script src="scripts/controllers/financeiro/transacoes/listar.controller.js"></script>
-  <script src="scripts/controllers/financeiro/extras/listar.controller.js"></script>
-
-
-
-
-  <script src="scripts/controllers/checagem/conferencia-documentos/pesquisar.controller.js"></script>
-  <script src="scripts/controllers/checagem/conferencia-documentos/anexos.controller.js"></script>
-  <script src="scripts/controllers/checagem/estados-confirmacao/listar.controller.js"></script>
-  <script src="scripts/controllers/checagem/documentos-conferencia/listar.controller.js"></script>
-  <script src="scripts/controllers/checagem/confirmacao-titulos/listar.controller.js"></script>
-
-
-  <script src="scripts/controllers/usuarios/novo.controller.js"></script>
-	<!-- end of Usuarios e Permissoes -->
+  <script src="scripts/controllers/cadastros/cedentes/listar.controller.js"></script>
 
 	<!-- end of Wba Scripts  -->
 

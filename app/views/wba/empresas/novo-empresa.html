@@ -40,10 +40,10 @@
             </label>
           </div>
           <div class="col-md-12" ng-show="tipoDoc == 'cpf'">
-            <input type="text" name="cpf" class="form-control" ng-model="empresa.cpf" ui-br-cpf-mask>
+            <input type="text" name="razaoSocial" class="form-control" ng-model="empresa.numeroInscricao" placeholder="CPF" ui-br-cpf-mask>
           </div>
           <div class="col-md-12" ng-show="tipoDoc == 'cnpj'">
-            <input type="text" name="cnpj" class="form-control" ng-model="empresa.cnpj" ui-br-cnpj-mask>
+            <input type="text" name="razaoSocial" class="form-control" ng-model="empresa.numeroInscricao" placeholder="CNPJ" ui-br-cnpj-mask>
           </div>
         </div>
 
@@ -70,7 +70,7 @@
               </select>
           </div>
           <div class="col-md-6">
-            <input type="text" class="form-control" name="inscricaoEstadual" ng-model="empresa.inscricaoEstadual" ui-br-ie-mask="selectedUF" placeholder="Inscrição Estadual da Empresa">
+            <input type="text" class="form-control" ng-model="empresa.inscricaoEstadual" ui-br-ie-mask='selectedUF' placeholder="Inscrição Estadual da Empresa">
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@
     <div class="form-group">
       <label for="organizationName" class="col-md-2 control-label">Inscrição Municipal</label>
       <div class="col-md-6">
-        <input type="number" name="inscricaoMunicipal" class="form-control" ng-model="empresa.inscricaoMunicipal" placeholder="Inscrição Municipal da Empresa">
+        <input type="text" name="razaoSocial" class="form-control" ng-model="empresa.inscricaoMunicipal" placeholder="Inscrição Municipal da Empresa">
       </div>
     </div>
     <div class="form-group">

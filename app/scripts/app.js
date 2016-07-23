@@ -23,12 +23,6 @@ angular.module('wbaApp', [
   'ngScrollbars',
   'uiSwitch',
   'uuid4',
-  'ntt.TreeDnD',
   'ui.ace',
-  'ngTagsInput',
-  'naif.base64',
-  'pdf',
-  'appFilereader',
-  'ui.mask',
-  'ngCpfCnpj'
+  'ngTagsInput'
   ]);

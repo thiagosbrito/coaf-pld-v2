@@ -40,24 +40,12 @@
                         </div>
                         <div class="form-group">
                           <label>
-                            Status:
-                          </label>
-                          <div class="input-group">
-                            <input type="text" class="form-control" disabled="" ng-model="operacao.status">
-                            <span class="input-group-btn">
-                              <button class="btn btn-primary" ng-click="nextState()">
-                                <i class="fa fa-rocket"></i>
-                              </button>  
-                            </span>
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label>
                             Cedente:
                           </label>
                           <select
                             class="form-control"
                             ng-model="selectedCedente"
+                            disabled
                             ng-options="ced as ced.razaoSocial for ced in cedentes">
                             <option value="">Selecione...</option>
                           </select>
@@ -66,6 +54,7 @@
                           <label>Carteira:</label>
                           <select
                             ng-model="selectedCarteira"
+                            disabled
                             class="form-control"
                             ng-options="cart as cart.nome for cart in carteiras">
                             <option value="">Selecione...</option>
@@ -89,6 +78,7 @@
                               type="text"
                               class="form-control"
                               datepicker-popup="dd/MM/yyyy"
+                              disabled
                               ng-model="operacao.dataOperacao"
                               is-open="isOpened"
                               close-text="Fechar"
@@ -103,15 +93,15 @@
                           <label>
                             Método de Cálculo
                           </label>
-                          <input type="text" class="form-control" ng-model="operacao.metodoCalculoDesagio">
+                          <input type="text" class="form-control" ng-model="operacao.metodoCalculoDesagio" disabled>
                         </div>
                         <div class="form-group" ng-show="detailsOpen">
                           <label>
                             Float
                           </label>
-                          <input type="text" class="form-control" ng-model="operacao.float">
+                          <input type="text" class="form-control" disabled="">
                         </div>
-                        <div class="form-group" ng-show="detailsOpen">
+                        <div class="form-group" ng-if="showSaveButton">
                           <button class="btn btn-primary btn-block" ng-click="update(operacao)">
                             <i class="fa fa-save"></i> Salvar
                           </button>

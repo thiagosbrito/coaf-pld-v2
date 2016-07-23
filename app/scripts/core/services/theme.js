@@ -20,14 +20,12 @@ angular
     var brandColors = {
       'default':      '#fafafa',
       'gray':         '#9e9e9e',
-
       'inverse':      '#757575',
       'primary':      '#03a9f4',
       'success':      '#8bc34a',
       'warning':      '#ffc107',
       'danger':       '#e51c23',
       'info':         '#00bcd4',
-      
       'brown':        '#795548',
       'indigo':       '#3f51b5',
       'orange':       '#ff9800',

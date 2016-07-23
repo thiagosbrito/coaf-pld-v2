@@ -1,0 +1,278 @@
+<ol class="breadcrumb">
+    <li><a href="#/">Dashboard</a></li>
+    <li>Pages</li>
+    <li class="active">Blank Page</li>
+</ol>
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-danger">
+            	<div class="panel-heading">
+            		<h2>Analise</h2>
+            	</div>
+            	<div class="panel-body">
+            		<div class="row">
+            			<div class="col-md-12">
+            				<div class="btn-group">
+							    <button class="btn btn-small" ng-click="cancel()"><i class="fa fa-chevron-left"></i> Voltar</button>
+							    <button ng-hide="hideNotificationButton()" class="btn btn-small" ng-click="openModal()">
+							    	<i class="icon-bullhorn"></i>Gerar Notificação
+						    	</button>
+							    <button ng-show="showReviewButton()" class="btn btn-small" ng-click="review()">
+							    	<i class="icon-share"></i> Revisar
+						    	</button>
+							  	<button ng-show="showReviewButton()" class="btn btn-small" ng-click="print()">
+							  		<i class="icon-print"></i> Imprimir
+						  		</button>
+						  		<button ng-show="analysis.status == 'IN_PROGRESS'" type="submit" class="btn btn-small btn-primary" ng-click="save()">
+							    	Salvar
+							    </button>
+							    <button ng-show="analysis.status == 'IN_PROGRESS'" type="submit" class="btn btn-small btn-danger" ng-click="finish()">
+							    	Salvar e Finalizar
+							    </button>					
+							    
+							</div>
+            			</div>
+            		</div>
+					
+					
+					
+					<div style="position: fixed; top: 20px; right: 40px" ng-show="showLoading">
+					  <img src="/img/ajax-loader.gif" title="carregando analises..." />
+					</div>
+					
+					<div  id="print-analysis-{{analysis.id}}" ng-hide="analysisNotLoaded">
+						<div class="row-fluid">
+					  		<div class="well span9 label-warning">
+					    		<table class="table">
+					        		<tbody>
+					
+								        <tr>
+								            <td><b>Cedente: </b></td>
+								            <td>{{analysis.customer.corporateIdNumber + ' - ' + analysis.customer.corporateName}}</td>
+								        </tr>
+								
+								        <tr>
+								            <td><b>Politica: </b></td>
+								            <td>{{analysis.policy.description}}</td>
+								        </tr>
+								
+								        <tr>
+								            <td><b>Tipo: </b></td>
+								            <td>{{analysis.policy.policyType | policyTypeFilter}}</td>
+								        </tr>
+								
+								        <tr ng-show="analysis.policy.policyType == 'OPERATION_ANALYSIS'">
+								            <td><b>Numero Operação: </b></td>
+								            <td>{{analysis.operationId}}</td>
+								        </tr>
+								
+								        <tr ng-show="analysis.policy.policyType == 'OPERATION_ANALYSIS'">
+								            <td><b>Valor Operação: </b></td>
+								            <td><span ui-currency="{symbol: 'R$'}" ng-model="analysis.operationValue" ng-show="!isReview()"></span>
+								              <input ng-model="analysis.operationValue" ng-show="permission.customerReview && isReview()">
+								            </td>
+								        </tr>
+					
+					        		</tbody>
+					    		</table>
+					  		</div>
+						</div>
+					
+						<div ng-show="analysis.status == 'IN_PROGRESS' || isReview()" class="row-fluid" ng-repeat="question in analysis.policy.questions">
+					
+					    	<div class="row-fluid well span9">
+					
+						        <table class="table">
+						            <tbody>
+						            <tr>
+						                <td><b>{{question.questionNumber}} . {{question.title}}</b></td>
+						            </tr>
+						            </tbody>
+						        </table>
+					
+						        <div ng-show="question.questionType == 'ONE_CHOICE'">
+						            <table class="table">
+						                <tbody>
+						                <tr ng-repeat="choice in question.choices">
+						                    <td style="width: 10px;">
+						                        <input type="radio" ng-model="question.selectedChoice" name="questionGroup{{analysis.id}}{{question.id}}"
+						                               ng-value="choice.id" ng-change="addAnswer(question.selectedChoice,question)"/>
+						                    </td>
+						                    <td>{{choice.description}} ({{choice.riskDescription}})</td>
+						                </tr>
+						                </tbody>
+						            </table>
+						        </div>
+					
+						        <div ng-show="question.questionType == 'MULTIPLE_CHOICE'">
+						            <table class="table">
+						                <tbody>
+						                <tr ng-repeat="choice in question.choices">
+						                    <td style="width: 10px;"><input type="checkbox" ng-model="question.selectedChoice"
+						                                                    ng-value="choice.id"
+						                                                    ng-change="addAnswer(question)"/></td>
+						                    <td>{{choice.description}} ({{choice.riskDescription}})</td>
+						
+						                </tr>
+						                </tbody>
+						            </table>
+						        </div>
+					
+					    	</div>
+						</div>
+					
+					
+						<div class="row-fluid" ng-show="analysis.status == 'DONE' && !isReview()">
+					
+					    	<div class="hero-unit span9 row-fluid" ng-show="analysis.policy.policyType == 'OPERATION_ANALYSIS'">
+					    
+					        	<div class="row-fluid" ng-show="analysis.notSuspicion">
+					            	<h1>Operação não suspeita</h1>
+					
+					            	<p>Essa operação foi identificada como não suspeita.</p>
+					
+					            	<p>
+					                	<a class="btn btn-info btn-large" ng-click="cancel()">
+					                    	Fechar
+					                	</a>
+					            	</p>
+					        	</div>
+					
+					
+					        	<div class="row-fluid" ng-show="analysis.suspicionOperation">
+					            	<h1>Operação suspeita</h1>
+						
+						            <p>Essa operação foi identificada como suspeita.</p>
+					
+					            	<p>
+					                	<a ng-show="analysis.policy.policyType == 'OPERATION_ANALYSIS'" class="btn btn-warning btn-large"
+					                   		href="/api/analyzes/{{analysis.id}}/transactionRecordReport">
+					                    	Imprimir o registro de operação suspeita.
+					                	</a>
+					            	</p>
+					        	</div>
+					
+					    	</div>
+					
+					
+					    	<div class="hero-unit span9 row-fluid" ng-show="analysis.policy.policyType == 'CUSTOMER_ANALYSIS'">
+					    
+					        	<div class="row-fluid" ng-show="analysis.mediumRisk">
+					            	<h1>Risco Normal</h1>
+					
+					            	<p>Essa cedente foi classificado como Risco Normal.</p>
+					
+					            	<p>
+					                	<a class="btn btn-info btn-large" ng-click="cancel()">
+					                    	Fechar
+					                	</a>
+					            	</p>
+					        	</div>
+					        	<div class="row-fluid" ng-show="analysis.lowRisk">
+					            	<h1>Risco Baixo</h1>
+					
+					            	<p>Essa cedente foi classificado como Risco Baixo.</p>
+					
+					            	<p>
+					                	<a class="btn btn-info btn-large" ng-click="cancel()">
+					                    	Fechar
+					                	</a>
+					            	</p>
+					        	</div>
+					
+					
+					        	<div class="row-fluid" ng-show="analysis.highRisk">
+					            	<h1>Risco Elevado</h1>
+					
+					            	<p>Esse cedente foi classificado como Risco Elevado.</p>
+					
+					            	<p>
+					                	<a ng-show="analysis.policy.policyType == 'CUSTOMER_ANALYSIS'" class="btn btn-warning btn-large"
+					                   	href="/api/analyzes/{{analysis.id}}/commitmentToRelationshipReport">
+					                    	Imprimir autorização de relacionamento.
+					                	</a>
+					            	</p>
+					        	</div>
+					
+					    	</div>
+						</div>
+					
+						<div ng-show="analysis.status == 'DONE'" class="row-fluid" ng-repeat="answer in analysis.answers">
+					
+					    	<div class="row-fluid well span9">
+					        	<table class="table">
+					            	<tbody>
+					            		<tr>
+					                		<td><b>{{answer.question.questionNumber}} . {{answer.question.title}}</b></td>
+					            		</tr>
+					            	</tbody>
+					        	</table>
+					        	<div ng-show="answer.question.questionType == 'ONE_CHOICE'">
+					            	<table class="table">
+						                <tbody>
+						                	<tr ng-repeat="choice in answer.choices"
+						                    	ng-class="{
+						                    	'alert alert-success': choice.risk == 'LOW_RISK' || choice.risk == 'NO_SUSPICION'  ,
+						                    	'alert alert-danger': choice.risk == 'HIGH_RISK' || choice.risk == 'MAX_SUSPICION',
+						                    	'alert alert-info': choice.risk == 'MEDIUM_RISK' || choice.risk == 'MEDIUM_SUSPICION'
+	           									|| choice.risk == 'HIGH_SUSPICION'
+					                    	}">
+						                    	<td style="width: 10px;">
+						                        	<span><i class="icon-check"></i></span>
+						                    	</td>
+						                    	<td>{{choice.description}} ({{choice.riskDescription}})</td>
+						                	</tr>
+						                </tbody>
+					            	</table>
+					        	</div>
+					
+					        	<div ng-show="answer.question.questionType == 'MULTIPLE_CHOICE'">
+					            	<table class="table">
+					                	<tbody>
+					                		<tr ng-repeat="choice in answer.choices">
+					                    		<td style="width: 10px;"><span><i class="icon-check"></i></span></td>
+					                    		<td>{{choice.description}} ({{choice.riskDescription}})</td>
+					
+					                		</tr>
+					                	</tbody>
+					            	</table>
+					        	</div>
+					
+					    	</div>
+						</div>
+					</div>
+					
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div class="btn-group">
+							    <button class="btn btn-small" ng-click="cancel()"><i class="fa fa-chevron-left"></i> Voltar</button>
+							    <button ng-hide="hideNotificationButton()" class="btn btn-small" ng-click="openModal()">
+							    	<i class="icon-bullhorn"></i>Gerar Notificação
+						    	</button>
+							    <button ng-show="showReviewButton()" class="btn btn-small" ng-click="review()">
+							    	<i class="icon-share"></i> Revisar
+						    	</button>
+							  	<button ng-show="showReviewButton()" class="btn btn-small" ng-click="print()">
+							  		<i class="icon-print"></i> Imprimir
+						  		</button>
+						  		<button ng-show="analysis.status == 'IN_PROGRESS'" type="submit" class="btn btn-small btn-primary" ng-click="save()">
+							    	Salvar
+							    </button>
+							    <button ng-show="analysis.status == 'IN_PROGRESS'" type="submit" class="btn btn-small btn-danger" ng-click="finish()">
+							    	Salvar e Finalizar
+							    </button>					
+							    
+							</div>
+						</div>
+					</div>
+					            		
+            	</div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- container-fluid -->

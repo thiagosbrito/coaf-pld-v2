@@ -1,8 +1,0 @@
-{
-  "realm" : "master",
-  "realm-public-key" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh1vaABhj8bRNTdixRApfJXwLvDEnJMd56hcsiEKmWD54i7m3RcdrsYz2/ZNZzTH1UdTsF4evR153BZWNz1YJI0Cw3s3t6QYr3uuEZR5hd6Mj7bZiDhVdfjWfspMy3bxrbVqdfvbSDzqKYTSIpMiGzUh0G1TX5iAehkHas2W/7/NZg1VqZQguCaptu9FVZ94nOo9UIVEEO0uetmU9Zn+b++obGqfxYARwZWfcfubUGWKnzQNrQ5XsxVDbj//3N/nlQqJO85/iyjRD9OGaUqvwjZQghXJgTImGNIYFdDajkI0cAZN2S6v9cmlNH9NhLMujbCpaiZZjTMa696REfrJzQwIDAQAB",
-  "auth-server-url" : "http://192.168.99.100:8080/auth",
-  "ssl-required" : "external",
-  "resource" : "admin-cli",
-  "public-client" : true
-}

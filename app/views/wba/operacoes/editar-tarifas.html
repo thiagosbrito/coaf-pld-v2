@@ -11,7 +11,7 @@
       </div>
       <div class="panel-body">
         <div ng-class="{'col-md-12': !expandTars, 'col-md-6': expandTars}">
-          <table class="table table-reponsive table-striped" ng-if="tarifas.length > 0">
+          <table class="table table-reponsive table-striped table-bordered" ng-if="tarifas.length > 0">
             <thead>
             <th ng-if="!expandTars">Cód</th>
             <th>Descrição</th>
@@ -29,23 +29,11 @@
               <td ng-if="!expandTars">{{tar.ordem}}</td>
 
               <td>
-                <span ng-if="tar.tipo == 'VALOR' && !tar.editTar">{{tar.valor | currency}}</span>
-                <span ng-if="tar.tipo == 'PORCENTAGEM' && !tar.editTar">{{tar.valor}}%</span>
-                <input type="text" ng-model="tar.valor" class="form-control" ng-if="tar.editTar && tar.tipo == 'VALOR'" ng-currency>
-                <input type="number" class="form-control" step="any" ng-model="tar.valor" ng-if="tar.editTar && tar.tipo == 'PORCENTAGEM'">
+                <span ng-if="tar.tipo == 'VALOR'">{{tar.valor | currency}}</span>
+                <span ng-if="tar.tipo == 'PORCENTAGEM'">{{tar.valor}}%</span>
               </td>
               <td ng-if="!expandTars">
-                <div class="btn-group pull-right">
-                  <button 
-                    class="btn btn-danger-alt"
-                    ng-click="deleteTarifa(tar.uuid)">
-                    <i class="fa fa-trash-o"></i>
-                  </button>
-                  <button class="btn btn-primary" ng-click="enableEdit(tar)">
-                    <i class="fa fa-pencil" ng-class="{'fa-pencil': !tar.editTar, 'fa-save': tar.editTar}"></i>
-                  </button>
-                </div>
-                
+                <button class="btn btn-danger-alt" ng-click="deleteTarifa(tar.uuid)"><i class="fa fa-trash-o"></i></button>
               </td>
             </tr>
             </tbody>

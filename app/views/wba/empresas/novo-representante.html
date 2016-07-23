@@ -26,19 +26,19 @@
         <div class="form-group">
           <label class="col-md-2 control-label">Nome</label>
           <div class="col-md-10">
-            <input type="text" ng-model="representante.nome" name="nome" class="form-control">
+            <input type="text" ng-model="representante.nome" class="form-control">
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-2 control-label">CPF</label>
           <div class="col-md-8">
-            <input type="text" ng-model="representante.cpf" name="cpf" class="form-control" ui-br-cpf-mask>
+            <input type="text" ng-model="representante.cpf" class="form-control" ui-br-cpf-mask>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-2 control-label">Email</label>
           <div class="col-md-8">
-            <input type="email" ng-model="representante.email" name="email" class="form-control">
+            <input type="email" ng-model="representante.email" class="form-control">
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
         </button>
         <div class="btn-group pull-right">
           <button class="btn btn-primary" ng-click="save(false)"><i class="fa fa-save"></i> Salvar</button>
-          <button class="btn btn-info" ng-click="save(true)" ng-disabled="orgForm.$invalid">Salvar e continuar <i class="fa fa-chevron-right"></i></button>
+          <button class="btn btn-info" ng-click="save(true)">Salvar e continuar <i class="fa fa-chevron-right"></i></button>
         </div>
       </div>
     </div>

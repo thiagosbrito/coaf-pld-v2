@@ -1,0 +1,597 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"t",
+				"type"
+			],
+			[
+				"sta",
+				"status"
+			],
+			[
+				"st",
+				"stateParams"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/views/wba/empresas/novo-empresa.html",
+			"settings":
+			{
+				"buffer_size": 5200,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/bower_components/angular-input-masks/.bower.json",
+			"settings":
+			{
+				"buffer_size": 894,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/index.html",
+			"settings":
+			{
+				"buffer_size": 27027,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/scripts/app.js",
+			"settings":
+			{
+				"buffer_size": 604,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/scripts/controllers/empresas/novo-empresa.controller.js",
+			"settings":
+			{
+				"buffer_size": 1414,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/views/wba/empresas/listar.html",
+			"settings":
+			{
+				"buffer_size": 2807,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/scripts/controllers/empresas/empresas.controller.js",
+			"settings":
+			{
+				"buffer_size": 1297,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/scripts/controllers/empresas/editar-representante.controller.js",
+			"settings":
+			{
+				"buffer_size": 5063,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/scripts/controllers/empresas/editar-empresa.controller.js",
+			"settings":
+			{
+				"buffer_size": 976,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 174.0,
+		"last_filter": "instal",
+		"selected_items":
+		[
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"rei",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"instl",
+				"Package Control: Install Local Dependency"
+			]
+		],
+		"width": 431.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/thiagosbrito/Desktop/wba",
+		"/Users/thiagosbrito/Desktop/wba/wba-gestao-portal",
+		"/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app",
+		"/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/bower_components",
+		"/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/bower_components/angular-input-masks",
+		"/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/scripts",
+		"/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/views",
+		"/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/views/wba",
+		"/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/views/wba/empresas"
+	],
+	"file_history":
+	[
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web/src/main/webapp/v2/index.html",
+		"/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/views/wba/checagem/conferencia-documentos/modal-add-nota.html",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/.gitignore",
+		"/Users/thiagosbrito/Desktop/wba/wba.sublime-project",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web-v2/app/scripts/config/routes.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web/src/main/webapp/v2/app/index.html",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web/src/main/webapp/v2/dist/index.html",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web/src/main/webapp/v2/dist/scripts/config/constants.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/start.sh",
+		"/Users/thiagosbrito/Downloads/apache-maven-3.3.9/bin/mvn",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web-v2/app/index.html",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web-v2/app/scripts/config/navigation.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web-v2/app/views/coaf-pld/analises/operacoes/listar.html",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web/src/main/webapp/app/js/customerCtrl.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web/src/main/webapp/app/js/services.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web-v2/app/scripts/services/analises.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web/src/main/webapp/app/js/app.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web-v2/app/scripts/config/constants.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web-v2/karma-e2e.conf.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web-v2/Gruntfile.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web-v2/app/views/layout/header.html",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web-v2/app/scripts/app.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web-v2/app/scripts/controllers/analises/operacoes/operacoes.listar.controller.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web/src/main/webapp/app/js/analysisCtrl.js",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web/src/main/webapp/app/partials/analyzes.html",
+		"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web/src/main/webapp/app/partials/analysis.html",
+		"/Users/thiagosbrito/Desktop/pld.sql",
+		"/etc/hosts",
+		"/Users/thiagosbrito/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/thiagosbrito/wildfly-10.0.0.Final/standalone/configuration/standalone.xml"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 94.0,
+		"where_history":
+		[
+			"/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/views",
+			"/Users/thiagosbrito/Desktop/wba/coaf-pld/coaf-pld-web/src/main/webapp/app/partials"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"datepicker",
+			"v/",
+			"v2/dist",
+			"\"scripts",
+			"\"assets",
+			"'assets",
+			"\"bower_components",
+			".tmp",
+			"&",
+			"refresh",
+			"queryAnalyzes",
+			"load",
+			"query",
+			"wba",
+			"123456"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/views/wba/empresas/novo-empresa.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5200,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/AngularJS/AngularJS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/bower_components/angular-input-masks/.bower.json",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 894,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 27027,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								18473,
+								18473
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 4585.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/scripts/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 604,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								582,
+								582
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/scripts/controllers/empresas/novo-empresa.controller.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1414,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1322,
+								1322
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/views/wba/empresas/listar.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2807,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/scripts/controllers/empresas/empresas.controller.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1297,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1159,
+								1159
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/scripts/controllers/empresas/editar-representante.controller.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5063,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								683,
+								683
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/Users/thiagosbrito/Desktop/wba/wba-gestao-portal/app/scripts/controllers/empresas/editar-empresa.controller.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 976,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								931,
+								931
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 24.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "wba.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 296.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

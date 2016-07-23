@@ -10,4 +10,10 @@ angular.module('wbaApp')
     str = str.replace(/(\d{4})(\d)/, '$1-$2');
     return str;
   };
+})
+.filter('startFrom', function() {
+    return function(input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
 });

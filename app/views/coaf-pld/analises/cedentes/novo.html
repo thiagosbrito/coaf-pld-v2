@@ -1,0 +1,119 @@
+<ol class="breadcrumb">
+  <li><a href="#/">Dashboard</a></li>
+  <li>Analizes</li>
+  <li>Operação</li>
+  <li class="active">Novo</li>
+</ol>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h2>
+            Nova Análise <small> | Cedente</small>
+          </h2>
+        </div>
+        <div class="panel-body">
+          <div class="spinner" ng-show="showLoading">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+          <form role="form" name="novaAnaliseOperacao" ng-show="!showLoading" class="form form-horizontal">
+            <div class="col-md-12">
+              <div class="well label-default custom- col-md-12">
+                <div class="form-group">
+                  <label for="cedenteAnalise" class="col-md-2 control-label">
+                    Cedente: 
+                  </label>
+                  <div class="col-md-6">
+                    <input 
+                      type="text"
+                      ng-model="analysis.customer"
+                      typeahead="customer as customer.corporateName for customer in customers | filter:$viewValue"
+                      class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="politicaAnalise" class="col-md-2 control-label">
+                    Política:
+                  </label>
+                  <div class="col-md-6">
+                    <select
+                      ng-model="analysis.policy" class="form-control"
+                      ng-options="policy.description for policy in policies">
+                      <option>Selecione</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="tipoAnalise" class="control-label col-md-2">
+                    Tipo:
+                  </label>
+                  <div class="col-md-6">
+                    {{analysis.policy.policyType}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="panel panel-danger" ng-repeat="question in analysis.policy.questions">
+                <div class="panel-heading">
+                  <h2>
+                    {{question.questionNumber}} . {{question.title}}
+                  </h2>
+                </div>
+                <div class="panel-body" ng-show="question.questionType == 'ONE_CHOICE'">
+                  <table class="table">
+                    <tbody>
+                      <tr ng-repeat="choice in question.choices">
+                          <td style="width: 10px;">
+                              <input type="radio" iradio ng-model="$parent.selectedOption" name="questionGroup{{question.id}}"
+                                 ng-value="choice"
+                                 ng-checked="choice.selected"
+                                 ng-change="addAnswer($parent.selectedOption,question)"/>
+                          </td>
+                          <td>{{choice.description}} ({{choice.riskDescription}})</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="panel-body" ng-show="question.questionType == 'MULTIPLE_CHOICE'">
+                  <table class="table">
+                    <tbody>
+                      <tr ng-repeat="choice in question.choices">
+                          <td style="width: 10px;">
+                            <div class="checkbox-inline icheck pull-right p-n">
+                              <label for="">
+                                <input icheck 
+                                  type="checkbox"
+                                  ng-value="choice"
+                                  ng-model="$parent.selectedOption"
+                                  ng-checked="choice.selected"
+                                  ng-change="addAnswer($parent.selectedOption,question)" />
+                                
+                              </label>
+                            </div>
+                          </td>
+                          <td>{{choice.description}} ({{choice.riskDescription}})</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>            
+          </form>
+        </div>
+        <div class="panel-footer">
+          <button class="btn btn-danger-alt pull-left" ui-sref="coafPld.analises.operacoes.listar">
+            <i class="fa fa-times"></i> Cancelar
+          </button>
+          <button class="btn btn-primary pull-right" ng-click="save()">
+            <i class="fa fa-save"></i> Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- container-fluid -->

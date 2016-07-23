@@ -67,7 +67,7 @@
                   <div class="col-md-8">
                     <select class="form-control"
                       ng-model="hierarquia.uuidPlataforma"
-                      ng-options="plataforma.uuid as plataforma.nome for plataforma in plataformas">
+                      ng-options="plataforma.uuid as plataforma.nome for plataforma in plataformas track by hierarquia.uuidPlataforma">
                       <option value="">Selecione uma plataforma...</option>
                     </select>
                   </div>

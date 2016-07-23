@@ -7,611 +7,78 @@ angular
       function($scope, $location, $timeout) {
         'use strict';
         $scope.menu = [
-          // {
-          //   label: 'Usuários e Permissões',
-          //   iconClasses: 'ti ti-lock',
-          //   children: [
-          //     {
-          //       label: 'Organizações',
-          //       url: '#/usuarios-permissoes/organizacoes/listar'
-          //     },
-          //     {
-          //       label: 'Grupos',
-          //       url: '#/usuarios-permissoes/grupos/listar'
-          //     },
-          //     {
-          //       label: 'Roles',
-          //       url: '#/usuarios-permissoes/roles/listar'
-          //     },
-          //     {
-          //       label: 'Permissões',
-          //       url: '#/usuarios-permissoes/roles/listar'
-          //     },
-          //     {
-          //       label: 'Módulos',
-          //       url: '#/usuarios-permissoes/modulos/listar'
-          //     }
-          //   ]
-          // },
           {
             label: 'Visão Geral',
-            iconClasses: 'ti ti-dashboard',
+            iconClasses: 'fa fa-dashboard',
             url: '#/dashboard'
           },
           {
-            label: 'Empresas',
-            iconClasses: 'ti ti-home',
+            label: 'Análises',
+            iconClasses: 'fa fa-search',
             children: [
               {
-                label: 'Empresas',
-                url: '#/empresas/listar'
+                label: 'Operacao',
+                url: '#/analises/operacao/listar'
+              },
+              {
+                label: 'Cedente',
+                url: '#/analises/cedente/listar'
               }
             ]
           },
           {
-            label: 'Comercial',
-            iconClasses: 'ti ti-panel',
-            children: [
-              // {
-              //   label: 'Empresas',
-              //   url: '#/empresas/listar'
-              // },
-              // {
-              //   label: 'Carteiras',
-              //   url: '#/operacoes/carteiras/listar'
-              // },
-              {
-                label: 'Plataformas',
-                url: '#/comercial/plataformas/listar'
-              }
-            ]
-          },
-          // {
-          //   label: 'Comercial',
-          //   iconClasses: 'ti ti-briefcase',
-          //   children: [
-          //     {
-          //       label: 'Oportunidades'
-          //     },
-          //     {
-          //       label: 'Atividades',
-          //       children: [
-          //         {
-          //           label: 'Visitas'
-          //         },
-          //         {
-          //           label: 'Tarefas'
-          //         },
-          //         {
-          //           label: 'Anotações'
-          //         },
-          //         {
-          //           label: 'Ligações'
-          //         }
-          //       ]
-          //     },
-          //     {
-          //       label: 'Cliente potencial'
-          //     },
-          //     {
-          //       label: 'Contatos'
-          //     }
-          //   ]
-          // },
-          {
-            label: 'Operações',
-            iconClasses: 'ti ti-settings',
+            label: 'Cadastro',
+            iconClasses: 'fa fa-th-list',
             children: [
               {
-                label: 'Operações',
-                url: '#/operacoes/listar'
+                label: 'Cedentes',
+                url: '#/cadastro/cedentes'
               },
               {
-                label: 'Carteiras',
-                url: '#/operacoes/carteiras/listar'
-              },
-              ,
-              {
-                label: 'Títulos',
-                url: '#/operacoes/titulos/listar'
+                label: 'Questões e Classificação de Risco',
+                url: '#/cadastro/questoes'
               },
               {
-                label: 'Tarifas',
-                url: '#/operacoes/tarifas/listar'
+                label: 'Critério de Risco',
+                url: '#/cadastro/criterio'
               },
               {
-                label: 'Workflow',
-                url: '#/operacoes/workflow/listar'
-              },
-              {
-                label: 'Tipos de Lançamentos',
-                url: '#/operacoes/tipo-lancamento/listar'
+                label: 'Usuários',
+                url: '#cadastro/usuarios'
               }
             ]
           },
           {
-            label: 'Checagem',
-            iconClasses: 'ti ti-check-box',
+            label: 'Comunicar ao COAF',
+            iconClasses: 'fa fa-paper-plane',
             children: [
               {
-                label: 'Conferência de Documentos',
-                url: '#/checagem/conferencia-documentos/pesquisar'
-              },
-              {
-                label: 'Confirmação de Títulos',
-                url: '#/checagem/confirmacao-titulos/pesquisar'
-              },
-              {
-                label: 'Estados de Confirmação',
-                url: '#/checagem/estados-confirmacao/listar'
-              },
-              {
-                label: 'Documentos de Conferência',
-                url: '#/checagem/documentos-conferencia/listar'
+                label: 'Notificações Geradas',
+                url: '#/comunicar/notificacoes'
               }
             ]
           },
           {
-            label: 'Financeiro',
-            iconClasses: 'ti ti-money',
+            label: 'Manual de PPLD',
+            iconClasses: 'fa fa-book',
             children: [
               {
-                label: 'Bancos',
-                url: '#/financeiro/bancos/listar'
-              },
-              {
-                label: 'Contas',
-                url: '#/financeiro/contas/listar'
-              },
-              {
-                label: 'Códigos de Lançamento',
-                url: '#/financeiro/codigos-lancamento/listar'
-              },
-              {
-                label: 'Centro de Custo',
-                url: '#/financeiro/centro-custo/listar'
-              },
-              // {
-              //   label: 'Instruções',
-              //   url: '#/financeiro/instrucoes/listar'
-              // },
-              {
-                label: 'Cobranças',
-                url: '#/cobranca/listar'
-              },
-              {
-                label: 'Lançamentos',
-                url: '#/financeiro/lancamentos'
+                label: 'Manual de PPLD',
+                url: '#/manual/ppld'
               }
             ]
           },
           {
-            label: 'Segurança',
-            iconClasses: 'ti ti-lock',
+            label: 'Sobre',
+            iconClasses: 'fa fa-question-circle',
             children: [
               {
-                label: 'Usuários e Permissões',
-                url: '#/usuarios-permissoes/organizacoes/listar'
+                label: 'Critérios de Avaliação',
+                url: '#/sobre/criterios-avaliacao'
               }
             ]
-          },
-          {
-            label: "Documentação",
-            iconClasses: "ti ti-file",
-            children: [
-              {
-                label: "Templates",
-                url: "#/documentacao/templates/listar"
-              }
-            ]
-          },
-          {
-            label: 'Relatórios',
-            iconClasses: 'ti ti-stats-up'
           }
-          /*{
-            label: 'Configurações',
-            iconClasses: 'ti ti-settings',
-            children: [
-              {
-                label: 'Empresas',
-                url: '#/empresas/listar'
-              },
-              {
-                label: 'Usuários e Permissões',
-                url: '#/usuarios-permissoes/organizacoes/listar'
-              }
-              // ,
-              // {
-              //   label: 'Parâmetros do sistema',
-              //   url: '#/usuarios-permissoes/grupos/listar'
-              // },
-              // {
-              //   label: 'Auditoria',
-              //   url: '#/usuarios-permissoes/grupos/listar'
-              // },
-              // {
-              //   label: 'Manutenção',
-              //   url: '#/usuarios-permissoes/grupos/listar'
-              // }
-            ]
-          }*/
-          // ,
-          // {
-          //   label: 'Notificações',
-          //   iconClasses: 'ti ti-announcement',
-          //   children: [
-          //     {
-          //       label: 'Emails'
-          //     },
-          //     {
-          //       label: 'SMTP'
-          //     }
-          //   ]
-          // }
-          // ,
-
-          // {
-          //   label: 'Explore',
-          //   iconClasses: '',
-          //   separator: true
-          // },
-          // {
-          //   label: 'Dashboard',
-          //   iconClasses: 'ti ti-home',
-          //   html: '<span class="badge badge-info">2</span>',
-          //   url: '#/template/',
-          // },
-          // {
-          //   label: 'HTML Version',
-          //   iconClasses: 'ti ti-cup',
-          //   url: '../../',
-          // },
-          // {
-          //   label: 'Layouts',
-          //   iconClasses: 'ti ti-layout',
-          //   children: [
-          //     {
-          //       label: 'Grid Scaffolding',
-          //       url: '#/template/layout-grid'
-          //     },
-          //     {
-          //       label: 'Horizontal Nav',
-          //       url: '#/template/layout-horizontal'
-          //     },
-          //     {
-          //       label: 'Boxed',
-          //       url: '#/template/layout-boxed'
-          //     }
-          //   ]
-          // },
-          // {
-          //   label: 'UI Kit',
-          //   iconClasses: 'ti ti-view-list-alt',
-          //   children: [
-          //     {
-          //       label: 'Typography',
-          //       url: '#/template/ui-typography'
-          //     },
-          //     {
-          //       label: 'Buttons',
-          //       url: '#/template/ui-buttons'
-          //     },
-          //     {
-          //       label: 'Modals',
-          //       url: '#/template/ui-modals'
-          //   },
-          //   {
-          //     label: 'Progress',
-          //     url: '#/template/ui-progressbars'
-          //   },
-          //   {
-          //     label: 'Pagination',
-          //     url: '#/template/ui-paginations'
-          //   },
-          //   {
-          //     label: 'Breadcrumbs',
-          //     url: '#/template/ui-breadcrumbs'
-          //   }, {
-          //     label: 'Labels & Badges',
-          //     url: '#/template/ui-labelsbadges',
-          //   }, {
-          //     label: 'Alerts',
-          //     url: '#/template/ui-alerts',
-          //   }, {
-          //     label: 'Tabs',
-          //     url: '#/template/ui-tabs',
-          //   }, {
-          //     label: 'FontAwesome Icons',
-          //     url: '#/template/ui-icons-fontawesome',
-          //   }, {
-          //     label: 'Themify Icons',
-          //     url: '#/template/ui-icons-themify',
-          //   }, {
-          //     label: 'Wells',
-          //     url: '#/template/ui-wells'
-          //   }, {
-          //     label: 'Images & Carousel',
-          //     url: '#/template/ui-imagecarousel'
-          //   }]
-          // }, {
-          //   label: 'Components',
-          //   iconClasses: 'ti ti-control-shuffle',
-          //   children: [{
-          //     label: 'Tiles',
-          //     url: '#/template/ui-tiles'
-          //   }, {
-          //     label: 'Bootbox',
-          //     url: '#/template/components-bootbox'
-          //   }, {
-          //     label: 'Pines Notifications',
-          //     url: '#/template/components-notifications'
-          //   }, {
-          //     label: 'Sliders & Ranges',
-          //     url: '#/template/ui-sliders',
-          //   }, {
-          //     label: 'Pulsating Elements',
-          //     url: '#/template/components-pulsate'
-          //   }, {
-          //     label: 'jQuery Knob',
-          //     url: '#/template/components-knob'
-          //   }]
-          // }, {
-          //   label: 'Forms',
-          //   iconClasses: 'ti ti-pencil',
-          //   children: [{
-          //     label: 'Form Layout',
-          //     url: '#/template/form-layout',
-          //   }, {
-          //     label: 'Components',
-          //     url: '#/template/form-components',
-          //   }, {
-          //     label: 'Pickers',
-          //     url: '#/template/form-pickers'
-          //   }, {
-          //     label: 'Form Wizard',
-          //     url: '#/template/form-wizard'
-          //   }, {
-          //     label: 'Validation',
-          //     url: '#/template/form-validation',
-          //   }, {
-          //     label: 'Form Masks',
-          //     url: '#/template/form-masks'
-          //   }, {
-          //     label: 'Advanced Uploaders',
-          //     url: '#/template/form-fileupload',
-          //   }, {
-          //     label: 'WYSIWYG Editor',
-          //     url: '#/template/form-wysiwyg',
-          //   }, {
-          //     label: 'Inline Editor',
-          //     url: '#/template/form-xeditable',
-          //   }]
-          // }, {
-          //   label: 'Panels',
-          //   iconClasses: 'ti ti-settings',
-          //   hideOnHorizontal: true,
-          //   children: [{
-          //     label: 'Panels',
-          //     url: '#/template/ui-panels',
-          //   }, {
-          //     label: 'Draggable Panels',
-          //     url: '#/template/ui-advancedpanels'
-          //   }]
-          // }, {
-          //   label: 'Tables',
-          //   iconClasses: 'ti ti-layout-grid3',
-          //   children: [{
-          //     label: 'Tables',
-          //     url: '#/template/tables-basic'
-          //   }, {
-          //     label: 'ngGrid',
-          //     url: '#/template/tables-data',
-          //   }, {
-          //     label: 'Responsive Tables',
-          //     url: '#/template/tables-responsive'
-          //   }, {
-          //     label: 'Editable Tables',
-          //     url: '#/template/tables-editable',
-          //   }]
-          // }, {
-          //   label: 'Analytics',
-          //   iconClasses: 'ti ti-stats-up',
-          //   hideOnHorizontal: true,
-          //   children: [{
-          //     label: 'Flot',
-          //     url: '#/template/charts-flot',
-          //   }, {
-          //     label: 'Morris.js',
-          //     url: '#/template/charts-morrisjs'
-          //   }, {
-          //     label: 'Easy Pie Chart',
-          //     url: '#/template/charts-easypiechart'
-          //   }, {
-          //     label: 'Sparklines',
-          //     url: '#/template/charts-sparklines',
-          //   }]
-          // }, {
-          //   label: 'Maps',
-          //   iconClasses: 'ti ti-map-alt',
-          //   hideOnHorizontal: true,
-          //   children: [{
-          //     label: 'Google Maps',
-          //     url: '#/template/maps-google'
-          //   }, {
-          //     label: 'Vector Maps',
-          //     url: '#/template/maps-vector',
-          //   }]
-          // }, {
-          //   label: 'Pages',
-          //   iconClasses: 'ti ti-file',
-          //   hideOnHorizontal: true,
-          //   children: [{
-          //     label: 'Profile',
-          //     url: '#/template/extras-profile'
-          //   }, {
-          //     label: 'FAQ',
-          //     url: '#/template/extras-faq',
-          //   }, {
-          //     label: 'Invoice',
-          //     url: '#/template/extras-invoice'
-          //   }, {
-          //     label: 'Registration',
-          //     url: '#/template/extras-registration'
-          //   }, {
-          //     label: 'Password Reset',
-          //     url: '#/template/extras-forgotpassword'
-          //   }, {
-          //     label: 'Login',
-          //     url: '#/template/extras-login'
-          //   }, {
-          //     label: '404 Page',
-          //     url: '#/template/extras-404'
-          //   }, {
-          //     label: '500 Page',
-          //     url: '#/template/extras-500'
-          //   }]
-          // }, {
-          //   label: 'Functional Apps',
-          //   hideOnHorizontal: true,
-          //   separator: true
-          // }, {
-          //   label: 'Inbox',
-          //   iconClasses: 'ti ti-email',
-          //   url: '#/template/inbox',
-          //   html: '<span class="badge badge-danger">3</span>'
-          // }, {
-          //   label: 'Calendar',
-          //   iconClasses: 'ti ti-calendar',
-          //   url: '#/template/calendar',
-          //   html: '<span class="badge badge-warning">1</span>'
-          // }
-        ];
-
-        // $scope.menu = [
-        //   {
-        //     label: 'Usuários e Permissões',
-        //     iconClasses: 'ti ti-lock',
-        //     children: [
-        //       {
-        //         label: 'Organizações',
-        //         url: '#/usuarios-permissoes/organizacoes/listar'
-        //       },
-        //       {
-        //         label: 'Grupos',
-        //         url: '#/usuarios-permissoes/grupos/listar'
-        //       },
-        //       {
-        //         label: 'Roles',
-        //         url: '#/usuarios-permissoes/roles/listar'
-        //       },
-        //       {
-        //         label: 'Permissões',
-        //         url: '#/usuarios-permissoes/roles/listar'
-        //       },
-        //       {
-        //         label: 'Módulos',
-        //         url: '#/usuarios-permissoes/modulos/listar'
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     label: 'Empresas',
-        //     iconClasses: 'ti ti-home',
-        //     children: [
-        //       {
-        //         label: 'Listar Empresas',
-        //         url: '#/empresas/listar'
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     label: 'Comercial',
-        //     iconClasses: 'ti ti-briefcase',
-        //     children: [
-        //       {
-        //         label: 'Hierarquias',
-        //         url: '#/comercial/hierarquias/listar'
-        //       },
-        //       {
-        //         label: 'Plataformas',
-        //         url: '#/comercial/plataformas/listar'
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     label: 'Operações',
-        //     iconClasses: 'ti ti-bolt',
-        //     children: [
-        //       {
-        //         label: 'Carteiras',
-        //         url: '#/operacoes/carteiras/listar'
-        //       },
-        //       {
-        //         label: 'Operações',
-        //         url: '#/operacoes/listar'
-        //       },
-        //       {
-        //         label: 'Recebíveis',
-        //         url: '#/operacoes/recebiveis/listar'
-        //       },
-        //       {
-        //         label: 'Tarifas',
-        //         url: '#/operacoes/tarifas/listar'
-        //       },
-        //       {
-        //         label: 'Workflow',
-        //         url: '#/operacoes/workflow/listar'
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     label: 'Checagem',
-        //     iconClasses: 'ti ti-check-box',
-        //     children: [
-        //       {
-        //         label: 'Agendamentos'
-        //       },
-        //       {
-        //         label: 'Títulos'
-        //       },
-        //       {
-        //         label: 'Conferência'
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     label: 'Cobrança',
-        //     iconClasses: 'ti ti-money',
-        //     children: [
-        //       {
-        //         label: 'Boletos'
-        //       },
-        //       {
-        //         label: 'Arquivos Eletrônicos',
-        //         children: [
-        //           {
-        //             label: 'Remessa'
-        //           },
-        //           {
-        //             label: 'Retorno'
-        //           }
-        //         ]
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     label: 'Notificações',
-        //     iconClasses: 'ti ti-announcement',
-        //     children: [
-        //       {
-        //         label: 'Emails'
-        //       },
-        //       {
-        //         label: 'SMTP'
-        //       }
-        //     ]
-        //   }];
+        ]
 
         var setParent = function(children, parent) {
           angular.forEach(children, function(child) {

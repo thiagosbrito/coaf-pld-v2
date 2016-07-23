@@ -15,18 +15,11 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
-  var fs = require('fs'),
-      Zip = require('jszip');
+  var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
 
   // Define the configuration for all the tasks
+
   grunt.initConfig({
-    zip: {
-      'files': [
-        {path:'codedeploy/appspec.yml', dest: 'appspec.yml', options: {unixPermissions:'666'}},
-        {path:'codedeploy/deploy.sh', dest: 'do-deploy.sh', options: {unixPermissions:'755'}},
-        {path:'codedeploy/deploy.sh', dest: 'deploy.sh', options: {unixPermissions:'755'}}
-      ]
-    },
 
     // Project settings
     yeoman: {
@@ -37,16 +30,13 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
-      bower: {
-        files: ['./bower.json'],
-        tasks: ['bowerInstall']
-      },
+      // bower: {
+      //   files: ['./bower.json'],
+      //   tasks: ['bowerInstall']
+      // },
       js: {
         files: ['/app/scripts/**/*.js'],
-        tasks: ['newer:jshint:all'],
-        options: {
-          livereload: true
-        }
+        tasks: ['newer:jshint:all','build']
       },
       jsTest: {
         files: ['test/spec/**/*.js'],
@@ -54,7 +44,7 @@ module.exports = function (grunt) {
       },
       styles: {
         files: ['/app/styles/**/*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        tasks: ['newer:copy:styles', 'autoprefixer','build']
       },
       less: {
         files: ['/app/assets/less/*.less'],
@@ -65,37 +55,52 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          livereload: '<%= connect.options.livereload %>'
+          livereload: 1337
         },
         files: [
           '/app/views/**/*.html',
-          '.tmp/assets/**/*.css',
+          '/app/scripts/**/*.js',
+          '/app/assets/**/*.css',
           '/app/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
 
+
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: '0.0.0.0'
-        // livereload: 35729,
-        // open: 'http://localhost:<%= connect.options.port %>'
+        port: 9001,
+        host: '0.0.0.0',
+        open: 'http://localhost:<%= connect.options.port %>'
       },
+      proxies: [
+        {
+          context: '/j_security_check',
+          host: '0.0.0.0',
+          port: 8443,
+          https: true
+        }
+      ],
       // courtesy of Phubase Tiewthanom
       livereload: {
         options: {
           middleware: function (connect) {
-            return [
-              connect.static('.tmp'),
-              connect().use(
-                '/bower_components',
-                 connect.static('./bower_components')
-              ),
-              connect.static(require('./bower.json').appPath || 'app')
-            ];
+            var middlewares = [];
+                    
+              middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
+
+              // Serve static files
+              middlewares.push(
+                connect.static('.tmp'),
+                connect().use(
+                    '/bower_components',
+                    connect.static('./bower_components')
+                ),
+                connect.static(require('./bower.json').appPath || 'app')
+              );
+
+              return middlewares;
           }
         }
       },
@@ -235,7 +240,6 @@ module.exports = function (grunt) {
         noAdvanced: true
       }
     },
-
     imagemin: {
       dist: {
         files: [{
@@ -246,7 +250,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-
     svgmin: {
       dist: {
         files: [{
@@ -257,7 +260,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-
     htmlmin: {
       dist: {
         options: {
@@ -395,7 +397,6 @@ module.exports = function (grunt) {
         }
       }
     },
-
     less: {
       server: {
         options: {
@@ -431,33 +432,7 @@ module.exports = function (grunt) {
         ]
       }
     },
-
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/**/*.css',
-    //         '/app/styles/**/*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
-
+    
     // Test settings
     karma: {
       unit: {
@@ -494,6 +469,7 @@ module.exports = function (grunt) {
       // 'bowerInstall',
       'concurrent:server',
       'autoprefixer',
+      'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);
@@ -515,40 +491,17 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'bowerInstall',
-    'ngtemplates',
     'useminPrepare',
     'concurrent:dist',
     'less:dist',
-    // 'autoprefixer',
-    // 'concat',
-    // 'ngmin',
     'copy:dist',
-    // 'copy:fonts',
-    // 'cdnify',
-    // 'cssmin',
-    // 'uglify',
-    // 'rev',
-    // 'usemin',
     'processhtml:dist'
-    // 'htmlmin'
+    
   ]);
 
-  grunt.registerTask('default', [
-    // 'newer:jshint',
-    // 'test',
-    'build'
-  ]);
+  grunt.loadNpmTasks('grunt-openport');
+  grunt.registerTask('default', ['build']);
 
-  grunt.registerTask('zipDist',function(target) {
-    var opt = grunt.config.get('zip');
-    fs.mkdirSync('dist-deploy');
-    var file = new Zip();
-    opt.files.forEach(function(f) {
-      var input = fs.readFileSync(f.path);
-      file.file(f.dest,input,f.options);
-    });
-    var output = file.generate({type:'nodebuffer', compression:'STORE',platform:'UNIX'});
-    fs.writeFileSync('dist-deploy/portal-'+process.env.TRAVIS_BUILD_NUMBER+'.zip', output);
-  });
+
 
 };

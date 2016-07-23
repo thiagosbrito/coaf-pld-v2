@@ -1,0 +1,188 @@
+<ol class="breadcrumb">
+	<li><a href="#/">Dashboard</a></li>
+	<li>Analizes</li>
+	<li class="active">Operação</li>
+</ol>
+
+<div class="container-fluid">
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					<h2>
+						Análises <small> | Operação</small>
+					</h2>
+					<div class="panel-ctrls">
+						<a class="button-icon" ui-sref="coafPld.analises.operacoes.novo"
+							tooltip="Adicionar Operação"> <i class="fa fa-plus"></i>
+						</a>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<form role="form" ng-show="showFilter" class="form">
+							<div class="col-md-12">
+								<div class="well">
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="" class="control-label">De:</label>
+												<p class="input-group datepicker-holder">
+													<input type="text" class="form-control"
+														datepicker-popup="dd-MM-yyyy"
+														disabled
+														ng-model="startDate" is-open="openedFrom"
+														datepicker-options="dateOptions" close-text="Fechar" /> <span
+														class="input-group-btn">
+														<button type="button" class="btn btn-primary"
+															ng-click="openFrom($event)">
+															<i class="fa fa-calendar"></i>
+														</button>
+													</span>
+												</p>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="" class="control-label">Até:</label>
+												<p class="input-group datepicker-holder">
+													<input type="text" class="form-control"
+														datepicker-popup="dd-MM-yyyy"
+														disabled
+														ng-model="endDate" is-open="openedTo"
+														datepicker-options="dateOptions" close-text="Fechar" />
+													<span class="input-group-btn">
+														<button type="button" class="btn btn-primary"
+															ng-click="openTo($event)">
+															<i class="fa fa-calendar"></i>
+														</button>
+													</span>
+												</p>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="" class="control-label">Status:</label> 
+												<select
+													ng-model="filter.status"
+													class="form-control">
+           											<option value="none">Todas</option>
+           											<option value="risk">Suspeita</option>
+           											<option value="no_risk">Não Suspeita</option>
+           											<option value="in_progress">Em andamento</option>
+        										</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="" class="control-label"># Operação</label>
+												<input type="text" class="form-control" ng-model="filter.inputNumeroOperacaoFilter" />
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="" class="control-label">CNPJ Cedente:</label>
+												<input type="text" class="form-control" ng-model="filter.inputCpfCnpjFilter" />	
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label for="" class="control-label">Nome Cedente:</label>
+												<input type="text" class="form-control" ng-model="filter.inputNomeFilter" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<button class="btn btn-primary pull-right" ng-click="getAnalyzes(filter)"><i class="fa fa-search"></i> Buscar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+						<div class="col-md-12">
+							<button class="btn btn-link btn-block" ng-click="showFilter = !showFilter">
+								<i class="fa" ng-class="{'fa-chevron-down': !showFilter, 'fa-chevron-up': showFilter}"></i> Filtrar
+							</button>
+						</div>
+					</div>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th style="text-align: center;">#</th>
+								<th></th>
+								<th style="text-align: center;">Operação</th>
+								<th style="text-align: center;">Cedente</th>
+								<th style="text-align: center;">Notificado</th>
+								<th style="text-align: center;">Criação</th>
+								<th style="text-align: center;">Data Criação</th>
+								<th style="text-align: center;">Revisão</th>
+								<th style="text-align: center;">Data Revisão</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr ng-show="loading">
+								<td colspan="11" style="text-align: center"><span
+									class="muted">Aguarde...</span></td>
+							</tr>
+
+							<tr ng-repeat="analysis in analyzes">
+								<td>{{analysis.id}}</td>
+								<td><span ng-show="analysis.suspicionOperation"
+									class="label label-important">Operação suspeita</span> <span
+									ng-show="analysis.notSuspicion" class="label label-info">Operação
+										não suspeita</span> <span ng-show="analysis.highRisk"
+									class="label label-important">Risco Elevado</span> <span
+									ng-show="analysis.mediumRisk" class="label label-info">Risco
+										Normal</span> <span ng-show="analysis.lowRisk"
+									class="label label-info">Risco Baixo</span> <span
+									ng-show="analysis.inProgress" class="label label-success">Em
+										andamento</span></td>
+								<td>{{analysis.operationId}}</td>
+								<td>[{{analysis.customer.corporateIdNumber}}] -
+									{{analysis.customer.corporateName}}</td>
+								<td><span ng-show="!analysis.notificaCoaf"
+									class="label label-info">Não</span> <span
+									ng-show="analysis.notificaCoaf" class="label label-success">Sim</span>
+								</td>
+								<td>{{analysis.createdBy}}</td>
+								<td>{{analysis.createdAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+								<td>{{analysis.changedBy}}</td>
+								<td>{{analysis.changedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+								<td><a ng-show="analysis.inProgress"
+									href="#/analysis/{{analysis.id}}?type={{type}}&startDate={{startDate.getTime()}}&endDate={{endDate.getTime()}}&status={{status}}&cpfCnpj={{inputCpfCnpjFilter}}&nome={{inputNomeFilter}}&numero={{inputNumeroOperacaoFilter}}"><i
+										class="icon-edit"></i></a> <a ng-show="!analysis.inProgress"
+									href="#/analysis/{{analysis.id}}?type={{type}}&startDate={{startDate.getTime()}}&endDate={{endDate.getTime()}}&status={{status}}&cpfCnpj={{inputCpfCnpjFilter}}&nome={{inputNomeFilter}}&numero={{inputNumeroOperacaoFilter}}"><i
+										class="icon-eye-open"></i></a> <a title="Gerar Notificação"
+									ng-hide="!permission.customerGenerateNotification ||
+                                                      analysis.lowRisk      ||
+                                                      analysis.highRisk     ||
+                                                      analysis.inProgress   ||
+                                                      analysis.notSuspicion ||
+                                                      analysis.notificaCoaf"
+									ng-click="openModal(analysis)"><i class="icon-bullhorn"></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+
+
+					<div style="text-align: center;">
+						<span ng-show="numberOfPages > 0">Página {{currentPage}}
+							de {{numberOfPages}}</span><span ng-show="numberOfPages == 0">Não
+							há registros</span>
+					</div>
+					<pager total-items="numItems" ng-change="pageChanged(currentPage)" previous-text="« Anterior" next-text="Próximo »" ng-model="currentPage"></pager>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- container-fluid -->
