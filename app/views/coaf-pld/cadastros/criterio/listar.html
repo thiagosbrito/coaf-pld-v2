@@ -1,0 +1,51 @@
+<ol class="breadcrumb">
+  <li><a href="#/">Dashboard</a></li>
+  <li>Cadastros</li>
+  <li class="active">Critério de Risco</li>
+</ol>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-red-wine">
+        <div class="panel-heading">
+          <h2>Critério de Risco</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon"
+              ng-click="novo()"
+              tooltip="Cadastrar Cedente"> <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Tipo</th>
+                <th>Descrição</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="risk in riskCriteria">
+                <td>{{risk.id}}</td>
+                <td>{{risk.policyType}}</td>
+                <td>{{risk.description}}</td>
+                <td>
+                  <!-- <div class="btn-group"> -->
+                    <button class="btn btn-danger" ng-click="delete(risk.id)"><i class="fa fa-trash-o"></i></button>
+                    <!-- <button class="btn btn-primary" ng-click="editar(risk.id)"><i class="fa fa-pencil"></i></button> -->
+                  <!-- </div> -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </div>
+
+</div> <!-- container-fluid -->

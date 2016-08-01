@@ -2,11 +2,160 @@
     <li><a href="#/">Home</a></li>
     <li class="active">Dashboard</li>
 </ol>
-<div class="container-fluid" ng-controller="DashboardController">
+<div class="container-fluid">
     <div data-widget-group="group1">
-        <div class="row">
+        <div ng-show="permissions.customerDashboard">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-red-wine">
+                        <div class="panel-heading">
+                            <h2>Cedentes</h2>
+                            <div class="panel-ctrls">
+                                <a class="button-icon"
+                                    ng-click="filtrarCedentes = !filtrarCedentes"
+                                    tooltip="Filtrar"> <i class="fa fa-filter"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row" ng-show="filtrarCedentes">
+                                <div class="col-md-12">
+                                    <div class="well">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>De:</label>
+                                                <p class="input-group datepicker-holder">
+                                                    <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        datepicker-popup="{{format}}"
+                                                        ng-model="customerStartDate"
+                                                        is-open="openedStartCustomer"
+                                                        datepicker-options="dateOptions"
+                                                        close-text="Fechar"> 
+                                                    <span class="input-group-btn fix-datepicker">
+                                                        <button type="button" class="btn btn-default" ng-click="openStartCustomer($event)">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </button>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Até:</label>
+                                                <p class="input-group datepicker-holder">
+                                                    <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        datepicker-popup="{{format}}"
+                                                        ng-model="customerEndDate"
+                                                        is-open="openedEndCustomer"
+                                                        datepicker-options="dateOptions"
+                                                        close-text="Fechar"> 
+                                                    <span class="input-group-btn fix-datepicker">
+                                                        <button type="button" class="btn btn-default"
+                                                            ng-click="openEndCustomer($event)">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </button>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <small class="muted text-center" ng-hide="customerChartData.length > 0">Não há itens a serem exibidos dentro deste período</small>
+                            <highchart id="chartCustomer" config="chartCustomer" class="col-md-12"></highchart>
+                            <!-- <div pie-chart="{data: {{customerChartData}},
+                                options: {
+                                    'pieSliceText':'value',
+                                    'height': 500,
+                                    'is3D':true,
+                                    'slices':{{customerChartSlices}}
+                                },
+                                select: 'customerCallback'
+                                }">
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-red-wine">
+                        <div class="panel-heading">
+                            <h2>Operações</h2>
+                            <div class="panel-ctrls">
+                                <a class="button-icon"
+                                    ng-click="filtrarOperacoes = !filtrarOperacoes"
+                                    tooltip="Filtrar"> <i class="fa fa-filter"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row" ng-show="filtrarOperacoes">
+                                <div class="col-md-12">
+                                    <div class="well">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>De:</label>
+                                                <p class="input-group datepicker-holder">
+                                                    <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        datepicker-popup="{{format}}"
+                                                        ng-model="operationStartDate"
+                                                        is-open="openedStartOperation"
+                                                        datepicker-options="dateOptions"
+                                                        close-text="Fechar"> 
+                                                    <span class="input-group-btn fix-datepicker">
+                                                        <button type="button" class="btn btn-default" ng-click="openStartOperation($event)">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </button>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Até:</label>
+                                                <p class="input-group datepicker-holder">
+                                                    <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        datepicker-popup="{{format}}"
+                                                        ng-model="operationEndDate"
+                                                        is-open="openedEndOperation"
+                                                        datepicker-options="dateOptions"
+                                                        close-text="Fechar"> 
+                                                    <span class="input-group-btn fix-datepicker">
+                                                        <button type="button" class="btn btn-default"
+                                                            ng-click="openEndOperation($event)">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </button>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <small class="muted text-center" ng-hide="operationChartData.length > 0">Não há itens a serem exibidos dentro deste período</small>
+                            <highchart id="chartOperation" config="chartOperation" class="col-md-12"></highchart>
+                            <!-- <div pie-chart="{data: {{operationChartData}},
+                                options: {
+                                    'pieSliceText':'value',
+                                    'height': 500,
+                                    'is3D':true,
+                                    'slices':{{operationChartSlices}}
+                                },
+                                select: 'operationCallback'
+                                }">
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- <div class="row">
             <div class="col-md-6">
-                <div class="panel panel-danger" data-widget='{"id" : "wiget9", "draggable": "false"}'>
+                <div class="panel panel-red-wine" data-widget='{"id" : "wiget9", "draggable": "false"}'>
                     <div class="panel-heading">
                         <h2>Vencidos x À Vencer</h2>
                         <div class="panel-ctrls button-icon-bg" 
@@ -28,7 +177,7 @@
             </div>
 
             <div class="col-md-6">
-                <div class="panel panel-danger" data-widget='{"draggable": "false"}'>
+                <div class="panel panel-red-wine" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
                         <h2>Total Carteira</h2>
                         <div class="panel-ctrls button-icon-bg" 
@@ -48,10 +197,10 @@
                 </div>
             </div>
 
-        </div>
-		<div class="row">
+        </div> -->
+		<!-- <div class="row">
             <div class="col-md-8">
-                <div class="panel panel-danger" data-widget='{"draggable": "false"}'>
+                <div class="panel panel-red-wine" data-widget='{"draggable": "false"}'>
                     <div class="panel-heading">
                         <h2>Confirmações</h2>
                         <div class="panel-ctrls button-icon-bg" 
@@ -124,7 +273,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="panel panel-danger" data-widget='{"draggable": true}'>
+                <div class="panel panel-red-wine" data-widget='{"draggable": true}'>
                     <div class="panel-heading">
                         <h2>Cedentes / % Liquidados</h2>
                         <div class="panel-ctrls button-icon-bg" 
@@ -215,6 +364,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div> <!-- container-fluid -->

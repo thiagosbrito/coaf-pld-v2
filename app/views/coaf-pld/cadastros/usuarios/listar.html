@@ -1,0 +1,47 @@
+<ol class="breadcrumb">
+  <li><a href="#/">Dashboard</a></li>
+  <li>Cadastros</li>
+  <li class="active"Usuários</li>
+</ol>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-red-wine">
+        <div class="panel-heading">
+          <h2>Usuários</h2>
+          <div class="panel-ctrls">
+            <a class="button-icon"
+              ng-click="novo()"
+              tooltip="Cadastrar Cedente"> <i class="fa fa-plus"></i>
+            </a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="user in users">
+                <td>{{user.login}}</td>
+                <td>{{user.name}}</td>
+                <td>
+                  <div class="btn-group">
+                    <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                    <button class="btn btn-primary" ng-click="editar(user.login)"><i class="fa fa-pencil"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel-footer"></div>
+      </div>
+    </div>
+  </div>
+</div>

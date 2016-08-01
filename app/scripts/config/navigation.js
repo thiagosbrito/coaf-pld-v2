@@ -32,19 +32,19 @@ angular
             children: [
               {
                 label: 'Cedentes',
-                url: '#/cadastro/cedentes'
+                url: '#/cadastro/cedentes/listar'
               },
               {
                 label: 'Questões e Classificação de Risco',
-                url: '#/cadastro/questoes'
+                url: '#/cadastro/questoes/listar'
               },
               {
                 label: 'Critério de Risco',
-                url: '#/cadastro/criterio'
+                url: '#/cadastro/criterio/listar'
               },
               {
                 label: 'Usuários',
-                url: '#cadastro/usuarios'
+                url: '#/cadastro/usuarios/listar'
               }
             ]
           },
@@ -54,7 +54,7 @@ angular
             children: [
               {
                 label: 'Notificações Geradas',
-                url: '#/comunicar/notificacoes'
+                url: '#/comunicar/notificacoes/listar'
               }
             ]
           },
@@ -74,7 +74,7 @@ angular
             children: [
               {
                 label: 'Critérios de Avaliação',
-                url: '#/sobre/criterios-avaliacao'
+                url: '#/sobre'
               }
             ]
           }

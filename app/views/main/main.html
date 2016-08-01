@@ -32,18 +32,18 @@
     </nav>
 
     <div id="layout-static">
-      <div class="static-sidebar-wrapper sidebar-red ng-cloak" ng-if="$state.current.name != 'coafPld.login'">
+      <div class="static-sidebar-wrapper sidebar-custom-gray ng-cloak" ng-if="$state.current.name != 'coafPld.login'">
         <div class="static-sidebar" role="navigation">
           <div class="sidebar">
             <div class="widget" ng-cloak>
               <div class="widget-body">
                 <div class="userinfo">
                   <div class="avatar">
-                    <img masked-image src="http://placehold.it/64x64" class="img-responsive img-circle">
+                    <img masked-image src="assets/img/male-user.png" class="img-responsive img-circle">
                   </div>
                   <div class="info">
-                    <span class="username">Thiago Brito</span>
-                    <span class="useremail">thiago.brito@wba.com.br</span>
+                    <span class="username">{{user.user.name}}</span>
+                    <!-- <span class="useremail">thiago.brito@wba.com.br</span> -->
                   </div>
                 </div>
               </div>

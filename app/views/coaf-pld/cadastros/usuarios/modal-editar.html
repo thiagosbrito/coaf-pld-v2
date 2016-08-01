@@ -1,0 +1,62 @@
+<div class="modal-header">
+  Editar Usuário
+</div>
+<div class="modal-body">
+  <form class="form-horizontal" name="userForm">
+    <div class="form-group">
+      <label class="control-label col-md-2" for="inputLogin">Login:</label>
+
+      <div class="col-md-6">
+        <input type="text" ng-model="user.login" class="form-control" id="inputLogin" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-md-2" for="inputNome">Nome:</label>
+
+      <div class="col-md-9">
+        <input type="text" ng-model="user.name" class="form-control" id="inputNome"
+        required/>
+      </div>
+    </div>
+    <div class="form-group" ng-show="permission.systemAdmin || permission.customerAdmin">
+      <label class="control-label col-md-2" for="inputPassword">Senha:</label>
+      <div class="col-md-6">
+        <div class="input-group">
+          <input type="password" ng-model="user.password" class="form-control" id="inputPassword" ng-hide="showChangeButton"
+          required minlength="1" ng-disabled="!editSenha">
+          <span class="input-group-btn">
+            <button class="btn btn-default" ng-click="changeSenha()">
+              <i class="fa fa-lock"></i> Mudar senha
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" ng-show="permission.systemAdmin || permission.customerAdmin">
+      <label class="control-label col-md-2" for="myselection">M&oacute;dulos</label>
+      <div class="col-md-10">
+        <select
+          multiple
+          class="form-control"
+          chosen
+          ng-model="user.groups"
+          ng-options="g as g.description for g in allGroups">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group" ng-show="permission.systemAdmin">
+      <label class="control-label col-md-2" for="inputCustomerPolicy">Empresa Resposavel PPLD</label>
+      <div class="col-md-10">
+        <select id="inputCustomerPolicy" class="form-control" ng-model="user.buyingEntity.id" style="height: 25px;"
+          ng-options="buyingEntity.id as buyingEntity.name for buyingEntity in itemsBuyingEntity">
+          <option>Selecione</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" ng-click="save(user)" class="btn btn-primary pull-right" ng-disabled="userForm.$invalid">Salvar</button>
+  <button type="button" class="btn btn-danger pull-left" ng-click="cancel()">Cancelar</button>
+</div>

@@ -24,5 +24,8 @@ angular.module('wbaApp', [
   'uiSwitch',
   'uuid4',
   'ui.ace',
-  'ngTagsInput'
+  'ngTagsInput',
+  'localytics.directives',
+  'highcharts-ng',
+  'ngStorage'
   ]);

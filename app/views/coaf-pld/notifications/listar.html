@@ -1,0 +1,101 @@
+<ol class="breadcrumb">
+    <li><a href="#/">Dashboard</a></li>
+    <li>Comunicar ao COAF</li>
+    <li class="active">Notificações Geradas</li>
+</ol>
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-red-wine">
+                <div class="panel-heading">
+                  <h2>Notificações Geradas</h2>
+                </div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="col-md-8">
+                        <div class="btn-group">
+                          <button ng-click="openAppletModal()" class="btn btn-primary">
+                            <i class="fa fa-play-circle icon-white"></i> Enviar para COAF
+                          </button>
+                          <button ng-click="retificar()" class="btn btn-danger">
+                            <i class="fa fa-play-circle icon-white"></i> Retificar Notificações
+                          </button>
+                          <button ng-click="consultarLote();" class="btn btn-default">
+                            <i class="fa fa-search"></i> Consultar Notificação no COAF
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <p class="input-group datepicker-holder">
+                          <input type="text" class="form-control"
+                            datepicker-popup="dd/mm/yy"
+                            ng-model="loteDate" is-open="opened"
+                            datepicker-options="dateOptions" close-text="Fechar" /> <span
+                            class="input-group-btn fix-datepicker"
+                            >
+                            <button type="button" class="btn btn-default"
+                              ng-click="open($event)">
+                              <i class="fa fa-calendar"></i>
+                            </button>
+                          </span>
+                        </p>
+                      </div>
+                      <hr>
+                    </div>
+                  </div>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Status</th>
+                        <th>Numero</th>
+                        <th>Criado em</th>
+                        <th>Cedente</th>
+                        <th>Enviado em</th>
+                        <th>Valor principal</th>
+                        <th>Código de Erro</th>
+                        <th>Mensagem</th>
+                        <th>Número Coaf</th>
+                        <!-- <th>Hash</th> -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        ng-repeat="notification in notifications | startFrom:currentPage*pageSize | limitTo:pageSize | filter:filtro">
+                        <td>
+                          <div class="icheck">
+                            <input type="checkbox" icheck ng-model="notification.selected" />
+                          </div>
+                        </td>
+                        <td>{{notification.statusLabel}}</td>
+                        <td>{{notification.number}}</td>
+                        <td>{{notification.createdAt}}</td>
+                        <td>{{notification.analysis.customer.corporateName}}</td>
+                        <td>{{notification.sentAt}}</td>
+                        <td>{{notification.principalValue | currency}}</td>
+                        <td>{{notification.errorCode}}</td>
+                        <td>{{notification.message}}</td>
+                        <td>{{notification.coafNumber}}</td>
+                        <!-- <td>{{notification.hash}}</td> -->
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="panel-footer">
+                  <ul class="pager">
+                    <li>
+                      <a ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1" class='pull-left'>« Anterior</a>
+                    </li>
+                    <li>
+                      <a class="pull-right" ng-disabled="currentPage >= customers.length/pageSize - 1" ng-click="currentPage=currentPage+1">Próximo »</a>
+                    </li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- container-fluid -->

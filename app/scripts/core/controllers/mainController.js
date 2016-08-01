@@ -9,8 +9,16 @@ angular.module('wbaApp')
     'apiLogin',
     '$state',
     'toaster',
-    function($scope, $theme, $timeout, progressLoader, wijetsService, $location, apiLogin, $state, toaster) {
+    'Session',
+    'SweetAlert',
+    'user',
+    '$localStorage',
+    function($scope, $theme, $timeout, progressLoader, wijetsService, $location, apiLogin, $state, toaster, Session, SweetAlert, user, $localStorage) {
       
+      $scope.user = user;
+      // console.log($localStorage);
+      
+
       $scope.layoutFixedHeader = $theme.get('fixedHeader');
       $scope.layoutPageTransitionStyle = $theme.get('pageTransitionStyle');
       $scope.layoutDropdownTransitionStyle = $theme.get('dropdownTransitionStyle');
@@ -20,19 +28,35 @@ angular.module('wbaApp')
       'rotateInDownRight','rotateInUpLeft','rotateInUpRight','rollIn','zoomIn','zoomInDown','zoomInLeft','zoomInRight',
       'zoomInUp'];
 
-
       $scope.logout = function () {
-        apiLogin.doLogout().then(
-          function (res) {
-            $state.go('login');
-          },
-          function (err) {
-            if(err.status == 301) {
-              $state.go('login');
-            }
-            toaster.pop('error','Logout',err.statusText);
+
+        SweetAlert.swal({
+          title: "Deseja sair?",
+          // text: "Se você prosseguir, essa operaçao no poderá ser desfeita",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Prosseguir",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm){
+          if (isConfirm) {
+            apiLogin.doLogout().then(
+              function (res) {
+                $state.go('login');
+              },
+              function (err) {
+                if(err.status == 301) {
+                  delete $localStorage.profile;
+                  $state.go('login');
+                }
+                toaster.pop('error','Logout',err.statusText);
+              }
+            )
           }
-        )
+        });
       };
 
       $scope.layoutLoading = true;

@@ -81,7 +81,9 @@
     "pdfjs-dist": "^1.5.292",
     "angular-ui-mask": "^1.8.6",
     "ng-cpf-cnpj": "^0.0.5",
-    "angular-ui-notification": "^0.2.0"
+    "angular-ui-notification": "^0.2.0",
+    "highcharts-ng": "^0.0.11",
+    "ngstorage": "^0.3.11"
   },
   "resolutions": {
     "jquery": "~1.11.0",
@@ -95,7 +97,8 @@
   },
   "devDependencies": {
     "twbs-bootstrap-sass": "~3.1.1",
-    "responsive-tables": "*"
+    "responsive-tables": "*",
+    "angular-chosen-localytics": "^1.4.3"
   },
   "overrides": {
     "stepy": {

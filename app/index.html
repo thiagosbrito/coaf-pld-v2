@@ -33,13 +33,15 @@
 	<link rel="stylesheet" href="bower_components/angular-tree-dnd/dist/ng-tree-dnd.css" />
 	<link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css">
 	<link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.bootstrap.css">	
-	<link rel='stylesheet' type='text/css' href='assets/plugins/form-fseditor/fseditor.css' />
-	<link rel='stylesheet' type='text/css' href='assets/plugins/jcrop/css/jquery.Jcrop.min.css' />
-	<link rel="stylesheet" type='text/css' href="assets/plugins/iCheck/skins/all.css" />
-	<link rel="stylesheet" type='text/css' href="assets/plugins/google-code-prettify/prettify.css" />
-  <link rel="stylesheet" type="text/css" href="bower_components/AngularJS-Toaster/toaster.min.css" />
-	<link rel="stylesheet" type="text/css" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css"/>
-  <link rel="stylesheet" type="text/css" href="bower_components/angular-ui-switch/angular-ui-switch.css">
+	<link rel='stylesheet' href='assets/plugins/form-fseditor/fseditor.css' />
+	<link rel='stylesheet' href='assets/plugins/jcrop/css/jquery.Jcrop.min.css' />
+	<link rel="stylesheet" href="assets/plugins/iCheck/skins/all.css" />
+	<link rel="stylesheet" href="assets/plugins/google-code-prettify/prettify.css" />
+  <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.min.css" />
+	<link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css"/>
+  <link rel="stylesheet" href="bower_components/angular-ui-switch/angular-ui-switch.css">
+  <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
+  <link rel="stylesheet" href="bower_components/chosen/chosen.css" />
   
 	<link rel="stylesheet" href="assets/css/styles.css">
 	<link rel="stylesheet" href="assets/css/wba.css">
@@ -166,6 +168,12 @@
   <script src="bower_components/angular-pdf/dist/angular-pdf.js"></script>
   <script src="bower_components/pdfjs-dist/build/pdf.js"></script>
   <script src="bower_components/pdfjs-dist/build/pdf.worker.js"></script>
+  <script src="bower_components/chosen/chosen.jquery.js"></script>
+  <script src="bower_components/angular-chosen-localytics/dist/angular-chosen.min.js"></script>
+  <script src="bower_components/highcharts-ng/dist/highchart.js"></script>
+  <script src="bower_components/highcharts-ng/dist/highchart-3d.js"></script>
+  <script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+  <script src="bower_components/ngstorage/ngStorage.min.js"></script>
 
 
 
@@ -184,7 +192,8 @@
 	<script src="scripts/config/constants.js"></script>
 	<script src="scripts/config/routes.js"></script>
 	<script src="scripts/config/runners.js"></script>
-	<script src="scripts/config/general-configs.js"></script>
+  <script src="scripts/config/interceptors.js"></script>
+  <script src="scripts/config/general-configs.js"></script>
 
 	<!-- Filters -->
 	<script src="scripts/filters/cnpj.filter.js"></script>
@@ -194,6 +203,7 @@
 
   <script src="scripts/directives/popover-html.js"></script>
   <script src="scripts/directives/fileReader.js"></script>
+  <script src="scripts/directives/fix-datepicker.js"></script>
   
 
 	<!-- Wba Scripts -->
@@ -206,10 +216,15 @@
 	<script src="scripts/services/permissions.js"></script>
   <script src="scripts/services/policies.js"></script>
   <script src="scripts/services/cep.js"></script>
+  <script src="scripts/services/buying-entity.js"></script>
+  <script src="scripts/services/notifications.js"></script>
+  <script src="scripts/services/manual.js"></script>
+  <script src="scripts/services/chart.js"></script>
   <script src="scripts/services/transformRequestAsFormPost.js"></script>
   
 
   <script src="scripts/controllers/auth/login.controller.js"></script>
+  <script src="scripts/controllers/dashboard/dashboard.controller.js"></script>
   <script src="scripts/controllers/analises/operacoes/operacao.listar.controller.js"></script>
   <script src="scripts/controllers/analises/operacoes/operacao.novo.controller.js"></script>
   <script src="scripts/controllers/analises/operacoes/operacao.view.controller.js"></script>
@@ -219,6 +234,14 @@
   <script src="scripts/controllers/analises/cedentes/cedente.view.controller.js"></script>
 
   <script src="scripts/controllers/cadastros/cedentes/listar.controller.js"></script>
+  <script src="scripts/controllers/cadastros/policies/listar.controller.js"></script>
+  <script src="scripts/controllers/cadastros/policies/novo.controller.js"></script>
+  <script src="scripts/controllers/cadastros/policies/editar.controller.js"></script>
+  <script src="scripts/controllers/cadastros/criterio/listar.controller.js"></script>
+  <script src="scripts/controllers/cadastros/usuarios/listar.controller.js"></script>
+  <script src="scripts/controllers/notifications/listar.controller.js"></script>
+
+  <script src="scripts/controllers/manual/manual.controller.js"></script>
 
 	<!-- end of Wba Scripts  -->
 

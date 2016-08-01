@@ -1,0 +1,51 @@
+<ol class="breadcrumb">
+    <li><a href="#/">Dashboard</a></li>
+    <li>Cadastro</li>
+    <li class="active">Questões e Classificação de Risco</li>
+</ol>
+
+<div class="container-fluid">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-red-wine">
+              <div class="panel-heading">
+                <h2>Questões e Classificação de Risco</h2>
+                <div class="panel-ctrls">
+                  <a class="button-icon" ui-sref="coafPld.cadastro.policies.novo" tooltip="Cadastrar Questões">
+                    <i class="fa fa-plus"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Código</th>
+                      <th>Tipo</th>
+                      <th>Descrição</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="policy in policies track by $index">
+                      <td>{{policy.id}}</td>
+                      <td>{{policy.policyCode}}</td>
+                      <td>{{policy.policyType}}</td>
+                      <td>{{policy.description}}</td>
+                      <td>
+                        <div class="btn-group pull-right">
+                          <button class="btn btn-danger" ng-click="delete(policy.id)"><i class="fa fa-trash-o"></i></button>
+                          <button class="btn btn-primary" ng-click="editar(policy.id)"><i class="fa fa-pencil"></i></button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- container-fluid -->

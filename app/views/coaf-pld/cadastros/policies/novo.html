@@ -1,0 +1,169 @@
+<ol class="breadcrumb">
+  <li><a href="#/">Dashboard</a></li>
+  <li>Cadastro</li>
+  <li class="active">Questões e Classificação de Risco</li>
+</ol>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-red-wine">
+        <div class="panel-heading">
+          <h2>Criar Questões e Classificação de Risco</h2>
+        </div>
+        <div class="panel-body">
+          <form role="form" class="form form-horizontal">
+            <div class="form-group">
+              <label class="col-md-2 control-label">
+                Usar existente?:
+              </label>
+              <div class="col-md-4">
+                <select name="existingPolicies" class="form-control" ng-options="policy as policy.description for policy in existingPolicies" ng-model="policyToCopy" ng-change="copyPolicy(policyToCopy)">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label">
+                Código:
+              </label>
+              <div class="col-md-4">
+                <input type="text" class="form-control" ng-model="pol.policyCode">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label">
+                Tipo:
+              </label>
+              <div class="col-md-4">
+                <select name="existingPolicies" class="form-control" ng-options="i.id as i.name for i in itemsOperacao" ng-model="pol.policyType">
+                  <option value=""></option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label">
+                Descrição:
+              </label>
+              <div class="col-md-10">
+                <input type="text" class="form-control" ng-model="pol.description">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label">
+                Política padrão?:
+              </label>
+              <div class="col-md-4">
+                <div class="checkbox">
+                  <input type="checkbox" class="checbox" ng-model="pol.defaultPolicy" ng-true-value="true" ng-false-value="false">
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="row-fluid">
+            
+            <div class="col-md-12" ng-repeat="question in pol.questions">
+              <form role="form" class="form form-horizontal">
+                <div class="well">
+                  <div class="form-group">
+                    <label class="col-md-2 control-label">
+                      Número:
+                    </label>
+                    <div class="col-md-9">
+                      <input ng-model="question.questionNumber" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-1">
+                      <button class="btn btn-danger" ng-click="removeQuestion(question)"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-2">
+                      Título:
+                    </label>
+                    <div class="col-md-10">
+                      <input ng-model="question.title" type="text" class="form-control"
+                     placeholder="Questão sem titulo">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-2">
+                      Código:
+                    </label>
+                    <div class="col-md-10">
+                      <input ng-model="question.questionCode" type="text" class="form-control" placeholder="Código da Questão">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-md-2">
+                      Tipo:
+                    </label>
+                    <div class="col-md-10">
+                      <select class="form-control" ng-model="question.questionType" ng-options="i.id as i.name for i in items">
+                        <option value=""></option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" ng-show="question.questionType == 'ONE_CHOICE'">
+                  <table class="table">
+                    <tbody>
+                      <tr ng-repeat="choice in question.choices">
+                        <td>
+                          <div class="icheck">
+                            <input type="radio" icheck disabled>
+                          </div>
+                        </td>
+                        <td>
+                          <input style="width: 10px;" class="form-control"  type="text" ng-model="choice.choiceNumber" placeholder="Número da Escolha">
+                        </td>
+                        <td>
+                          <input style="width: 400px;" class="form-control"  type="text" ng-model="choice.description" placeholder="Escolha sem titulo">
+                        </td>
+                        <td>
+                          <input style="width: 60px;" class="form-control"  type="text" ng-model="choice.choiceCode" placeholder="Cod. Escolha">
+                        </td>
+                        <td>
+                          <input style="width: 30px;" class="form-control"  type="text" ng-model="choice.coafCode" placeholder="Coaf">
+                        </td>
+                        <td>
+                          <select style="height: 25px;" class="form-control" ng-model="choice.risk" ng-options="i.id as i.name for i in itemsRisk(pol)">
+                            <option value=""></option>
+                          </select>
+                        </td>
+                        <td>
+                          <button class="btn btn-danger" ng-click="removeChoice(question,choice)"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="icheck">
+                            <input type="radio" icheck class="radio" disabled/>
+                          </div>
+                        </td>
+                        <td>
+                          <input style="width: 10px;" type="text" ng-click="addChoice(question)" placeholder="Adicionar escolha"
+                                   class="form-control ss-ghost-input"></td>
+                        <td>
+                            <input type="text" style="width: 15px;"
+                                   class="form-control ss-ghost-input">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+            <hr>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <button class="btn btn-primary" ng-click="save()"><i class="fa fa-save"></i> Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

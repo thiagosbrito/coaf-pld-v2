@@ -1,5 +1,5 @@
 <span ng-if="item.separator==true">{{item.label}}</span>
-<a ng-if="!item.separator" class="brito-teste" ng-click="select(item)" ng-href="{{item.url}}">
+<a ng-if="!item.separator" ng-click="select(item)" ng-href="{{item.url}}">
   <i ng-if="item.iconClasses" class="{{item.iconClasses}}"></i><span>{{item.label}}</span>
   <span ng-bind-html="item.html"></span>
 </a>

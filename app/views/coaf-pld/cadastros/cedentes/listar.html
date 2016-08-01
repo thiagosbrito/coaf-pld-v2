@@ -8,7 +8,7 @@
     
   <div class="row">
     <div class="col-md-12">
-      <div class="panel panel-danger">
+      <div class="panel panel-red-wine">
         <div class="panel-heading">
           <h2>Cedentes</h2>
           <div class="panel-ctrls">
@@ -47,10 +47,13 @@
             <tbody>
               <tr ng-repeat="customer in customers | startFrom:currentPage*pageSize | limitTo:pageSize">
                 <td>{{customer.id}}</td>
-                <td>{{customer.corporateIdNumber}}</td>
+                <td>{{customer.corporateIdNumber | cnpj}}</td>
                 <td>{{customer.corporateName }}</td>
                 <td>
-                    <button class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+                  <div class="btn-group">
+                    <button class="btn btn-danger" ng-click="delete(customer.id)"><i class="fa fa-trash-o"></i></button>
+                    <button class="btn btn-primary" ng-click="editar(customer.id)"><i class="fa fa-pencil"></i></button>
+                  </div>
                 </td>
               </tr>
             </tbody>

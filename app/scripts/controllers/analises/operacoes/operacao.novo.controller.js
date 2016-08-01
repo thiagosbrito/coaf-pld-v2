@@ -10,8 +10,10 @@ angular.module('wbaApp')
     'apiCustomers',
     'apiPolicies',
     'toaster',
-    function ($scope, $rootScope, $state, $stateParams, apiAnalizes, apiCustomers, apiPolicies, toaster) {
+    'user',
+    function ($scope, $rootScope, $state, $stateParams, apiAnalizes, apiCustomers, apiPolicies, toaster, user) {
 
+      $scope.user = user;
 
       $scope.analysis = {};
       $scope.showLoading = true;
@@ -44,7 +46,7 @@ angular.module('wbaApp')
       $scope.format = $scope.formats[0];
 
       $scope.getPolicies = function () {
-        apiPolicies.getPoliciesByCustomerId($rootScope.operationPolicy.id).then(
+        apiPolicies.getPoliciesByCustomerId($scope.user.operationPolicy.id).then(
           function (res) {
             $scope.policies.push(res.data);
             $scope.analysis.policy = res.data;
@@ -93,7 +95,7 @@ angular.module('wbaApp')
       };
 
       $scope.save = function () {
-        $scope.analysis.buyingEntity = $rootScope.loggedBuyingEntity;
+        $scope.analysis.buyingEntity = $scope.user.loggedBuyingEntity;
         apiAnalizes.save($scope.analysis).then(
           function (res) {
             toaster.pop('success','Análise de Operação','Análise cadastrada com sucesso');

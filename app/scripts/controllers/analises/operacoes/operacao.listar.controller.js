@@ -7,7 +7,8 @@ angular.module('wbaApp')
 	'$stateParams',
 	'apiAnalizes',
     'toaster',
-	function ($scope, $state, $stateParams, apiAnalizes, toaster) {
+    'Session',
+	function ($scope, $state, $stateParams, apiAnalizes, toaster, Session) {
 		
     	// definitions for date
     	

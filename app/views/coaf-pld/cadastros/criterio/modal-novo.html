@@ -1,0 +1,153 @@
+<div class="modal-header">
+  Cadastrar Critério de Risco
+</div>
+<div class="modal-body">
+  <form class="form-horizontal" ng-submit="save(riskCriteria)">
+    <div class="form-group">
+        <label class="control-label col-md-2">Tipo</label>
+        <div class="col-md-6">
+          <select ng-model="riskCriteria.policyType" class="form-control"
+                  ng-options="policy for policy in policies" name="inputPolicyType">
+                  <option>Selecione</option>
+          </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2" for="inputDescription">Descrição</label>
+
+        <div class="col-md-10">
+            <input type="text" ng-model="riskCriteria.description" class="form-control" id="inputDescription" required />
+        </div>
+    </div>
+
+    <div class="well" ng-show="riskCriteria.policyType == 'CUSTOMER_ANALYSIS'">
+      <div class="form-group" style="margin-bottom: 0px !important;">
+        <label class="col-md-5">
+          &nbsp;
+        </label>
+        <div class="col-md-6" style="margin-bottom: 0px !important;">
+          <label class="input-checkbox">
+            <span class="icheck">
+              <input type="checkbox" icheck ng-model="riskCriteria.useHighRisk" name="inputUseHighRisk" />
+            </span>
+            Critério de alto risco
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-5">Quantidade Máxima</label>
+        <div class="col-md-6">
+            <input class="form-control" ng-disabled="!riskCriteria.useHighRisk" type="number" ng-model="riskCriteria.limitHighRisk" required min="1" max="99" name="inputLimitHighRisk" />
+          </div>
+      </div>
+      <div class="form-group" style="margin-bottom: 0px !important;">
+        <label class="col-md-5">
+          &nbsp;
+        </label>
+        <div class="col-md-6" style="margin-bottom: 0px !important;">
+          <label class="input-checkbox">
+            <span class="icheck">
+              <input type="checkbox" icheck ng-model="riskCriteria.useMediumRisk" name="inputUseMediumRisk" />
+            </span>
+            Critério de médio risco
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-5">Quantidade Máxima</label>
+        <div class="col-md-6">
+            <input class="form-control" ng-disabled="!riskCriteria.useMediumRisk" type="number" ng-model="riskCriteria.limitMediumRisk" required min="1" max="99" name="inputLimitMediumRisk" />
+          </div>
+      </div>
+      <div class="form-group" style="margin-bottom: 0px !important;">
+        <label class="col-md-5">
+          &nbsp;
+        </label>
+        <div class="col-md-6" style="margin-bottom: 0px !important;">
+          <label class="input-checkbox">
+            <span class="icheck">
+              <input type="checkbox" icheck ng-model="riskCriteria.useLowRisk" name="inputUseLowRisk" />
+            </span>
+            Critério de baixo risco
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-5">Soma das ocorrências não deve ultrapassar de</label>
+        <div class="col-md-6">
+          <input ng-disabled="riskCriteria.policyType != 'CUSTOMER_ANALYSIS'" type="number" class="form-control" ng-model="riskCriteria.limitSumRisk"  required min="1" max="99" name="inputLimitSumRisk" />
+        </div>
+      </div>
+    </div>
+    
+    <div class="well" ng-show="riskCriteria.policyType == 'OPERATION_ANALYSIS'">
+        <div class="form-group" style="margin-bottom: 0px !important;">
+          <label class="col-md-5">
+            &nbsp;
+          </label>
+          <div class="col-md-6">
+            <label class="input-checkbox">
+              <input type="checkbox" ng-model="riskCriteria.useMaxSuspicion" name="inputUseMaxSuspicion" />
+                Critério de suspeição máxima
+              </label>
+            </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-md-5">Quantidade Máxima</label>
+          <div class="col-md-6">
+              <input class="form-control" ng-disabled="!riskCriteria.useMaxSuspicion" type="number" ng-model="riskCriteria.limitMaxSuspicion" min="1" max="99" name="inputLimitMaxSuspicion" />
+            </div>
+        </div>
+        <div class="form-group" style="margin-bottom: 0px !important;">
+          <label class="col-md-5">
+            &nbsp;
+          </label>
+          <div class="col-md-6">
+            <label class="input-checkbox">
+              <input type="checkbox" ng-model="riskCriteria.useHighSuspicion" name="inputUseHighSuspicion" />
+                Critério de suspeição alta
+              </label>
+            </div>
+        </div>
+          <div class="form-group">
+            <label class="control-label col-md-5">Quantidade Máxima</label>
+            <div class="controls col-md-6">
+              <input class="form-control" ng-disabled="!riskCriteria.useHighSuspicion" type="number" ng-model="riskCriteria.limitHighSuspicion" min="1" max="99" name="inputLimitHighSuspicion" />
+            </div>
+          </div>
+        <div class="form-group" style="margin-bottom: 0px !important;">
+          <label class="col-md-5">
+            &nbsp;
+          </label>
+          <div class="col-md-6">
+            <label class="input-checkbox">
+              <input type="checkbox" ng-model="riskCriteria.useMediumSuspicion" name="inputUseMediumSuspicion" />
+                Critério de suspeição média
+              </label>
+            </div>
+        </div>
+          <div class="form-group">
+            <label class="control-label col-md-5">Quantidade Máxima</label>
+            <div class="col-md-6">
+              <input class="form-control" ng-disabled="!riskCriteria.useMediumSuspicion" type="number" min="1" max="99" ng-model="riskCriteria.limitMediumSuspicion" name="inputLimitMediumSuspicion" />
+            </div>
+          </div>
+        <div class="form-group">
+          <label class="control-label col-md-5">Soma das ocorrências não deve ultrapassar de</label>
+          <div class="col-md-6">
+            <input ng-disabled="riskCriteria.policyType != 'OPERATION_ANALYSIS'" type="number" class="form-control" ng-model="riskCriteria.limitSumSuspicion" required min="1" max="99" name="inputLimitSumSuspicion" />
+          </div>
+        </div>
+    </div>
+    <!-- <div class="form-actions" ng-hide="controlsHide">
+        <button type="submit" class="btn btn-small btn-primary">Salvar</button>
+        <button type="button" class="btn btn-small btn-danger" ng-click="remove()" ng-hide="isNew">Remover</button>
+        <button type="button" class="btn btn-small" ng-click="cancel()">Cancelar</button>
+    </div> -->
+</form>
+
+</div>
+<div class="modal-footer">
+  <button class="pull-left btn btn-danger-alt" ng-click="cancel()"><i class="fa fa-times"></i> Cancelar</button>
+  <button class="pull-right btn btn-primary" ng-click="save(riskCriteria)" ng-disabled="CadastroForm.$invalid"><i class="fa fa-save"></i> Salvar</button>
+</div>

@@ -1,0 +1,59 @@
+<div class="modal-header">
+  Cadastrar Questões e Classificação de Riscos
+</div>
+<div class="modal-body">
+  <form role="form" class="form form-horizontal">
+    <div class="form-group">
+      <label class="col-md-2 control-label">
+        Usar existente?:
+      </label>
+      <div class="col-md-4">
+        <select name="existingPolicies" class="form-control" ng-options="policy as policy.description for policy in existingPolicies" ng-model="policyToCopy">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label">
+        Código:
+      </label>
+      <div class="col-md-4">
+        <input type="text" class="form-control" ng-model="pol.policyCode">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label">
+        Tipo:
+      </label>
+      <div class="col-md-4">
+        <select name="existingPolicies" class="form-control" ng-options="i.id as i.name for i in itemsOperacao" ng-model="pol.policyType">
+          <option value=""></option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label">
+        Descrição
+      </label>
+      <div class="col-md-10">
+        <input type="text" class="form-control" ng-model="pol.description">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2">
+        Política padrão?:
+      </label>
+      <div class="col-md-4">
+        <input type="checkbox" ng-model="pol.defaultPolicy" ng-true-value="true" ng-false-value="false">
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger pull-left" ng-click="cancel()">
+    <i class="fa fa-times"></i> Cancelar
+  </button>
+  <button class="btn btn-primary pull-right" ng-click="save(policy)">
+    <i class="fa fa-save"></i> Salvar
+  </button>
+</div>

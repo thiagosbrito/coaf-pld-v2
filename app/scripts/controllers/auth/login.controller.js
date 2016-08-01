@@ -16,7 +16,6 @@ angular.module('wbaApp')
         var loginData = {j_username: user.username, j_password: user.password};
         apiLogin.doLogin(loginData).then(
           function (res) {
-            console.log(res);
             $state.go('coafPld.dashboard');
           },
           function (err) {

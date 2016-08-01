@@ -41,10 +41,22 @@ angular.module('wbaApp')
         )
       };
 
+      var _getPolicyById = function (id) {
+        return $http({
+          url: baseUrl.apiUrl + '/policies/' + id,
+          method: 'GET'
+        }).then(
+          function (results) {
+            return results;
+          }
+        )
+      };
+
 
       api.getPolicies               = _getPolicies;
       api.getPoliciesByCustomerId   = _getPoliciesByCustomerId;
-      api._getPoliciesBySearchType  = _getPoliciesBySearchType;
+      api.getPoliciesBySearchType   = _getPoliciesBySearchType;
+      api.getPolicyById             = _getPolicyById;
 
       return api;
 
