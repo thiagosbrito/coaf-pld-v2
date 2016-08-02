@@ -45,11 +45,43 @@ angular.module('wbaApp')
             }
         )
     }
+
+    var _update = function (id, data) {
+        return $http({
+            url: baseUrl.apiUrl + '/analyzes/' + id,
+            method: 'POST',
+            data: data,
+            headers: {
+                'Content-Type':'application/json'
+            }
+        }).then(
+            function (results) {
+                return results
+            }
+        ) 
+    }
+
+    var _execute = function (id, data) {
+        return $http({
+            url: baseUrl.apiUrl + '/analyzes/' + id + '/doFinish',
+            method: 'POST',
+            data: data,
+            headers: {
+                'Content-Type':'application/json'
+            }
+        }).then(
+            function (results) {
+                return results
+            }
+        )
+    }
     
 
     api.getAnalizes               = _getAnalizes;
     api.getAnalizeById            = _getAnalizeBydId;
     api.save                      = _save;
+    api.execute                   = _execute;
+    api.update                    = _update;
 
     
     return api;

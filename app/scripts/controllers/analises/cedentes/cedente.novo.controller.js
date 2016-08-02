@@ -10,7 +10,10 @@ angular.module('wbaApp')
     'apiCustomers',
     'apiPolicies',
     'toaster',
-    function ($scope, $rootScope, $state, $stateParams, apiAnalizes, apiCustomers, apiPolicies, toaster) {
+    'Session',
+    function ($scope, $rootScope, $state, $stateParams, apiAnalizes, apiCustomers, apiPolicies, toaster, Session) {
+
+      $scope.user = Session.getUser();
 
 
       $scope.analysis = {};
@@ -44,7 +47,7 @@ angular.module('wbaApp')
       $scope.format = $scope.formats[0];
 
       $scope.getPolicies = function () {
-        apiPolicies.getPoliciesByCustomerId($rootScope.customerPolicy.id).then(
+        apiPolicies.getPoliciesByCustomerId($scope.user.customerPolicy.id).then(
           function (res) {
             $scope.policies.push(res.data);
             $scope.analysis.policy = res.data;

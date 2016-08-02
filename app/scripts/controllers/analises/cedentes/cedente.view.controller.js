@@ -11,22 +11,126 @@ angular.module('wbaApp')
     'apiCustomers',
     'apiPolicies',
     'toaster',
-    function ($scope, $rootScope, $state, $stateParams, apiAnalizes, apiCustomers, apiPolicies, toaster) {
+    'Session',
+    function ($scope, $rootScope, $state, $stateParams, apiAnalizes, apiCustomers, apiPolicies, toaster, Session) {
+        
+        $scope.isLoading = true;
+        $scope.user = Session.getUser();
 
-      $scope.getAnalise = function (id) {
-        apiAnalizes.getAnalizeById(id).then(
-          function (res) {
-            $scope.analysis = res.data;
-            console.log($scope.analysis);
-          },
-          function (err) {
-            toaster.pop('error','Análises',err.statusText);
-          }
-        )
-      };
-      $scope.getAnalise($stateParams.analiseId);
-      
+        $scope.getAnalise = function (id) {
+            apiAnalizes.getAnalizeById(id).then(
+                function (res) {
+                    $scope.analysis = res.data;
+                    $scope.loadAnswer($scope.analysis);
+                    console.log($scope.analysis);
+                    $scope.isLoading = false;
+                },
+                function (err) {
+                    toaster.pop('error','Análises',err.statusText);
+                }
+            )
+        };
+        $scope.getAnalise($stateParams.analiseId);
+
+        $scope.currentAnalysis = function() {
+            return $scope.analysis;
+        };
+
+        $scope.userCanReview = function() {
+            return $scope.user.permissions.customerReview;
+        };
+        
+        $scope.analysisCanReview = function() {
+            var analysis = $scope.currentAnalysis();
+            if (!angular.isUndefined(analysis)) {
+                return !analysis.notificaCoaf && !analysis.inProgress && analysis.review;
+            } else {
+                return false;
+            }
+        }
+        
+        $scope.isReview = function() {
+            return $scope.userCanReview() && $scope.analysisCanReview();
+        };
+        
+        $scope.showReviewButton = function() {
+            var analysis = $scope.currentAnalysis();
+            if (!angular.isUndefined(analysis))
+                return $scope.userCanReview() && analysis.status != 'IN_PROGRESS' && !analysis.review;
+            else
+                return false;
+        };
+        
+        $scope.review = function() {
+            $scope.currentAnalysis().review=true;
+            $scope.currentAnalysis().status='IN_PROGRESS';
+        }
+
+        $scope.hideNotificationButton = function () {
+            if (!angular.isUndefined($scope.analysis)) {
+                return !$scope.user.permissions.customerGenerateNotification ||
+                $scope.analysis.lowRisk      ||
+                $scope.analysis.mediumRisk   ||
+                $scope.analysis.highRisk     ||
+                $scope.analysis.inProgress   ||
+                $scope.analysis.notSuspicion ||
+                $scope.analysis.notificaCoaf;
+            } else {
+                return true;
+            }
+        };
+
+        $scope.loadAnswer = function(analysis) {
+            angular.forEach(analysis.answers, function (answer) {
+                angular.forEach(analysis.policy.questions, function (question) {
+                    if (answer.question.id == question.id) {
+                        angular.forEach(answer.choices, function (choice) {
+                            angular.forEach(question.choices, function (c) {
+                                if (choice.id == c.id) {
+                                    question.selectedChoice = c.id;
+                                }
+                            });
+                        });
+                    }
+                });
+            });
+        };
+        $scope.finish = function (analysis) {
+            // var hashKey = $scope.analyzes[$scope.currentIndex].$$hashKey;
+            var numberOfQuestions = $scope.analysis.policy.questions.length;
+            var numberOfAnswers = $scope.analysis.answers.length;
+
+            if (numberOfQuestions == numberOfAnswers) {
+                apiAnalizes.execute($scope.analysis.id, $scope.analysis).then(
+                    function (res) {
+                        $scope.analysis = res.data;
+                        $scope.loadAnswer($scope.analysis);
+                        toaster.pop('success','Análise Cedentes','Análise finalizada com sucesso!');
+                    },
+                    function(error) {
+                        toaster.pop('error','Análise Cedentes',error.status + ": " + error.message);
+                    }
+                );
+                
+            } 
+            else {
+                toaster.pop('error','Análise Cedentes',"Você respondeu apenas " + numberOfAnswers + " de " + numberOfQuestions + " por favor complete a analise.");
+            }
+
+        };
+
+        $scope.save = function () {
+            apiAnalizes.update($scope.analysis.id, $scope.analysis).then(
+                function (res) {
+                    toaster.pop('success','Análise Cedentes','Análise salva com sucesso');
+                },
+                function (err) {
+                    toaster.pop('error','Análise Cedentes',err.status+': '+err.message);
+                }
+            )
+        }
     }
+    
     //   $scope.currentIndex = 0;
     //   $scope.type = 'C';
     //   $scope.review = $routeParams.review;
@@ -123,44 +227,8 @@ angular.module('wbaApp')
     //   $scope.selectedOptions = '';
     //   $scope.editAnalysisValue = false;
 
-    //   $scope.hideNotificationButton = function () {
-    //     if (!angular.isUndefined($scope.analysis)) {
-    //       return !$scope.permission.customerGenerateNotification ||
-    //       $scope.analysis.lowRisk      ||
-    //       $scope.analysis.mediumRisk   ||
-    //       $scope.analysis.highRisk     ||
-    //       $scope.analysis.inProgress   ||
-    //       $scope.analysis.notSuspicion ||
-    //       $scope.analysis.notificaCoaf;
-    //     } else {
-    //       return true;
-    //     }
-    //   }
 
-    //   $scope.userCanReview = function() {
-    //     return $scope.permission.customerReview;
-    //   };
-
-    //   $scope.analysisCanReview = function() {
-    //     var analysis = $scope.currentAnalysis();
-    //     if (!angular.isUndefined(analysis)) {
-    //       return !analysis.notificaCoaf && !analysis.inProgress && analysis.review;
-    //     } else {
-    //       return false;
-    //     }
-    //   }
-
-    //   $scope.isReview = function() {
-    //     return $scope.userCanReview() && $scope.analysisCanReview();
-    //   };
-
-    //   $scope.showReviewButton = function() {
-    //     var analysis = $scope.currentAnalysis();
-    //     if (!angular.isUndefined(analysis))
-    //       return $scope.userCanReview() && analysis.status != 'IN_PROGRESS' && !analysis.review;
-    //     else
-    //       return false;
-    //   };
+      
 
     //   $scope.review = function() {
     //     $scope.currentAnalysis().review=true;
@@ -283,9 +351,7 @@ angular.module('wbaApp')
     //     w.close();
     //   };
             
-    //   $scope.currentAnalysis = function() {
-    //     return $scope.analysis;
-    //   };
+    
     // }
         
   ]);

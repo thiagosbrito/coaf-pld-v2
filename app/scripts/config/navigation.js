@@ -17,12 +17,12 @@ angular
             iconClasses: 'fa fa-search',
             children: [
               {
-                label: 'Operacao',
-                url: '#/analises/operacao/listar'
+                label: 'Cedentes',
+                url: '#/analises/cedente/listar'
               },
               {
-                label: 'Cedente',
-                url: '#/analises/cedente/listar'
+                label: 'Operacões',
+                url: '#/analises/operacao/listar'
               }
             ]
           },

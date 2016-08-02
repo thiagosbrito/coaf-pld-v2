@@ -119,10 +119,10 @@
 								<th style="text-align: center;">Operação</th>
 								<th style="text-align: center;">Cedente</th>
 								<th style="text-align: center;">Notificado</th>
-								<th style="text-align: center;">Criação</th>
+								<!-- <th style="text-align: center;">Criação</th>
 								<th style="text-align: center;">Data Criação</th>
 								<th style="text-align: center;">Revisão</th>
-								<th style="text-align: center;">Data Revisão</th>
+								<th style="text-align: center;">Data Revisão</th> -->
 								<th></th>
 							</tr>
 						</thead>
@@ -135,39 +135,46 @@
 
 							<tr ng-repeat="analysis in analyzes">
 								<td>{{analysis.id}}</td>
-								<td><span ng-show="analysis.suspicionOperation"
-									class="label label-important">Operação suspeita</span> <span
-									ng-show="analysis.notSuspicion" class="label label-info">Operação
-										não suspeita</span> <span ng-show="analysis.highRisk"
-									class="label label-important">Risco Elevado</span> <span
-									ng-show="analysis.mediumRisk" class="label label-info">Risco
-										Normal</span> <span ng-show="analysis.lowRisk"
-									class="label label-info">Risco Baixo</span> <span
-									ng-show="analysis.inProgress" class="label label-success">Em
-										andamento</span></td>
-								<td>{{analysis.operationId}}</td>
-								<td>[{{analysis.customer.corporateIdNumber}}] -
-									{{analysis.customer.corporateName}}</td>
-								<td><span ng-show="!analysis.notificaCoaf"
-									class="label label-info">Não</span> <span
-									ng-show="analysis.notificaCoaf" class="label label-success">Sim</span>
+								<td class="text-center">
+									<span ng-show="analysis.suspicionOperation" class="label label-important">Op. Suspeita</span>
+									<span ng-show="analysis.notSuspicion" class="label label-info">Op. Não Suspeita</span>
+									<span ng-show="analysis.highRisk" class="label label-important">Risco Elevado</span>
+									<span ng-show="analysis.mediumRisk" class="label label-info">Risco Normal</span> 
+									<span ng-show="analysis.lowRisk" class="label label-info">Risco Baixo</span>
+									<span ng-show="analysis.inProgress" class="label label-success">Em andamento</span>
 								</td>
-								<td>{{analysis.createdBy}}</td>
+								<td>{{analysis.operationId}}</td>
+								<td>[{{analysis.customer.corporateIdNumber | cnpj}}] - {{analysis.customer.corporateName}}</td>
+								<td class="text-center">
+									<span ng-show="!analysis.notificaCoaf" class="label label-info">Não</span>
+									<span ng-show="analysis.notificaCoaf" class="label label-success">Sim</span>
+								</td>
+								<!-- <td>{{analysis.createdBy}}</td>
 								<td>{{analysis.createdAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
 								<td>{{analysis.changedBy}}</td>
-								<td>{{analysis.changedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-								<td><a ng-show="analysis.inProgress"
-									href="#/analysis/{{analysis.id}}?type={{type}}&startDate={{startDate.getTime()}}&endDate={{endDate.getTime()}}&status={{status}}&cpfCnpj={{inputCpfCnpjFilter}}&nome={{inputNomeFilter}}&numero={{inputNumeroOperacaoFilter}}"><i
-										class="icon-edit"></i></a> <a ng-show="!analysis.inProgress"
-									href="#/analysis/{{analysis.id}}?type={{type}}&startDate={{startDate.getTime()}}&endDate={{endDate.getTime()}}&status={{status}}&cpfCnpj={{inputCpfCnpjFilter}}&nome={{inputNomeFilter}}&numero={{inputNumeroOperacaoFilter}}"><i
-										class="icon-eye-open"></i></a> <a title="Gerar Notificação"
-									ng-hide="!permission.customerGenerateNotification ||
-                                                      analysis.lowRisk      ||
-                                                      analysis.highRisk     ||
-                                                      analysis.inProgress   ||
-                                                      analysis.notSuspicion ||
-                                                      analysis.notificaCoaf"
-									ng-click="openModal(analysis)"><i class="icon-bullhorn"></i></a></td>
+								<td>{{analysis.changedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td> -->
+								<td>
+									<div class="btn-group">
+										<button 
+											class="btn btn-primary"
+											ng-class="{'btn-info': !analysis.inProgress, 'btn-primary': analysis.inProgress}"
+											ui-sref="coafPld.analises.operacoes.view({analiseId: analysis.id})">
+												<i class="fa" ng-class="{'fa-eye': !analysis.inProgress, 'fa-pencil': analysis.inProgress}"></i>
+										</button>
+										<a
+											class="btn btn-info"
+											title="Gerar Notificação"
+											ng-hide="!permission.customerGenerateNotification ||
+	                      analysis.lowRisk      ||
+	                      analysis.highRisk     ||
+	                      analysis.inProgress   ||
+	                      analysis.notSuspicion ||
+	                      analysis.notificaCoaf"
+											ng-click="openModal(analysis)">
+											<i class="fa fa-horn"></i>
+										</a>
+									</div>
+								</td>
 							</tr>
 						</tbody>
 					</table>

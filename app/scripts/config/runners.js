@@ -17,6 +17,14 @@ angular.module('wbaApp')
       $rootScope.$state = $state;
       $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams){
         // console.log('$stateChangeStart to '+toState.to+'- fired when the transition begins. toState,toParams : \n',toState, toParams);
+        if(!Session.getUser() && toState.name != 'login') {
+          $timeout(function () {
+            $state.go('login')
+          });
+          if(toState.name == 'coafPld') {
+            $state.go('login');
+          }
+        }
       });
 
       $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams){

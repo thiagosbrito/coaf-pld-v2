@@ -146,7 +146,7 @@
 									<span ng-show="analysis.inProgress" class="label label-success">Em andamento</span>
 								</td>
 								<td>
-									[{{analysis.customer.corporateIdNumber}}] - {{analysis.customer.corporateName}}
+									[{{analysis.customer.corporateIdNumber | cnpj}}] - {{analysis.customer.corporateName}}
 								</td>
 								<td>
 									<span ng-show="!analysis.notificaCoaf" class="label label-info">Não</span>
@@ -159,7 +159,10 @@
 								<td>
 									<button 
 										class="btn btn-primary"
-										ui-sref="coafPld.analises.cedentes.view({analiseId: analysis.id})"><i class="fa fa-eye"></i></button>
+										ng-class="{'btn-info': !analysis.inProgress, 'btn-primary': analysis.inProgress}"
+										ui-sref="coafPld.analises.cedentes.view({analiseId: analysis.id})">
+											<i class="fa" ng-class="{'fa-eye': !analysis.inProgress, 'fa-pencil': analysis.inProgress}"></i>
+									</button>
 									<!-- <a 
 										ng-show="analysis.inProgress"
 										href="#/analysis/{{analysis.id}}?type={{type}}&startDate={{startDate.getTime()}}&endDate={{endDate.getTime()}}&status={{status}}&cpfCnpj={{inputCpfCnpjFilter}}&nome={{inputNomeFilter}}&numero={{inputNumeroOperacaoFilter}}">
