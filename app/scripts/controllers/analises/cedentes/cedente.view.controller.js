@@ -12,7 +12,9 @@ angular.module('wbaApp')
     'apiPolicies',
     'toaster',
     'Session',
-    function ($scope, $rootScope, $state, $stateParams, apiAnalizes, apiCustomers, apiPolicies, toaster, Session) {
+    '$modal',
+    '$window',
+    function ($scope, $rootScope, $state, $stateParams, apiAnalizes, apiCustomers, apiPolicies, toaster, Session, $modal, $window) {
         
         $scope.isLoading = true;
         $scope.user = Session.getUser();
@@ -95,6 +97,21 @@ angular.module('wbaApp')
                 });
             });
         };
+
+        $scope.printAuthorization = function () {
+            apiAnalizes.print($scope.analysis.id).then(
+                function (res) {
+                    $scope.file = new Blob([res.data], {type: 'application/json'});
+                    var url = $window.URL || $window.webkitURL;
+                    $scope.pdfUrl = url.createObjectURL($scope.file);
+                    $scope.showLink = true;
+                },
+                function (err) {
+                    toaster.pop('error','Imprimir Autorização de Relacionamento',err.status + ': ' + err.message);
+                }
+            )
+        };
+
         $scope.finish = function (analysis) {
             // var hashKey = $scope.analyzes[$scope.currentIndex].$$hashKey;
             var numberOfQuestions = $scope.analysis.policy.questions.length;

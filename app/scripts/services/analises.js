@@ -75,6 +75,17 @@ angular.module('wbaApp')
             }
         )
     }
+
+    var _printAuthorization = function (id) {
+        return $http({
+            url: baseUrl.apiUrl + '/analyzes/' + id + '/commitmentToRelationshipReport',
+            method: 'GET'
+        }).then(
+            function (results) {
+                return results
+            }
+        )
+    };
     
 
     api.getAnalizes               = _getAnalizes;
@@ -82,7 +93,7 @@ angular.module('wbaApp')
     api.save                      = _save;
     api.execute                   = _execute;
     api.update                    = _update;
-
+    api.printAuthorization        = _printAuthorization;
     
     return api;
 

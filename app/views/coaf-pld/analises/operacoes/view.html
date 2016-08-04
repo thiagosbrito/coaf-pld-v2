@@ -192,8 +192,10 @@
                                         <p>Essa operação foi identificada como suspeita.</p>
 
                                         <p>
-                                            <a ng-show="analysis.policy.policyType == 'OPERATION_ANALYSIS'" class="btn btn-warning btn-large"
-                                               href="/api/analyzes/{{analysis.id}}/transactionRecordReport">
+                                            <a 
+                                                ng-show="analysis.policy.policyType == 'OPERATION_ANALYSIS'"
+                                                class="btn btn-warning btn-large"
+                                                ui-href="coafPld.analises.operacoes.pdf({analiseId:analysis.id})">
                                                 Imprimir o registro de operação suspeita.
                                             </a>
                                         </p>

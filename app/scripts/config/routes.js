@@ -70,26 +70,40 @@ angular.module('wbaApp')
         templateUrl: 'views/coaf-pld/analises/operacoes/view.html',
         controller: 'AnalisesOperacoesViewController'
       })
+      .state('coafPld.analises.operacoes.pdf',{
+        url: '/view/:analiseId/pdf',
+        controller: 'PDFViewerOperacaoController',
+        templateUrl: 'views/coaf-pld/analises/operacoes/pdf.html'
+      })
       
 
       .state('coafPld.analises.cedentes',{ // Main state for cedentes
         url: '/cedente',
         template: '<div ui-view=""></div>'
       })
+
       .state('coafPld.analises.cedentes.listar',{ // listar cedentes
         url: '/listar',
         templateUrl: 'views/coaf-pld/analises/cedentes/listar.html',
         controller: 'AnalisesCedentesListarController'
       })
+
       .state('coafPld.analises.cedentes.novo',{ // nova analise de cedentes
         url: '/novo',
         templateUrl: 'views/coaf-pld/analises/cedentes/novo.html',
         controller: 'AnalisesCedentesNovoController'
       })
+
       .state('coafPld.analises.cedentes.view',{ // nova analise de cedentes
         url: '/view/:analiseId',
         templateUrl: 'views/coaf-pld/analises/cedentes/view.html',
         controller: 'AnalisesCedentesViewController'
+      })
+
+      .state('coafPld.analises.cedentes.pdf',{
+        url: '/view/:analiseId/pdf',
+        controller: 'PDFViewerCedenteController',
+        templateUrl: 'views/coaf-pld/analises/cedentes/pdf.html'
       })
       
       

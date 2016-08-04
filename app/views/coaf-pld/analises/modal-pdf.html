@@ -1,0 +1,12 @@
+<div class="modal-header">
+  Imprimir Autorização de Relacionamento
+</div>
+<div class="modal-body">
+    {{pdfUrl}}
+    <ng-pdf scale="page-fit" template-url="views/coaf-pld/analises/pdf-viewer.html" canvasid="pdf"></ng-pdf>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary">
+    <i class="fa fa-times"></i> Fechar
+  </button>
+</div>
