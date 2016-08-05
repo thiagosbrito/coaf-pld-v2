@@ -18,26 +18,24 @@
     </span> -->
     
     <a class="navbar-brand" href="#/">
-      WBA | COAF-PLD
+      <span style="padding-left: 15px;"><em>WBA</em> | <strong>COAF-PLD</strong></span>
     </a>
 
-    <div class="toolbar-icon-bg hidden-xs" id="toolbar-search" ng-class="{
-      active: getLayoutOption('showSmallSearchBar')
-    }">
-          <div class="input-group">
-              <span class="input-group-btn"><button class="btn" type="button"><i class="ti ti-search"></i></button></span>
+    <!-- <div class="toolbar-icon-bg hidden-xs" id="toolbar-search" ng-class="{active: getLayoutOption('showSmallSearchBar')}">
+      <div class="input-group">
+        <span class="input-group-btn"><button class="btn" type="button"><i class="ti ti-search"></i></button></span>
         <input type="text" class="form-control" placeholder="Pesquisar...">
         <span class="input-group-btn">
           <button class="btn" type="button" ng-click="toggleSearchBar($event)"><i class="ti ti-close"></i></button>
         </span>
       </div>
-      </div>
+    </div> -->
   </div>
 
   <ul class="nav navbar-nav pull-right toolbar">
-    <li class="toolbar-icon-bg visible-xs-block">
+    <!-- <li class="toolbar-icon-bg visible-xs-block">
       <a href="" ng-click="toggleSearchBar($event)"><span class="icon-bg"><i class="ti ti-search"></i></span></a>
-    </li>
+    </li> -->
 
     <!-- <li class="toolbar-icon-bg hidden-xs">
       <a href="" class="toggle-fullscreen"><span class="icon-bg"><i class="ti ti-world"></i></span></i></a>
@@ -51,71 +49,71 @@
         <a href="" class="toggle-fullscreen"><span class="icon-bg"><i class="ti ti-fullscreen"></i></span></i></a>
     </li> -->
     
-    <li class="dropdown" ng-show="!isLoggedIn">
+    <!-- <li class="dropdown" ng-show="!isLoggedIn">
       <a href="#/extras-login2" style="font-size: 14px"><i class="fa fa-sign-in"></i> Log in</a>
-    </li>
+    </li> -->
 
-        <li class="dropdown toolbar-icon-bg hidden-xs" dropdown ng-controller="MessagesController" >
-      <a href="" class="hasnotifications dropdown-toggle" dropdown-toggle><span class="icon-bg"><i class="ti ti-email"></i></span><span
-      class="badge badge-deeporange">2</span></a>
-      <div class="dropdown-menu animated notifications arrow">
-        <div class="topnav-dropdown-header">
-          <span>Messages</span>
-        </div>
-        <ul class="media-list scrollthis" scrollable>
-          <li ng-repeat="item in messages" class="media notification-message">
-            <a href="#">
-              <div class="media-left">
-                <img class="img-circle avatar" ng-src="{{item.thumb}}" alt="" />
-              </div>
-              <div class="media-body">
-                <h4 class="notification-heading"><strong>{{item.name}}</strong> <span class="text-gray">‒ {{item.message}}</span></h4>
-                <span class="notification-time">{{item.time}}</span>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <div class="topnav-dropdown-footer">
-          <a href="#">See all messages</a>
-        </div>
-      </div>
-    </li>
+        <!-- <li class="dropdown toolbar-icon-bg hidden-xs" dropdown ng-controller="MessagesController" >
+          <a href="" class="hasnotifications dropdown-toggle" dropdown-toggle><span class="icon-bg"><i class="ti ti-email"></i></span><span
+          class="badge badge-deeporange">2</span></a>
+          <div class="dropdown-menu animated notifications arrow">
+            <div class="topnav-dropdown-header">
+              <span>Messages</span>
+            </div>
+            <ul class="media-list scrollthis" scrollable>
+              <li ng-repeat="item in messages" class="media notification-message">
+                <a href="#">
+                  <div class="media-left">
+                    <img class="img-circle avatar" ng-src="{{item.thumb}}" alt="" />
+                  </div>
+                  <div class="media-body">
+                    <h4 class="notification-heading"><strong>{{item.name}}</strong> <span class="text-gray">‒ {{item.message}}</span></h4>
+                    <span class="notification-time">{{item.time}}</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+            <div class="topnav-dropdown-footer">
+              <a href="#">See all messages</a>
+            </div>
+          </div>
+        </li> -->
 
-    <li class="dropdown toolbar-icon-bg" dropdown ng-controller="NotificationsController" ng-show="isLoggedIn">
-    <a href dropdown-toggle class="dropdown-toggle">
-      <span class="icon-bg"><i class="ti ti-bell"></i></span>
-      <span class="badge badge-primary" ng-if="unseenCount>0" ng-bind="unseenCount"></span>
-    </a>
-    <div class="dropdown-menu animated notifications arrow">
-      <div class="topnav-dropdown-header">
-        <span>Notifications</span>
-      </div>
-      <ul class="media-list scrollthis" scrollable>
-        <li ng-repeat="item in notifications" class="media {{item.class}}">
-          <a href="#">
-            <div class="media-left">
-              <span class="notification-icon" ng-if="item.thumb==undefined"><i class="{{item.iconClasses}}"></i></span>
-              <img class="img-circle avatar" ng-if="item.thumb!==undefined" ng-src="{{item.thumb}}" alt="" />
+        <!-- <li class="dropdown toolbar-icon-bg" dropdown ng-controller="NotificationsController" ng-show="isLoggedIn">
+          <a href dropdown-toggle class="dropdown-toggle">
+            <span class="icon-bg"><i class="ti ti-bell"></i></span>
+            <span class="badge badge-primary" ng-if="unseenCount>0" ng-bind="unseenCount"></span>
+          </a>
+          <div class="dropdown-menu animated notifications arrow">
+            <div class="topnav-dropdown-header">
+              <span>Notifications</span>
             </div>
-            <div class="media-body">
-              <h4 class="notification-heading" ng-if="item.thumb==undefined">{{item.text}}</h4>
-              <h4 class="notification-heading" ng-if="item.thumb!==undefined" ng-bind-html="item.text"></h4>
-              <span class="notification-time">{{item.time}}</span>
+            <ul class="media-list scrollthis" scrollable>
+              <li ng-repeat="item in notifications" class="media {{item.class}}">
+                <a href="#">
+                  <div class="media-left">
+                    <span class="notification-icon" ng-if="item.thumb==undefined"><i class="{{item.iconClasses}}"></i></span>
+                    <img class="img-circle avatar" ng-if="item.thumb!==undefined" ng-src="{{item.thumb}}" alt="" />
+                  </div>
+                  <div class="media-body">
+                    <h4 class="notification-heading" ng-if="item.thumb==undefined">{{item.text}}</h4>
+                    <h4 class="notification-heading" ng-if="item.thumb!==undefined" ng-bind-html="item.text"></h4>
+                    <span class="notification-time">{{item.time}}</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+            <div class="topnav-dropdown-footer">
+              <a href="#/">See all notifications</a>
             </div>
+          </div>
+        </li> -->
+        <li class="toolbar-icon-bg" ng-show="isLoggedIn">
+          <a href class="username" ng-click="logout()">
+            <span class="icon-bg">
+              <i class="ti ti-power-off"></i>
+            </span>
           </a>
         </li>
       </ul>
-      <div class="topnav-dropdown-footer">
-        <a href="#/">See all notifications</a>
-      </div>
-    </div>
-    </li>
-    <li class="toolbar-icon-bg" ng-show="isLoggedIn">
-      <a href class="username" ng-click="logout()">
-        <span class="icon-bg">
-          <i class="ti ti-power-off"></i>
-        </span>
-      </a>
-    </li>
-  </ul>
 </header>

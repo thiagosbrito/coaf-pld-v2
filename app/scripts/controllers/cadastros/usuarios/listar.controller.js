@@ -12,6 +12,7 @@ angular.module('wbaApp')
     'Session',
     'apiBuyingEntity',
     function ($scope, $state, $stateParams, apiCadastro, apiPermissions, $modal, toaster, SweetAlert, Session, apiBuyingEntity) {
+      
       $scope.user = Session.getUser();
 
       $scope.getUsers = function () {
@@ -85,7 +86,7 @@ angular.module('wbaApp')
             apiCadastro.addUsuario(item).then(
               function (res) {
                 toaster.pop('success','Cadastro Usuários','Cadastro realizado com sucesso');
-                $scope.getRiskCriteria();
+                $scope.getUsers();
               },
               function (err) {
                 toaster.pop('error','Cadastro Usuários',err.status + ": " + err.message);
@@ -103,12 +104,11 @@ angular.module('wbaApp')
 
           templateUrl: 'views/coaf-pld/cadastros/usuarios/modal-editar.html',
           controller: function ($modalInstance, $scope, user, permissions, usuario) {
-            
+
             $scope.allGroups = permissions;
+
             $scope.permission = user.permissions;
             $scope.user = usuario;
-
-            $scope.groups = $scope.user.groups;
 
             $scope.changeSenha = function () {
               if(!$scope.editSenha) {
@@ -132,7 +132,19 @@ angular.module('wbaApp')
             usuario: function () {
               return apiCadastro.getUsuarioById(id).then(
                 function (usuario) {
-                  return usuario.data;
+                  var dados = usuario.data;
+                  var newGroups = [];
+                  angular.forEach(dados.groups, function (group) {
+                      var newGroup = {
+                        name:group.name,
+                        description:group.description,
+                        $$hashKey:group.name
+                      };
+                      newGroups.push(newGroup);
+                  });
+
+                  dados.groups = newGroups;
+                  return dados;
                 }
               )
             },
@@ -142,7 +154,15 @@ angular.module('wbaApp')
             permissions: function () {
               return apiPermissions.getAllPermissions().then(
                 function (permissions) {
-                  return permissions.data;
+                  var items = [];
+                  angular.forEach(permissions.data, function(item) {
+                    items.push({
+                      name:item.name,
+                      description: item.description,
+                      $$hashKey:item.name
+                    });
+                  });
+                  return items;
                 }
               )
             }
@@ -152,10 +172,10 @@ angular.module('wbaApp')
         modalInstance.result.then(
           function (item) {
             
-            apiCadastro.updateUsuario(item).then(
+            apiCadastro.updateUsuario(item.login, item).then(
               function (res) {
                 toaster.pop('success','Cadastro Usuários','Cadastro atualizado com sucesso');
-                $scope.getRiskCriteria();
+                $scope.getUsers();
               },
               function (err) {
                 toaster.pop('error','Cadastro Usuários',err.status + ": " + err.message);
@@ -167,6 +187,33 @@ angular.module('wbaApp')
           }
         );
       };
+      $scope.delete = function (id) {
+        SweetAlert.swal({
+          title: "Você tem certeza?",
+          text: "Se você prosseguir, essa operaçao no poderá ser desfeita",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Prosseguir",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: false,
+          closeOnCancel: false },
+        function(isConfirm){
+          if (isConfirm) {
+            apiCadastro.deleteUsuario(id).then(
+              function (res) {
+                SweetAlert.swal("Excluído!", "Seu registro foi excluído com sucesso", "success");
+                $scope.getUsers();
+              },
+              function (err) {
+                toaster.pop('error','Usuários',err.status + ": " + err.message);
+              }
+            )
+          } else {
+            SweetAlert.swal("Cancelado", "Seu item permanece intacto", "error");
+          }
+        });
+      }
 
     }
     

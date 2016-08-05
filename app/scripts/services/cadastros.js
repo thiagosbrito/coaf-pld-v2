@@ -79,7 +79,7 @@ angular.module('wbaApp')
           }
         )
       };
-      var _addPolicy = function (data) {
+      var _savePolicy = function (data) {
         return $http({
           url: baseUrl.apiUrl + '/policies',
           method: 'POST',
@@ -93,10 +93,10 @@ angular.module('wbaApp')
           }
         )
       };
-      var _updatePolicy = function (data) {
+      var _updatePolicy = function (id, data) {
         return $http({
-          url: baseUrl.apiUrl + '/policies',
-          method: 'PUT',
+          url: baseUrl.apiUrl + '/policies/' + id,
+          method: 'POST',
           data: data,
           headers: {
             'Content-Type':'application/json'
@@ -166,10 +166,10 @@ angular.module('wbaApp')
         )
       };
 
-      var _updateRiskCriteria = function (data) {
+      var _updateRiskCriteria = function (id, data) {
         return $http({
-          url: baseUrl.apiUrl + '/risk/criteria',
-          method: 'PUT',
+          url: baseUrl.apiUrl + '/risk/criteria/' + id,
+          method: 'POST',
           data: data,
           headers: {
             'Content-Type':'application/json'
@@ -230,10 +230,10 @@ angular.module('wbaApp')
         )
       };
 
-      var _updateUsuario = function (data) {
+      var _updateUsuario = function (id, data) {
         return $http({
-          url: baseUrl.apiUrl + '/users',
-          method: 'PUT',
+          url: baseUrl.apiUrl + '/users/' + id,
+          method: 'POST',
           data: data,
           headers: {
             'Content-Type':'application/json'
@@ -267,7 +267,7 @@ angular.module('wbaApp')
 
       api.getPolicies         = _getPolicies;
       api.getPolicyById       = _getPolicyById;
-      api.addPolicy           = _addPolicy;
+      api.savePolicy           = _savePolicy;
       api.updatePolicy        = _updatePolicy;
       api.deletePolicy        = _deletePolicy;
 

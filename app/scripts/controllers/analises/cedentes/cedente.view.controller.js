@@ -99,17 +99,18 @@ angular.module('wbaApp')
         };
 
         $scope.printAuthorization = function () {
-            apiAnalizes.print($scope.analysis.id).then(
-                function (res) {
-                    $scope.file = new Blob([res.data], {type: 'application/json'});
-                    var url = $window.URL || $window.webkitURL;
-                    $scope.pdfUrl = url.createObjectURL($scope.file);
-                    $scope.showLink = true;
-                },
-                function (err) {
-                    toaster.pop('error','Imprimir Autorização de Relacionamento',err.status + ': ' + err.message);
-                }
-            )
+            $window.open('https://dpld.wba.com.br:8443/api/analyzes/' + $scope.analysis.id + '/commitmentToRelationshipReport');
+            // apiAnalizes.print().then(
+            //     function (res) {
+            //         $scope.file = new Blob([res.data], {type: 'application/json'});
+            //         var url = $window.URL || $window.webkitURL;
+            //         $scope.pdfUrl = url.createObjectURL($scope.file);
+            //         $scope.showLink = true;
+            //     },
+            //     function (err) {
+            //         toaster.pop('error','Imprimir Autorização de Relacionamento',err.status + ': ' + err.message);
+            //     }
+            // )
         };
 
         $scope.finish = function (analysis) {

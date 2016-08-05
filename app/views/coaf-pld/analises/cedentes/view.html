@@ -198,9 +198,10 @@
 							                	<a
 							                		ng-show="analysis.policy.policyType == 'CUSTOMER_ANALYSIS'"
 							                		class="btn btn-danger btn-lg"
-							                   	ui-sref="coafPld.analises.operacoes.pdf({analiseId: analysis.id})">
-							                    <i class="fa fa-print"></i> Imprimir autorização de relacionamento
-							                	</a>
+                                  ng-click="printAuthorization()">
+                                  <i class="fa fa-print"></i> Imprimir autorização de relacionamento
+                                </a>
+							                   	<!-- ui-sref="coafPld.analises.cedentes.pdf({analiseId: analysis.id})"> -->
 								            	</p>
 								        	</div>
 									

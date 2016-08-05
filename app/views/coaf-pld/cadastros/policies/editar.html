@@ -59,8 +59,14 @@
               </div>
             </div>
           </form>
-
-          <div class="row-fluid">
+          
+          <div class="row">
+            <div class="col-md-12">
+              <button class="btn btn-primary" ng-click="addQuestion('ONE_CHOICE')"><i class="fa fa-plus"></i> Adicionar questões</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
             
             <div class="col-md-12" ng-repeat="question in pol.questions">
               <form role="form" class="form form-horizontal">

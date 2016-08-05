@@ -26,6 +26,35 @@ angular.module('wbaApp')
         )
       };
 
+      $scope.save = function () {
+        apiCadastro.updatePolicy($scope.pol.id, $scope.pol).then(
+          function (res) {
+            toaster.pop('success','Questões e Classificação de Risco','Dados salvos com sucesso');
+          },
+          function (err) {
+            toaster.pop('error','Questões e Classificação de Risco',err.status + ": " + err.message);
+          }
+        )
+      };
+
+       $scope.addQuestion = function (type) {
+        var question = {title:'', questionType:type, choices:[]}
+        $scope.pol.questions.push(question);
+      };
+
+      $scope.removeQuestion = function (question) {
+          $scope.pol.questions.splice($scope.pol.questions.indexOf(question), 1);
+      };
+
+      $scope.addChoice = function (question) {
+          var choice = {risk:'', description:''}
+          question.choices.push(choice);
+      };
+
+      $scope.removeChoice = function (question, choice) {
+          question.choices.splice(question.choices.indexOf(choice), 1);
+      };
+
       $scope.getPolicy($stateParams.policyId);
 
 

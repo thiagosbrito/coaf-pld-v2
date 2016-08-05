@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h2>Criar Notificação</h2>
+</div>
+<div class="modal-body">
+  <form role="form" class="form form-horizontal">
+    <div class="form-group">
+      <label class="col-md-2">
+        Mensagem:
+      </label>
+      <div class="col-md-10">
+        <textarea
+          class="form-control"
+          ng-model="detalheNotificacao"
+          resize="none">
+        </textarea>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger pull-left" ng-click="cancel()"><i class="fa fa-times"></i> Cancerla</button>
+  <button class="btn btn-primary pull-right" ng-click="save(detalheNotificacao)"><i class="fa fa-save"></i> Salvar</button>
+</div>

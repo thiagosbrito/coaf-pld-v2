@@ -99,7 +99,7 @@ angular.module('wbaApp')
         modalInstance.result.then(
           function (item) {
             
-            apiCadastro.updateRiskCriteria(item).then(
+            apiCadastro.updateRiskCriteria(id, item).then(
               function (res) {
                 toaster.pop('success','Cadastro Critério de Risco','Cadastro atualizado com sucesso');
                 $scope.getRiskCriteria();
@@ -131,7 +131,7 @@ angular.module('wbaApp')
             apiCadastro.deleteRiskCriteria(id).then(
               function (res) {
                 SweetAlert.swal("Excluído!", "Seu registro foi excluído com sucesso", "success");
-                $scope.getCedentes();
+                $scope.getRiskCriteria();
               },
               function (err) {
                 toaster.pop('error','Critério de Risco',err.status + ": " + err.message);

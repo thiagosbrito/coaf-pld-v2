@@ -8,10 +8,13 @@ angular.module('wbaApp')
     '$location',
     'apiChart',
     '$rootScope',
-    'Session',
+    'user',
     'apiLogin',
-    function ($scope, $state, $location, apiChart, $rootScope, Session, apiLogin) {
+    function ($scope, $state, $location, apiChart, $rootScope, user, apiLogin) {
       
+      $scope.user = user;
+      $scope.permissions = $scope.user.permissions;
+
       $scope.customerChartData = [];
       $scope.operationChartData = [];
 
@@ -59,7 +62,7 @@ angular.module('wbaApp')
         },
         series: [{
           name: 'Cedentes',
-          data: $scope.customerChartData
+          data: []
         }],
         title: {
           text: ''
@@ -100,7 +103,7 @@ angular.module('wbaApp')
         series: [{
           name: 'Operacões',
           innerSize: 120,
-          data: $scope.operationChartData
+          data: []
         }],
         title: {
           text: ''
@@ -155,9 +158,6 @@ angular.module('wbaApp')
 
       $scope.format = 'dd/MM/yyyy';
 
-
-      $scope.user = Session.getUser();
-      $scope.permissions = $scope.user.permissions;
 
       var inprogress_style = {color:'#00EE00', textStyle:{color:'black'}};
       var riscoBaixo_style = {color:'#3300CC'};
@@ -232,6 +232,7 @@ angular.module('wbaApp')
        * Processa os dados retornados pelo servidor (customers)
        */
       $scope.processCustomer = function (startDate, endDate) {
+
         if ($scope.permissions.customerDashboard) {
           var opt = {type:'customer'};
           $scope.includeRequestFormattedDate(startDate, endDate, opt);
@@ -239,7 +240,7 @@ angular.module('wbaApp')
             function (res) {
               if (res.data.length > 0) {
                 angular.forEach(res.data, function (value) {
-                  $scope.customerChartData.push({name: value.status, y: value.count})
+                  $scope.chartCustomer.series[0].data.push({name: value.status, y: value.count})
                 })
                 $scope.customerChartShow = $scope.chartCustomer.series.length > 0 ? true : false;    
               }
@@ -250,11 +251,13 @@ angular.module('wbaApp')
           )
         }
       };
+      $scope.processCustomer($scope.customerStartDate, $scope.customerEndDate);
 
       /**
        * Processa os dados retornados pelo servidor (operations)
        */
       $scope.processOperation = function (startDate, endDate) {
+        
         if ($scope.permissions.customerDashboard) {
           var opt = {type:'operation'};
           $scope.includeRequestFormattedDate(startDate, endDate, opt);
@@ -262,35 +265,44 @@ angular.module('wbaApp')
             function (res) {
               if(res.data.length > 0) {
                 angular.forEach(res.data, function (value) {
-                  $scope.operationChartData.push({name: value.status, y: value.count})
+                  $scope.chartOperation.series[0].data.push({name: value.status, y: value.count})
                 })
                 $scope.operationChartShow = $scope.chartOperation.series.length > 0 ? true : false;
               }
-              // $scope.operationRestData = $scope.sortRestData(res.data);
-              // $scope.operationChartData = $scope.resolveRestData($scope.operationRestData);
-              // $scope.operationChartSlices = $scope.resolveSlices($scope.operationRestData);
             }
           )
         }
       };
 
-      // funções processadoras das datas do chart (customer)
-      $scope.$watch('customerStartDate', function (value) {
-        $scope.processCustomer(value, $scope.customerEndDate);
-      });
+      $scope.processOperation($scope.operationStartDate, $scope.operationEndDate);
 
-      $scope.$watch('customerEndDate', function (value) {
-        $scope.processCustomer($scope.customerStartDate, value);
-      });
+      $scope.changeCustomerDate = function (start, end) {
+        $scope.chartCustomer.series[0].data = [];
+        $scope.processCustomer(start, end);
+      }
 
-      // funções processadoras das datas do chart (operation)
-      $scope.$watch('operationStartDate', function (value) {
-        $scope.processOperation(value, $scope.operationEndDate);
-      });
+      $scope.changeOperationDate = function (start, end) {
+        $scope.chartOperation.series[0].data = [];
+        $scope.processOperation(start, end);
+      }
 
-      $scope.$watch('opertationEndDate', function (value) {
-        $scope.processOperation($scope.operationStartDate, value);
-      });
+      // // funções processadoras das datas do chart (customer)
+      // $scope.$watch('customerStartDate', function (value) {
+      //   $scope.processCustomer(value, $scope.customerEndDate);
+      // });
+
+      // $scope.$watch('customerEndDate', function (value) {
+      //   $scope.processCustomer($scope.customerStartDate, value);
+      // });
+
+      // // funções processadoras das datas do chart (operation)
+      // $scope.$watch('operationStartDate', function (value) {
+      //   $scope.processOperation(value, $scope.operationEndDate);
+      // });
+
+      // $scope.$watch('opertationEndDate', function (value) {
+      //   $scope.processOperation($scope.operationStartDate, value);
+      // });
 
       $scope.analysisCallback = function (selection, analysisType, data, startDate, endDate) {
         if (selection.length > 0) {

@@ -4502,6 +4502,7 @@ button.close {
   display: inline;
 }
 .pager li > a,
+.pager li > button,
 .pager li > span {
   display: inline-block;
   padding: 5px 14px;
@@ -4510,21 +4511,34 @@ button.close {
   border-radius: 2px;
 }
 .pager li > a:hover,
-.pager li > a:focus {
+.pager li > a:focus,
+.pager li > button:hover,
+.pager li > button:focus {
   text-decoration: none;
   background-color: #e0e0e0;
 }
-.pager .next > a,
+.pager .next > a
+.pager .next > button,
 .pager .next > span {
   float: right;
 }
-.pager .previous > a,
+.pager .previous > a
+.pager .previous > button,
 .pager .previous > span {
   float: left;
+}
+.pager li > button[disabled="disabled"],
+.pager li > a[disabled="disabled"] {
+  color: #bdbdbd;
+  background-color: #ffffff;
+  cursor: not-allowed;
 }
 .pager .disabled > a,
 .pager .disabled > a:hover,
 .pager .disabled > a:focus,
+.pager .disabled > button,
+.pager .disabled > button:hover,
+.pager .disabled > button:focus,
 .pager .disabled > span {
   color: #bdbdbd;
   background-color: #ffffff;

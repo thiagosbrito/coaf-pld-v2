@@ -7,34 +7,16 @@ angular.module('wbaApp')
     'apiNotifications',
     'SweetAlert',
     'toaster',
-    function ($scope, $state, apiNotifications, SweetAlert, toaster) {
+    'notifications',
+    '$modal',
+    function ($scope, $state, apiNotifications, SweetAlert, toaster, notifications, $modal) {
       
-      console.log("I'm alive");
-
-      $scope.open = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-
-        $scope.opened = true;
-      };
-
       $scope.filtro = {};
-
       $scope.currentPage = 0;
       $scope.pageSize = 8;
 
-      $scope.getNotifications = function () {
-        apiNotifications.getNotifications().then(
-          function (res) {
-            $scope.notifications = res.data;
-          },
-          function (err) {
-            toaster.pop('error','Notificações',err.status + ": " + err.message);
-          }
-        )
-      };
-      $scope.getNotifications();
-
+      $scope.notifications = notifications;
+      
       $scope.loteDate = new Date();
 
       $scope.numberOfPages = function() {
@@ -42,29 +24,53 @@ angular.module('wbaApp')
       };
 
       $scope.retificar = function() {
+
         if ($scope.selectToRetificate() == '') {
           return;
         }
-
         
         $scope.appletHtml = "<applet codebase='/applet' code='br.com.wcj.coaf.applet.Signer.java'" +
-        " archive='applet-coaf.jar'" +
-        " width='550px' height='150px' name='Applet de assinatura de xml'> " + 
-        "<param name='list' value='" + $scope.selectToRetificate() + "' />" +
-        "<param name='operation' value='2' />" + 
+          " archive='applet-coaf.jar'" +
+          " width='550px' height='150px' name='Applet de assinatura de xml'> " + 
+          "<param name='list' value='" + $scope.selectToRetificate() + "' />" +
+          "<param name='operation' value='2' />" + 
         " </applet>";
 
-        var dialog = $dialog.dialog({
-          modalFade : false,
-          resolve : {
-            appletHtml: $scope.appletHtml
+        var modalInstance = $modal.open({
+
+          templateUrl: 'views/coaf-pld/notifications/modal-applet.html',
+          resolve: {
+            appletHtml: function () {
+              return $scope.appletHtml;
+            }
+          },
+          controller: function ($modalInstance, $scope, appletHtml) {
+            $scope.appletHtml = appletHtml;
+
+            $scope.save = function (item) {
+              $modalInstance.close(item)
+            }
+
+            $scope.cancel = function () {
+              $modalInstance.dismiss('cancel');
+            }
           }
         });
-        dialog.open('/app/dialogs/applet.html', 'AppletModalCtrl').then(
-          function(result) {
-            $scope.notifications = Notification.query(function(result) {
-              $location.url('/notifications');
-            });
+
+        modalInstance.result.then(
+          function (item) {
+            
+            apiCadastro.addCedente(item).then(
+              function (res) {
+                toaster.pop('success','Cadastro Cedente','Cadastro realizado com sucesso');
+              },
+              function (err) {
+                toaster.pop('error','Cadastro Cedente',err.statusText);
+              }
+            )
+          }, 
+          function () {
+            return false
           }
         );
       };
@@ -76,10 +82,10 @@ angular.module('wbaApp')
         }
 
         $scope.appletHtml = "<applet codebase='/applet' code='br.com.wcj.coaf.applet.Signer.java'" +
-        " archive='applet-coaf.jar'" +
-        " width='550px' height='150px' name='Applet de assinatura de xml'> " + 
-        "<param name='list' value='" + $scope.selectedIds() + "' />" +
-        "<param name='operation' value='0' />" + 
+          " archive='applet-coaf.jar'" +
+          " width='550px' height='150px' name='Applet de assinatura de xml'> " + 
+          "<param name='list' value='" + $scope.selectedIds() + "' />" +
+          "<param name='operation' value='0' />" + 
         " </applet>";
 
 
@@ -92,21 +98,21 @@ angular.module('wbaApp')
         
         
         dialog.open('/app/dialogs/applet.html', 'AppletModalCtrl').then(
-          function(result) {
-            $scope.notifications = Notification.query(function(result) {
-              $location.url('/notifications');
+            function(result) {
+              $scope.notifications = Notification.query(function(result) {
+                $location.url('/notifications');
+              });
             });
-          });
       };
 
       $scope.consultarLote = function() {
 
 
         $scope.appletHtml = "<applet codebase='/applet' code='br.com.wcj.coaf.applet.Signer.java'" +
-        " archive='applet-coaf.jar'" +
-        " width='550px' height='150px' name='Applet de assinatura de xml'> " + 
-        "<param name='list' value='" + $scope.readDate() + "' />" +
-        "<param name='operation' value='1' />" + 
+          " archive='applet-coaf.jar'" +
+          " width='550px' height='150px' name='Applet de assinatura de xml'> " + 
+          "<param name='list' value='" + $scope.readDate() + "' />" +
+          "<param name='operation' value='1' />" + 
         " </applet>";
 
 
@@ -119,11 +125,11 @@ angular.module('wbaApp')
 
 
         dialog.open('/app/dialogs/applet.html', 'AppletModalCtrl').then(
-          function(result) {
-            $scope.notifications = Notification.query(function(result) {
-              $location.url('/notifications');
+            function(result) {
+              $scope.notifications = Notification.query(function(result) {
+                $location.url('/notifications');
+              });
             });
-          });
       };
 
       $scope.selectToRetificate = function() {
@@ -160,5 +166,12 @@ angular.module('wbaApp')
         return d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
 
       };
+
+      $scope.open = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        $scope.opened = true;
+      };
+
     }
   ])

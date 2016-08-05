@@ -115,7 +115,7 @@ angular.module('wbaApp')
 
       $scope.save = function () {
         console.log($scope.pol);
-        apiCadastro.addPolicy($scope.pol).then(
+        apiCadastro.savePolicy($scope.pol).then(
           function (res) {
             toaster.pop('success','Cadastro de Questões e Critérios de Risco','Cadastro efetuado com sucesso');
           },

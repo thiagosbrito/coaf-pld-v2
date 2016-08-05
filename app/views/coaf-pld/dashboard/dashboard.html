@@ -29,6 +29,7 @@
                                                         type="text"
                                                         class="form-control"
                                                         datepicker-popup="{{format}}"
+                                                        ng-change="changeCustomerDate(customerStartDate, customerEndDate)"
                                                         ng-model="customerStartDate"
                                                         is-open="openedStartCustomer"
                                                         datepicker-options="dateOptions"
@@ -47,6 +48,7 @@
                                                         type="text"
                                                         class="form-control"
                                                         datepicker-popup="{{format}}"
+                                                        ng-change="changeCustomerDate(customerStartDate, customerEndDate)"
                                                         ng-model="customerEndDate"
                                                         is-open="openedEndCustomer"
                                                         datepicker-options="dateOptions"
@@ -63,7 +65,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <small class="muted text-center" ng-hide="customerChartData.length > 0">Não há itens a serem exibidos dentro deste período</small>
+                            <small class="muted text-center" ng-hide="chartCustomer.series[0].data.length > 0">Não há itens a serem exibidos dentro deste período</small>
                             <highchart id="chartCustomer" config="chartCustomer" class="col-md-12"></highchart>
                             <!-- <div pie-chart="{data: {{customerChartData}},
                                 options: {
@@ -101,6 +103,7 @@
                                                         type="text"
                                                         class="form-control"
                                                         datepicker-popup="{{format}}"
+                                                        ng-change="changeOperationDate(operationStartDate, operationEndDate)"
                                                         ng-model="operationStartDate"
                                                         is-open="openedStartOperation"
                                                         datepicker-options="dateOptions"
@@ -119,6 +122,7 @@
                                                         type="text"
                                                         class="form-control"
                                                         datepicker-popup="{{format}}"
+                                                        ng-change="changeOperationDate(operationStartDate, operationEndDate)"
                                                         ng-model="operationEndDate"
                                                         is-open="openedEndOperation"
                                                         datepicker-options="dateOptions"
@@ -135,7 +139,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <small class="muted text-center" ng-hide="operationChartData.length > 0">Não há itens a serem exibidos dentro deste período</small>
+                            <small class="muted text-center" ng-hide="chartOperation.series[0].data.length > 0">Não há itens a serem exibidos dentro deste período</small>
                             <highchart id="chartOperation" config="chartOperation" class="col-md-12"></highchart>
                             <!-- <div pie-chart="{data: {{operationChartData}},
                                 options: {

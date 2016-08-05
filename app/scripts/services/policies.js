@@ -52,12 +52,42 @@ angular.module('wbaApp')
         )
       };
 
+      var _savePolicy = function (data) {
+        return $http({
+          url: baseUrl.apiUrl + '/policies',
+          method: 'POST',
+          data: data,
+          headers: {
+            'Content-Type':'application/json'
+          }
+        }).then(
+          function (results) {
+            return results
+          }
+        )
+      };
+      var _updatePolicy = function (id, data) {
+        return $http({
+          url: baseUrl.apiUrl + '/policies/' + id,
+          method: 'POST',
+          data: data,
+          headers: {
+            'Content-Type':'application/json'
+          }
+        }).then(
+          function (results) {
+            return results
+          }
+        )
+      };
+
 
       api.getPolicies               = _getPolicies;
       api.getPoliciesByCustomerId   = _getPoliciesByCustomerId;
       api.getPoliciesBySearchType   = _getPoliciesBySearchType;
       api.getPolicyById             = _getPolicyById;
-
+      api.savePolicy                = _savePolicy; 
+      api.updatePolicy              = _updatePolicy; 
       return api;
 
     }

@@ -86,6 +86,21 @@ angular.module('wbaApp')
             }
         )
     };
+
+    var _createNotification = function (id, data) {
+        return $http({
+            url: baseUrl.apiUrl + '/analyzes/' + id + '/createCOAFNotification',
+            method: 'POST',
+            data: data,
+            headers: {
+                'Content-Type':'application/json'
+            }
+        }).then(
+            function (results) {
+                return results
+            }
+        )
+    };
     
 
     api.getAnalizes               = _getAnalizes;
@@ -94,7 +109,7 @@ angular.module('wbaApp')
     api.execute                   = _execute;
     api.update                    = _update;
     api.printAuthorization        = _printAuthorization;
-    
+    api.createNotification        = _createNotification;
     return api;
 
   }]);

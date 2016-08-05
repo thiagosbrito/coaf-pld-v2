@@ -14,9 +14,10 @@ angular.module('wbaApp')
       $scope.getPdf = function () {
         apiAnalizes.printAuthorization($stateParams.analiseId).then(
           function (res) {
-            // $scope.pdfUrl = res.data;
+            $scope.pdfUrl = res.data;
             // var url = $window.URL || $window.webkitURL;
-            $scope.pdfUrl = URL.createObjectURL(res.data);
+            var url = $window.URL || $window.webkitURL;
+            $scope.pdfUrl = url.createObjectURL($scope.file);
           },
           function (err) {
             toaster.pop('error','Imprimir Autorização de Relacionamento',err.status + ': ' + err.message);

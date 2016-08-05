@@ -11,12 +11,14 @@ angular.module('wbaApp')
     '$window',
     function ($scope, $stateParams, $state, toaster, Session, apiAnalizes, $window) {
 
+      var url = $window.URL || $window.webkitURL;
+
       $scope.getPdf = function () {
         apiAnalizes.printAuthorization($stateParams.analiseId).then(
           function (res) {
             $scope.file = res.data;
+            $scope.file = btoa(unescape(encodeURIComponent($scope.file)))
             $scope.file = new Blob([$scope.file],{tyoe: 'application/pdf'});
-            var url = $window.URL || $window.webkitURL;
             $scope.pdfUrl = url.createObjectURL($scope.file);
           },
           function (err) {

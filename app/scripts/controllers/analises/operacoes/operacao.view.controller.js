@@ -22,9 +22,10 @@ angular.module('wbaApp')
             apiAnalizes.getAnalizeById(id).then(
                 function (res) {
                     $scope.analysis = res.data;
+                    $scope.addActive($scope.analysis);
                     $scope.loadAnswer($scope.analysis);
-                    console.log($scope.analysis);
-                    $scope.isLoading = false;
+                    $scope.analysis.active = true;
+                    $scope.analysis.review = false;
                 },
                 function (err) {
                     toaster.pop('error','Análises',err.statusText);
@@ -32,19 +33,29 @@ angular.module('wbaApp')
             )
         };
         $scope.getAnalise($stateParams.analiseId);
+        $scope.addActive = function(item) {
+            if (angular.isArray(item)) {
+                angular.forEach(item, function(i) {
+                    $scope.addActive(i);
+                });
+            } else {
+                angular.extend(item, {active:false});
+            }
+        };
 
         $scope.printAuthorization = function () {
-          apiAnalizes.print($scope.analysis.id).then(
-            function (res) {
-              $scope.file = new Blob([res.data], {type: 'application/json'});
-              var url = $window.URL || $window.webkitURL;
-              $scope.pdfUrl = url.createObjectURL($scope.file);
-              $scopw.showLink = true;
-            },
-            function (err) {
-              toaster.pop('error','Imprimir Autorização de Relacionamento',err.status + ': ' + err.message);
-            }
-          )
+            $window.open('https://dpld.wba.com.br:8443/api/analyzes/' + $scope.analysis.id + '/commitmentToRelationshipReport');
+          // apiAnalizes.print($scope.analysis.id).then(
+          //   function (res) {
+          //     $scope.file = new Blob([res.data], {type: 'application/json'});
+          //     var url = $window.URL || $window.webkitURL;
+          //     $scope.pdfUrl = url.createObjectURL($scope.file);
+          //     $scopw.showLink = true;
+          //   },
+          //   function (err) {
+          //     toaster.pop('error','Imprimir Autorização de Relacionamento',err.status + ': ' + err.message);
+          //   }
+          // )
         };
 
         $scope.currentAnalysis = function() {
@@ -110,6 +121,55 @@ angular.module('wbaApp')
                 });
             });
         };
+
+        $scope.notificate = function () {
+            var modalInstance = $modal.open({
+
+                templateUrl: 'views/coaf-pld/analises/operacoes/modal-notificar.html',
+
+                controller: function ($modalInstance, $scope, apiCep) {
+                    $scope.cedente = {};
+
+                    $scope.buscarCep = function (cep) {
+                        apiCep.consultaCep(cep).then(
+                            function (res) {
+                                var address = res.data;
+                                $scope.cedente.address = {
+                                    street: address.logradouro,
+                                    city: address.localidade,
+                                    state: address.uf
+                                }
+                            }
+                        )
+                    }
+
+                    $scope.save = function (item) {
+                        $modalInstance.close(item)
+                    }
+
+                    $scope.cancel = function () {
+                        $modalInstance.dismiss('cancel');
+                    }
+                }
+            });
+
+            modalInstance.result.then(
+                function (item) {
+                    $scope.analysis.detalheNotificacao = item;
+                    apiAnalizes.createNotification($stateParams.analiseId, $scope.analysis).then(
+                        function (res) {
+                            toaster.pop('success','Criar notificação','Notificação criada com sucesso');
+                        },
+                        function (err) {
+                            toaster.pop('error','Criar notificação',err.status +": "+err.message);
+                        }
+                    )
+                }, 
+                function () {
+                    return false
+                }
+            );
+        }
         $scope.finish = function (analysis) {
             // var hashKey = $scope.analyzes[$scope.currentIndex].$$hashKey;
             var numberOfQuestions = $scope.analysis.policy.questions.length;

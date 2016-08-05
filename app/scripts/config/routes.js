@@ -38,7 +38,12 @@ angular.module('wbaApp')
       .state('coafPld.dashboard',{
         url: '/dashboard',
         templateUrl: 'views/coaf-pld/dashboard/dashboard.html',
-        controller: 'DashboardController'
+        controller: 'DashboardController',
+        resolve: {
+          user: function (Session) {
+            return Session.getUser();
+          }
+        }
       })
 
       // ANALISES
@@ -226,7 +231,16 @@ angular.module('wbaApp')
       .state('coafPld.comunicar.notifications.listar', {
         url: '/listar',
         templateUrl: 'views/coaf-pld/notifications/listar.html',
-        controller: 'NotificationsListarController'
+        controller: 'NotificationsListarController',
+        resolve: {
+          notifications: function (apiNotifications) {
+            return apiNotifications.getNotifications().then(
+              function (res) {
+                return res.data
+              }
+            )
+          }
+        }
       })
 
       .state('coafPld.manual',    {
