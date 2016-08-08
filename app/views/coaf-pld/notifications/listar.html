@@ -50,15 +50,15 @@
                     <thead>
                       <tr>
                         <th>#</th>
-                        <th>Status</th>
-                        <th>Numero</th>
-                        <th>Criado em</th>
-                        <th>Cedente</th>
-                        <th>Enviado em</th>
-                        <th>Valor principal</th>
-                        <th>Código de Erro</th>
-                        <th>Mensagem</th>
-                        <th>Número Coaf</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Numero</th>
+                        <th class="text-center">Criado em</th>
+                        <th class="text-center">Cedente</th>
+                        <th class="text-center">Enviado em</th>
+                        <th class="text-center">Valor principal</th>
+                        <th class="text-center">Código de Erro</th>
+                        <th class="text-center">Mensagem</th>
+                        <th class="text-center">Número Coaf</th>
                         <!-- <th>Hash</th> -->
                       </tr>
                     </thead>
@@ -70,15 +70,21 @@
                             <input type="checkbox" icheck ng-model="notification.selected" />
                           </div>
                         </td>
-                        <td>{{notification.statusLabel}}</td>
-                        <td>{{notification.number}}</td>
-                        <td>{{notification.createdAt}}</td>
-                        <td>{{notification.analysis.customer.corporateName}}</td>
-                        <td>{{notification.sentAt}}</td>
-                        <td>{{notification.principalValue | currency}}</td>
-                        <td>{{notification.errorCode}}</td>
-                        <td>{{notification.message}}</td>
-                        <td>{{notification.coafNumber}}</td>
+                        <td class="text-center">
+                          <span 
+                            class="label"
+                            ng-class="{'label-success': notification.status == 'SUCESS','label-info': notification.status == 'NOT_SENT'}">
+                            {{notification.statusLabel}}
+                          </span>
+                        </td>
+                        <td class="text-center">{{notification.number}}</td>
+                        <td class="text-center">{{notification.createdAt}}</td>
+                        <td class="text-center">{{notification.analysis.customer.corporateName}}</td>
+                        <td class="text-center">{{notification.sentAt}}</td>
+                        <td class="text-center">{{notification.principalValue | currency}}</td>
+                        <td class="text-center">{{notification.errorCode}}</td>
+                        <td class="text-center">{{notification.message}}</td>
+                        <td class="text-center">{{notification.coafNumber}}</td>
                         <!-- <td>{{notification.hash}}</td> -->
                       </tr>
                     </tbody>

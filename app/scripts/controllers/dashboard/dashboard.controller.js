@@ -53,6 +53,9 @@ angular.module('wbaApp')
                     alert('Name: ' + this.name + ', value: ' + this.y);
                 }
               }
+            },
+            series: {
+              turboThreshold: 10000
             }
           }
         },
@@ -87,6 +90,9 @@ angular.module('wbaApp')
                   enabled: false
               },
               showInLegend: true
+            },
+            series: {
+              turboThreshold: 10000
             }
           },
           legend: {

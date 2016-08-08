@@ -1,11 +1,4 @@
 angular.module('wbaApp')
-  .run(['$window', function ($window) {
-    $window.ngGrid.config = {
-        footerRowHeight: 40,
-        headerRowHeight: 40,
-        rowHeight: 40
-    };
-  }])
   .run([
     '$state',
     '$rootScope',

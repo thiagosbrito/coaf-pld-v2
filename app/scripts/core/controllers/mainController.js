@@ -3,8 +3,8 @@ angular.module('wbaApp')
     '$scope',
     '$theme',
     '$timeout',
-    'progressLoader',
-    'wijetsService',
+    // 'progressLoader',
+    // 'wijetsService',
     '$location',
     'apiLogin',
     '$state',
@@ -13,20 +13,20 @@ angular.module('wbaApp')
     'SweetAlert',
     'user',
     '$localStorage',
-    function($scope, $theme, $timeout, progressLoader, wijetsService, $location, apiLogin, $state, toaster, Session, SweetAlert, user, $localStorage) {
+    function($scope, $theme, $timeout, $location, apiLogin, $state, toaster, Session, SweetAlert, user, $localStorage) {
       
       $scope.user = user;
       // console.log($localStorage);
       
 
-      $scope.layoutFixedHeader = $theme.get('fixedHeader');
-      $scope.layoutPageTransitionStyle = $theme.get('pageTransitionStyle');
-      $scope.layoutDropdownTransitionStyle = $theme.get('dropdownTransitionStyle');
-      $scope.layoutPageTransitionStyleList = ['bounce','flash','pulse','bounceIn','bounceInDown','bounceInLeft',
-      'bounceInRight','bounceInUp','fadeIn','fadeInDown','fadeInDownBig','fadeInLeft','fadeInLeftBig','fadeInRight',
-      'fadeInRightBig','fadeInUp','fadeInUpBig','flipInX','flipInY','lightSpeedIn','rotateIn','rotateInDownLeft',
-      'rotateInDownRight','rotateInUpLeft','rotateInUpRight','rollIn','zoomIn','zoomInDown','zoomInLeft','zoomInRight',
-      'zoomInUp'];
+      // $scope.layoutFixedHeader = $theme.get('fixedHeader');
+      // $scope.layoutPageTransitionStyle = $theme.get('pageTransitionStyle');
+      // $scope.layoutDropdownTransitionStyle = $theme.get('dropdownTransitionStyle');
+      // $scope.layoutPageTransitionStyleList = ['bounce','flash','pulse','bounceIn','bounceInDown','bounceInLeft',
+      // 'bounceInRight','bounceInUp','fadeIn','fadeInDown','fadeInDownBig','fadeInLeft','fadeInLeftBig','fadeInRight',
+      // 'fadeInRightBig','fadeInUp','fadeInUpBig','flipInX','flipInY','lightSpeedIn','rotateIn','rotateInDownLeft',
+      // 'rotateInDownRight','rotateInUpLeft','rotateInUpRight','rollIn','zoomIn','zoomInDown','zoomInLeft','zoomInRight',
+      // 'zoomInUp'];
 
       $scope.logout = function () {
 
