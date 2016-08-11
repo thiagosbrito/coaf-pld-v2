@@ -25,6 +25,10 @@ angular.module('wbaApp')
         templateUrl: 'views/coaf-pld/auth/login.html',
         controller: 'LoginController'
       })
+      .state('logout', {
+        url: '/logout',
+        controller: 'LogoutController'
+      })
       .state('coafPld',{
         url: '',
         controller: 'MainController',

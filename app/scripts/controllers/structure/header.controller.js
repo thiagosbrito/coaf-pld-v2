@@ -14,17 +14,7 @@ angular.module('wbaApp')
       }
 
       $scope.logout = function () {
-        apiLogin.doLogout().then(
-          function (res) {
-            $state.go('login');
-          },
-          function (err) {
-            if(err.status == 301) {
-              $state.go('login');
-            }
-            toaster.pop('error','Logout',err.statusText);
-          }
-        )
+        $state.go('logout');
       };
 
     }]

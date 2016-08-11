@@ -36,13 +36,7 @@ angular.module('wbaApp')
       }
       
       this.destroy = function () {
-        this.user               = null;
-        this.permissions        = null;
-        this.loggedBuyingEntity = null;
-        this.operationPolicy    = null;
-        this.customerPolicy     = null;
-        this.isLogged           = false;
-        $session.$reset();
+         return $session.$reset();
       }
 
     }
